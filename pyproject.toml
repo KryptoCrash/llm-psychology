@@ -1,0 +1,21 @@
+[project]
+name = "llm-psychology"
+version = "0.1.0"
+description = "Dataset retrieval utilities for reimplementing 'Conformity in Large Language Models'"
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    "datasets>=3.6.0",
+    "httpx>=0.28.1",
+    "transformer-lens>=2.18.0",
+]
+
+[project.scripts]
+fetch-paper-datasets = "llm_psychology.fetch_datasets:main"
+
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/llm_psychology"]
