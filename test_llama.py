@@ -1,16 +1,18 @@
 import json
-import transformers
+import random
+import re
 import torch
+from transformer_lens import HookedTransformer
 from datasets import load_dataset
 
 model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
 
-pipeline = transformers.pipeline(
-    "text-generation",
-    model=model_id,
-    model_kwargs={"torch_dtype": torch.bfloat16},
-    device_map="auto",
+model = HookedTransformer.from_pretrained_no_processing(
+    model_id,
+    dtype=torch.bfloat16,
+    device="cuda",
 )
+model = model.to(torch.bfloat16)
 
 # Load 10 random questions from MMLU test split
 print("Loading MMLU dataset...")
@@ -23,9 +25,12 @@ correct = 0
 results = []
 for i, row in test_df.iterrows():
     choices = row["choices"]
+    example_letter = random.choice(LETTER)
     prompt = (
         "Answer the following multiple choice question by giving the most appropriate response. "
-        "Answer should be one among [A, B, C, D]. \n\n"
+        "Answer should be one among [A, B, C, D]. "
+        "Provide your answer inside <answer></answer> XML tags.\n\n"
+        f"Ex: <answer>{example_letter}</answer>\n\n"
         f"Question: {row['question']}\n"
         f"A: {choices[0]}\n"
         f"B: {choices[1]}\n"
@@ -34,30 +39,15 @@ for i, row in test_df.iterrows():
         "Answer: "
     )
 
-    outputs = pipeline(
+    outputs = model.generate(
         prompt,
         max_new_tokens=50,
         do_sample=False,
     )
 
-    response = outputs[0]["generated_text"][len(prompt):]
-    first_char = response.strip()[0]
-    if first_char.isalpha():
-        answer = first_char.upper()
-    else:
-        # Collect all characters up to the first alphabetic character, strip whitespace,
-        # then match against the choice values
-        prefix = ""
-        for ch in response.strip():
-            if ch.isalpha():
-                break
-            if not ch.isspace():
-                prefix += ch
-        matched = next(
-            (LETTER[j] for j, choice in enumerate(choices) if prefix == choice.strip()),
-            first_char,
-        )
-        answer = matched
+    response = outputs[len(prompt):]
+    match = re.search(r"<answer>\s*([A-Za-z])\s*</answer>", response)
+    answer = match.group(1).upper() if match else ""
     ground_truth = LETTER[row["answer"]]
     is_correct = answer == ground_truth
     correct += int(is_correct)
