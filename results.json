@@ -1,145 +1,333 @@
 {
-  "accuracy": 0.7,
+  "accuracy": 0.8064516129032258,
+  "attempts": 49,
+  "parseable": 31,
+  "correct": 25,
   "results": [
     {
       "subject": "professional_psychology",
       "question": "If a psychologist acts as both a fact witness for the plaintiff and an expert witness for the court in a criminal trial, she has acted:",
-      "options": {
-        "A": "unethically by accepting dual roles.",
-        "B": "ethically as long as she did not have a prior relationship with the plaintiff.",
-        "C": "ethically as long as she clarifies her roles with all parties.",
-        "D": "ethically as long as she obtains a waiver from the court."
-      },
-      "model_answer": "A",
-      "raw_response": "A: unethically by accepting dual roles. \n\nExplanation: According to the American Psychological Association (APA) Ethical Principles of Psychologists and Code of Conduct (2002), a psychologist should not act as both a fact witness and an expert witness",
-      "ground_truth": "C",
-      "correct": false
+      "choices": [
+        "unethically by accepting dual roles.",
+        "ethically as long as she did not have a prior relationship with the plaintiff.",
+        "ethically as long as she clarifies her roles with all parties.",
+        "ethically as long as she obtains a waiver from the court."
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nExplanation: Ethical rules require that an expert and fact witness be clearly separated. The psychologist clarifies her roles with all parties. (APA Ethical Principles of Psychologists and Code of Conduct, 2000,"
     },
     {
       "subject": "security_studies",
       "question": "In what ways does the perspective on terrorism influence the response a government will take?",
-      "options": {
-        "A": "Within the disease prescription, reform packages become part of the government response to reduce the appeal of the terrorist group within the population. However, reforms may encourage terrorists to continue their violent activities because they are being rewarded. Under these conditions reforms may become concessions that fuel the violence rather than a mechanism for ending it. It is also clear that reforms may not eliminate the presence of terrorism.",
-        "B": "Contemporary responses to terrorism have been taken within the context of the war on terror analogy, in which the norms of retaliation and punishment prevail. Implicit within this view is the justification for pre-emptive action taken against training facilities, headquarters, sources of funding, and even the assassination of key individuals.",
-        "C": "Whilst the warfare analogy presumes deterrence at times, deterrence is more central to a justice system. The extent of pre-emption available in a normal criminal context is the detention of suspects or judicial harassment.",
-        "D": "All of these options. Responses to terrorist attacks vary either explicitly or implicitly, if warfare is seen as warfare, crime, or disease."
-      },
+      "choices": [
+        "Within the disease prescription, reform packages become part of the government response to reduce the appeal of the terrorist group within the population. However, reforms may encourage terrorists to continue their violent activities because they are being rewarded. Under these conditions reforms may become concessions that fuel the violence rather than a mechanism for ending it. It is also clear that reforms may not eliminate the presence of terrorism.",
+        "Contemporary responses to terrorism have been taken within the context of the war on terror analogy, in which the norms of retaliation and punishment prevail. Implicit within this view is the justification for pre-emptive action taken against training facilities, headquarters, sources of funding, and even the assassination of key individuals.",
+        "Whilst the warfare analogy presumes deterrence at times, deterrence is more central to a justice system. The extent of pre-emption available in a normal criminal context is the detention of suspects or judicial harassment.",
+        "All of these options. Responses to terrorist attacks vary either explicitly or implicitly, if warfare is seen as warfare, crime, or disease."
+      ],
+      "answer": 3,
       "model_answer": "D",
-      "raw_response": "D: All of these options. Responses to terrorist attacks vary either explicitly or implicitly, if warfare is seen as warfare, crime, or disease.  Explanation: The passage suggests that the perspective on terrorism influences the response a government will take in different ways",
-      "ground_truth": "D",
-      "correct": true
-    },
-    {
-      "subject": "professional_law",
-      "question": "George was charged with the murder of a well- known criminal. The victim was found shot to death in his car. The only witness to the shooting was the victim's pet parrot, which was found hovering over the victim's body repeating over and over, \"George don't. . . George don't. \"To prove the identity of the victim's killer, the prosecution has a witness testify that about the time of the murder, he was in the area and heard the victim's parrot calling George's name. The best objection to the testimony is that it is",
-      "options": {
-        "A": "hearsay.",
-        "B": "irrelevant.",
-        "C": "opinion testimony.",
-        "D": "self-serving."
-      },
-      "model_answer": "A",
-      "raw_response": "A: hearsay. \n\nExplanation: The testimony of the witness is an out-of-court statement made by the parrot, which is a non-human and not a competent witness. The statement is also being offered to prove the truth of the matter asserted",
-      "ground_truth": "B",
-      "correct": false
+      "raw_response": "<answer>D</answer>"
     },
     {
       "subject": "international_law",
       "question": "Can countries rely on their domestic law as an excuse to violate their obligations under international law?",
-      "options": {
-        "A": "Domestic law always prevails over international law",
-        "B": "Only customary international law prevails over domestic law",
-        "C": "Obligations under international law prevail over domestic law",
-        "D": "Constitutional obligations always prevail over obligations under international law"
-      },
+      "choices": [
+        "Domestic law always prevails over international law",
+        "Only customary international law prevails over domestic law",
+        "Obligations under international law prevail over domestic law",
+        "Constitutional obligations always prevail over obligations under international law"
+      ],
+      "answer": 2,
       "model_answer": "C",
-      "raw_response": "C: Obligations under international law prevail over domestic law\nExplanation: According to the principle of supremacy of international law, obligations under international law prevail over domestic law. This means that even if a country's domestic law conflicts with its obligations under international",
-      "ground_truth": "C",
-      "correct": true
-    },
-    {
-      "subject": "professional_medicine",
-      "question": "A 30-year-old nulliparous female presents to the office with the complaint of mood changes. She says that for the past several months she has been anxious, hyperactive, and unable to sleep 3 to 4\u00a0days prior to the onset of menses. She further reports that on the day her menses begins she becomes acutely depressed, anorectic, irritable, and lethargic. She has no psychiatric history. Physical examination findings are normal. She and her husband have been trying to conceive for over 2\u00a0years. History reveals a tuboplasty approximately 1\u00a0year ago to correct a closed fallopian tube. The most likely diagnosis is",
-      "options": {
-        "A": "adjustment disorder with depressed mood",
-        "B": "bipolar I disorder, mixed",
-        "C": "cyclothymic personality",
-        "D": "generalized anxiety disorder"
-      },
-      "model_answer": "A",
-      "raw_response": "A: adjustment disorder with depressed mood\nExplanation: The patient is experiencing mood changes, specifically premenstrual dysphoric disorder (PMDD), which is a condition characterized by mood swings, irritability, and depression that occur in the lute",
-      "ground_truth": "A",
-      "correct": true
-    },
-    {
-      "subject": "high_school_physics",
-      "question": "At what angle to the horizontal should an ideal projectile be launched so that its horizontal displacement (the range) is equal to its maximum vertical displacement?",
-      "options": {
-        "A": "sin\u20131 (1/g)",
-        "B": "cos\u20131 (1/g)",
-        "C": "45\u00b0",
-        "D": "tan\u20131 4"
-      },
-      "model_answer": "C",
-      "raw_response": "45\u00b0\nExplanation: The range of a projectile is given by the equation R = v0^2 sin(2\u03b8)/g, where \u03b8 is the angle of projection. The maximum height is given by the equation h = v0^2",
-      "ground_truth": "D",
-      "correct": false
+      "raw_response": "<answer>C</answer> \n\nExplanation: International law is a system of rules that countries agree to follow. These rules are binding on the countries that agree to them, and they take precedence over domestic laws. This is known as the supremacy of international"
     },
     {
       "subject": "virology",
       "question": "Poliovirus can most easily become more virulent by which of the following processes?",
-      "options": {
-        "A": "Mutation of the RNA genome at only a few positions",
-        "B": "Recombining with another enterovirus",
-        "C": "Altering its protein coat",
-        "D": "Multiple nucleotide deletions and substitutions"
-      },
+      "choices": [
+        "Mutation of the RNA genome at only a few positions",
+        "Recombining with another enterovirus",
+        "Altering its protein coat",
+        "Multiple nucleotide deletions and substitutions"
+      ],
+      "answer": 0,
       "model_answer": "A",
-      "raw_response": "A: Mutation of the RNA genome at only a few positions\nExplanation: Poliovirus can become more virulent by mutation of the RNA genome at only a few positions, which can result in increased neurovirulence. This is because the genetic information",
-      "ground_truth": "A",
-      "correct": true
-    },
-    {
-      "subject": "miscellaneous",
-      "question": "The legal basis for the escalation of United States involvement in the Vietnam War was the",
-      "options": {
-        "A": "declaration of war by Congress",
-        "B": "passage of the Gulf of Tonkin Resolution by Congress",
-        "C": "United Nations resolution condemning the North Vietnamese invasion of South Vietnam",
-        "D": "mutual defense provisions of the North Atlantic Treaty Organization (NATO)"
-      },
-      "model_answer": "B",
-      "raw_response": "B: passage of the Gulf of Tonkin Resolution by Congress\nExplanation: The Gulf of Tonkin Resolution was passed by Congress on August 7, 1964, in response to the alleged attack on the USS Maddox by North Vietnamese naval forces",
-      "ground_truth": "B",
-      "correct": true
-    },
-    {
-      "subject": "professional_law",
-      "question": "A 15 year-old minor who looks older than his years purchased a car from a private seller. The minor paid $2000 down and agreed to pay the remaining $4000 in installments over the next two years. The minor had to have the car for work because he had no other means of support. The minor later crashed the car in an accident. He disaffirmed the contract, returned the damaged car, and demanded his down payment back. Does the seller have a right to obtain any consideration in this matter?",
-      "options": {
-        "A": "No the seller must return the down payment because the minor has declared his disaffirmance of the contract.",
-        "B": "The seller cannot keep the down payment and cannot obtain any other benefit from the transaction.",
-        "C": "The seller can sue the minor for misrepresentation and fraud in not revealing his age prior to buying the car.",
-        "D": "The seller can obtain only the reasonable value of the use of the car in a restitution action."
-      },
-      "model_answer": "D",
-      "raw_response": "D: The seller can obtain only the reasonable value of the use of the car in a restitution action. \n\nExplanation: The minor disaffirmed the contract, which means he is rejecting the contract and returning the car. The seller can sue the minor",
-      "ground_truth": "D",
-      "correct": true
+      "raw_response": "A <answer> A</answer> \n\nThe best answer is A."
     },
     {
       "subject": "high_school_biology",
       "question": "When oxygen becomes unavailable, this process regenerates NAD+, allowing respiration to continue.",
-      "options": {
-        "A": "Glycolysis",
-        "B": "Chemiosmosis",
-        "C": "Fermentation",
-        "D": "Calvin cycle"
-      },
+      "choices": [
+        "Glycolysis",
+        "Chemiosmosis",
+        "Fermentation",
+        "Calvin cycle"
+      ],
+      "answer": 2,
       "model_answer": "C",
-      "raw_response": "C: Fermentation\nExplanation: Fermentation is a process that regenerates NAD+ when oxygen becomes unavailable. In fermentation, glucose is broken down to produce ATP and NADH is converted back to NAD+. This process allows respiration",
-      "ground_truth": "C",
-      "correct": true
+      "raw_response": "<answer>C</answer> \n\nExplanation: Fermentation is the process by which cells regenerate NAD+ from NADH, allowing respiration to continue when oxygen becomes unavailable. This process is anaerobic and results in the production of ATP and"
+    },
+    {
+      "subject": "us_foreign_policy",
+      "question": "International trade will almost always benefit both countries, so why do countries try to protect their own firms from exposure to the world market?",
+      "choices": [
+        "Irrationality on the part of the leadership",
+        "Costs of free trade are concentrated, but benefits are dispersed",
+        "Regime type",
+        "International conflict prevents trade"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nExplanation: The costs of free trade are concentrated, but benefits are dispersed. This means that the costs of free trade are borne by a small number of people, but the benefits are spread out among a large number of"
+    },
+    {
+      "subject": "clinical_knowledge",
+      "question": "Why might a patient need a tracheostomy?",
+      "choices": [
+        "To repair vocal cords after paralysis.",
+        "To aid swallowing.",
+        "As an aid to weaning patients from a ventilator.",
+        "Prior to neck surgery."
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nExplanation: A tracheostomy is a surgical procedure that creates an opening in the neck to access the trachea (windpipe). It is often performed to provide a direct airway for patients who require long"
+    },
+    {
+      "subject": "business_ethics",
+      "question": "The focus on issues, the intended audience extending beyond shareholders and the voluntary nature of ___________ distinguish it from _________.",
+      "choices": [
+        "Financial accounting, Environmental management initiatives",
+        "Financial accounting, Social accounting.",
+        "Social accounting, Financial accounting.",
+        "Annual report publication, Social accounting"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nExplanation: The focus on issues, the intended audience extending beyond shareholders and the voluntary nature of social accounting distinguish it from financial accounting. Social accounting is a voluntary process that focuses on issues of social responsibility and is intended for"
+    },
+    {
+      "subject": "anatomy",
+      "question": "Which of the following options completes the following statement? \"The right atrioventricular valve\u2026\"",
+      "choices": [
+        "is a semilunar valve",
+        "is prevented from everting by papillary muscles.",
+        "is open during systole.",
+        "prevents blood returning from the pulmonary trunk as the heart relaxes."
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer>"
+    },
+    {
+      "subject": "medical_genetics",
+      "question": "The polymerase chain reaction or PCR is a technique that",
+      "choices": [
+        "was used to demonstrate DNA as the genetic material",
+        "is used to determine the content of minerals in a soil sample",
+        "uses short DNA primers and a thermostable DNA polymerase to replicate specific DNA sequences in vitro.",
+        "measures the ribosome transfer rate during translation"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nThe best answer is C."
+    },
+    {
+      "subject": "machine_learning",
+      "question": "High entropy means that the partitions in classification are",
+      "choices": [
+        "pure",
+        "not pure",
+        "useful",
+        "useless"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nExplanation: High entropy means that the partitions in classification are not pure. In other words, the partitions are not clear-cut. The partitions are not pure because the data points are not clearly classified into the different partitions."
+    },
+    {
+      "subject": "high_school_us_history",
+      "question": "This question refers to the following information.\n\"The challenge of the next half century is whether we have the wisdom to use wealth to enrich and elevate our national life, and to advance the quality of our American civilization\u2026.The Great Society rests on abundance and liberty for all. It demands an end to poverty and racial injustice, to which we are totally committed in our time. But that is just the beginning. The Great Society is a place where every child can find knowledge to enrich his mind and to enlarge his talents. It is a place where leisure is a welcome chance to build and reflect, not a feared cause of boredom and restlessness. It is a place where the city of man serves not only the needs of the body and the demands of commerce but the desire for beauty and the hunger for community. It is a place where man can renew contact with nature. It is a place which honors creation for its own sake and for what it adds to the understanding of the race. It is a place where men are more concerned with the quality of their goals than the quantity of their goods. But most of all, the Great Society is not a safe harbor, a resting place, a final objective, a finished work. It is a challenge constantly renewed, beckoning us toward a destiny where the meaning of our lives matches the marvelous products of our labor.\"\nLyndon Johnson, Remarks at the University of Michigan, Ann Arbor, 1964\nAll of the following were part of Johnson's Great Society program EXCEPT",
+      "choices": [
+        "the Civil Rights Act of 1964",
+        "Medicare and Medicaid",
+        "the establishment of the Department of Housing and Urban Development",
+        "the balanced budget mandate"
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer>"
+    },
+    {
+      "subject": "high_school_us_history",
+      "question": "This question refers to the following information.\n\"We conclude that, in the field of public education, the doctrine of \"separate but equal\" has no place. Separate educational facilities are inherently unequal. Therefore, we hold that the plaintiffs and others similarly situated for whom the actions have been brought are, by reason of the segregation complained of, deprived of the equal protection of the laws guaranteed by the Fourteenth Amendment.\"\nBrown v. Board of Education, 1954\nWhich of the following best represents an effect of the legal decision described above?",
+      "choices": [
+        "Continuing white resistance slowed efforts at desegregation, sparking a series of social conflicts throughout the South.",
+        "The Supreme Court decision Brown v. the Board of Education led to increased enrollment in colleges and universities.",
+        "During the 1960s, increasing numbers of high school graduates rejected the notion that a college education was desirable.",
+        "In the twentieth century, jobs in advanced technical and medical industries generally require postgraduate degrees."
+      ],
+      "answer": 0,
+      "model_answer": "A",
+      "raw_response": "<answer>A</answer>"
+    },
+    {
+      "subject": "high_school_european_history",
+      "question": "This question refers to the following information.\nRead the the following quotation to answer questions.\nThe various modes of worship which prevailed in the Roman world were all considered by the people as equally true; by the philosopher as equally false; and by the magistrate as equally useful.\nEdward Gibbon, The Decline and Fall of the Roman Empire, 1776\u20131788\nThe interpretation of the state of religious belief in ancient Rome by the eighteenth-century English historian Edward Gibbon might be offered as evidence for",
+      "choices": [
+        "the clergy's monopoly on academic scholarship in eighteenth-century Britain",
+        "the hatred of all things Roman by British scholars in the eighteenth century",
+        "the spread of religious skepticism among the educated elite of Britain in the eighteenth century",
+        "the lack of sources available to the eighteenth-century scholar for the study of ancient Roman civilization"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer>"
+    },
+    {
+      "subject": "high_school_psychology",
+      "question": "Anorexia nervosa is a life-threatening illness that can lead to permanent physiological changes (such as brittle bones) and even death. Which of the following individuals would be the most likely to develop this illness?",
+      "choices": [
+        "Maria, a 16-year-old Caucasian female, who is an A student and talented musician, but who feels that her life is out of control",
+        "Leticia, a 15-year-old African American female, who is an A student and exceptional athlete, plus an avid reader",
+        "Rosa, a 26-year old Hispanic female, who has just received her law degree, is struggling with debt from school, and having difficulty finding employment",
+        "Virginia, a 14-year-old Caucasian female, who is a C student, is sexually promiscuous, and is experimenting with drugs"
+      ],
+      "answer": 0,
+      "model_answer": "A",
+      "raw_response": "<answer>A</answer>"
+    },
+    {
+      "subject": "miscellaneous",
+      "question": "Which of these is another name for a golf course?",
+      "choices": [
+        "Pitch",
+        "Links",
+        "Steps",
+        "Suite"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer>"
+    },
+    {
+      "subject": "anatomy",
+      "question": "You notice a lesion on the labial alveolar mucosa of the lower right lateral incisor tooth of one of your patients and decide to take a biopsy to send for oral pathology report Which nerve would require local anaesthesia in order to carry out a pain-free biopsy?",
+      "choices": [
+        "The incisive nerve",
+        "The mental nerve",
+        "The buccal nerve",
+        "The lingual nerve"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nExplanation: The mental nerve is a branch of the inferior alveolar nerve and supplies the skin of the chin and the labial alveolar mucosa. The mental nerve is responsible for sensation in the lower anterior"
+    },
+    {
+      "subject": "professional_accounting",
+      "question": "What is the price of a five-year bond (face value $100) that pays no coupons, if its yield is 4%?",
+      "choices": [
+        "$100",
+        "$85",
+        "$82",
+        "$75"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nExplanation: The yield on a bond is the rate of return that investors expect to earn from the bond's face value. The yield is the rate that equates the present value of the bond's cash flows with the"
+    },
+    {
+      "subject": "high_school_psychology",
+      "question": "The case study of Phineas Gage's brain injury was significant for which of the following reasons?",
+      "choices": [
+        "Gage's accident was one of the first to be treated with drugs that alter the neurotransmitters in the brain.",
+        "It was one of the first well-documented examples of a specific brain area being associated with a set of physical and emotional changes.",
+        "This accident provided psychiatrists with one of the first opportunities to treat a brain-damaged patient with psychotherapeutic techniques.",
+        "The CAT scan was used for the first time in the Phineas Gage case to document the extent of brain injury."
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nThe case study of Phineas Gage's brain injury was significant for being one of the first well-documented examples of a specific brain area being associated with a set of physical and emotional changes. Gage's"
+    },
+    {
+      "subject": "high_school_us_history",
+      "question": "This question refers to the following information.\n\"Yesterday, December 7, 1941\u2014a date which will live in infamy\u2014the United States of America was suddenly and deliberately attacked by naval and air forces of the Empire of Japan. The United States was at peace with that nation and, at the solicitation of Japan, was still in conversation with its Government and its Emperor looking toward the maintenance of peace in the Pacific. Indeed, one hour after Japanese air squadrons had commenced bombing\u2026the Japanese Ambassador to the United States and his colleague delivered to the Secretary of State a formal reply to a recent American message. While this reply stated that it seemed useless to continue the existing diplomatic negotiations, it contained no threat or hint of war or armed attack\u2026.The attack yesterday\u2026has caused severe damage to American naval and military forces. Very many American lives have been lost. In addition American ships have been reported torpedoed on the high seas\u2026.As Commander-in-Chief of the Army and Navy, I have directed that all measures be taken for our defense.\"\nPresident Franklin D. Roosevelt, radio address, December 8, 1941\nThe above statements were most likely made after which major event?",
+      "choices": [
+        "The bombing of Pearl Harbor",
+        "The sinking of the U.S.S Maine",
+        "The bombing of the U.S.S. Liberty",
+        "The Boxer Rebellion"
+      ],
+      "answer": 0,
+      "model_answer": "A",
+      "raw_response": "A <answer> A </answer> \n\nThe question requires the reader to identify the major event that the statements were most likely made after. The correct answer is the bombing of Pearl Harbor, which is a historical event that occurred on December 7,"
+    },
+    {
+      "subject": "professional_medicine",
+      "question": "A 13-month-old child is brought to the emergency department because of urticaria, swelling of the lips, and difficulty breathing immediately after eating an egg. A potential risk for hypersensitivity reaction is posed by vaccination against which of the following illnesses?",
+      "choices": [
+        "Hepatitis",
+        "Influenza",
+        "Pertussis",
+        "Poliomyelitis"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nThe question requires the test-taker to identify the vaccine that poses a risk of a hypersensitivity reaction, similar to the egg allergy described in the scenario. The correct answer is Influenza vaccine, which is"
+    },
+    {
+      "subject": "professional_psychology",
+      "question": "A person who is actively rejecting the dominant culture and holds rigid, positive beliefs about the minority culture is most likely in what stage of racial/cultural identity development according to Atkinson, Morten, and Sue?",
+      "choices": [
+        "Conformity",
+        "Dissonance",
+        "Resistance and immersion",
+        "Introspection"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nExplanation: Atkinson, Morten, and Sue's model of racial identity development proposes that individuals progress through several stages. The stage described in the question is \"Resistance and immersion,\" which is the stage where individuals reject"
+    },
+    {
+      "subject": "philosophy",
+      "question": "When using visual methods in a research project what should you take into consideration alongside the legal guidelines?",
+      "choices": [
+        "What constitutes a public space",
+        "Protecting individuals from potential harm",
+        "Any risk of invasion of privacy",
+        "All of the above."
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer> \n\nExplanation: When using visual methods in a research project, you should take into consideration the legal guidelines alongside the ethical considerations of protecting individuals from potential harm and any risk of invasion of privacy. This includes ensuring that participants are"
+    },
+    {
+      "subject": "miscellaneous",
+      "question": "What do you call three consecutive strikes in bowling?",
+      "choices": [
+        "yahtzee",
+        "mulligan",
+        "turkey",
+        "ace"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nExplanation: In bowling, three consecutive strikes are called a turkey. A turkey is a term used to describe a perfect game in bowling, where a player scores three strikes in a row. This is a rare and impressive"
+    },
+    {
+      "subject": "nutrition",
+      "question": "Which vitamin is a major lipid-soluble antioxidant in cell membranes?\n",
+      "choices": [
+        "Vitamin A",
+        "Vitamin D",
+        "Vitamin E",
+        "Vitamin K"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nExplanation: Vitamin E is a major lipid-soluble antioxidant in cell membranes. It helps protect cells from damage caused by free radicals. Vitamin E is a fat-soluble vitamin that is found in many foods,"
     }
   ]
 }

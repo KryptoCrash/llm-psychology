@@ -4,27 +4,49 @@ import re
 import torch
 from transformer_lens import HookedTransformer
 from datasets import load_dataset
+import os
+import plotly.io as pio
+import circuitsvis as cv
+import torch.nn as nn
+import einops
+from fancy_einsum import einsum
+import tqdm.auto as tqdm
+import plotly.express as px
+from jaxtyping import Float
+from functools import partial
+import transformer_lens.utilities as utils
+from transformer_lens.hook_points import (
+    HookPoint,
+)  
+from transformer_lens import FactoredMatrix, HookedTransformer
+from transformer_lens.model_bridge import TransformerBridge
 
-model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
+torch.set_grad_enabled(False)
+device = utils.get_device()
 
-model = HookedTransformer.from_pretrained_no_processing(
-    model_id,
-    dtype=torch.bfloat16,
-    device="cuda",
+# NBVAL_IGNORE_OUTPUT
+model = TransformerBridge.boot_transformers(
+    "meta-llama/Llama-3.2-3B-Instruct",
+    device=device,
 )
-model = model.to(torch.bfloat16)
+model.enable_compatibility_mode(disable_warnings=True)
 
-# Load 10 random questions from MMLU test split
+
 print("Loading MMLU dataset...")
 dataset = load_dataset("cais/mmlu", "all", cache_dir="./mmlu_cache")
-test_df = dataset["test"].to_pandas().sample(n=10, random_state=42).reset_index(drop=True)
+test_df = dataset["test"].to_pandas().sample(frac=1, random_state=42).reset_index(drop=True)
 
 LETTER = ["A", "B", "C", "D"]
+TARGET_CORRECT = 25
 
 correct = 0
-results = []
-for i, row in test_df.iterrows():
-    choices = row["choices"]
+attempts = 0
+parseable = 0
+correct_records = []
+for _, row in test_df.iterrows():
+    if correct >= TARGET_CORRECT:
+        break
+    choices = list(row["choices"])
     example_letter = random.choice(LETTER)
     prompt = (
         "Answer the following multiple choice question by giving the most appropriate response. "
@@ -44,27 +66,43 @@ for i, row in test_df.iterrows():
         max_new_tokens=50,
         do_sample=False,
     )
-
     response = outputs[len(prompt):]
     match = re.search(r"<answer>\s*([A-Za-z])\s*</answer>", response)
     answer = match.group(1).upper() if match else ""
     ground_truth = LETTER[row["answer"]]
-    is_correct = answer == ground_truth
-    correct += int(is_correct)
+    attempts += 1
+    if answer:
+        parseable += 1
+    if answer != ground_truth:
+        continue
 
-    results.append({
+    correct += 1
+    correct_records.append({
         "subject": row["subject"],
         "question": row["question"],
-        "options": {"A": choices[0], "B": choices[1], "C": choices[2], "D": choices[3]},
+        "choices": choices,
+        "answer": int(row["answer"]),
         "model_answer": answer,
         "raw_response": response.strip(),
-        "ground_truth": ground_truth,
-        "correct": is_correct,
     })
 
-accuracy = correct / 10
+accuracy = correct / parseable if parseable else 0.0
 
-output = {"accuracy": accuracy, "results": results}
+questions = [
+    {
+        "subject": r["subject"],
+        "question": r["question"],
+        "choices": r["choices"],
+        "answer": r["answer"],
+    }
+    for r in correct_records
+]
+with open("correct_questions.json", "w") as f:
+    json.dump(questions, f, indent=2)
+
+summary = {"accuracy": accuracy, "attempts": attempts, "parseable": parseable, "correct": correct, "results": correct_records}
 with open("results.json", "w") as f:
-    json.dump(output, f, indent=2)
-print("Results saved to results.json")
+    json.dump(summary, f, indent=2)
+print(f"Collected {correct} correct responses in {attempts} attempts (accuracy={accuracy:.3f})")
+print("Questions saved to correct_questions.json")
+print("Full results saved to results.json")
