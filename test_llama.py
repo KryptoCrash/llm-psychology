@@ -24,10 +24,14 @@ device = utils.get_device()
 
 # NBVAL_IGNORE_OUTPUT
 model = TransformerBridge.boot_transformers(
-    "meta-llama/Llama-3.2-3B-Instruct",
+    "meta-llama/Llama-3.1-8B-Instruct",
     device=device,
 )
 model.enable_compatibility_mode(disable_warnings=True)
+
+print(f"Loading oracle LoRA: {ORACLE_LORA_PATH}")
+model.load_adapter(ORACLE_LORA_PATH, adapter_name="oracle", is_trainable=False)
+print("Oracle loaded successfully!")
 
 
 print("Loading MMLU dataset...")
@@ -80,20 +84,20 @@ for _, row in test_df.iterrows():
     attempts += 1
     if answer:
         parseable += 1
+        correct_records.append(
+            {
+                "subject": row["subject"],
+                "question": row["question"],
+                "choices": choices,
+                "answer": int(row["answer"]),
+                "model_answer": answer,
+                "raw_response": response.strip(),
+            }
+        )
     if answer != ground_truth:
         continue
 
     correct += 1
-    correct_records.append(
-        {
-            "subject": row["subject"],
-            "question": row["question"],
-            "choices": choices,
-            "answer": int(row["answer"]),
-            "model_answer": answer,
-            "raw_response": response.strip(),
-        }
-    )
 
 accuracy = correct / parseable if parseable else 0.0
 
