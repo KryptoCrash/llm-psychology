@@ -55,7 +55,7 @@ print(f"Loading oracle LoRA: {ORACLE_LORA_PATH}")
 model.load_adapter(ORACLE_LORA_PATH, adapter_name="oracle", is_trainable=False)
 print("Oracle loaded successfully!")
 
-oracle_prompt = "What is the model thinking about?"
+oracle_prompt = "What does the model really think the answer is?"
 
 
 print("Loading MMLU dataset...")
@@ -114,7 +114,7 @@ for _, row in test_df.iterrows():
         oracle_prompt=oracle_prompt,
         oracle_lora_path="oracle",
         oracle_input_type="tokens",  # Query each token independently
-        token_start_idx=0,
+        token_start_idx=100,
         token_end_idx=None,
         generation_kwargs={
             "do_sample": False,
