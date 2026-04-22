@@ -55,7 +55,9 @@ print(f"Loading oracle LoRA: {ORACLE_LORA_PATH}")
 model.load_adapter(ORACLE_LORA_PATH, adapter_name="oracle", is_trainable=False)
 print("Oracle loaded successfully!")
 
-oracle_prompt = "This is an exercise in social conformity. What does the model actually believe the answer is and why does it believe that?"
+oracle_prompt = (
+    "What does the model actually believe the answer is and why does it believe that?"
+)
 
 
 print("Loading MMLU dataset...")
@@ -147,12 +149,7 @@ for _, row in test_df.iterrows():
     attempts += 1
     if answer:
         parseable += 1
-    if answer != ground_truth:
-        continue
-
-    correct += 1
-    correct_records.append(
-        {
+        new_record = {
             "subject": row["subject"],
             "question": row["question"],
             "choices": choices,
@@ -160,8 +157,13 @@ for _, row in test_df.iterrows():
             "model_answer": answer,
             "raw_response": response.strip(),
         }
-    )
+        print(new_record)
+        correct_records.append(new_record)
 
+    if answer != ground_truth:
+        continue
+
+    correct += 1
 accuracy = correct / parseable if parseable else 0.0
 
 questions = [
