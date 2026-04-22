@@ -55,9 +55,7 @@ print(f"Loading oracle LoRA: {ORACLE_LORA_PATH}")
 model.load_adapter(ORACLE_LORA_PATH, adapter_name="oracle", is_trainable=False)
 print("Oracle loaded successfully!")
 
-oracle_prompt = (
-    "What does the model actually believe the answer is and why does it believe that?"
-)
+oracle_prompt = "What is the model thinking about?"
 
 
 print("Loading MMLU dataset...")
