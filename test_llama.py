@@ -12,18 +12,20 @@ import plotly.io as pio
 import torch
 import torch.nn as nn
 import tqdm.auto as tqdm
-import transformer_lens.utilities as utils
 from datasets import load_dataset
 from fancy_einsum import einsum
 from jaxtyping import Float
 from peft import LoraConfig
 from transformer_lens import FactoredMatrix, HookedTransformer
 from transformer_lens.hook_points import HookPoint
-from transformer_lens.model_bridge import TransformerBridge
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 torch.set_grad_enabled(False)
-device = utils.get_device()
+device = torch.device(
+    "mps"
+    if torch.backends.mps.is_available()
+    else "cuda" if torch.cuda.is_available() else "cpu"
+)
 dtype = torch.bfloat16
 
 MODEL_NAME = "Qwen/Qwen3-8B"
@@ -64,7 +66,7 @@ test_df = (
 
 LETTER = ["A", "B", "C", "D"]
 TARGET_CORRECT = 5
-NUM_PARTICIPANTS = 1
+NUM_PARTICIPANTS = 2
 
 correct = 0
 attempts = 0
@@ -92,7 +94,7 @@ for _, row in test_df.iterrows():
         f"C: {choices[2]}\n"
         f"D: {choices[3]}\n\n"
         f"{participant_lines}\n"
-        f"Now, as participant {NUM_PARTICIPANTS}, it's your turn. Answer:"
+        f"Now, as participant {NUM_PARTICIPANTS + 1}, it's your turn. Answer:"
     )
 
     target_prompt_dict = [{"role": "user", "content": prompt_content}]
