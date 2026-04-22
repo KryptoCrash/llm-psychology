@@ -109,7 +109,7 @@ for _, row in test_df.iterrows():
         model=model,
         tokenizer=tokenizer,
         device=device,
-        target_prompt=target_prompt,
+        target_prompt=prompt,
         target_lora_path=None,
         oracle_prompt=oracle_prompt,
         oracle_lora_path="oracle",
