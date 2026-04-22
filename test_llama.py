@@ -102,19 +102,22 @@ for _, row in test_df.iterrows():
         tokenize=False,
         add_generation_prompt=True,
     )
-    results = utils.run_oracle(
+
+    results = oracle_utils.run_oracle(
         model=model,
         tokenizer=tokenizer,
         device=device,
         target_prompt=target_prompt,
-        target_lora_path=None,  # Using base model
+        target_lora_path=None,
         oracle_prompt=oracle_prompt,
-        oracle_lora_path="oracle",  # Our loaded oracle adapter
-        oracle_input_type="full_seq",  # Query the full sequence
+        oracle_lora_path="oracle",
+        oracle_input_type="tokens",  # Query each token independently
+        token_start_idx=0,
+        token_end_idx=None,
         generation_kwargs={
             "do_sample": False,
             "temperature": 0.0,
-            "max_new_tokens": 50,
+            "max_new_tokens": 100,
         },
     )
 
