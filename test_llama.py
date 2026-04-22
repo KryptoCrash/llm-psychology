@@ -66,7 +66,7 @@ test_df = (
 
 LETTER = ["A", "B", "C", "D"]
 TARGET_CORRECT = 5
-NUM_PARTICIPANTS = 2
+NUM_PARTICIPANTS = 5
 
 correct = 0
 attempts = 0
