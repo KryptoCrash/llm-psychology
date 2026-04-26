@@ -130,9 +130,7 @@ for row in questions:
     answer = ""
     for _ in range(10):
         outputs = model.generate(
-            prompt_formatted,
-            max_new_tokens=50,
-            do_sample=True,
+            prompt_formatted, max_new_tokens=50, do_sample=True, return_tensors="pt"
         )
 
         response = outputs[len(prompt_formatted) :]
