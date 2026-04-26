@@ -122,15 +122,15 @@ for row in questions:
     ]
 
     prompt_formatted = tokenizer.apply_chat_template(
-        prompt_dict,
-        tokenize=True,
-        add_generation_prompt=True,
+        prompt_dict, tokenize=True, add_generation_prompt=True, return_tensors="pt"
     )
 
     answer = ""
     for _ in range(10):
         outputs = model.generate(
-            prompt_formatted, max_new_tokens=50, do_sample=True, return_tensors="pt"
+            prompt_formatted,
+            max_new_tokens=50,
+            do_sample=True,
         )
 
         response = outputs[len(prompt_formatted) :]
