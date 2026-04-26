@@ -116,14 +116,14 @@ for row in questions:
             + "\nYour response - \n"
             + f"Participant {n}: "
         )
-    
+
     prompt_dict = [
         {"role": "user", "content": prompt},
     ]
 
     prompt_formatted = tokenizer.apply_chat_template(
         prompt_dict,
-        tokenize=False,
+        tokenize=True,
         add_generation_prompt=True,
     )
 
