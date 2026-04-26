@@ -10,7 +10,6 @@ import transformer_lens.utilities as utils
 from peft import LoraConfig
 from transformer_lens import FactoredMatrix, HookedTransformer
 from transformer_lens.hook_points import HookPoint
-from transformer_lens.model_bridge import TransformerBridge
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 parser = argparse.ArgumentParser()
@@ -117,16 +116,26 @@ for row in questions:
             + "\nYour response - \n"
             + f"Participant {n}: "
         )
+    
+    prompt_dict = [
+        {"role": "user", "content": prompt},
+    ]
+
+    prompt_formatted = tokenizer.apply_chat_template(
+        prompt_dict,
+        tokenize=False,
+        add_generation_prompt=True,
+    )
 
     answer = ""
     for _ in range(10):
         outputs = model.generate(
-            prompt,
+            prompt_formatted,
             max_new_tokens=50,
             do_sample=True,
         )
 
-        response = outputs[len(prompt) :]
+        response = outputs[len(prompt_formatted) :]
         m = re.search(r"<answer>\s*([A-Za-z])\s*</answer>", response)
         if m:
             answer = m.group(1).upper()
