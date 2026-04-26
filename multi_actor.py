@@ -1,28 +1,63 @@
 import argparse
+import enum
 import json
 import random
 import re
+
+import oracle_utils
 import torch
-from transformer_lens import HookedTransformer
 import transformer_lens.utilities as utils
-from transformer_lens.hook_points import HookPoint
+from peft import LoraConfig
 from transformer_lens import FactoredMatrix, HookedTransformer
+from transformer_lens.hook_points import HookPoint
 from transformer_lens.model_bridge import TransformerBridge
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 parser = argparse.ArgumentParser()
-parser.add_argument("n", type=int, help="Total number of participants (1=no actors, 2=single actor, >=3=multi actor)")
-parser.add_argument("--qd", action="store_true", help="Question distillation: summarise prior responses as a single line")
+parser.add_argument(
+    "n",
+    type=int,
+    help="Total number of participants (1=no actors, 2=single actor, >=3=multi actor)",
+)
+parser.add_argument(
+    "--qd",
+    action="store_true",
+    help="Question distillation: summarise prior responses as a single line",
+)
 args = parser.parse_args()
 n = args.n
 
 torch.set_grad_enabled(False)
-device = utils.get_device()
-
-model = TransformerBridge.boot_transformers(
-    "meta-llama/Llama-3.2-3B-Instruct",
-    device=device,
+dtype = torch.bfloat16
+device = torch.device(
+    "mps"
+    if torch.backends.mps.is_available()
+    else "cuda" if torch.cuda.is_available() else "cpu"
 )
-model.enable_compatibility_mode(disable_warnings=True)
+
+# Model configuration
+MODEL_NAME = "Qwen/Qwen3-8B"
+ORACLE_LORA_PATH = "adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B"
+
+print(f"Loading tokenizer: {MODEL_NAME}")
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+tokenizer.padding_side = "left"
+if not tokenizer.pad_token_id:
+    tokenizer.pad_token_id = tokenizer.eos_token_id
+
+print(f"Loading model: {MODEL_NAME}...")
+model = AutoModelForCausalLM.from_pretrained(
+    MODEL_NAME,
+    device_map="auto",
+    dtype=dtype,
+)
+model.eval()
+
+# Add dummy adapter for consistent PeftModel API
+dummy_config = LoraConfig()
+model.add_adapter(dummy_config, adapter_name="default")
+
+print("Model loaded successfully!")
 
 LETTER = ["A", "B", "C", "D"]
 
@@ -90,7 +125,8 @@ for row in questions:
             max_new_tokens=50,
             do_sample=True,
         )
-        response = outputs[len(prompt):]
+
+        response = outputs[len(prompt) :]
         m = re.search(r"<answer>\s*([A-Za-z])\s*</answer>", response)
         if m:
             answer = m.group(1).upper()
@@ -103,18 +139,71 @@ for row in questions:
         correct += 1
 
     record = {
+        "prompt": prompt,
         "subject": row["subject"],
         "question": row["question"],
         "choices": choices,
         "answer": ground_truth_idx,
         "model_answer": answer,
         "is_correct": is_correct,
-        "raw_response": response.strip(),
+        "raw_response": response,
     }
     if n >= 2:
         record["participant_1_answer"] = participant_1_answer
         record["conforms"] = (answer == participant_1_answer) if answer else None
     records.append(record)
+
+# Load oracle LoRA
+print(f"Loading oracle LoRA: {ORACLE_LORA_PATH}")
+model.load_adapter(ORACLE_LORA_PATH, adapter_name="oracle", is_trainable=False)
+print("Oracle loaded successfully!")
+
+oracle_prompt = "Are the participants answer's true or false?"
+
+oracle_records = []
+
+for record_idx, record in enumerate(records):
+    target_prompt_dict = [
+        {"role": "user", "content": record.prompt},
+        {"role": "assistant", "content": record.response},
+    ]
+
+    target_prompt = tokenizer.apply_chat_template(
+        target_prompt_dict,
+        tokenize=False,
+        add_generation_prompt=True,
+    )
+
+    results = oracle_utils.run_oracle(
+        model=model,
+        tokenizer=tokenizer,
+        device=device,
+        target_prompt=target_prompt,
+        target_lora_path=None,
+        oracle_prompt=oracle_prompt,
+        oracle_lora_path="oracle",
+        oracle_input_type="tokens",  # Query each token independently
+        token_start_idx=0,
+        token_end_idx=None,
+        generation_kwargs={
+            "do_sample": False,
+            "temperature": 0.0,
+            "max_new_tokens": 100,
+        },
+    )
+
+    # Display token-by-token responses
+    target_tokens = tokenizer.convert_ids_to_tokens(results.target_input_ids)
+    oracle_responses = []
+    for i, (token, response) in enumerate(zip(target_tokens, results.token_responses)):
+        if response:
+            oracle_responses.append(
+                {"position": i, "token": token, "response": response}
+            )
+
+    oracle_record = {"record": record, "oracle_responses": oracle_responses}
+    oracle_records.append(oracle_record)
+    torch.save(results.activations, f"activations-{record_idx}.pt")
 
 attempts = len(records)
 accuracy = correct / parseable if parseable else 0.0
@@ -135,5 +224,14 @@ output_file = f"qd_{n}.json" if args.qd else f"multi_actor_{n}_results.json"
 with open(output_file, "w") as f:
     json.dump(summary, f, indent=2)
 
-print(f"n={n} | Processed {attempts} questions: {correct} correct, {parseable} parseable (accuracy={accuracy:.3f})")
+oracle_output_file = (
+    f"qd_{n}_oracle.json" if args.qd else f"multi_actor_{n}_oracle_results.json"
+)
+with open(oracle_output_file, "w") as f:
+    json.dump(oracle_records, f, indent=2)
+
+print(
+    f"n={n} | Processed {attempts} questions: {correct} correct, {parseable} parseable (accuracy={accuracy:.3f})"
+)
 print(f"Full results saved to {output_file}")
+print(f"Full oracle results saved to {oracle_output_file}")
