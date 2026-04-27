@@ -1,0 +1,217 @@
+{
+  "n": 1,
+  "accuracy": 1.0,
+  "attempts": 13,
+  "parseable": 13,
+  "correct": 13,
+  "results": [
+    {
+      "subject": "professional_psychology",
+      "question": "If a psychologist acts as both a fact witness for the plaintiff and an expert witness for the court in a criminal trial, she has acted:",
+      "choices": [
+        "unethically by accepting dual roles.",
+        "ethically as long as she did not have a prior relationship with the plaintiff.",
+        "ethically as long as she clarifies her roles with all parties.",
+        "ethically as long as she obtains a waiver from the court."
+      ],
+      "answer": 2,
+      "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: If a psychologist acts as both a fact witness for the plaintiff and an expert witness for the court in a criminal trial, she has acted:\nA: unethically by accepting dual roles.\nB: ethically as long as she did not have a prior relationship with the plaintiff.\nC: ethically as long as she clarifies her roles with all parties.\nD: ethically as long as she obtains a waiver from the court.\n\nAnswer: ",
+      "generation_attempts": 1,
+      "model_answer": "C",
+      "is_correct": true,
+      "raw_response": "<answer>C</answer> \n\nExplanation: Psychologists are permitted to perform both some fact-witness and some expert-functions in individual cases, as long as their dual roles are bartered forth with all parties, and provide some warning to them as to"
+    },
+    {
+      "subject": "security_studies",
+      "question": "In what ways does the perspective on terrorism influence the response a government will take?",
+      "choices": [
+        "Within the disease prescription, reform packages become part of the government response to reduce the appeal of the terrorist group within the population. However, reforms may encourage terrorists to continue their violent activities because they are being rewarded. Under these conditions reforms may become concessions that fuel the violence rather than a mechanism for ending it. It is also clear that reforms may not eliminate the presence of terrorism.",
+        "Contemporary responses to terrorism have been taken within the context of the war on terror analogy, in which the norms of retaliation and punishment prevail. Implicit within this view is the justification for pre-emptive action taken against training facilities, headquarters, sources of funding, and even the assassination of key individuals.",
+        "Whilst the warfare analogy presumes deterrence at times, deterrence is more central to a justice system. The extent of pre-emption available in a normal criminal context is the detention of suspects or judicial harassment.",
+        "All of these options. Responses to terrorist attacks vary either explicitly or implicitly, if warfare is seen as warfare, crime, or disease."
+      ],
+      "answer": 3,
+      "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: In what ways does the perspective on terrorism influence the response a government will take?\nA: Within the disease prescription, reform packages become part of the government response to reduce the appeal of the terrorist group within the population. However, reforms may encourage terrorists to continue their violent activities because they are being rewarded. Under these conditions reforms may become concessions that fuel the violence rather than a mechanism for ending it. It is also clear that reforms may not eliminate the presence of terrorism.\nB: Contemporary responses to terrorism have been taken within the context of the war on terror analogy, in which the norms of retaliation and punishment prevail. Implicit within this view is the justification for pre-emptive action taken against training facilities, headquarters, sources of funding, and even the assassination of key individuals.\nC: Whilst the warfare analogy presumes deterrence at times, deterrence is more central to a justice system. The extent of pre-emption available in a normal criminal context is the detention of suspects or judicial harassment.\nD: All of these options. Responses to terrorist attacks vary either explicitly or implicitly, if warfare is seen as warfare, crime, or disease.\n\nAnswer: ",
+      "generation_attempts": 1,
+      "model_answer": "D",
+      "is_correct": true,
+      "raw_response": "<answer>D</answer>"
+    },
+    {
+      "subject": "virology",
+      "question": "Poliovirus can most easily become more virulent by which of the following processes?",
+      "choices": [
+        "Mutation of the RNA genome at only a few positions",
+        "Recombining with another enterovirus",
+        "Altering its protein coat",
+        "Multiple nucleotide deletions and substitutions"
+      ],
+      "answer": 0,
+      "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Poliovirus can most easily become more virulent by which of the following processes?\nA: Mutation of the RNA genome at only a few positions\nB: Recombining with another enterovirus\nC: Altering its protein coat\nD: Multiple nucleotide deletions and substitutions\n\nAnswer: ",
+      "generation_attempts": 5,
+      "model_answer": "A",
+      "is_correct": true,
+      "raw_response": "A -> Virus may become virulent due to mutations or recombination depending on how significant the changes are.\n\n\n<answer>A</answer>"
+    },
+    {
+      "subject": "high_school_biology",
+      "question": "When oxygen becomes unavailable, this process regenerates NAD+, allowing respiration to continue.",
+      "choices": [
+        "Glycolysis",
+        "Chemiosmosis",
+        "Fermentation",
+        "Calvin cycle"
+      ],
+      "answer": 2,
+      "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: When oxygen becomes unavailable, this process regenerates NAD+, allowing respiration to continue.\nA: Glycolysis\nB: Chemiosmosis\nC: Fermentation\nD: Calvin cycle\n\nAnswer: ",
+      "generation_attempts": 1,
+      "model_answer": "C",
+      "is_correct": true,
+      "raw_response": "<answer>C</answer>\n\nExplanation: During anaerobic conditions, the NADH produced during glycolysis cannot convert the pyruvate to ATP via oxidative phosphorylation, because oxygen cannot be present. Therefore, cellular respiration proceeds via"
+    },
+    {
+      "subject": "us_foreign_policy",
+      "question": "International trade will almost always benefit both countries, so why do countries try to protect their own firms from exposure to the world market?",
+      "choices": [
+        "Irrationality on the part of the leadership",
+        "Costs of free trade are concentrated, but benefits are dispersed",
+        "Regime type",
+        "International conflict prevents trade"
+      ],
+      "answer": 1,
+      "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: International trade will almost always benefit both countries, so why do countries try to protect their own firms from exposure to the world market?\nA: Irrationality on the part of the leadership\nB: Costs of free trade are concentrated, but benefits are dispersed\nC: Regime type\nD: International conflict prevents trade\n\nAnswer: ",
+      "generation_attempts": 1,
+      "model_answer": "B",
+      "is_correct": true,
+      "raw_response": "<answer>B</answer>xml\n\n\nExplanation: Free trade equilibrium benefits agricultural exporters (take advantage of lower comparative advantage), but at the expense of domestic food manufacturers. Countries have a propensity to protect their domestic food producers who have not yet reached Free Trade"
+    },
+    {
+      "subject": "clinical_knowledge",
+      "question": "Why might a patient need a tracheostomy?",
+      "choices": [
+        "To repair vocal cords after paralysis.",
+        "To aid swallowing.",
+        "As an aid to weaning patients from a ventilator.",
+        "Prior to neck surgery."
+      ],
+      "answer": 2,
+      "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: Why might a patient need a tracheostomy?\nA: To repair vocal cords after paralysis.\nB: To aid swallowing.\nC: As an aid to weaning patients from a ventilator.\nD: Prior to neck surgery.\n\nAnswer: ",
+      "generation_attempts": 1,
+      "model_answer": "C",
+      "is_correct": true,
+      "raw_response": "<answer>C</answer> \n\nExplanation: The tracheostomy tube bypasses the problem person's airway obstruction (such as a pneumothorax post-op or pulmonary edema), allowing air to and from the lungs more effectively. Patients"
+    },
+    {
+      "subject": "business_ethics",
+      "question": "The focus on issues, the intended audience extending beyond shareholders and the voluntary nature of ___________ distinguish it from _________.",
+      "choices": [
+        "Financial accounting, Environmental management initiatives",
+        "Financial accounting, Social accounting.",
+        "Social accounting, Financial accounting.",
+        "Annual report publication, Social accounting"
+      ],
+      "answer": 2,
+      "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: The focus on issues, the intended audience extending beyond shareholders and the voluntary nature of ___________ distinguish it from _________.\nA: Financial accounting, Environmental management initiatives\nB: Financial accounting, Social accounting.\nC: Social accounting, Financial accounting.\nD: Annual report publication, Social accounting\n\nAnswer: ",
+      "generation_attempts": 1,
+      "model_answer": "C",
+      "is_correct": true,
+      "raw_response": "<answer>C</answer> \n\nExplanation: The focus on issues, the intended audience extending beyond the shareholders and the voluntary nature of Social reporting distinguish it from Financial accounting.Disclosed by adopters and regulated by Financial Reporting Council, financial reporting draws and albeit"
+    },
+    {
+      "subject": "anatomy",
+      "question": "Which of the following options completes the following statement? \"The right atrioventricular valve\u2026\"",
+      "choices": [
+        "is a semilunar valve",
+        "is prevented from everting by papillary muscles.",
+        "is open during systole.",
+        "prevents blood returning from the pulmonary trunk as the heart relaxes."
+      ],
+      "answer": 1,
+      "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Which of the following options completes the following statement? \"The right atrioventricular valve\u2026\"\nA: is a semilunar valve\nB: is prevented from everting by papillary muscles.\nC: is open during systole.\nD: prevents blood returning from the pulmonary trunk as the heart relaxes.\n\nAnswer: ",
+      "generation_attempts": 3,
+      "model_answer": "B",
+      "is_correct": true,
+      "raw_response": "<answer>B</answer>\n\nExplanation: The bicuspid (two-leafed) AV valve allows the blood pumped from right ventricle to enter the right ventricle by opening and prevent the blood getting shot backwards as the ventr"
+    },
+    {
+      "subject": "medical_genetics",
+      "question": "The polymerase chain reaction or PCR is a technique that",
+      "choices": [
+        "was used to demonstrate DNA as the genetic material",
+        "is used to determine the content of minerals in a soil sample",
+        "uses short DNA primers and a thermostable DNA polymerase to replicate specific DNA sequences in vitro.",
+        "measures the ribosome transfer rate during translation"
+      ],
+      "answer": 2,
+      "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: The polymerase chain reaction or PCR is a technique that\nA: was used to demonstrate DNA as the genetic material\nB: is used to determine the content of minerals in a soil sample\nC: uses short DNA primers and a thermostable DNA polymerase to replicate specific DNA sequences in vitro.\nD: measures the ribosome transfer rate during translation\n\nAnswer: ",
+      "generation_attempts": 1,
+      "model_answer": "C",
+      "is_correct": true,
+      "raw_response": "<answer>C</answer> \n\nThe best answer is C."
+    },
+    {
+      "subject": "machine_learning",
+      "question": "High entropy means that the partitions in classification are",
+      "choices": [
+        "pure",
+        "not pure",
+        "useful",
+        "useless"
+      ],
+      "answer": 1,
+      "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: High entropy means that the partitions in classification are\nA: pure\nB: not pure\nC: useful\nD: useless\n\nAnswer: ",
+      "generation_attempts": 2,
+      "model_answer": "B",
+      "is_correct": true,
+      "raw_response": "<answer>B</answer> \n\nExplanation: Entropy is a measure of the amount of uncertainty in a particular outcome. In the context of classification, when the entropy is high, it means that the partitions are not clean i.e the feature values are"
+    },
+    {
+      "subject": "high_school_us_history",
+      "question": "This question refers to the following information.\n\"The challenge of the next half century is whether we have the wisdom to use wealth to enrich and elevate our national life, and to advance the quality of our American civilization\u2026.The Great Society rests on abundance and liberty for all. It demands an end to poverty and racial injustice, to which we are totally committed in our time. But that is just the beginning. The Great Society is a place where every child can find knowledge to enrich his mind and to enlarge his talents. It is a place where leisure is a welcome chance to build and reflect, not a feared cause of boredom and restlessness. It is a place where the city of man serves not only the needs of the body and the demands of commerce but the desire for beauty and the hunger for community. It is a place where man can renew contact with nature. It is a place which honors creation for its own sake and for what it adds to the understanding of the race. It is a place where men are more concerned with the quality of their goals than the quantity of their goods. But most of all, the Great Society is not a safe harbor, a resting place, a final objective, a finished work. It is a challenge constantly renewed, beckoning us toward a destiny where the meaning of our lives matches the marvelous products of our labor.\"\nLyndon Johnson, Remarks at the University of Michigan, Ann Arbor, 1964\nAll of the following were part of Johnson's Great Society program EXCEPT",
+      "choices": [
+        "the Civil Rights Act of 1964",
+        "Medicare and Medicaid",
+        "the establishment of the Department of Housing and Urban Development",
+        "the balanced budget mandate"
+      ],
+      "answer": 3,
+      "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: This question refers to the following information.\n\"The challenge of the next half century is whether we have the wisdom to use wealth to enrich and elevate our national life, and to advance the quality of our American civilization\u2026.The Great Society rests on abundance and liberty for all. It demands an end to poverty and racial injustice, to which we are totally committed in our time. But that is just the beginning. The Great Society is a place where every child can find knowledge to enrich his mind and to enlarge his talents. It is a place where leisure is a welcome chance to build and reflect, not a feared cause of boredom and restlessness. It is a place where the city of man serves not only the needs of the body and the demands of commerce but the desire for beauty and the hunger for community. It is a place where man can renew contact with nature. It is a place which honors creation for its own sake and for what it adds to the understanding of the race. It is a place where men are more concerned with the quality of their goals than the quantity of their goods. But most of all, the Great Society is not a safe harbor, a resting place, a final objective, a finished work. It is a challenge constantly renewed, beckoning us toward a destiny where the meaning of our lives matches the marvelous products of our labor.\"\nLyndon Johnson, Remarks at the University of Michigan, Ann Arbor, 1964\nAll of the following were part of Johnson's Great Society program EXCEPT\nA: the Civil Rights Act of 1964\nB: Medicare and Medicaid\nC: the establishment of the Department of Housing and Urban Development\nD: the balanced budget mandate\n\nAnswer: ",
+      "generation_attempts": 1,
+      "model_answer": "D",
+      "is_correct": true,
+      "raw_response": "<answer>D</answer>"
+    },
+    {
+      "subject": "high_school_us_history",
+      "question": "This question refers to the following information.\n\"We conclude that, in the field of public education, the doctrine of \"separate but equal\" has no place. Separate educational facilities are inherently unequal. Therefore, we hold that the plaintiffs and others similarly situated for whom the actions have been brought are, by reason of the segregation complained of, deprived of the equal protection of the laws guaranteed by the Fourteenth Amendment.\"\nBrown v. Board of Education, 1954\nWhich of the following best represents an effect of the legal decision described above?",
+      "choices": [
+        "Continuing white resistance slowed efforts at desegregation, sparking a series of social conflicts throughout the South.",
+        "The Supreme Court decision Brown v. the Board of Education led to increased enrollment in colleges and universities.",
+        "During the 1960s, increasing numbers of high school graduates rejected the notion that a college education was desirable.",
+        "In the twentieth century, jobs in advanced technical and medical industries generally require postgraduate degrees."
+      ],
+      "answer": 0,
+      "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: This question refers to the following information.\n\"We conclude that, in the field of public education, the doctrine of \"separate but equal\" has no place. Separate educational facilities are inherently unequal. Therefore, we hold that the plaintiffs and others similarly situated for whom the actions have been brought are, by reason of the segregation complained of, deprived of the equal protection of the laws guaranteed by the Fourteenth Amendment.\"\nBrown v. Board of Education, 1954\nWhich of the following best represents an effect of the legal decision described above?\nA: Continuing white resistance slowed efforts at desegregation, sparking a series of social conflicts throughout the South.\nB: The Supreme Court decision Brown v. the Board of Education led to increased enrollment in colleges and universities.\nC: During the 1960s, increasing numbers of high school graduates rejected the notion that a college education was desirable.\nD: In the twentieth century, jobs in advanced technical and medical industries generally require postgraduate degrees.\n\nAnswer: ",
+      "generation_attempts": 1,
+      "model_answer": "A",
+      "is_correct": true,
+      "raw_response": "<answer>A</answer>"
+    },
+    {
+      "subject": "high_school_european_history",
+      "question": "This question refers to the following information.\nRead the the following quotation to answer questions.\nThe various modes of worship which prevailed in the Roman world were all considered by the people as equally true; by the philosopher as equally false; and by the magistrate as equally useful.\nEdward Gibbon, The Decline and Fall of the Roman Empire, 1776\u20131788\nThe interpretation of the state of religious belief in ancient Rome by the eighteenth-century English historian Edward Gibbon might be offered as evidence for",
+      "choices": [
+        "the clergy's monopoly on academic scholarship in eighteenth-century Britain",
+        "the hatred of all things Roman by British scholars in the eighteenth century",
+        "the spread of religious skepticism among the educated elite of Britain in the eighteenth century",
+        "the lack of sources available to the eighteenth-century scholar for the study of ancient Roman civilization"
+      ],
+      "answer": 2,
+      "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: This question refers to the following information.\nRead the the following quotation to answer questions.\nThe various modes of worship which prevailed in the Roman world were all considered by the people as equally true; by the philosopher as equally false; and by the magistrate as equally useful.\nEdward Gibbon, The Decline and Fall of the Roman Empire, 1776\u20131788\nThe interpretation of the state of religious belief in ancient Rome by the eighteenth-century English historian Edward Gibbon might be offered as evidence for\nA: the clergy's monopoly on academic scholarship in eighteenth-century Britain\nB: the hatred of all things Roman by British scholars in the eighteenth century\nC: the spread of religious skepticism among the educated elite of Britain in the eighteenth century\nD: the lack of sources available to the eighteenth-century scholar for the study of ancient Roman civilization\n\nAnswer: ",
+      "generation_attempts": 2,
+      "model_answer": "C",
+      "is_correct": true,
+      "raw_response": "<answer>C</answer>"
+    }
+  ]
+}

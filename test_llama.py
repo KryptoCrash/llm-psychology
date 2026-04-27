@@ -37,7 +37,7 @@ dataset = load_dataset("cais/mmlu", "all", cache_dir="./mmlu_cache")
 test_df = dataset["test"].to_pandas().sample(frac=1, random_state=42).reset_index(drop=True)
 
 LETTER = ["A", "B", "C", "D"]
-TARGET_CORRECT = 25
+TARGET_CORRECT = 100
 
 correct = 0
 attempts = 0

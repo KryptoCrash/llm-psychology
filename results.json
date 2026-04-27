@@ -1,8 +1,8 @@
 {
-  "accuracy": 0.8064516129032258,
-  "attempts": 49,
-  "parseable": 31,
-  "correct": 25,
+  "accuracy": 0.6578947368421053,
+  "attempts": 287,
+  "parseable": 152,
+  "correct": 100,
   "results": [
     {
       "subject": "professional_psychology",
@@ -15,7 +15,7 @@
       ],
       "answer": 2,
       "model_answer": "C",
-      "raw_response": "<answer>C</answer> \n\nExplanation: Ethical rules require that an expert and fact witness be clearly separated. The psychologist clarifies her roles with all parties. (APA Ethical Principles of Psychologists and Code of Conduct, 2000,"
+      "raw_response": "<answer>C</answer> \n\nExplanation: Ethical rules require that an expert and fact witness be clearly identified. The psychologist clarifies her roles with all parties. (APA Ethical Principles of Psychologists and Code of Conduct, 2000,"
     },
     {
       "subject": "security_studies",
@@ -28,20 +28,7 @@
       ],
       "answer": 3,
       "model_answer": "D",
-      "raw_response": "<answer>D</answer>"
-    },
-    {
-      "subject": "international_law",
-      "question": "Can countries rely on their domestic law as an excuse to violate their obligations under international law?",
-      "choices": [
-        "Domestic law always prevails over international law",
-        "Only customary international law prevails over domestic law",
-        "Obligations under international law prevail over domestic law",
-        "Constitutional obligations always prevail over obligations under international law"
-      ],
-      "answer": 2,
-      "model_answer": "C",
-      "raw_response": "<answer>C</answer> \n\nExplanation: International law is a system of rules that countries agree to follow. These rules are binding on the countries that agree to them, and they take precedence over domestic laws. This is known as the supremacy of international"
+      "raw_response": "<answer>D</answer> \n\nThe best answer is D."
     },
     {
       "subject": "virology",
@@ -67,7 +54,7 @@
       ],
       "answer": 2,
       "model_answer": "C",
-      "raw_response": "<answer>C</answer> \n\nExplanation: Fermentation is the process by which cells regenerate NAD+ from NADH, allowing respiration to continue when oxygen becomes unavailable. This process is anaerobic and results in the production of ATP and"
+      "raw_response": "<answer>C</answer> \n\nExplanation: Fermentation is the process by which cells regenerate NAD+ from NADH when oxygen becomes unavailable. This process allows respiration to continue. Fermentation is a type of anaerobic respiration."
     },
     {
       "subject": "us_foreign_policy",
@@ -80,7 +67,7 @@
       ],
       "answer": 1,
       "model_answer": "B",
-      "raw_response": "<answer>B</answer> \n\nExplanation: The costs of free trade are concentrated, but benefits are dispersed. This means that the costs of free trade are borne by a small number of people, but the benefits are spread out among a large number of"
+      "raw_response": "<answer>B</answer> \n\nExplanation: The costs of free trade are concentrated, but benefits are dispersed. This means that the costs of free trade are borne by a small number of people, but the benefits are spread out over a large number of"
     },
     {
       "subject": "clinical_knowledge",
@@ -106,7 +93,7 @@
       ],
       "answer": 2,
       "model_answer": "C",
-      "raw_response": "<answer>C</answer> \n\nExplanation: The focus on issues, the intended audience extending beyond shareholders and the voluntary nature of social accounting distinguish it from financial accounting. Social accounting is a voluntary process that focuses on issues of social responsibility and is intended for"
+      "raw_response": "<answer>C</answer> \n\nExplanation: Social accounting is a voluntary process that focuses on issues beyond financial performance and extends beyond shareholders. It is a distinguishing feature of social accounting. Financial accounting, on the other hand, is a mandatory process that focuses"
     },
     {
       "subject": "anatomy",
@@ -158,7 +145,7 @@
       ],
       "answer": 3,
       "model_answer": "D",
-      "raw_response": "<answer>D</answer>"
+      "raw_response": "<answer>D</answer> \n\nThe Great Society program was a series of domestic policy initiatives launched by President Lyndon B. Johnson in the 1960s. The program was designed to address issues such as poverty, racial inequality, education, and"
     },
     {
       "subject": "high_school_us_history",
@@ -197,7 +184,7 @@
       ],
       "answer": 0,
       "model_answer": "A",
-      "raw_response": "<answer>A</answer>"
+      "raw_response": "<answer>A</answer> \n\nThe question requires the test-taker to identify the individual most likely to develop anorexia nervosa. The correct answer is Maria, as she is described as feeling that her life is out of control, which is"
     },
     {
       "subject": "miscellaneous",
@@ -252,19 +239,6 @@
       "raw_response": "<answer>B</answer> \n\nThe case study of Phineas Gage's brain injury was significant for being one of the first well-documented examples of a specific brain area being associated with a set of physical and emotional changes. Gage's"
     },
     {
-      "subject": "high_school_us_history",
-      "question": "This question refers to the following information.\n\"Yesterday, December 7, 1941\u2014a date which will live in infamy\u2014the United States of America was suddenly and deliberately attacked by naval and air forces of the Empire of Japan. The United States was at peace with that nation and, at the solicitation of Japan, was still in conversation with its Government and its Emperor looking toward the maintenance of peace in the Pacific. Indeed, one hour after Japanese air squadrons had commenced bombing\u2026the Japanese Ambassador to the United States and his colleague delivered to the Secretary of State a formal reply to a recent American message. While this reply stated that it seemed useless to continue the existing diplomatic negotiations, it contained no threat or hint of war or armed attack\u2026.The attack yesterday\u2026has caused severe damage to American naval and military forces. Very many American lives have been lost. In addition American ships have been reported torpedoed on the high seas\u2026.As Commander-in-Chief of the Army and Navy, I have directed that all measures be taken for our defense.\"\nPresident Franklin D. Roosevelt, radio address, December 8, 1941\nThe above statements were most likely made after which major event?",
-      "choices": [
-        "The bombing of Pearl Harbor",
-        "The sinking of the U.S.S Maine",
-        "The bombing of the U.S.S. Liberty",
-        "The Boxer Rebellion"
-      ],
-      "answer": 0,
-      "model_answer": "A",
-      "raw_response": "A <answer> A </answer> \n\nThe question requires the reader to identify the major event that the statements were most likely made after. The correct answer is the bombing of Pearl Harbor, which is a historical event that occurred on December 7,"
-    },
-    {
       "subject": "professional_medicine",
       "question": "A 13-month-old child is brought to the emergency department because of urticaria, swelling of the lips, and difficulty breathing immediately after eating an egg. A potential risk for hypersensitivity reaction is posed by vaccination against which of the following illnesses?",
       "choices": [
@@ -275,7 +249,7 @@
       ],
       "answer": 1,
       "model_answer": "B",
-      "raw_response": "<answer>B</answer> \n\nThe question requires the test-taker to identify the vaccine that poses a risk of a hypersensitivity reaction, similar to the egg allergy described in the scenario. The correct answer is Influenza vaccine, which is"
+      "raw_response": "<answer>B</answer> \n\nExplanation: The child is experiencing symptoms of anaphylaxis, which is a severe, potentially life-threatening allergic reaction. The symptoms are likely caused by an immune reaction to an egg protein. Vaccination against influenza poses"
     },
     {
       "subject": "professional_psychology",
@@ -327,7 +301,1008 @@
       ],
       "answer": 2,
       "model_answer": "C",
-      "raw_response": "<answer>C</answer> \n\nExplanation: Vitamin E is a major lipid-soluble antioxidant in cell membranes. It helps protect cells from damage caused by free radicals. Vitamin E is a fat-soluble vitamin that is found in many foods,"
+      "raw_response": "<answer>C</answer> \n\nExplanation: Vitamin E is a major lipid-soluble antioxidant in cell membranes. It is a fat-soluble vitamin that helps protect cells from damage caused by free radicals. It is found in various foods such as"
+    },
+    {
+      "subject": "high_school_geography",
+      "question": "Which of the following is NOT an important environmental factor influencing a country's agriculture?",
+      "choices": [
+        "Number of frost-free days per year",
+        "Availability of sufficient rainfall",
+        "Reliability of sufficient rainfall",
+        "Amount of fertilizer produced in the country"
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer>"
+    },
+    {
+      "subject": "high_school_biology",
+      "question": "Which of the following pairs of scientists pioneered the ecological discipline known as island biogeography?",
+      "choices": [
+        "Robert MacArthur and E. O. Wilson",
+        "James Watson and Francis Crick",
+        "Matthias Schleiden and Theodor Schwann",
+        "Alfred Hershey and Martha Chase"
+      ],
+      "answer": 0,
+      "model_answer": "A",
+      "raw_response": "A <answer> A </answer> \n\nThe question requires the test-taker to identify the correct pair of scientists who pioneered the ecological discipline known as island biogeography. The correct answer is Robert MacArthur and E. O. Wilson, who"
+    },
+    {
+      "subject": "college_biology",
+      "question": "Which of the following best explains why enzymes are effective in facilitating chemical reactions?",
+      "choices": [
+        "They raise the temperature of the reaction mixture, thereby speeding up the conversion of reactants to products.",
+        "They alter the equilibrium constant of a reaction (K_eq) so that more reactant can be converted to product.",
+        "They increase the maximal rate of the chemical reaction (V_max).",
+        "They lower the activation energy, thereby speeding up the conversion of reactants to products."
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer> \n\nExplanation: Enzymes are biological catalysts that speed up chemical reactions. They do this by lowering the activation energy required for the reaction to proceed, thereby speeding up the conversion of reactants to products. This is"
+    },
+    {
+      "subject": "philosophy",
+      "question": "According to Socrates, a clear sign that a person has _____ is her exclusive pursuit of social status, wealth, power, and pleasure.",
+      "choices": [
+        "philosophical ambition",
+        "worldly wisdom",
+        "exceptional desires",
+        "an unhealthy soul"
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer>"
+    },
+    {
+      "subject": "moral_scenarios",
+      "question": "For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I moved my family into the underground storm shelter to hide them from child protective services. Scenario 2 | I passed my exam",
+      "choices": [
+        "Wrong, Wrong",
+        "Wrong, Not wrong",
+        "Not wrong, Wrong",
+        "Not wrong, Not wrong"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nExplanation: In scenario 1, the main character is doing something clearly morally wrong. In scenario 2, the main character is doing something that is morally acceptable. Passing an exam is a normal and expected achievement in"
+    },
+    {
+      "subject": "prehistory",
+      "question": "Which area is home to the tradition of making stone tools from chipped pebbles, called Hoabinhian?",
+      "choices": [
+        "Australia",
+        "North America",
+        "Europe",
+        "Asia"
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer> \n\nThe Hoabinhian culture is a prehistoric culture that existed from approximately 100,000 to 10,000 years ago in Southeast Asia. The culture is known for its sophisticated stone tools, including the use"
+    },
+    {
+      "subject": "professional_psychology",
+      "question": "A 38-year-old person is afraid to travel on public transportation. A program of treatment that relies on graduated exposure to traveling by bus, with actual real-life behavioral activities increased across trials, is called",
+      "choices": [
+        "flooding",
+        "modeling",
+        "reinforced practice",
+        "implosion"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nExplanation: The treatment program described in the question is an example of a behavior therapy technique called reinforced practice. The goal of this technique is to increase the frequency of a behavior by providing positive reinforcement. In this case,"
+    },
+    {
+      "subject": "conceptual_physics",
+      "question": "The time it takes for a pendulum swinging to and fro refers to its",
+      "choices": [
+        "frequency",
+        "period",
+        "wavelength",
+        "amplitude"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nExplanation: The time taken by a pendulum to complete one oscillation is called its period. The period of a pendulum is independent of its amplitude. The frequency of a pendulum is the number of oscillations"
+    },
+    {
+      "subject": "high_school_government_and_politics",
+      "question": "The government promotes preferential treatment for members of groups that have historically suffered from discrimination by means of",
+      "choices": [
+        "the New Federalism",
+        "affirmative action programs",
+        "Social Security benefits",
+        "bills of attainder"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nExplanation: Affirmative action programs are designed to promote preferential treatment for members of groups that have historically suffered from discrimination. The New Federalism is a policy that seeks to decentralize power and reduce the role of"
+    },
+    {
+      "subject": "formal_logic",
+      "question": " Select the best translation into predicate logic: Ms. Jackson lent me some sugar, but neither Janet nor Latoya did.",
+      "choices": [
+        "Lm \u2228 ~(Jl \u2228 Ll)",
+        "Lm \u2022 ~(Lj \u2022 Ll)",
+        "Lm \u2022 ~(Lj \u2228 Ll)",
+        "Lm \u2228 ~(Lj \u2022 Ll)"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "C <answer>C</answer>"
+    },
+    {
+      "subject": "miscellaneous",
+      "question": "What city's airport uses the code ORD?",
+      "choices": [
+        "Chicago",
+        "Orlando",
+        "New York City",
+        "Portland"
+      ],
+      "answer": 0,
+      "model_answer": "A",
+      "raw_response": "<answer>A</answer>"
+    },
+    {
+      "subject": "high_school_geography",
+      "question": "Which factor in the last quarter century greatly destabilized Eastern Europe and led to ethnic conflict?",
+      "choices": [
+        "The introduction of new languages",
+        "The end of the Cold War",
+        "The invasion by the Soviets",
+        "The acceptance of many Eastern European countries into the EU"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer>"
+    },
+    {
+      "subject": "machine_learning",
+      "question": "Statement 1| The derivative of the sigmoid $\\sigma(x)=(1+e^{-x})^{-1}$ with respect to $x$ is equal to $\\text{Var}(B)$ where $B\\sim \\text{Bern}(\\sigma(x))$ is a Bernoulli random variable. Statement 2| Setting the bias parameters in each layer of neural network to 0 changes the bias-variance trade-off such that the model's variance increases and the model's bias decreases",
+      "choices": [
+        "True, True",
+        "False, False",
+        "True, False",
+        "False, True"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "C <answer>C</answer>"
+    },
+    {
+      "subject": "human_sexuality",
+      "question": "Buffy and Willow were discussing their sexual fantasies. Buffy revealed that she sometimes fantasizes about sex with other women even though she normally finds herself attracted to men. She also fantasizes about group sex. Which of the following statements can be inferred from Buffy's fantasies?",
+      "choices": [
+        "Buffy's fantasies suggest that she must be a latent homosexual or bisexual.",
+        "Buffy's fantasies are indicative of a paraphilia.",
+        "Buffy's fantasies indicate that she is not getting enough sex to keep her satisfied.",
+        "Buffy's fantasies are fairly typical and tell us little about her sexual tendencies."
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer> \n\nReasoning Skill: Applying Moral And Ethical Principles - This question requires the ability to analyze the information given and make an inference about Buffy's sexual fantasies. The correct answer, D, indicates that the fantasies are fairly"
+    },
+    {
+      "subject": "sociology",
+      "question": "Warner's study of the city of Natchez in the American Deep South showed that the 'colour line' there was:",
+      "choices": [
+        "no longer a powerful influence upon race relations",
+        "a way of marking out the land so that black people had less space for housing",
+        "a new policy that had been introduced to assimilate black and white groups",
+        "a sharp division between black and white castes, underpinned by beliefs about white superiority"
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "D <answer> D </answer>"
+    },
+    {
+      "subject": "computer_security",
+      "question": "How do you prevent SQL injection?",
+      "choices": [
+        "Escape queries",
+        "Interrupt requests",
+        "Merge tables",
+        "All of the above"
+      ],
+      "answer": 0,
+      "model_answer": "A",
+      "raw_response": "<answer>A</answer> \n\nExplanation: SQL injection occurs when an attacker injects malicious SQL code into a web application's database. To prevent SQL injection, you should escape all user input. This means that you should use parameterized queries or prepared"
+    },
+    {
+      "subject": "computer_security",
+      "question": "Which of the following is a Wireless traffic Sniffing tool?",
+      "choices": [
+        "Maltego",
+        "BurpSuit",
+        "Nessus",
+        "Wireshark"
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer>"
+    },
+    {
+      "subject": "public_relations",
+      "question": "Early theories of mass communication suggested that audiences were passive recipients of media messages and thus vulnerable to manipulation. Which of the following best describes current thinking?",
+      "choices": [
+        "Audiences are more vulnerable and passive than ever before.",
+        "Television viewing, in particular, creates increased activity in the right hemisphere of the brain.",
+        "Active receivers are not uniformly affected by mass communication messages.",
+        "Technology has led to increasingly passive recipients at the ends of message transmission systems."
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer>"
+    },
+    {
+      "subject": "clinical_knowledge",
+      "question": "The transcription of DNA to a molecule of messenger RNA occurs:",
+      "choices": [
+        "on the ribosomes.",
+        "in the cytosol.",
+        "in the nucleus.",
+        "only during cell division."
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nThe transcription of DNA to a molecule of messenger RNA occurs in the nucleus. The process of transcription is the first step in gene expression, where a segment of DNA is used as a template to create a complementary RNA molecule"
+    },
+    {
+      "subject": "high_school_psychology",
+      "question": "According to Kohlberg, at the third (postconventional) level of moral development, individuals",
+      "choices": [
+        "follow rules in order to obtain reward",
+        "follow rules in order to avoid punishment",
+        "define what is right by what they have learned from others, especially authority figures",
+        "self-define principles that may or may not match the dominant morals of the times"
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer>"
+    },
+    {
+      "subject": "clinical_knowledge",
+      "question": "Which of these is most likely to cause deviation of the trachea?",
+      "choices": [
+        "A left basal pneumonia",
+        "A small right pleural effusion",
+        "Previous tuberculosis of the right upper lobe",
+        "Idiopathic fibrosing alveolitis"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nExplanation: The trachea is most likely to be deviated by a mass in the right main bronchus. The right main bronchus is larger than the left main bronchus, so a mass"
+    },
+    {
+      "subject": "high_school_us_history",
+      "question": "This question refers to the following information.\nPerhaps, however, I am more conscious of the importance of civil liberties in this particular moment of our history than anyone else, because I travel through the country and meet people and see things that have happened to little people, I realize what it means to democracy to preserve our civil liberties.\nAll through the years we have had to fight for civil liberty, and we know that there are times when the light grows rather dim, and every time that happens democracy is in danger. Now, largely because of the troubled state of the world as a whole, civil liberties have disappeared in many other countries.\nIt is impossible, of course, to be at war and keep freedom of the press and freedom of speech and freedom of assembly. They disappear automatically. And so in many countries where ordinarily they were safe, today they have gone. In other countries, even before war came, not only freedom of the press and freedom of assembly, and freedom of speech disappeared, but freedom of religion disappeared.\nAnd so we know here in this country, we have a grave responsibility. We are at peace. We have no reason for the fears which govern so many other peoples throughout the world; therefore, we have to guard the freedoms of democracy.\n\u2014Eleanor Roosevelt, Address to the American Civil Liberties Union, Chicago, Illinois, March 14, 1940\nRoosevelt's concerns can most directly be compared to those of the people who debated which of the following?",
+      "choices": [
+        "The Gulf of Tonkin Resolution of 1964",
+        "The Voting Rights Act of 1965",
+        "The USA Patriot Act of 2001",
+        "The Affordable Care Act of 2010"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nThe Gulf of Tonkin Resolution of 1964, the Voting Rights Act of 1965, and the Affordable Care Act of 2010 are all domestic legislation. The USA Patriot Act of 2001,"
+    },
+    {
+      "subject": "philosophy",
+      "question": "According to Locke, every man, by consenting with others to make one body politic under one government, puts himself under an obligation to everyone of that society to submit to the determination of_____.",
+      "choices": [
+        "the majority",
+        "the king",
+        "the judges",
+        "his own will"
+      ],
+      "answer": 0,
+      "model_answer": "A",
+      "raw_response": "<answer>A</answer> \n\nExplanation: John Locke, in his Second Treatise of Government, states that when people agree to form a government, they agree to submit to the decisions of the majority. Locke believed that the majority's decision should be"
+    },
+    {
+      "subject": "high_school_geography",
+      "question": "The Basques, Bretons, Kashmiris, and Tamils are all examples of",
+      "choices": [
+        "regionalist groups.",
+        "separatist groups.",
+        "terrorist groups.",
+        "interventionist groups."
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nExplanation: The Basques, Bretons, Kashmiris, and Tamils are all examples of separatist groups. They all wish to separate themselves from the rest of their respective countries. The Basques are from the"
+    },
+    {
+      "subject": "international_law",
+      "question": "What is a 'treaty' according to the Vienna Convention on the Law of Treaties (VCLT)?",
+      "choices": [
+        "Treaties are all agreements concluded between States, international organizations and non-State entities (e.g. corporations)",
+        "Treaties are agreements concluded between States in written form and governed by international law",
+        "Treaties are both the written and oral agreements between States",
+        "Treaties are agreements concluded between States in written form governed either by international or domestic law"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer>"
+    },
+    {
+      "subject": "us_foreign_policy",
+      "question": "What was the Clinton Administration's policy on the Russian economy?",
+      "choices": [
+        "The US inhibited the marketization of the Russian economy",
+        "The US promoted the marketization of the Russian economy",
+        "The US supported public ownership of natural resources",
+        "None, the US was only concerned with security issues"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer>"
+    },
+    {
+      "subject": "high_school_biology",
+      "question": "The sequence of amino acids in hemoglobin molecules of humans is more similar to the hemoglobin of chimpanzees than it is to the hemoglobin of dogs. This similarity suggests that",
+      "choices": [
+        "humans and dogs are more closely related than humans and chimpanzees",
+        "humans and chimpanzees are more closely related than humans and dogs",
+        "humans are related to chimpanzees but not to dogs",
+        "humans and chimpanzees are closely analogous"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nExplanation: The similarity in the sequence of amino acids in hemoglobin molecules of humans and chimpanzees suggests that humans and chimpanzees are more closely related than humans and dogs. This is because the similarity in the"
+    },
+    {
+      "subject": "high_school_physics",
+      "question": "If two non-zero vectors are added together, and the resultant vector is zero, what must be true of the two vectors?",
+      "choices": [
+        "They have equal magnitude and are pointed in the same direction.",
+        "They have equal magnitude and are pointed in opposite directions.",
+        "They have different magnitudes and are pointed in opposite directions.",
+        "It is not possible for the sum of two non-zero vectors to be zero."
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer>"
+    },
+    {
+      "subject": "philosophy",
+      "question": "According to Sartre, what existentialists have in common is that they think that _____.",
+      "choices": [
+        "essence precedes existence",
+        "objectivity must be a starting point",
+        "existence is a myth",
+        "existence precedes essence"
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer> \n\nExplanation: Jean-Paul Sartre, an existentialist philosopher, argued that human beings have complete freedom to choose their actions and create their own meaning in life. According to Sartre, human beings do not"
+    },
+    {
+      "subject": "us_foreign_policy",
+      "question": "The trade-off between defense and social spending is often referred to as a choice between",
+      "choices": [
+        "bread and butter.",
+        "war and peace.",
+        "guns and butter.",
+        "bombs and books."
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nThe question is referring to the concept of the \"guns and butter\" trade-off, which was first introduced by economist Milton Friedman. This concept suggests that a country's defense spending and social spending are inversely related,"
+    },
+    {
+      "subject": "conceptual_physics",
+      "question": "Compared with the power input, the power output of an ideal transformer is",
+      "choices": [
+        "greater",
+        "less",
+        "the same",
+        "Any of these"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "C <answer>C</answer> \n\nExplanation: The power input and power output of an ideal transformer are the same. The power input is the power supplied to the primary coil, and the power output is the power delivered to the secondary coil. In"
+    },
+    {
+      "subject": "professional_law",
+      "question": "Recently, Congress enacted a statute requiring all boat owners to register their boats with a newly created federal boat registry. Among the purposes of the statute are the prevention of theft of boats in coastal waters and the protection of the rights of individual boat owners throughout the United States. Congress enacted the statute despite the fact that all states require boat owners to register their craft with the state department of motor vehicles. In addition, there is uncontradicted evidence that most stolen boats are kept or resold in the state in which the theft occurred. Nonetheless, an increasing number of boats are transported to other states and other countries for resale. Is the statute likely to be held constitutional?",
+      "choices": [
+        "No, because most stolen boats remain within the state in which they were stolen.",
+        "No, because the registration of boats is a matter reserved to the states by the Tenth Amendment.",
+        "Yes, because Congress could determine that the transportation of stolen boats affects interstate commerce.",
+        "Yes, because Congress has the power to regulate property for the general welfare."
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nThe statute is constitutional because it regulates a commercial activity (the transportation of stolen boats) that has a substantial effect on interstate commerce. The U.S. Supreme Court has held that Congress has the power to regulate commerce under"
+    },
+    {
+      "subject": "world_religions",
+      "question": " What is the name of the most authoritative Kabbalah text?",
+      "choices": [
+        "Gemarah",
+        "Midrash",
+        "Zohar",
+        "Septuagint"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nExplanation: The Zohar is the most authoritative Kabbalah text. It is a foundational text of Jewish mysticism and contains the teachings of Rabbi Moses de Leon. The Zohar is considered the central text"
+    },
+    {
+      "subject": "professional_law",
+      "question": "In which of the following situations would the defendant not be guilty of homicide?",
+      "choices": [
+        "A defendant came into a bar looking for a fight. He walked up to a victim, tapped him on the shoulder and said, \"You bother me. Get out of here. \" The victim ignored him, and the defendant proceeded to punch the victim in the face and stab him in the arm with a knife. The victim thereupon took out a knife that had been concealed in his pocket and stabbed the defendant in the right arm. The defendant, fearful that the victim would stab him in the heart, took out a gun and shot the victim to death.",
+        "A defendant was home in bed with a fever one night, and all the lights in his house were off. A victim, who was scouting the neighborhood that night for a house to burglarize, broke into the defendant's house through the basement window and went upstairs to the bedrooms to look for jewelry. The defendant, who was not aware that someone else was in the house, was startled when he saw the victim walk past his room toward the stairs leading to the outside doorway. The defendant pulled out a pistol from under his pillow when he saw the victim and shot him to death.",
+        "A defendant started a joke about the victim's brother. When word got to the victim about the defendant's joke, the victim became incensed. He rushed to the defendant's home, broke open the door and found the defendant preparing dinner in the kitchen. He immediately said, \"I'm going to kill you. \" The defendant knew that the victim had been convicted of attempted murder several years ago, and he cringed when the victim took out a gun and pointed it at him. The defendant could have easily darted for the open front door and evaded the victim but, instead, he suddenly pulled a knife from the kitchen wall, lunged at the victim, and stabbed him to death. Unknown to the defendant, the victim's gun was not loaded.",
+        "A defendant was a reporter for a newspaper and was sent on assignment to another state to cover the story of a mining disaster. He was sitting in his hotel room one evening, trying to get a message to his editor, when a victim knocked at the door. The defendant opened the door, and the victim announced a robbery. The defendant took a lamp from the night table and threw it at the victim. The victim was momentarily stunned, and the defendant then pulled a gun out of his own suitcase and shot the victim to death."
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "2010 American Bar Association Publishing, LLC. All rights reserved. This material may not be copied or distributed without the express written permission of the American Bar Association. <answer>C</answer>"
+    },
+    {
+      "subject": "high_school_government_and_politics",
+      "question": "Which of the following generally results when the Senate and House of Representatives pass different versions of the same bill?",
+      "choices": [
+        "The president signs the version he prefers.",
+        "The bill goes back to each house's committee and restarts the legislative process.",
+        "All amendments to the bill are invalidated, and the original version of the bill is sent to the president to sign.",
+        "The two legislative bodies form a conference committee."
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer>"
+    },
+    {
+      "subject": "high_school_european_history",
+      "question": "This question refers to the following information.\nRead the following memoir.\nNot only did he expect all persons of distinction to be in continual attendance at Court, but he was quick to notice the absence of those of inferior degree; at his lever, his couches, his meals, in the gardens of Versailles (the only place where the courtiers in general were allowed to follow him), he used to cast his eyes to right and left; nothing escaped him[;] he saw everybody. If anyone habitually living at Court absented himself he insisted on knowing the reason; those who came there only for flying visits had also to give a satisfactory explanation; anyone who seldom or never appeared there was certain to incur his displeasure. If asked to bestow a favor on such persons he would reply haughtily: \"I do not know him\"; of such as rarely presented themselves he would say, \"He is a man I never see\"; and from these judgments there was no appeal.\nNo one understood better than Louis XIV the art of enhancing the value of a favor by his manner of bestowing it; he knew how to make the most of a word, a smile, even of a glance.\nHe loved splendor, magnificence, and profusion in all things, and encouraged similar tastes in his Court; to spend money freely on equipages and buildings, on feasting and at cards, was a sure way to gain his favor, perhaps to obtain the honor of a word from him. Motives of policy had something to do with this; by making expensive habits the fashion, and, for people in a certain position, a necessity, he compelled his courtiers to live beyond their income, and gradually reduced them to depend on his bounty for the means of subsistence.\n\u2014Duke Saint-Simon, Memoirs of Louis XIV and His Court and His Regency, c. 1750\nLouis XIV was aided by many able advisors, but which of the following advisors helped him to reorganize France and make it into a world power?",
+      "choices": [
+        "Jean Martinet, his chief military advisor",
+        "Cardinal Mazarin, his regent and foreign policy advisor",
+        "Jean Baptiste Colbert, his finance minister",
+        "the Duke of Burgundy"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nThe question is asking about the advisor who helped Louis XIV to reorganize France and make it into a world power. The correct answer is Jean Baptiste Colbert, who was Louis XIV's finance minister. Colbert played"
+    },
+    {
+      "subject": "professional_law",
+      "question": "A man outraged by the recent church decision to clear a famous philosopher of charges of heresy, decided to present a lecture, open to the public, disproving the philosopher's theories. A state statute provides that: \"state universities can permit the use of their lecture halls to the public for worthwhile programs of public benefit, upon approval of the school board. \"The appropriate school board refused to make a university lecture hall available to the man on the grounds that the proposed lecture was not of worthwhile benefit to the public. As a result, the man brought suit in a state court against the school board and requested injunctive relief requiring the board to allow him the use of the lecture hall. The trial court denied relief and dismissed the suit. The judgment was affirmed by the state appellate court, and is now before the U. S. Supreme Court. In analyzing the state statute, which of the following statements is least accurate?",
+      "choices": [
+        "The statute is unconstitutionally overbroad, because it may result in the exclusion of protected speech as well as unprotected speech.",
+        "The statute, as applied to the man, does not violate his First Amendment rights because his proposed speech is not political and, therefore, not among the classes of speech that are protected.",
+        "Indirect speech, regulations are only permissible if necessary to serve compelling state interests.",
+        "The statute is a prior restraint on speech, which unconstitutionally vests unfettered discretion in the school board to decide who may use university lecture halls."
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nThe statute is intended to regulate the use of university facilities for public benefit. The man's speech is not political, but is still protected by the First Amendment. The statute is overbroad because it may exclude protected"
+    },
+    {
+      "subject": "professional_law",
+      "question": "In an effort to improve the health care of cancer patients, a state's legislature has enacted a law providing public funds to assist privately owned hospitals. According to the law, every hospital in the state would receive $5,000 annually for each cancer patient who was admitted to that hospital, and whose period of hospitalization exceeded one week. Although this bill was initially opposed by several churches and other organizations, the state's legislature re-drafted the bill in a compromise effort to appease the opposition. In its final re-draft, the bill provided that the $5,000 annual subsidy \"would not be paid to any hospital performing abortions. \"Which of the following is the strongest argument in support of the constitutionality of the state statute?",
+      "choices": [
+        "The Tenth Amendment reserves to the states plenary power over the allocation of their public funds.",
+        "Public subsidies in hospitals are privileges rather than rights and, therefore, are not entitlements protected by the due process clause of the Fourteenth Amendment.",
+        "The funding limitation in this statute does not directly prohibit or penalize the exercise of a fundamental right and is rationally related to the achievement of a legitimate state interest.",
+        "The statute promotes a compelling state interest in advancing the health, safety, and welfare of its citizenry."
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nNote: The question is based on the US Supreme Court case of Planned Parenthood v. Casey (1992). In this case, the court upheld a Pennsylvania law that restricted public funding for abortion services. The court's"
+    },
+    {
+      "subject": "sociology",
+      "question": "Freud's notion of the 'ego' referred to:",
+      "choices": [
+        "the unconscious mass of instinctive drives that may be repressed",
+        "the self as a whole: an unstable mix of conscious and unconscious elements",
+        "the conscious part of the mind that regulates emotional drives on a practical, rational level",
+        "the neurotic part of the mind that longs for belonging and may suffer an inferiority complex"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer>"
+    },
+    {
+      "subject": "miscellaneous",
+      "question": "What is the chemical process wherein a solid is turned to a liquid via the application of heat?",
+      "choices": [
+        "distillation",
+        "photosynthesis",
+        "freezing",
+        "melting"
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer>"
+    },
+    {
+      "subject": "sociology",
+      "question": "World-affirming religions:",
+      "choices": [
+        "embrace conventional cultural values but offer new means of achieving them",
+        "react against the loss of any meaningful religious content in the teachings of churches",
+        "adopt an attitude of mild disapproval towards mainstream social values",
+        "reject both the goals and means of conventional society and provide utopian alternatives"
+      ],
+      "answer": 0,
+      "model_answer": "A",
+      "raw_response": "A <answer> A </answer> \n\nExplanation: World-affirming religions are those that accept the conventional cultural values of the society in which they are practiced but offer new means of achieving them. They do not reject the existing social values but rather"
+    },
+    {
+      "subject": "prehistory",
+      "question": "What culture used hide boats and spread across the Arctic, from Alaska to Greenland beginning about 700 years ago, in a third wave of migration from the Old World into the New?",
+      "choices": [
+        "Paleo-Eskimos",
+        "Dorset",
+        "Thule",
+        "Clovis"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer>"
+    },
+    {
+      "subject": "high_school_psychology",
+      "question": "Which of the following disorders is most likely related to the amount of light to which a susceptible person is exposed?",
+      "choices": [
+        "seasonal affective disorder",
+        "claustrophobia",
+        "Alzheimer's disease",
+        "catatonic schizophrenia"
+      ],
+      "answer": 0,
+      "model_answer": "A",
+      "raw_response": "<answer>A</answer> \n\nThe amount of light to which a susceptible person is exposed is most likely related to the development of seasonal affective disorder. Seasonal affective disorder is a type of depression that occurs during the same time every year,"
+    },
+    {
+      "subject": "elementary_mathematics",
+      "question": "Find the opposite of the number \u22127.",
+      "choices": [
+        "7",
+        "\u22127",
+        "0.7",
+        "\u22127.7"
+      ],
+      "answer": 0,
+      "model_answer": "A",
+      "raw_response": "<answer>A</answer>"
+    },
+    {
+      "subject": "high_school_microeconomics",
+      "question": "Monopolistic competition is said to be productively inefficient because",
+      "choices": [
+        "the long-run price is above minimum average total cost.",
+        "long-run profits are positive.",
+        "firms engage in collusive behavior.",
+        "there exist no barriers to entry."
+      ],
+      "answer": 0,
+      "model_answer": "A",
+      "raw_response": "<answer>A</answer> \n\nExplanation: Monopolistic competition is said to be productively inefficient because the long-run price is above the minimum average total cost. This is because the firms are not producing at the optimal level of output. They are"
+    },
+    {
+      "subject": "high_school_european_history",
+      "question": "This question refers to the following information.\nThe following account of the Paris Exposition of 1889.\n\"The opportunities to study the natural history of man in Paris during the Exposition, and especially in August, when the great Congresses and the French Association held their sessions, were unparalleled in the history of anthropology. At any time the French capital affords rare advantages to the anthropologist. The Mus\u00e9e and Laboratoire Broca, the anthropometric operations of Bertillon in the Palais de Justice, the courses of lectures in the \u00e9cole d'Anthropologie, the collections in the Jardin de Plantes, the facilities for original work in the \u00e9coles de Medicine, and the hospitals give to the comparative anatomist and biologist abundant employment.\"\nOtis T. Mason, American ethnologist and curator, 1889\nIt can be inferred from the text that at the time of the Paris Exposition, the scientific community was changing due to",
+      "choices": [
+        "the inclusion of women",
+        "an increase in funding from officials in the French capital",
+        "the development of universal public education in many European countries",
+        "the development of new, specialized fields"
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer>"
+    },
+    {
+      "subject": "electrical_engineering",
+      "question": "The metal surfaces for electrical resistance welding must be",
+      "choices": [
+        "rough.",
+        "clean.",
+        "moistened",
+        "coloured"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer>"
+    },
+    {
+      "subject": "security_studies",
+      "question": "Which of the following statements best describes our understanding of the term 'globalization'?",
+      "choices": [
+        "Globalization refers to the process by which shared hegemonic values pervade societies across the globe, drawing them into an ideological community, most often based on the economic principles of capitalism.",
+        "Best described as intensification of worldwide social relations and increasing interdependence, globalization is the result of the compression of space and time through the development of new technologies.",
+        "Globalization is best described as the 'shrinking' of the global community, drawing people into closer contact with one another primarily at the economic and technical levels. This process began in the early 20th century and was based on the ideological expeditions that originated from western Europe.",
+        "Globalization has occurred since the 1980s, originating in Western Europe as a centre of political power and technological advancement. The process is a direct result of technological advancement in communications and travel industries that facilitate the efficient transportation of physical objects, people and ideas across the globe."
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer>"
+    },
+    {
+      "subject": "high_school_psychology",
+      "question": "Sanja hears a sound that she recognizes as the front door being shut. In order for her to detect the sound and process it so that she knows what it is, Sanja's ear funnels the sound waves to the inner ear in order to stimulate the cilia of the inner ear. This is a critical step in the process of",
+      "choices": [
+        "auditory transduction",
+        "olfactory perception",
+        "sensory interaction",
+        "decibel cognition"
+      ],
+      "answer": 0,
+      "model_answer": "A",
+      "raw_response": "<answer>A</answer> \n\nThe best answer is A."
+    },
+    {
+      "subject": "miscellaneous",
+      "question": "The term that best describes an artwork that incorporates theatrical elements such as body movement, audience participation, music, and projected images is",
+      "choices": [
+        "mimesis",
+        "installation art",
+        "performance art",
+        "digital collage"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer>"
+    },
+    {
+      "subject": "professional_psychology",
+      "question": "If the objectives of psychological research conducted in a laboratory dictate that certain information be withheld from the participant, consent by the participant",
+      "choices": [
+        "maybe waived provided written consent is obtained from a member of the participant's immediate family",
+        "is not necessary, bur some explanation of the research situation to the participant is essential",
+        "is necessary, and an explanation of significant aspects that might affect willingness to participate must be provided",
+        "is considered essential only if there is possible risk of physical or psychological harm"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "C <answer> C </answer>"
+    },
+    {
+      "subject": "logical_fallacies",
+      "question": "Evading burden of proof is another name for the fallacy of",
+      "choices": [
+        "Extension",
+        "Appeal to ignorance",
+        "Complex question",
+        "Complex proposition"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nExplanation: Appeal to ignorance is a fallacy in which it is argued that something is true because it has not been proven false. It is also known as evading the burden of proof. For example, \"God"
+    },
+    {
+      "subject": "moral_disputes",
+      "question": " One kind of externality imposed on the world's poor by the economic activity of wealthy nation is",
+      "choices": [
+        "unequal social order.",
+        "authoritarian regimes.",
+        "crime.",
+        "pollution."
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer> \n\nExplanation: The economic activity of wealthy nations imposes pollution on the world's poor. This is an example of negative externality. The wealthy nations do not pay the full cost of pollution, which is borne by the world"
+    },
+    {
+      "subject": "miscellaneous",
+      "question": "Which of the following breakfast cereals is shaped like the letter O?",
+      "choices": [
+        "Life Corn",
+        "Chex",
+        "Cheerios",
+        "Raisin Bran"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer>"
+    },
+    {
+      "subject": "nutrition",
+      "question": "What are histones?\n",
+      "choices": [
+        "Lipids",
+        "Carbohydrates",
+        "Nucleotides",
+        "Proteins"
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer> \n\nExplanation: Histones are proteins around which DNA is wound in the cell nucleus. They are the chief protein components of chromatin. Histones are acidic proteins that are rich in arginine and lysine residues. They"
+    },
+    {
+      "subject": "miscellaneous",
+      "question": "Who was the longest reigning monarch in French history?",
+      "choices": [
+        "Louis XIII",
+        "Louis XIV",
+        "Louis XV",
+        "Louis XVI"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nExplanation: Louis XIV, also known as the Sun King, was the longest reigning French monarch, with a reign of 72 years and 110 days. He ruled from 1643 to 1715. Louis"
+    },
+    {
+      "subject": "high_school_chemistry",
+      "question": "Which following pair of substances can be used to make a buffer solution?",
+      "choices": [
+        "NaCl and HCl",
+        "HC2H3O2 and KC2H3O2",
+        "NaBr and KBr",
+        "HIO3 and KClO3"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nExplanation: Buffer solutions are made from weak acids and their conjugate bases. HC2H3O2 is a weak acid and KC2H3O2 is its conjugate base. NaCl and HCl"
+    },
+    {
+      "subject": "sociology",
+      "question": "Which of the following did Thatcher's government not strive to achieve:",
+      "choices": [
+        "marketization and privatization",
+        "individual freedom, choice and responsibility",
+        "generous financial benefits for single parents, students and the unemployed",
+        "the rolling back of the welfare state"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "C <answer> C </answer>"
+    },
+    {
+      "subject": "virology",
+      "question": "How do viruses of the calcivirus family replicate?",
+      "choices": [
+        "As negative strand RNA viruses",
+        "As positive strand RNA viruses",
+        "Retroviruses",
+        "Using genetic reassortment"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nThe calciviruses are a family of RNA viruses that are known to cause gastrointestinal diseases in humans and animals. They are positive strand RNA viruses. The viruses are transmitted through the fecal-oral route. The"
+    },
+    {
+      "subject": "high_school_psychology",
+      "question": "Of the following, which is characteristic of formal operational thinking?",
+      "choices": [
+        "simple motor responses to sensory stimuli",
+        "failure to understand reversibility",
+        "capacity to deal well with concrete objects, but not with hypothetical situations",
+        "logical reasoning and systematic planning"
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer> \n\nThe question is about formal operational thinking, which is a stage of cognitive development. According to Jean Piaget, formal operational thinking is characterized by the ability to reason logically and make plans. This stage is typically reached during"
+    },
+    {
+      "subject": "high_school_macroeconomics",
+      "question": "When the FED lowers the discount rate its intention is to",
+      "choices": [
+        "give depository institutions a break on their borrowings.",
+        "signal participants in financial markets that a recession is coming.",
+        "signal participants in financial markets that an inflationary period is coming.",
+        "encourage borrowing by depository institutions so that the money supply may expand."
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "D <answer> D </answer>"
+    },
+    {
+      "subject": "management",
+      "question": "From what does a chain of command extend?",
+      "choices": [
+        "Bottom to top",
+        "Top to bottom",
+        "Diagonally",
+        "Laterally"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nExplanation: A chain of command is a line of authority that extends from the top of an organization to the lowest level of personnel. It is a hierarchical structure that defines the lines of authority and responsibility within an organization."
+    },
+    {
+      "subject": "world_religions",
+      "question": "Pure Land Buddhism belongs to which school?",
+      "choices": [
+        "Vajrayana",
+        "Theravada",
+        "Mahayana",
+        "Mahavira"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nExplanation: Pure Land Buddhism is a school of Mahayana Buddhism. It is based on the teachings of the Buddha and the power of the Buddha's name. It is also known as Jodo in Japanese. It"
+    },
+    {
+      "subject": "astronomy",
+      "question": "Why is it thought that the climate on Mars changed when the planet lost its strong magnetic field?",
+      "choices": [
+        "without a strong magnetic field the ozone layer was destroyed by the solar wind which stopped the greenhouse effect and cooled Mars down.",
+        "without a strong magnetic field which enhances the greenhouse effect Mars cooled down.",
+        "without a strong magnetic field the solar wind stripped away most of the atmosphere significantly reducing the greenhouse effect and cooling Mars down",
+        "without a strong magnetic field the planet recieves fewer charged particles from the solar wind and therefore is not heated as much"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nExplanation: Mars is believed to have lost its magnetic field about 3.5 billion years ago. The solar wind, a stream of charged particles emitted by the sun, would then have stripped away most of the planet"
+    },
+    {
+      "subject": "high_school_psychology",
+      "question": "Jupiter pilots his newly created perfectionism scale on a high school psychology class. He returns one month later to administer the same test to the same students, and then he correlates the two sets of results. What is Jupiter probably doing?",
+      "choices": [
+        "checking for outliers",
+        "standardizing the test",
+        "looking to see if the mean level of perfectionism has changed",
+        "measuring the test's reliability"
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer> \n\nExplanation: The test is being administered to the same students at different times. This is a measure of the test's reliability. Reliability is the degree to which a test measures what it is supposed to measure. If"
+    },
+    {
+      "subject": "high_school_psychology",
+      "question": "Someone who is unable to encode new memories is said to suffer from",
+      "choices": [
+        "overgeneralization.",
+        "belief bias.",
+        "state-dependent memory.",
+        "anterograde amnesia."
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer> \n\nExplanation: Anterograde amnesia is a condition in which a person is unable to encode new memories. This is often the result of damage to the hippocampus, a part of the brain that plays a key"
+    },
+    {
+      "subject": "miscellaneous",
+      "question": "What is the 7-Eleven company's trademarked name for its super-large sodas?",
+      "choices": [
+        "Big Slurp",
+        "Big Gulp",
+        "Big Drink",
+        "Big Sip"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer>"
+    },
+    {
+      "subject": "high_school_microeconomics",
+      "question": "Which of the following indicates that two goods are complements?",
+      "choices": [
+        "A positive income elasticity",
+        "A horizontal demand curve",
+        "A negative cross-price elasticity",
+        "A demand elasticity greater than one"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer>"
+    },
+    {
+      "subject": "professional_law",
+      "question": "A motorist who was injured in an accident sued the negligent other driver for his damages. The defense medical expert did an independent medical examination and reviewed all medical records. The expert testified that the accident did not cause the injuries because the medical records proved a long history of prior treatment for the same symptoms. The jury returned a verdict for the plaintiff but awarded only $10 in damages. On post-trial motions, the plaintiff argued that the expert's testimony was inadmissible hearsay because he based it on prior treating physicians' records, and the prior doctors were not available for cross-examination. Under the Federal Rules of Evidence, what is the correct ruling?",
+      "choices": [
+        "Testimony regarding the plaintiff's condition prior to the accident is irrelevant and the testimony is inadmissible.",
+        "The Federal Rules of Evidence allow the admission of hearsay statements that were made for the purpose of medical diagnosis or treatment.",
+        "Medical testimony that is relevant to the issues can never by excluded from the defendant's case because it is always reliable.",
+        "The testimony is inadmissible hearsay because there was a constitutional right under these facts to cross-examine the doctors who wrote the prior records."
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nThe Federal Rules of Evidence allow the admission of hearsay statements that were made for the purpose of medical diagnosis or treatment. The prior treating physician's records were generated for diagnostic purposes and are admissible under Rule 803"
+    },
+    {
+      "subject": "nutrition",
+      "question": "Which of the following vitamins provides the coenzyme for carboxylation reactions?\n",
+      "choices": [
+        "Biotin",
+        "Niacin",
+        "Riboflavin",
+        "Thiamin"
+      ],
+      "answer": 0,
+      "model_answer": "A",
+      "raw_response": "<answer>A</answer> \n\nThe coenzyme for carboxylation reactions is biotin. Biotin is a B-vitamin that acts as a coenzyme for carboxylase enzymes, which are involved in various metabolic processes, including"
+    },
+    {
+      "subject": "high_school_chemistry",
+      "question": "Atoms of four elements are examined: carbon, nitrogen, neon, and sulfur. Atoms of which element would have the strongest magnetic moment?",
+      "choices": [
+        "Carbon",
+        "Nitrogen",
+        "Neon",
+        "Sulfur"
+      ],
+      "answer": 1,
+      "model_answer": "B",
+      "raw_response": "<answer>B</answer> \n\nExplanation: The magnetic moment of an atom is determined by the number of unpaired electrons in the atom. Nitrogen has three unpaired electrons, while the other elements have either no unpaired electrons (neon)"
+    },
+    {
+      "subject": "international_law",
+      "question": "What other criteria were imposed by the Badinter Commission on the former Yugoslav republics?",
+      "choices": [
+        "The Commission required a commitment to submit disputes to the ICJ",
+        "The Commission required a change in boundaries",
+        "The Commission required a commitment to human rights and democracy",
+        "The Commission required an exchange of ethnic populations"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nThe Badinter Commission was established in 1991 to examine the question of the existence of international crimes and the responsibility of states for such crimes. The Commission was composed of seven judges of the European Court of Human Rights"
+    },
+    {
+      "subject": "conceptual_physics",
+      "question": "Sound travels in air by a series of",
+      "choices": [
+        "compressions",
+        "rarefactions",
+        "Both of these",
+        "Neither of these"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer> \n\nExplanation: Sound is a pressure wave that travels in air by a series of compressions and rarefactions. When a sound is produced, it creates a series of compressions and rarefactions that travel through the"
+    },
+    {
+      "subject": "high_school_us_history",
+      "question": "This question refers to the following information.\n\"We conclude that, in the field of public education, the doctrine of \"separate but equal\" has no place. Separate educational facilities are inherently unequal. Therefore, we hold that the plaintiffs and others similarly situated for whom the actions have been brought are, by reason of the segregation complained of, deprived of the equal protection of the laws guaranteed by the Fourteenth Amendment.\"\nBrown v. Board of Education, 1954\nIn which decision did the Supreme Court validate the practice of \"separate but equal\" facilities for blacks and whites?",
+      "choices": [
+        "Marbury v. Madison",
+        "Bradwell v. Illinois",
+        "Plessy v. Ferguson",
+        "Holden v. Hardy"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer>"
+    },
+    {
+      "subject": "international_law",
+      "question": "When a reservation is considered as invalid under the law of treaties?",
+      "choices": [
+        "A reservation is invalid when the majority of the State parties objects to it",
+        "A reservation is invalid only when an international tribunal says so",
+        "A reservation is invalid only when is incompatible with a peremptory norm of international law (jus cogens)",
+        "A reservation is invalid when it is incompatible with the object and purpose of the treaty"
+      ],
+      "answer": 3,
+      "model_answer": "D",
+      "raw_response": "<answer>D</answer>"
+    },
+    {
+      "subject": "miscellaneous",
+      "question": "Which of these animals lays eggs?",
+      "choices": [
+        "cow",
+        "gerbil",
+        "frog",
+        "elephant"
+      ],
+      "answer": 2,
+      "model_answer": "C",
+      "raw_response": "<answer>C</answer>"
+    },
+    {
+      "subject": "marketing",
+      "question": " According to Maslow's Hierarchy of Needs theory, the need for fulfilment, for realizing one's own potential, and for fully using one's talents and capabilities are examples of __________ needs.",
+      "choices": [
+        "Self-actualization.",
+        "Physiological.",
+        "Social.",
+        "Esteem."
+      ],
+      "answer": 0,
+      "model_answer": "A",
+      "raw_response": "<answer>A</answer> \n\nExplanation: Maslow's Hierarchy of Needs theory categorizes human needs into five levels. The first three levels are physiological, safety, and love and belongingness. The last two levels are esteem and self-actual"
     }
   ]
 }
