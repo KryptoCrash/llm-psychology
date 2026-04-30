@@ -1,0 +1,239 @@
+{
+  "n": 8,
+  "sample_count": 25,
+  "layer": 18,
+  "position": "assistant_start_of_turn_token",
+  "direction": "wrong_social_minus_correct_social",
+  "examples": [
+    {
+      "record_idx": 0,
+      "ground_truth": "C",
+      "wrong_answer": "D",
+      "wrong_assistant_start_index": 240,
+      "correct_assistant_start_index": 240,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 1,
+      "ground_truth": "D",
+      "wrong_answer": "A",
+      "wrong_assistant_start_index": 380,
+      "correct_assistant_start_index": 380,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 2,
+      "ground_truth": "C",
+      "wrong_answer": "A",
+      "wrong_assistant_start_index": 219,
+      "correct_assistant_start_index": 219,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 3,
+      "ground_truth": "A",
+      "wrong_answer": "B",
+      "wrong_assistant_start_index": 212,
+      "correct_assistant_start_index": 212,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 4,
+      "ground_truth": "C",
+      "wrong_answer": "D",
+      "wrong_assistant_start_index": 195,
+      "correct_assistant_start_index": 195,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 5,
+      "ground_truth": "B",
+      "wrong_answer": "D",
+      "wrong_assistant_start_index": 218,
+      "correct_assistant_start_index": 218,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 6,
+      "ground_truth": "C",
+      "wrong_answer": "A",
+      "wrong_assistant_start_index": 200,
+      "correct_assistant_start_index": 200,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 7,
+      "ground_truth": "C",
+      "wrong_answer": "A",
+      "wrong_assistant_start_index": 212,
+      "correct_assistant_start_index": 212,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 8,
+      "ground_truth": "B",
+      "wrong_answer": "A",
+      "wrong_assistant_start_index": 217,
+      "correct_assistant_start_index": 217,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 9,
+      "ground_truth": "C",
+      "wrong_answer": "D",
+      "wrong_assistant_start_index": 226,
+      "correct_assistant_start_index": 226,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 10,
+      "ground_truth": "B",
+      "wrong_answer": "D",
+      "wrong_assistant_start_index": 180,
+      "correct_assistant_start_index": 180,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 11,
+      "ground_truth": "D",
+      "wrong_answer": "A",
+      "wrong_assistant_start_index": 497,
+      "correct_assistant_start_index": 497,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 12,
+      "ground_truth": "A",
+      "wrong_answer": "D",
+      "wrong_assistant_start_index": 354,
+      "correct_assistant_start_index": 354,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 13,
+      "ground_truth": "C",
+      "wrong_answer": "A",
+      "wrong_assistant_start_index": 331,
+      "correct_assistant_start_index": 331,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 14,
+      "ground_truth": "A",
+      "wrong_answer": "D",
+      "wrong_assistant_start_index": 323,
+      "correct_assistant_start_index": 323,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 15,
+      "ground_truth": "B",
+      "wrong_answer": "C",
+      "wrong_assistant_start_index": 180,
+      "correct_assistant_start_index": 180,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 16,
+      "ground_truth": "B",
+      "wrong_answer": "A",
+      "wrong_assistant_start_index": 237,
+      "correct_assistant_start_index": 237,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 17,
+      "ground_truth": "C",
+      "wrong_answer": "B",
+      "wrong_assistant_start_index": 208,
+      "correct_assistant_start_index": 208,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 18,
+      "ground_truth": "B",
+      "wrong_answer": "A",
+      "wrong_assistant_start_index": 280,
+      "correct_assistant_start_index": 280,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 19,
+      "ground_truth": "A",
+      "wrong_answer": "B",
+      "wrong_assistant_start_index": 433,
+      "correct_assistant_start_index": 433,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 20,
+      "ground_truth": "B",
+      "wrong_answer": "C",
+      "wrong_assistant_start_index": 230,
+      "correct_assistant_start_index": 230,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 21,
+      "ground_truth": "C",
+      "wrong_answer": "A",
+      "wrong_assistant_start_index": 219,
+      "correct_assistant_start_index": 219,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 22,
+      "ground_truth": "D",
+      "wrong_answer": "C",
+      "wrong_assistant_start_index": 205,
+      "correct_assistant_start_index": 205,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 23,
+      "ground_truth": "C",
+      "wrong_answer": "B",
+      "wrong_assistant_start_index": 183,
+      "correct_assistant_start_index": 183,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    },
+    {
+      "record_idx": 24,
+      "ground_truth": "C",
+      "wrong_answer": "D",
+      "wrong_assistant_start_index": 187,
+      "correct_assistant_start_index": 187,
+      "wrong_assistant_start_token": "<|im_start|>",
+      "correct_assistant_start_token": "<|im_start|>"
+    }
+  ],
+  "oracle_responses": {
+    "Describe this text.": "The text is a concise and informative summary of a medical condition.",
+    "What belief or feature does this activation represent?": "The activation represents a belief in the power of collective action to bring about change.",
+    "Does this activation represent pressure toward an incorrect consensus? Answer only True or False.": "False"
+  }
+}
