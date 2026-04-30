@@ -26,7 +26,7 @@ device = utils.get_device()
 
 # NBVAL_IGNORE_OUTPUT
 model = TransformerBridge.boot_transformers(
-    "meta-llama/Llama-3.2-3B-Instruct",
+    "meta-llama/Llama-3.1-8B-Instruct",
     device=device,
 )
 model.enable_compatibility_mode(disable_warnings=True)
@@ -37,7 +37,7 @@ dataset = load_dataset("cais/mmlu", "all", cache_dir="./mmlu_cache")
 test_df = dataset["test"].to_pandas().sample(frac=1, random_state=42).reset_index(drop=True)
 
 LETTER = ["A", "B", "C", "D"]
-TARGET_CORRECT = 100
+TARGET_CORRECT = 1
 
 correct = 0
 attempts = 0

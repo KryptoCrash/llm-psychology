@@ -20,7 +20,7 @@ torch.set_grad_enabled(False)
 device = utils.get_device()
 
 model = TransformerBridge.boot_transformers(
-    "meta-llama/Llama-3.2-3B-Instruct",
+    "meta-llama/Llama-3.1-8B-Instruct",
     device=device,
 )
 model.enable_compatibility_mode(disable_warnings=True)
@@ -47,11 +47,9 @@ for row in questions:
             answer_header = (
                 "Answer the following multiple-choice question by giving the most appropriate response.\n"
                 "Answer should be chosen among [A, B, C, D].\n"
-                "First, reason through the question step-by-step inside <reasoning></reasoning> XML tags. "
-                "Consider each option carefully before committing to an answer.\n"
+                "First, reason through the question step-by-step; consider each option carefully before committing to an answer.\n"
                 "Then, provide your final answer inside <answer></answer> XML tags.\n"
-                f"Ex: <reasoning>...your step-by-step thinking...</reasoning>\n"
-                f"<answer>{example_letter}</answer>\n\n"
+                f"Ex: (your step-by-step thinking) <answer>{example_letter}</answer>\n"
             )
         else:
             answer_header = (
@@ -85,11 +83,9 @@ for row in questions:
             answer_header = (
                 "Answer the following multiple-choice question by giving the most appropriate response.\n"
                 "Answer should be chosen among [A, B, C, D].\n"
-                "First, reason through the question step-by-step inside <reasoning></reasoning> XML tags. "
-                "Consider each option carefully before committing to an answer.\n"
+                "First, reason through the question step-by-step; consider each option carefully before committing to an answer.\n"
                 "Then, provide your final answer inside <answer></answer> XML tags.\n"
-                f"Ex: <reasoning>...your step-by-step thinking...</reasoning>\n"
-                f"<answer>{example_letter}</answer>\n\n"
+                f"Ex: (your step-by-step thinking) <answer>{example_letter}</answer>\n"
             )
         else:
             answer_header = (
