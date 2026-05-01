@@ -798,5 +798,805 @@
     "raw_response": " B: Treaties are agreements concluded between States in written form and governed by international law\nAnswer: <answer>B</answer>  According to Article 2(1)(a) of the VCLT, a treaty is defined as \"an",
     "parseable": true,
     "correct": true
+  },
+  {
+    "subject": "high_school_psychology",
+    "question": "Runners in a park were found to pick up their pace when another runner came into view; this finding illustrates the phenomenon of",
+    "choices": [
+      "social facilitation.",
+      "conformity.",
+      "deindividuation.",
+      "norms."
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Runners in a park were found to pick up their pace when another runner came into view; this finding illustrates the phenomenon of\nA: social facilitation.\nB: conformity.\nC: deindividuation.\nD: norms.\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " A: social facilitation. <answer>A</answer>  Social facilitation is the tendency for people to perform better in the presence of others. This phenomenon is often seen in sports, where athletes tend to perform better when they are in front of",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "us_foreign_policy",
+    "question": "What was the Clinton Administration's policy on the Russian economy?",
+    "choices": [
+      "The US inhibited the marketization of the Russian economy",
+      "The US promoted the marketization of the Russian economy",
+      "The US supported public ownership of natural resources",
+      "None, the US was only concerned with security issues"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: What was the Clinton Administration's policy on the Russian economy?\nA: The US inhibited the marketization of the Russian economy\nB: The US promoted the marketization of the Russian economy\nC: The US supported public ownership of natural resources\nD: None, the US was only concerned with security issues\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " B\nAnswer: <answer>B</answer>  The Clinton Administration's policy was to promote the marketization of the Russian economy. The US provided billions of dollars in aid to Russia to help it transition to a market economy. The US also supported",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "prehistory",
+    "question": "Which archaeological method is best for identifying large-scale land modifications?",
+    "choices": [
+      "test pits",
+      "ground-penetrating radar",
+      "aerial photography",
+      "proton magnetometers"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Which archaeological method is best for identifying large-scale land modifications?\nA: test pits\nB: ground-penetrating radar\nC: aerial photography\nD: proton magnetometers\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " C\n<answer>C</answer>  Aerial photography is a method that can be used to identify large-scale land modifications. Test pits (A) are used to identify small-scale land modifications. Ground-penetrating radar (B) is",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "philosophy",
+    "question": "According to Sartre, what existentialists have in common is that they think that _____.",
+    "choices": [
+      "essence precedes existence",
+      "objectivity must be a starting point",
+      "existence is a myth",
+      "existence precedes essence"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: According to Sartre, what existentialists have in common is that they think that _____.\nA: essence precedes existence\nB: objectivity must be a starting point\nC: existence is a myth\nD: existence precedes essence\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Sartre's existentialism is based on the idea that existence precedes essence. This means that we exist first, and then we create our own essence through our choices and actions. This is in contrast to the",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "us_foreign_policy",
+    "question": "The trade-off between defense and social spending is often referred to as a choice between",
+    "choices": [
+      "bread and butter.",
+      "war and peace.",
+      "guns and butter.",
+      "bombs and books."
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: The trade-off between defense and social spending is often referred to as a choice between\nA: bread and butter.\nB: war and peace.\nC: guns and butter.\nD: bombs and books.\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " C: guns and butter. <answer>C</answer> The trade-off between defense and social spending is often referred to as a choice between guns and butter. This is a metaphor that suggests that the government must choose between spending on defense (guns)",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_european_history",
+    "question": "This question refers to the following information.\nRead the following quote.\nI had now decided beyond all question that there existed in the heavens three stars wandering about Jupiter as do Venus and Mercury about the sun, and this became plainer than daylight from observations on similar occasions which followed. Nor were there just three such stars; four wanderers complete their revolutions about Jupiter, and of their alterations as observed more precisely later on we shall give a description here. Also I measured the distances between them by means of the telescope. . . .\nSuch are the observations concerning the four Medicean planets recently first discovered by me, and although from this data their periods have not yet been reconstructed in numerical form, it is legitimate at least to put in evidence some facts worthy of note. Above all, since they sometimes follow and sometimes precede Jupiter by the same intervals, and they remain within very limited distances either to east or west of Jupiter, accompanying that planet in both its retrograde and direct movements in a constant manner, no one can doubt that they complete their revolutions about Jupiter and at the same time effect all together a twelve-year period about the center of the universe.\n\u2014Galileo Galilei, 1610\nWhich of the following is best demonstrated by the passage about intellectual thought at the time?",
+    "choices": [
+      "It led to better scientific tools, which led to a rise in the standard of living during the seventeenth century across Europe.",
+      "The ideas of the ancient Greeks guided all of their ideas.",
+      "It used information obtained through experimentation to conceptualize the universe.",
+      "It provided experimental proof of the theories of ancient thinkers, such as Aristotle, on how the universe worked."
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: This question refers to the following information.\nRead the following quote.\nI had now decided beyond all question that there existed in the heavens three stars wandering about Jupiter as do Venus and Mercury about the sun, and this became plainer than daylight from observations on similar occasions which followed. Nor were there just three such stars; four wanderers complete their revolutions about Jupiter, and of their alterations as observed more precisely later on we shall give a description here. Also I measured the distances between them by means of the telescope. . . .\nSuch are the observations concerning the four Medicean planets recently first discovered by me, and although from this data their periods have not yet been reconstructed in numerical form, it is legitimate at least to put in evidence some facts worthy of note. Above all, since they sometimes follow and sometimes precede Jupiter by the same intervals, and they remain within very limited distances either to east or west of Jupiter, accompanying that planet in both its retrograde and direct movements in a constant manner, no one can doubt that they complete their revolutions about Jupiter and at the same time effect all together a twelve-year period about the center of the universe.\n\u2014Galileo Galilei, 1610\nWhich of the following is best demonstrated by the passage about intellectual thought at the time?\nA: It led to better scientific tools, which led to a rise in the standard of living during the seventeenth century across Europe.\nB: The ideas of the ancient Greeks guided all of their ideas.\nC: It used information obtained through experimentation to conceptualize the universe.\nD: It provided experimental proof of the theories of ancient thinkers, such as Aristotle, on how the universe worked.\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " It used information obtained through experimentation to conceptualize the universe. <answer>C</answer> The passage describes Galileo's use of experimentation to conceptualize the universe. He used a telescope to observe the heavens and make new discoveries. The passage",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "professional_psychology",
+    "question": "After studying for an examination, retention of the learned material is best facilitated by",
+    "choices": [
+      "sleeping",
+      "studying a related subject",
+      "exercising",
+      "studying an unrelated subject"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: After studying for an examination, retention of the learned material is best facilitated by\nA: sleeping\nB: studying a related subject\nC: exercising\nD: studying an unrelated subject\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " <answer>A</answer>  Sleep is a state of reduced consciousness and is a time when the brain is not actively engaged in the learning process. During sleep, the brain processes and consolidates the information learned during the day. This process is called",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "astronomy",
+    "question": "Which of the following methods has led to the most discoveries of massive planets orbiting near their parent stars?",
+    "choices": [
+      "detecting the gravitational effect of an orbiting planet by looking for the Doppler shifts in the star's spectrum",
+      "detecting the shift of the star's position against the sky due to the planet's gravitational pull",
+      "detecting a planet ejected from a binary star system",
+      "detecting the starlight reflected off the planet"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Which of the following methods has led to the most discoveries of massive planets orbiting near their parent stars?\nA: detecting the gravitational effect of an orbiting planet by looking for the Doppler shifts in the star's spectrum\nB: detecting the shift of the star's position against the sky due to the planet's gravitational pull\nC: detecting a planet ejected from a binary star system\nD: detecting the starlight reflected off the planet\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " A: detecting the gravitational effect of an orbiting planet by looking for the Doppler shifts in the star's spectrum\nAnswer: <answer>A</answer>  The Doppler shift method is the most successful method for discovering planets that are close to",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "world_religions",
+    "question": " What is the name of the most authoritative Kabbalah text?",
+    "choices": [
+      "Gemarah",
+      "Midrash",
+      "Zohar",
+      "Septuagint"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion:  What is the name of the most authoritative Kabbalah text?\nA: Gemarah\nB: Midrash\nC: Zohar\nD: Septuagint\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  The Zohar is the most authoritative Kabbalah text. It is a foundational text of Jewish mysticism and is considered to be the central text of the Kabbalah. The Zohar is a mystical",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "formal_logic",
+    "question": " Construct a complete truth table for the following pairs of propositions. Then, using the truth tables, determine whether the statements are logically equivalent or contradictory. If neither, determine whether they are consistent or inconsistent. Justify your answers.\nC \u2283 (D \u2228 C) and C \u00b7 ~D",
+    "choices": [
+      "Logically equivalent",
+      "Contradictory",
+      "Neither logically equivalent nor contradictory, but consistent",
+      "Inconsistent"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion:  Construct a complete truth table for the following pairs of propositions. Then, using the truth tables, determine whether the statements are logically equivalent or contradictory. If neither, determine whether they are consistent or inconsistent. Justify your answers.\nC \u2283 (D \u2228 C) and C \u00b7 ~D\nA: Logically equivalent\nB: Contradictory\nC: Neither logically equivalent nor contradictory, but consistent\nD: Inconsistent\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " The correct answer is (C) : Neither logically equivalent nor contradictory, but consistent. <answer>C</answer> The truth table for the two propositions is as follows: <table class=\"horiz-center\" style=\"border-collapse: collapse; width",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_government_and_politics",
+    "question": "Which of the following generally results when the Senate and House of Representatives pass different versions of the same bill?",
+    "choices": [
+      "The president signs the version he prefers.",
+      "The bill goes back to each house's committee and restarts the legislative process.",
+      "All amendments to the bill are invalidated, and the original version of the bill is sent to the president to sign.",
+      "The two legislative bodies form a conference committee."
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: Which of the following generally results when the Senate and House of Representatives pass different versions of the same bill?\nA: The president signs the version he prefers.\nB: The bill goes back to each house's committee and restarts the legislative process.\nC: All amendments to the bill are invalidated, and the original version of the bill is sent to the president to sign.\nD: The two legislative bodies form a conference committee.\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  When the Senate and House of Representatives pass different versions of the same bill, a conference committee is formed to iron out the differences between the two versions. The conference committee is made up of members from both the Senate and",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_psychology",
+    "question": "Which of the following is true regarding lifelong learning and ongoing professional development of school psychologists?",
+    "choices": [
+      "A formal professional development plan should be made and updated annually.",
+      "Textbooks from graduate school should be reread annually.",
+      "A degree in another field should be pursued.",
+      "A graduate education program should offer adequate preparation for professional practice, so no further training will be needed."
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Which of the following is true regarding lifelong learning and ongoing professional development of school psychologists?\nA: A formal professional development plan should be made and updated annually.\nB: Textbooks from graduate school should be reread annually.\nC: A degree in another field should be pursued.\nD: A graduate education program should offer adequate preparation for professional practice, so no further training will be needed.\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " A\nAnswer: <answer>A</answer>  Lifelong learning and ongoing professional development are essential for school psychologists. A formal professional development plan should be made and updated annually. This plan should include specific goals, objectives, and strategies for professional growth",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "miscellaneous",
+    "question": "What is the chemical process wherein a solid is turned to a liquid via the application of heat?",
+    "choices": [
+      "distillation",
+      "photosynthesis",
+      "freezing",
+      "melting"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: What is the chemical process wherein a solid is turned to a liquid via the application of heat?\nA: distillation\nB: photosynthesis\nC: freezing\nD: melting\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Melting is the process by which a solid is turned to a liquid. This process occurs when the solid is heated to its melting point, which is the temperature at which the solid and liquid phases of a substance are",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_macroeconomics",
+    "question": "Which of the following is a consequence of removal of a protective tariff on imported steel?",
+    "choices": [
+      "Imports fall.",
+      "Income is transferred from steel consumers to domestic steel producers.",
+      "Income is transferred from foreign steel producers to domestic steel producers.",
+      "Allocative efficiency is improved."
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Which of the following is a consequence of removal of a protective tariff on imported steel?\nA: Imports fall.\nB: Income is transferred from steel consumers to domestic steel producers.\nC: Income is transferred from foreign steel producers to domestic steel producers.\nD: Allocative efficiency is improved.\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  The removal of a protective tariff on imported steel would lead to an increase in the quantity of steel imported. This would lead to an increase in the quantity of steel available to consumers, which would lead to an increase in",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "prehistory",
+    "question": "What culture used hide boats and spread across the Arctic, from Alaska to Greenland beginning about 700 years ago, in a third wave of migration from the Old World into the New?",
+    "choices": [
+      "Paleo-Eskimos",
+      "Dorset",
+      "Thule",
+      "Clovis"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: What culture used hide boats and spread across the Arctic, from Alaska to Greenland beginning about 700 years ago, in a third wave of migration from the Old World into the New?\nA: Paleo-Eskimos\nB: Dorset\nC: Thule\nD: Clovis\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  The Thule people, who migrated from Alaska to Greenland, are the ancestors of the Inuit. The Thule people were skilled hunters and whalers, and their migration was likely driven by the need to find new",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "sociology",
+    "question": "The 'new racism' refers to:",
+    "choices": [
+      "a subtler form of prejudice, masked by nationalist pride",
+      "a post-modern deconstruction of racist ideas to reveal their lack of depth",
+      "racist practices found in newly emerging areas of social life, such as cyberspace",
+      "an anti-fascist movement which challenges nationalist politics"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: The 'new racism' refers to:\nA: a subtler form of prejudice, masked by nationalist pride\nB: a post-modern deconstruction of racist ideas to reveal their lack of depth\nC: racist practices found in newly emerging areas of social life, such as cyberspace\nD: an anti-fascist movement which challenges nationalist politics\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " A: a subtler form of prejudice, masked by nationalist pride\nAnswer: <answer>A</answer>  The 'new racism' is a term used to describe a more subtle form of racism, which is often masked by nationalist pride. This",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_psychology",
+    "question": "Which of the following disorders is most likely related to the amount of light to which a susceptible person is exposed?",
+    "choices": [
+      "seasonal affective disorder",
+      "claustrophobia",
+      "Alzheimer's disease",
+      "catatonic schizophrenia"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: Which of the following disorders is most likely related to the amount of light to which a susceptible person is exposed?\nA: seasonal affective disorder\nB: claustrophobia\nC: Alzheimer's disease\nD: catatonic schizophrenia\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " <answer>A</answer>  Seasonal affective disorder (SAD) is a type of depression that occurs at a certain time of the year, most often in the winter months when there is less sunlight. The exact cause of SAD is",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_european_history",
+    "question": "This question refers to the following information.\nThe following account of the Paris Exposition of 1889.\n\"The opportunities to study the natural history of man in Paris during the Exposition, and especially in August, when the great Congresses and the French Association held their sessions, were unparalleled in the history of anthropology. At any time the French capital affords rare advantages to the anthropologist. The Mus\u00e9e and Laboratoire Broca, the anthropometric operations of Bertillon in the Palais de Justice, the courses of lectures in the \u00e9cole d'Anthropologie, the collections in the Jardin de Plantes, the facilities for original work in the \u00e9coles de Medicine, and the hospitals give to the comparative anatomist and biologist abundant employment.\"\nOtis T. Mason, American ethnologist and curator, 1889\nIt can be inferred from the text that at the time of the Paris Exposition, the scientific community was changing due to",
+    "choices": [
+      "the inclusion of women",
+      "an increase in funding from officials in the French capital",
+      "the development of universal public education in many European countries",
+      "the development of new, specialized fields"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: This question refers to the following information.\nThe following account of the Paris Exposition of 1889.\n\"The opportunities to study the natural history of man in Paris during the Exposition, and especially in August, when the great Congresses and the French Association held their sessions, were unparalleled in the history of anthropology. At any time the French capital affords rare advantages to the anthropologist. The Mus\u00e9e and Laboratoire Broca, the anthropometric operations of Bertillon in the Palais de Justice, the courses of lectures in the \u00e9cole d'Anthropologie, the collections in the Jardin de Plantes, the facilities for original work in the \u00e9coles de Medicine, and the hospitals give to the comparative anatomist and biologist abundant employment.\"\nOtis T. Mason, American ethnologist and curator, 1889\nIt can be inferred from the text that at the time of the Paris Exposition, the scientific community was changing due to\nA: the inclusion of women\nB: an increase in funding from officials in the French capital\nC: the development of universal public education in many European countries\nD: the development of new, specialized fields\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " D: the development of new, specialized fields\nAnswer: <answer>D</answer>  The text suggests that the scientific community was changing due to the development of new, specialized fields, such as anthropology, which is a field that studies human beings",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "electrical_engineering",
+    "question": "The metal surfaces for electrical resistance welding must be",
+    "choices": [
+      "rough.",
+      "clean.",
+      "moistened",
+      "coloured"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: The metal surfaces for electrical resistance welding must be\nA: rough.\nB: clean.\nC: moistened\nD: coloured\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>  The metal surfaces for electrical resistance welding must be clean. The surfaces must be free from oil, grease, paint, rust, scale, etc. The surfaces must be free from any type of contamination. The surfaces must",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "security_studies",
+    "question": "Which of the following statements best describes our understanding of the term 'globalization'?",
+    "choices": [
+      "Globalization refers to the process by which shared hegemonic values pervade societies across the globe, drawing them into an ideological community, most often based on the economic principles of capitalism.",
+      "Best described as intensification of worldwide social relations and increasing interdependence, globalization is the result of the compression of space and time through the development of new technologies.",
+      "Globalization is best described as the 'shrinking' of the global community, drawing people into closer contact with one another primarily at the economic and technical levels. This process began in the early 20th century and was based on the ideological expeditions that originated from western Europe.",
+      "Globalization has occurred since the 1980s, originating in Western Europe as a centre of political power and technological advancement. The process is a direct result of technological advancement in communications and travel industries that facilitate the efficient transportation of physical objects, people and ideas across the globe."
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Which of the following statements best describes our understanding of the term 'globalization'?\nA: Globalization refers to the process by which shared hegemonic values pervade societies across the globe, drawing them into an ideological community, most often based on the economic principles of capitalism.\nB: Best described as intensification of worldwide social relations and increasing interdependence, globalization is the result of the compression of space and time through the development of new technologies.\nC: Globalization is best described as the 'shrinking' of the global community, drawing people into closer contact with one another primarily at the economic and technical levels. This process began in the early 20th century and was based on the ideological expeditions that originated from western Europe.\nD: Globalization has occurred since the 1980s, originating in Western Europe as a centre of political power and technological advancement. The process is a direct result of technological advancement in communications and travel industries that facilitate the efficient transportation of physical objects, people and ideas across the globe.\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": "B\nAnswer: <answer>B</answer>  This is the most appropriate response because it best describes the current understanding of the term 'globalization'. Globalization is a complex and multifaceted process that involves the intensification of worldwide social relations",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "philosophy",
+    "question": "Baier asserts that when we ask for moral advice, we are asking for others to:",
+    "choices": [
+      "issue commands.",
+      "inform us of their preferences.",
+      "deliberate with us.",
+      "empathize with us."
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Baier asserts that when we ask for moral advice, we are asking for others to:\nA: issue commands.\nB: inform us of their preferences.\nC: deliberate with us.\nD: empathize with us.\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  Baier argues that when we ask for moral advice, we are asking for others to deliberate with us. This is because moral advice is not simply a matter of telling us what to do, but rather of engaging in",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "miscellaneous",
+    "question": "The term that best describes an artwork that incorporates theatrical elements such as body movement, audience participation, music, and projected images is",
+    "choices": [
+      "mimesis",
+      "installation art",
+      "performance art",
+      "digital collage"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: The term that best describes an artwork that incorporates theatrical elements such as body movement, audience participation, music, and projected images is\nA: mimesis\nB: installation art\nC: performance art\nD: digital collage\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  Performance art is a term that describes an artwork that incorporates theatrical elements such as body movement, audience participation, music, and projected images. Mimesis is a term that describes the representation of reality in art. Installation",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "professional_psychology",
+    "question": "If the objectives of psychological research conducted in a laboratory dictate that certain information be withheld from the participant, consent by the participant",
+    "choices": [
+      "maybe waived provided written consent is obtained from a member of the participant's immediate family",
+      "is not necessary, bur some explanation of the research situation to the participant is essential",
+      "is necessary, and an explanation of significant aspects that might affect willingness to participate must be provided",
+      "is considered essential only if there is possible risk of physical or psychological harm"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: If the objectives of psychological research conducted in a laboratory dictate that certain information be withheld from the participant, consent by the participant\nA: maybe waived provided written consent is obtained from a member of the participant's immediate family\nB: is not necessary, bur some explanation of the research situation to the participant is essential\nC: is necessary, and an explanation of significant aspects that might affect willingness to participate must be provided\nD: is considered essential only if there is possible risk of physical or psychological harm\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  The American Psychological Association's Ethical Principles of Psychologists and Code of Conduct (2002) states that psychologists obtain informed consent to research from participants, unless doing so would (a) compromise the experiment or (b",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "logical_fallacies",
+    "question": "Evading burden of proof is another name for the fallacy of",
+    "choices": [
+      "Extension",
+      "Appeal to ignorance",
+      "Complex question",
+      "Complex proposition"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Evading burden of proof is another name for the fallacy of\nA: Extension\nB: Appeal to ignorance\nC: Complex question\nD: Complex proposition\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>  The fallacy of appeal to ignorance is the argument that because there is no evidence to refute a claim, the claim is true. This is a fallacy because the burden of proof is on the person making the claim",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "clinical_knowledge",
+    "question": "Oedema is the presence of:",
+    "choices": [
+      "excessive intravascular fluid.",
+      "excessive extravascular fluid.",
+      "excessive intracranial fluid.",
+      "excessive necrotic cells."
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: Oedema is the presence of:\nA: excessive intravascular fluid.\nB: excessive extravascular fluid.\nC: excessive intracranial fluid.\nD: excessive necrotic cells.\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>  Oedema is the accumulation of fluid in the interstitial space. It is the result of an imbalance between the forces that regulate the movement of fluid between the intravascular and interstitial spaces. The fluid moves",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "logical_fallacies",
+    "question": "\" _Ad novitatem_ \" is",
+    "choices": [
+      "arguing that what is true of a few members of a class is true of all members of the class",
+      "drawing a conclusion by applying irrelevant criteria to a subject",
+      "substituting individual stories for a larger sample as support for a claim",
+      "arguing that something must be good because it is new, or must be bad because it is old"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: \" _Ad novitatem_ \" is\nA: arguing that what is true of a few members of a class is true of all members of the class\nB: drawing a conclusion by applying irrelevant criteria to a subject\nC: substituting individual stories for a larger sample as support for a claim\nD: arguing that something must be good because it is new, or must be bad because it is old\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  \" _Ad novitatem_ \" is a fallacy of relevance. It is arguing that something must be good because it is new, or must be bad because it is old. This is a fallacy because",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "moral_disputes",
+    "question": " One kind of externality imposed on the world's poor by the economic activity of wealthy nation is",
+    "choices": [
+      "unequal social order.",
+      "authoritarian regimes.",
+      "crime.",
+      "pollution."
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion:  One kind of externality imposed on the world's poor by the economic activity of wealthy nation is\nA: unequal social order.\nB: authoritarian regimes.\nC: crime.\nD: pollution.\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " D: pollution. <answer>D</answer> The poor are often the victims of pollution from the industrial activities of wealthy nations. This is an example of an externality, which is an effect of an economic activity that is not reflected in the market",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "miscellaneous",
+    "question": "Which of the following breakfast cereals is shaped like the letter O?",
+    "choices": [
+      "Life Corn",
+      "Chex",
+      "Cheerios",
+      "Raisin Bran"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Which of the following breakfast cereals is shaped like the letter O?\nA: Life Corn\nB: Chex\nC: Cheerios\nD: Raisin Bran\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  Cheerios is a popular breakfast cereal that is shaped like the letter O. It is a puffed cereal made from whole grain oats. Cheerios is a popular choice for children and adults alike, and is often served",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "nutrition",
+    "question": "What are histones?\n",
+    "choices": [
+      "Lipids",
+      "Carbohydrates",
+      "Nucleotides",
+      "Proteins"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: What are histones?\n\nA: Lipids\nB: Carbohydrates\nC: Nucleotides\nD: Proteins\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Histones are proteins around which DNA is wound. They are basic proteins and are rich in lysine and arginine. They are found in the nucleus of eukaryotic cells. They are of five types:",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "miscellaneous",
+    "question": "Who was the longest reigning monarch in French history?",
+    "choices": [
+      "Louis XIII",
+      "Louis XIV",
+      "Louis XV",
+      "Louis XVI"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Who was the longest reigning monarch in French history?\nA: Louis XIII\nB: Louis XIV\nC: Louis XV\nD: Louis XVI\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>   Louis XIV was the longest reigning monarch in French history, ruling for 72 years and 110 days. He was the first king to be crowned at Reims, and he was the first king to be crowned in",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_chemistry",
+    "question": "Which following pair of substances can be used to make a buffer solution?",
+    "choices": [
+      "NaCl and HCl",
+      "HC2H3O2 and KC2H3O2",
+      "NaBr and KBr",
+      "HIO3 and KClO3"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Which following pair of substances can be used to make a buffer solution?\nA: NaCl and HCl\nB: HC2H3O2 and KC2H3O2\nC: NaBr and KBr\nD: HIO3 and KClO3\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer> HC2H3O2 (acetic acid) and KC2H3O2 (potassium acetate) are a conjugate acid-base pair. The acid is a weak acid and the salt is a salt",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "sociology",
+    "question": "Which of the following did Thatcher's government not strive to achieve:",
+    "choices": [
+      "marketization and privatization",
+      "individual freedom, choice and responsibility",
+      "generous financial benefits for single parents, students and the unemployed",
+      "the rolling back of the welfare state"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Which of the following did Thatcher's government not strive to achieve:\nA: marketization and privatization\nB: individual freedom, choice and responsibility\nC: generous financial benefits for single parents, students and the unemployed\nD: the rolling back of the welfare state\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " C: generous financial benefits for single parents, students and the unemployed\nAnswer: <answer>C</answer>  Thatcher's government was committed to reducing the welfare state and the role of the state in general. It sought to reduce the power of trade",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_macroeconomics",
+    "question": "When the FED lowers the discount rate its intention is to",
+    "choices": [
+      "give depository institutions a break on their borrowings.",
+      "signal participants in financial markets that a recession is coming.",
+      "signal participants in financial markets that an inflationary period is coming.",
+      "encourage borrowing by depository institutions so that the money supply may expand."
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: When the FED lowers the discount rate its intention is to\nA: give depository institutions a break on their borrowings.\nB: signal participants in financial markets that a recession is coming.\nC: signal participants in financial markets that an inflationary period is coming.\nD: encourage borrowing by depository institutions so that the money supply may expand.\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  The discount rate is the interest rate that depository institutions pay to borrow money from the Fed. When the Fed lowers the discount rate, it is encouraging depository institutions to borrow more money from the Fed. This is",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "moral_scenarios",
+    "question": "For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I completed my brother's homework in my bedroom. Scenario 2 | I felt like vomiting so I reached for my host's trash can.",
+    "choices": [
+      "Wrong, Wrong",
+      "Wrong, Not wrong",
+      "Not wrong, Wrong",
+      "Not wrong, Not wrong"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I completed my brother's homework in my bedroom. Scenario 2 | I felt like vomiting so I reached for my host's trash can.\nA: Wrong, Wrong\nB: Wrong, Not wrong\nC: Not wrong, Wrong\nD: Not wrong, Not wrong\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>  In Scenario 1, the main character does something wrong. Completing someone else's homework is cheating, and cheating is wrong. In Scenario 2, the main character does something right. If you feel like vomiting",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "world_religions",
+    "question": "Pure Land Buddhism belongs to which school?",
+    "choices": [
+      "Vajrayana",
+      "Theravada",
+      "Mahayana",
+      "Mahavira"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Pure Land Buddhism belongs to which school?\nA: Vajrayana\nB: Theravada\nC: Mahayana\nD: Mahavira\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>   Pure Land Buddhism is a school of Mahayana Buddhism that emphasizes devotion to Amitabha Buddha and the attainment of rebirth in the Pure Land, a paradise on the west. The Pure Land school is based on",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "astronomy",
+    "question": "Why is it thought that the climate on Mars changed when the planet lost its strong magnetic field?",
+    "choices": [
+      "without a strong magnetic field the ozone layer was destroyed by the solar wind which stopped the greenhouse effect and cooled Mars down.",
+      "without a strong magnetic field which enhances the greenhouse effect Mars cooled down.",
+      "without a strong magnetic field the solar wind stripped away most of the atmosphere significantly reducing the greenhouse effect and cooling Mars down",
+      "without a strong magnetic field the planet recieves fewer charged particles from the solar wind and therefore is not heated as much"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Why is it thought that the climate on Mars changed when the planet lost its strong magnetic field?\nA: without a strong magnetic field the ozone layer was destroyed by the solar wind which stopped the greenhouse effect and cooled Mars down.\nB: without a strong magnetic field which enhances the greenhouse effect Mars cooled down.\nC: without a strong magnetic field the solar wind stripped away most of the atmosphere significantly reducing the greenhouse effect and cooling Mars down\nD: without a strong magnetic field the planet recieves fewer charged particles from the solar wind and therefore is not heated as much\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " C: without a strong magnetic field the solar wind stripped away most of the atmosphere significantly reducing the greenhouse effect and cooling Mars down\nAnswer: <answer>C</answer>  The solar wind is a stream of charged particles ejected from the upper atmosphere of",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_psychology",
+    "question": "Jupiter pilots his newly created perfectionism scale on a high school psychology class. He returns one month later to administer the same test to the same students, and then he correlates the two sets of results. What is Jupiter probably doing?",
+    "choices": [
+      "checking for outliers",
+      "standardizing the test",
+      "looking to see if the mean level of perfectionism has changed",
+      "measuring the test's reliability"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Jupiter pilots his newly created perfectionism scale on a high school psychology class. He returns one month later to administer the same test to the same students, and then he correlates the two sets of results. What is Jupiter probably doing?\nA: checking for outliers\nB: standardizing the test\nC: looking to see if the mean level of perfectionism has changed\nD: measuring the test's reliability\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Reliability is the consistency of a test. If a test is reliable, it will yield consistent results when administered to the same group of people at different times. This is what Jupiter is doing. He is correlating",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_psychology",
+    "question": "Someone who is unable to encode new memories is said to suffer from",
+    "choices": [
+      "overgeneralization.",
+      "belief bias.",
+      "state-dependent memory.",
+      "anterograde amnesia."
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Someone who is unable to encode new memories is said to suffer from\nA: overgeneralization.\nB: belief bias.\nC: state-dependent memory.\nD: anterograde amnesia.\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Anterograde amnesia is a condition in which a person is unable to form new memories. This is often the result of damage to the hippocampus, a part of the brain that plays a key role in",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_microeconomics",
+    "question": "Which of the following indicates that two goods are complements?",
+    "choices": [
+      "A positive income elasticity",
+      "A horizontal demand curve",
+      "A negative cross-price elasticity",
+      "A demand elasticity greater than one"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Which of the following indicates that two goods are complements?\nA: A positive income elasticity\nB: A horizontal demand curve\nC: A negative cross-price elasticity\nD: A demand elasticity greater than one\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  Complementary goods are those goods that are used together. For example, a car and gasoline. If the price of gasoline increases, the demand for cars will decrease. This is an example of a negative cross-price elasticity",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "elementary_mathematics",
+    "question": "A store has 3 boxes of shirts. Each box has 4 packages with 7 shirts in each package. The expression 3 \u00d7 (4 \u00d7 7) can be used to find the total number of shirts. Which expression can also be used to find the total number of shirts?",
+    "choices": [
+      "12 \u00d7 3",
+      "12 \u00d7 7",
+      "28 \u00d7 4",
+      "28 \u00d7 7"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: A store has 3 boxes of shirts. Each box has 4 packages with 7 shirts in each package. The expression 3 \u00d7 (4 \u00d7 7) can be used to find the total number of shirts. Which expression can also be used to find the total number of shirts?\nA: 12 \u00d7 3\nB: 12 \u00d7 7\nC: 28 \u00d7 4\nD: 28 \u00d7 7\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": "3 \u00d7 (4 \u00d7 7) = 3 \u00d7 28 = 84. 3 \u00d7 28 = 84. 84 = 12 \u00d7 7. So, the correct answer is B.\n<answer>B</answer>",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "elementary_mathematics",
+    "question": "8 + 8 \u00f7 2 + 2 =",
+    "choices": [
+      "4",
+      "8",
+      "10",
+      "14"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: 8 + 8 \u00f7 2 + 2 =\nA: 4\nB: 8\nC: 10\nD: 14\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": "8 + 8 \u00f7 2 + 2 = 8 + 4 + 2 = 14\n<answer>D</answer> 8 + 8 \u00f7 2 + 2 = 8 + 4 + ",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "conceptual_physics",
+    "question": "A wave transfers",
+    "choices": [
+      "amplitude",
+      "wavelength",
+      "frequency",
+      "energy"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: A wave transfers\nA: amplitude\nB: wavelength\nC: frequency\nD: energy\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": "4: <answer>D</answer>  A wave transfers energy. Amplitude is the displacement of the particle from its mean position. Wavelength is the distance between two consecutive points in phase. Frequency is the number of oscillations per second. Energy",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "sociology",
+    "question": "Booth's (1901) study revealed that the percentage of people in London who were living in poverty was:",
+    "choices": [
+      "30.70%",
+      "27.50%",
+      "18.60%",
+      "33.20%"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Booth's (1901) study revealed that the percentage of people in London who were living in poverty was:\nA: 30.70%\nB: 27.50%\nC: 18.60%\nD: 33.20%\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " <answer>A</answer>  Booth's study of London's poverty in 1901 revealed that 30.70% of the population was living in poverty. The study was a comprehensive survey of the city's population and was the first to use",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "miscellaneous",
+    "question": "What is the name of Raggedy Ann's doll brother?",
+    "choices": [
+      "Red",
+      "Freckles",
+      "Randy",
+      "Andy"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: What is the name of Raggedy Ann's doll brother?\nA: Red\nB: Freckles\nC: Randy\nD: Andy\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Raggedy Ann's doll brother is named Andy. He was created by Johnny Gruelle in 1915. The name \"Andy\" was chosen because it was the name of Johnny Gruelle's son",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "nutrition",
+    "question": "Which of the following vitamins provides the coenzyme for carboxylation reactions?\n",
+    "choices": [
+      "Biotin",
+      "Niacin",
+      "Riboflavin",
+      "Thiamin"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: Which of the following vitamins provides the coenzyme for carboxylation reactions?\n\nA: Biotin\nB: Niacin\nC: Riboflavin\nD: Thiamin\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " A\nAnswer: <answer>A</answer>  Biotin is a coenzyme for carboxylation reactions. It is a B vitamin and is required for the synthesis of fatty acids and amino acids. It is also required for gluconeogenesis",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_chemistry",
+    "question": "Atoms of four elements are examined: carbon, nitrogen, neon, and sulfur. Atoms of which element would have the strongest magnetic moment?",
+    "choices": [
+      "Carbon",
+      "Nitrogen",
+      "Neon",
+      "Sulfur"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Atoms of four elements are examined: carbon, nitrogen, neon, and sulfur. Atoms of which element would have the strongest magnetic moment?\nA: Carbon\nB: Nitrogen\nC: Neon\nD: Sulfur\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>  Nitrogen has five electrons in its outermost shell, which can be arranged in three unpaired electron pairs. This results in a strong magnetic moment. Carbon has four electrons in its outermost shell, which can be",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "moral_scenarios",
+    "question": "For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I saw that the girl was crying so I brought her a milkshake. Scenario 2 | I home school my kids so they don't get smarter than me.",
+    "choices": [
+      "Wrong, Wrong",
+      "Wrong, Not wrong",
+      "Not wrong, Wrong",
+      "Not wrong, Not wrong"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I saw that the girl was crying so I brought her a milkshake. Scenario 2 | I home school my kids so they don't get smarter than me.\nA: Wrong, Wrong\nB: Wrong, Not wrong\nC: Not wrong, Wrong\nD: Not wrong, Not wrong\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  In scenario 1, the main character does something kind and helpful. In scenario 2, the main character is trying to keep his kids from being smarter than him, which is a morally wrong motivation. The main",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "marketing",
+    "question": "Which of the following is the best example of a trade discount?",
+    "choices": [
+      "A lumberyard offers a discount to a homeowner for buying lumber.",
+      "A retailer offers a discount to a consumer for buying out of-season merchandise.",
+      "A producer offers a discount to retailers for promoting its product during the month of June.",
+      "A car dealer offers a discount to a customer in exchange for a used car."
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Which of the following is the best example of a trade discount?\nA: A lumberyard offers a discount to a homeowner for buying lumber.\nB: A retailer offers a discount to a consumer for buying out of-season merchandise.\nC: A producer offers a discount to retailers for promoting its product during the month of June.\nD: A car dealer offers a discount to a customer in exchange for a used car.\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  Trade discounts are offered by producers to retailers for promoting their products. In this case, the producer is offering a discount to the retailer for promoting its product during the month of June. A trade discount is a discount offered",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "nutrition",
+    "question": "Which of the following statements is correct?\n",
+    "choices": [
+      "Mycotoxins contaminate foods containing bacteria formed during storage under dry conditions",
+      "Mycotoxins contaminate foods containing fungi formed during storage under dry conditions",
+      "Mycotoxins contaminate foods containing bacteria formed during storage under moist conditions",
+      "Mycotoxins contaminate foods containing fungi formed during storage under moist conditions"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Which of the following statements is correct?\n\nA: Mycotoxins contaminate foods containing bacteria formed during storage under dry conditions\nB: Mycotoxins contaminate foods containing fungi formed during storage under dry conditions\nC: Mycotoxins contaminate foods containing bacteria formed during storage under moist conditions\nD: Mycotoxins contaminate foods containing fungi formed during storage under moist conditions\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Mycotoxins are toxic compounds produced by fungi. They contaminate foods containing fungi formed during storage under moist conditions. The most common mycotoxins are aflatoxins, ochrato",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "nutrition",
+    "question": "Occasionally infants are born without a normally functioning immune system. What are the signs most suggestive of a severe combined immunodeficiency?\n",
+    "choices": [
+      "Recurrent severe infections",
+      "Family history of unexplained death in infancy",
+      "Generalised spread of the Tuberculosis strain BCG after vaccination",
+      "All of the options given are correct"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: Occasionally infants are born without a normally functioning immune system. What are the signs most suggestive of a severe combined immunodeficiency?\n\nA: Recurrent severe infections\nB: Family history of unexplained death in infancy\nC: Generalised spread of the Tuberculosis strain BCG after vaccination\nD: All of the options given are correct\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Severe combined immunodeficiency (SCID) is a group of rare, potentially life-threatening disorders that are present at birth. SCID is characterized by a weakened immune system that is unable to fight off infections.",
+    "parseable": true,
+    "correct": true
   }
 ]
