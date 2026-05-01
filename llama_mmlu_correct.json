@@ -1,0 +1,1058 @@
+[
+  {
+    "subject": "clinical_knowledge",
+    "question": "Oedema is the presence of:",
+    "choices": [
+      "excessive intravascular fluid.",
+      "excessive extravascular fluid.",
+      "excessive intracranial fluid.",
+      "excessive necrotic cells."
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: Oedema is the presence of:\nA: excessive intravascular fluid.\nB: excessive extravascular fluid.\nC: excessive intracranial fluid.\nD: excessive necrotic cells.\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>  Oedema is the accumulation of fluid in the interstitial space. It is the result of an imbalance between the forces that regulate the movement of fluid between the intravascular and interstitial spaces. The fluid moves",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "logical_fallacies",
+    "question": "\" _Ad novitatem_ \" is",
+    "choices": [
+      "arguing that what is true of a few members of a class is true of all members of the class",
+      "drawing a conclusion by applying irrelevant criteria to a subject",
+      "substituting individual stories for a larger sample as support for a claim",
+      "arguing that something must be good because it is new, or must be bad because it is old"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: \" _Ad novitatem_ \" is\nA: arguing that what is true of a few members of a class is true of all members of the class\nB: drawing a conclusion by applying irrelevant criteria to a subject\nC: substituting individual stories for a larger sample as support for a claim\nD: arguing that something must be good because it is new, or must be bad because it is old\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  \" _Ad novitatem_ \" is a fallacy of relevance. It is arguing that something must be good because it is new, or must be bad because it is old. This is a fallacy because",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "moral_disputes",
+    "question": " One kind of externality imposed on the world's poor by the economic activity of wealthy nation is",
+    "choices": [
+      "unequal social order.",
+      "authoritarian regimes.",
+      "crime.",
+      "pollution."
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion:  One kind of externality imposed on the world's poor by the economic activity of wealthy nation is\nA: unequal social order.\nB: authoritarian regimes.\nC: crime.\nD: pollution.\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " D: pollution. <answer>D</answer> The poor are often the victims of pollution from the industrial activities of wealthy nations. This is an example of an externality, which is an effect of an economic activity that is not reflected in the market",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "miscellaneous",
+    "question": "Which of the following breakfast cereals is shaped like the letter O?",
+    "choices": [
+      "Life Corn",
+      "Chex",
+      "Cheerios",
+      "Raisin Bran"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Which of the following breakfast cereals is shaped like the letter O?\nA: Life Corn\nB: Chex\nC: Cheerios\nD: Raisin Bran\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  Cheerios is a popular breakfast cereal that is shaped like the letter O. It is a puffed cereal made from whole grain oats. Cheerios is a popular choice for children and adults alike, and is often served",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "nutrition",
+    "question": "What are histones?\n",
+    "choices": [
+      "Lipids",
+      "Carbohydrates",
+      "Nucleotides",
+      "Proteins"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: What are histones?\n\nA: Lipids\nB: Carbohydrates\nC: Nucleotides\nD: Proteins\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Histones are proteins around which DNA is wound. They are basic proteins and are rich in lysine and arginine. They are found in the nucleus of eukaryotic cells. They are of five types:",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "miscellaneous",
+    "question": "Who was the longest reigning monarch in French history?",
+    "choices": [
+      "Louis XIII",
+      "Louis XIV",
+      "Louis XV",
+      "Louis XVI"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Who was the longest reigning monarch in French history?\nA: Louis XIII\nB: Louis XIV\nC: Louis XV\nD: Louis XVI\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>   Louis XIV was the longest reigning monarch in French history, ruling for 72 years and 110 days. He was the first king to be crowned at Reims, and he was the first king to be crowned in",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_chemistry",
+    "question": "Which following pair of substances can be used to make a buffer solution?",
+    "choices": [
+      "NaCl and HCl",
+      "HC2H3O2 and KC2H3O2",
+      "NaBr and KBr",
+      "HIO3 and KClO3"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Which following pair of substances can be used to make a buffer solution?\nA: NaCl and HCl\nB: HC2H3O2 and KC2H3O2\nC: NaBr and KBr\nD: HIO3 and KClO3\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer> HC2H3O2 (acetic acid) and KC2H3O2 (potassium acetate) are a conjugate acid-base pair. The acid is a weak acid and the salt is a salt",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "sociology",
+    "question": "Which of the following did Thatcher's government not strive to achieve:",
+    "choices": [
+      "marketization and privatization",
+      "individual freedom, choice and responsibility",
+      "generous financial benefits for single parents, students and the unemployed",
+      "the rolling back of the welfare state"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Which of the following did Thatcher's government not strive to achieve:\nA: marketization and privatization\nB: individual freedom, choice and responsibility\nC: generous financial benefits for single parents, students and the unemployed\nD: the rolling back of the welfare state\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " C: generous financial benefits for single parents, students and the unemployed\nAnswer: <answer>C</answer>  Thatcher's government was committed to reducing the welfare state and the role of the state in general. It sought to reduce the power of trade",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_macroeconomics",
+    "question": "When the FED lowers the discount rate its intention is to",
+    "choices": [
+      "give depository institutions a break on their borrowings.",
+      "signal participants in financial markets that a recession is coming.",
+      "signal participants in financial markets that an inflationary period is coming.",
+      "encourage borrowing by depository institutions so that the money supply may expand."
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: When the FED lowers the discount rate its intention is to\nA: give depository institutions a break on their borrowings.\nB: signal participants in financial markets that a recession is coming.\nC: signal participants in financial markets that an inflationary period is coming.\nD: encourage borrowing by depository institutions so that the money supply may expand.\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  The discount rate is the interest rate that depository institutions pay to borrow money from the Fed. When the Fed lowers the discount rate, it is encouraging depository institutions to borrow more money from the Fed. This is",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "moral_scenarios",
+    "question": "For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I completed my brother's homework in my bedroom. Scenario 2 | I felt like vomiting so I reached for my host's trash can.",
+    "choices": [
+      "Wrong, Wrong",
+      "Wrong, Not wrong",
+      "Not wrong, Wrong",
+      "Not wrong, Not wrong"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I completed my brother's homework in my bedroom. Scenario 2 | I felt like vomiting so I reached for my host's trash can.\nA: Wrong, Wrong\nB: Wrong, Not wrong\nC: Not wrong, Wrong\nD: Not wrong, Not wrong\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>  In Scenario 1, the main character does something wrong. Completing someone else's homework is cheating, and cheating is wrong. In Scenario 2, the main character does something right. If you feel like vomiting",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "world_religions",
+    "question": "Pure Land Buddhism belongs to which school?",
+    "choices": [
+      "Vajrayana",
+      "Theravada",
+      "Mahayana",
+      "Mahavira"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Pure Land Buddhism belongs to which school?\nA: Vajrayana\nB: Theravada\nC: Mahayana\nD: Mahavira\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>   Pure Land Buddhism is a school of Mahayana Buddhism that emphasizes devotion to Amitabha Buddha and the attainment of rebirth in the Pure Land, a paradise on the west. The Pure Land school is based on",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "astronomy",
+    "question": "Why is it thought that the climate on Mars changed when the planet lost its strong magnetic field?",
+    "choices": [
+      "without a strong magnetic field the ozone layer was destroyed by the solar wind which stopped the greenhouse effect and cooled Mars down.",
+      "without a strong magnetic field which enhances the greenhouse effect Mars cooled down.",
+      "without a strong magnetic field the solar wind stripped away most of the atmosphere significantly reducing the greenhouse effect and cooling Mars down",
+      "without a strong magnetic field the planet recieves fewer charged particles from the solar wind and therefore is not heated as much"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Why is it thought that the climate on Mars changed when the planet lost its strong magnetic field?\nA: without a strong magnetic field the ozone layer was destroyed by the solar wind which stopped the greenhouse effect and cooled Mars down.\nB: without a strong magnetic field which enhances the greenhouse effect Mars cooled down.\nC: without a strong magnetic field the solar wind stripped away most of the atmosphere significantly reducing the greenhouse effect and cooling Mars down\nD: without a strong magnetic field the planet recieves fewer charged particles from the solar wind and therefore is not heated as much\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " C: without a strong magnetic field the solar wind stripped away most of the atmosphere significantly reducing the greenhouse effect and cooling Mars down\nAnswer: <answer>C</answer>  The solar wind is a stream of charged particles ejected from the upper atmosphere of",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_psychology",
+    "question": "Jupiter pilots his newly created perfectionism scale on a high school psychology class. He returns one month later to administer the same test to the same students, and then he correlates the two sets of results. What is Jupiter probably doing?",
+    "choices": [
+      "checking for outliers",
+      "standardizing the test",
+      "looking to see if the mean level of perfectionism has changed",
+      "measuring the test's reliability"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Jupiter pilots his newly created perfectionism scale on a high school psychology class. He returns one month later to administer the same test to the same students, and then he correlates the two sets of results. What is Jupiter probably doing?\nA: checking for outliers\nB: standardizing the test\nC: looking to see if the mean level of perfectionism has changed\nD: measuring the test's reliability\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Reliability is the consistency of a test. If a test is reliable, it will yield consistent results when administered to the same group of people at different times. This is what Jupiter is doing. He is correlating",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_psychology",
+    "question": "Someone who is unable to encode new memories is said to suffer from",
+    "choices": [
+      "overgeneralization.",
+      "belief bias.",
+      "state-dependent memory.",
+      "anterograde amnesia."
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Someone who is unable to encode new memories is said to suffer from\nA: overgeneralization.\nB: belief bias.\nC: state-dependent memory.\nD: anterograde amnesia.\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Anterograde amnesia is a condition in which a person is unable to form new memories. This is often the result of damage to the hippocampus, a part of the brain that plays a key role in",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "miscellaneous",
+    "question": "What is the 7-Eleven company's trademarked name for its super-large sodas?",
+    "choices": [
+      "Big Slurp",
+      "Big Gulp",
+      "Big Drink",
+      "Big Sip"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: What is the 7-Eleven company's trademarked name for its super-large sodas?\nA: Big Slurp\nB: Big Gulp\nC: Big Drink\nD: Big Sip\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>  The 7-Eleven company's trademarked name for its super-large sodas is Big Gulp. Big Gulp is a trademarked name for the 7-Eleven company's super-large sodas",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "moral_scenarios",
+    "question": "For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I brought my 13-year-old son to a show featuring exotic dancers. Scenario 2 | I went fishing for dolphins last weekend.",
+    "choices": [
+      "Wrong, Wrong",
+      "Wrong, Not wrong",
+      "Not wrong, Wrong",
+      "Not wrong, Not wrong"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I brought my 13-year-old son to a show featuring exotic dancers. Scenario 2 | I went fishing for dolphins last weekend.\nA: Wrong, Wrong\nB: Wrong, Not wrong\nC: Not wrong, Wrong\nD: Not wrong, Not wrong\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " <answer>A</answer>  In both scenarios, the main character does something that is clearly morally wrong. In the first scenario, the main character exposes his 13-year-old son to a show that is not suitable for minors. In the second",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_microeconomics",
+    "question": "Which of the following indicates that two goods are complements?",
+    "choices": [
+      "A positive income elasticity",
+      "A horizontal demand curve",
+      "A negative cross-price elasticity",
+      "A demand elasticity greater than one"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Which of the following indicates that two goods are complements?\nA: A positive income elasticity\nB: A horizontal demand curve\nC: A negative cross-price elasticity\nD: A demand elasticity greater than one\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  Complementary goods are those goods that are used together. For example, a car and gasoline. If the price of gasoline increases, the demand for cars will decrease. This is an example of a negative cross-price elasticity",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "elementary_mathematics",
+    "question": "A store has 3 boxes of shirts. Each box has 4 packages with 7 shirts in each package. The expression 3 \u00d7 (4 \u00d7 7) can be used to find the total number of shirts. Which expression can also be used to find the total number of shirts?",
+    "choices": [
+      "12 \u00d7 3",
+      "12 \u00d7 7",
+      "28 \u00d7 4",
+      "28 \u00d7 7"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: A store has 3 boxes of shirts. Each box has 4 packages with 7 shirts in each package. The expression 3 \u00d7 (4 \u00d7 7) can be used to find the total number of shirts. Which expression can also be used to find the total number of shirts?\nA: 12 \u00d7 3\nB: 12 \u00d7 7\nC: 28 \u00d7 4\nD: 28 \u00d7 7\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": "3 \u00d7 (4 \u00d7 7) = 3 \u00d7 28 = 84. 3 \u00d7 28 = 84. 84 = 12 \u00d7 7. So, the correct answer is B.\n<answer>B</answer>",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "elementary_mathematics",
+    "question": "8 + 8 \u00f7 2 + 2 =",
+    "choices": [
+      "4",
+      "8",
+      "10",
+      "14"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: 8 + 8 \u00f7 2 + 2 =\nA: 4\nB: 8\nC: 10\nD: 14\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": "8 + 8 \u00f7 2 + 2 = 8 + 4 + 2 = 14\n<answer>D</answer> 8 + 8 \u00f7 2 + 2 = 8 + 4 + ",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "conceptual_physics",
+    "question": "A wave transfers",
+    "choices": [
+      "amplitude",
+      "wavelength",
+      "frequency",
+      "energy"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: A wave transfers\nA: amplitude\nB: wavelength\nC: frequency\nD: energy\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": "4: <answer>D</answer>  A wave transfers energy. Amplitude is the displacement of the particle from its mean position. Wavelength is the distance between two consecutive points in phase. Frequency is the number of oscillations per second. Energy",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "sociology",
+    "question": "Booth's (1901) study revealed that the percentage of people in London who were living in poverty was:",
+    "choices": [
+      "30.70%",
+      "27.50%",
+      "18.60%",
+      "33.20%"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Booth's (1901) study revealed that the percentage of people in London who were living in poverty was:\nA: 30.70%\nB: 27.50%\nC: 18.60%\nD: 33.20%\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " <answer>A</answer>  Booth's study of London's poverty in 1901 revealed that 30.70% of the population was living in poverty. The study was a comprehensive survey of the city's population and was the first to use",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "miscellaneous",
+    "question": "What is the name of Raggedy Ann's doll brother?",
+    "choices": [
+      "Red",
+      "Freckles",
+      "Randy",
+      "Andy"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: What is the name of Raggedy Ann's doll brother?\nA: Red\nB: Freckles\nC: Randy\nD: Andy\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Raggedy Ann's doll brother is named Andy. He was created by Johnny Gruelle in 1915. The name \"Andy\" was chosen because it was the name of Johnny Gruelle's son",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "nutrition",
+    "question": "Which of the following vitamins provides the coenzyme for carboxylation reactions?\n",
+    "choices": [
+      "Biotin",
+      "Niacin",
+      "Riboflavin",
+      "Thiamin"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: Which of the following vitamins provides the coenzyme for carboxylation reactions?\n\nA: Biotin\nB: Niacin\nC: Riboflavin\nD: Thiamin\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " A\nAnswer: <answer>A</answer>  Biotin is a coenzyme for carboxylation reactions. It is a B vitamin and is required for the synthesis of fatty acids and amino acids. It is also required for gluconeogenesis",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_chemistry",
+    "question": "Atoms of four elements are examined: carbon, nitrogen, neon, and sulfur. Atoms of which element would have the strongest magnetic moment?",
+    "choices": [
+      "Carbon",
+      "Nitrogen",
+      "Neon",
+      "Sulfur"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Atoms of four elements are examined: carbon, nitrogen, neon, and sulfur. Atoms of which element would have the strongest magnetic moment?\nA: Carbon\nB: Nitrogen\nC: Neon\nD: Sulfur\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>  Nitrogen has five electrons in its outermost shell, which can be arranged in three unpaired electron pairs. This results in a strong magnetic moment. Carbon has four electrons in its outermost shell, which can be",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "moral_scenarios",
+    "question": "For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I saw that the girl was crying so I brought her a milkshake. Scenario 2 | I home school my kids so they don't get smarter than me.",
+    "choices": [
+      "Wrong, Wrong",
+      "Wrong, Not wrong",
+      "Not wrong, Wrong",
+      "Not wrong, Not wrong"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I saw that the girl was crying so I brought her a milkshake. Scenario 2 | I home school my kids so they don't get smarter than me.\nA: Wrong, Wrong\nB: Wrong, Not wrong\nC: Not wrong, Wrong\nD: Not wrong, Not wrong\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  In scenario 1, the main character does something kind and helpful. In scenario 2, the main character is trying to keep his kids from being smarter than him, which is a morally wrong motivation. The main",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "marketing",
+    "question": "Which of the following is the best example of a trade discount?",
+    "choices": [
+      "A lumberyard offers a discount to a homeowner for buying lumber.",
+      "A retailer offers a discount to a consumer for buying out of-season merchandise.",
+      "A producer offers a discount to retailers for promoting its product during the month of June.",
+      "A car dealer offers a discount to a customer in exchange for a used car."
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: Which of the following is the best example of a trade discount?\nA: A lumberyard offers a discount to a homeowner for buying lumber.\nB: A retailer offers a discount to a consumer for buying out of-season merchandise.\nC: A producer offers a discount to retailers for promoting its product during the month of June.\nD: A car dealer offers a discount to a customer in exchange for a used car.\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  Trade discounts are offered by producers to retailers for promoting their products. In this case, the producer is offering a discount to the retailer for promoting its product during the month of June. A trade discount is a discount offered",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "nutrition",
+    "question": "Which of the following statements is correct?\n",
+    "choices": [
+      "Mycotoxins contaminate foods containing bacteria formed during storage under dry conditions",
+      "Mycotoxins contaminate foods containing fungi formed during storage under dry conditions",
+      "Mycotoxins contaminate foods containing bacteria formed during storage under moist conditions",
+      "Mycotoxins contaminate foods containing fungi formed during storage under moist conditions"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Which of the following statements is correct?\n\nA: Mycotoxins contaminate foods containing bacteria formed during storage under dry conditions\nB: Mycotoxins contaminate foods containing fungi formed during storage under dry conditions\nC: Mycotoxins contaminate foods containing bacteria formed during storage under moist conditions\nD: Mycotoxins contaminate foods containing fungi formed during storage under moist conditions\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Mycotoxins are toxic compounds produced by fungi. They contaminate foods containing fungi formed during storage under moist conditions. The most common mycotoxins are aflatoxins, ochrato",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "nutrition",
+    "question": "Occasionally infants are born without a normally functioning immune system. What are the signs most suggestive of a severe combined immunodeficiency?\n",
+    "choices": [
+      "Recurrent severe infections",
+      "Family history of unexplained death in infancy",
+      "Generalised spread of the Tuberculosis strain BCG after vaccination",
+      "All of the options given are correct"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: Occasionally infants are born without a normally functioning immune system. What are the signs most suggestive of a severe combined immunodeficiency?\n\nA: Recurrent severe infections\nB: Family history of unexplained death in infancy\nC: Generalised spread of the Tuberculosis strain BCG after vaccination\nD: All of the options given are correct\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Severe combined immunodeficiency (SCID) is a group of rare, potentially life-threatening disorders that are present at birth. SCID is characterized by a weakened immune system that is unable to fight off infections.",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "elementary_mathematics",
+    "question": "\u22124 +  ( \u22123 )=",
+    "choices": [
+      "\u22127",
+      "\u22121",
+      "1",
+      "7"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: \u22124 +  ( \u22123 )=\nA: \u22127\nB: \u22121\nC: 1\nD: 7\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " \u22124 +  ( \u22123 )= \u22127\n<answer>A</answer> .  \u22124 +  ( \u22123 )= \u22127\nAnswer is: A .  \u22124 +  ( \u22123 )= \u2212",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_us_history",
+    "question": "This question refers to the following information.\n\"We conclude that, in the field of public education, the doctrine of \"separate but equal\" has no place. Separate educational facilities are inherently unequal. Therefore, we hold that the plaintiffs and others similarly situated for whom the actions have been brought are, by reason of the segregation complained of, deprived of the equal protection of the laws guaranteed by the Fourteenth Amendment.\"\nBrown v. Board of Education, 1954\nIn which decision did the Supreme Court validate the practice of \"separate but equal\" facilities for blacks and whites?",
+    "choices": [
+      "Marbury v. Madison",
+      "Bradwell v. Illinois",
+      "Plessy v. Ferguson",
+      "Holden v. Hardy"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: This question refers to the following information.\n\"We conclude that, in the field of public education, the doctrine of \"separate but equal\" has no place. Separate educational facilities are inherently unequal. Therefore, we hold that the plaintiffs and others similarly situated for whom the actions have been brought are, by reason of the segregation complained of, deprived of the equal protection of the laws guaranteed by the Fourteenth Amendment.\"\nBrown v. Board of Education, 1954\nIn which decision did the Supreme Court validate the practice of \"separate but equal\" facilities for blacks and whites?\nA: Marbury v. Madison\nB: Bradwell v. Illinois\nC: Plessy v. Ferguson\nD: Holden v. Hardy\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  The Supreme Court validated the practice of \"separate but equal\" facilities for blacks and whites in Plessy v. Ferguson, 1896. The Court held that segregation was constitutional as long as the facilities were",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "international_law",
+    "question": "When a reservation is considered as invalid under the law of treaties?",
+    "choices": [
+      "A reservation is invalid when the majority of the State parties objects to it",
+      "A reservation is invalid only when an international tribunal says so",
+      "A reservation is invalid only when is incompatible with a peremptory norm of international law (jus cogens)",
+      "A reservation is invalid when it is incompatible with the object and purpose of the treaty"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: When a reservation is considered as invalid under the law of treaties?\nA: A reservation is invalid when the majority of the State parties objects to it\nB: A reservation is invalid only when an international tribunal says so\nC: A reservation is invalid only when is incompatible with a peremptory norm of international law (jus cogens)\nD: A reservation is invalid when it is incompatible with the object and purpose of the treaty\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " D: A reservation is invalid when it is incompatible with the object and purpose of the treaty\nAnswer: <answer>D</answer>  A reservation is invalid when it is incompatible with the object and purpose of the treaty.  A reservation is a",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "miscellaneous",
+    "question": "Which of these animals lays eggs?",
+    "choices": [
+      "cow",
+      "gerbil",
+      "frog",
+      "elephant"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: Which of these animals lays eggs?\nA: cow\nB: gerbil\nC: frog\nD: elephant\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  All frogs lay eggs. They do not give birth to live young. The eggs hatch into tadpoles, which then undergo metamorphosis to become adult frogs. Frogs are amphibians, which means they live",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_european_history",
+    "question": "This question refers to the following information.\nRead the the following poem to answer questions.\nTake up the White Man's burden\u2014\nSend forth the best ye breed\u2014\nGo bind your sons to exile\nTo serve your captives' need;\nTo wait in heavy harness,\nOn fluttered folk and wild\u2014\nYour new-caught, sullen peoples,\nHalf-devil and half-child.\n...\nTake up the White Man's burden\u2014\nThe savage wars of peace\u2014\nFill full the mouth of Famine\nAnd bid the sickness cease;\nAnd when your goal is nearest\nThe end for others sought\u2026\nWatch sloth and heathen Folly\nBring all your hopes to naught.\nRudyard Kipling, The White Man's Burden, 1899\nThe poem describes which kind of attitude toward the native peoples who were under the rule or influence of the British Empire?",
+    "choices": [
+      "They are \"exiled sons\" of the British race.",
+      "While \"savage,\" they fight wars for the sake of a lasting peace.",
+      "They are ready for conversion to Christianity.",
+      "They are the product of a less-civilized and less-developed civilization."
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: This question refers to the following information.\nRead the the following poem to answer questions.\nTake up the White Man's burden\u2014\nSend forth the best ye breed\u2014\nGo bind your sons to exile\nTo serve your captives' need;\nTo wait in heavy harness,\nOn fluttered folk and wild\u2014\nYour new-caught, sullen peoples,\nHalf-devil and half-child.\n...\nTake up the White Man's burden\u2014\nThe savage wars of peace\u2014\nFill full the mouth of Famine\nAnd bid the sickness cease;\nAnd when your goal is nearest\nThe end for others sought\u2026\nWatch sloth and heathen Folly\nBring all your hopes to naught.\nRudyard Kipling, The White Man's Burden, 1899\nThe poem describes which kind of attitude toward the native peoples who were under the rule or influence of the British Empire?\nA: They are \"exiled sons\" of the British race.\nB: While \"savage,\" they fight wars for the sake of a lasting peace.\nC: They are ready for conversion to Christianity.\nD: They are the product of a less-civilized and less-developed civilization.\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  The poem describes the native peoples as \"half-devil and half-child\" and \"sullen peoples\" who are \"new-caught.\" The poem portrays the native peoples as being in a state of savagery",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_psychology",
+    "question": "Which of the following neurotransmitters is most explicitly associated with the experience of pleasure?",
+    "choices": [
+      "GABA",
+      "Acetylcholine",
+      "Serotonin",
+      "Dopamine"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Which of the following neurotransmitters is most explicitly associated with the experience of pleasure?\nA: GABA\nB: Acetylcholine\nC: Serotonin\nD: Dopamine\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Dopamine is the neurotransmitter most explicitly associated with the experience of pleasure. It is released in the brain's reward centers in response to activities that are pleasurable, such as eating, sex, and taking drugs.",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_macroeconomics",
+    "question": "Which of the following will promote economic growth?",
+    "choices": [
+      "An increase in the amount of capital.",
+      "Lower wages.",
+      "Price controls that keep prices low.",
+      "Increased government spending."
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Which of the following will promote economic growth?\nA: An increase in the amount of capital.\nB: Lower wages.\nC: Price controls that keep prices low.\nD: Increased government spending.\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " <answer>A</answer>  Economic growth is the increase in the production of goods and services in an economy. The production of goods and services is determined by the amount of capital available, the amount of labor available, and the technology used. An",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_biology",
+    "question": "Which of the following about meiosis is NOT true?",
+    "choices": [
+      "Meiosis produces two haploid gametes.",
+      "Homologous chromosomes join during synapsis.",
+      "Sister chromatids separate during meiosis I.",
+      "Crossing-over increases genetic variation in gametes."
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Which of the following about meiosis is NOT true?\nA: Meiosis produces two haploid gametes.\nB: Homologous chromosomes join during synapsis.\nC: Sister chromatids separate during meiosis I.\nD: Crossing-over increases genetic variation in gametes.\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " C: Sister chromatids separate during meiosis I. <answer>C</answer> Sister chromatids separate during meiosis II. Meiosis I is the first division of meiosis, and it is the division that separates homologous chromosomes. Me",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_biology",
+    "question": "Which of the following would most likely describe the fate of a vesicle formed as a result of phagocytosis?",
+    "choices": [
+      "The vesicle merges with a mitochondrion.",
+      "The vesicle merges with a lysosome.",
+      "The vesicle is shuttled to the nucleus, and its contents become part of the nucleolus.",
+      "The vesicle releases its contents to the cytoplasm to be digested."
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Which of the following would most likely describe the fate of a vesicle formed as a result of phagocytosis?\nA: The vesicle merges with a mitochondrion.\nB: The vesicle merges with a lysosome.\nC: The vesicle is shuttled to the nucleus, and its contents become part of the nucleolus.\nD: The vesicle releases its contents to the cytoplasm to be digested.\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " B\nAnswer: <answer>B</answer>  Phagocytosis is a type of endocytosis in which a cell engulfs a large particle, such as a bacterium. The vesicle that forms as a result of",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_government_and_politics",
+    "question": "The Dred Scott decision of 1857 was overturned by the",
+    "choices": [
+      "Plessy v. Ferguson decision",
+      "Missouri Compromise",
+      "Jim Crow laws",
+      "Fourteenth Amendment"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: The Dred Scott decision of 1857 was overturned by the\nA: Plessy v. Ferguson decision\nB: Missouri Compromise\nC: Jim Crow laws\nD: Fourteenth Amendment\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  The Dred Scott decision of 1857 was overturned by the Fourteenth Amendment. The Dred Scott decision of 1857 held that slaves were not citizens and had no right to sue in court. The Four",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "miscellaneous",
+    "question": "The traitor is a traitor, so you are a traitor, so I am a patriot.The words of a patriot are the most valuable, so my words are good.Since my words are good, you are undoubtedly a traitor! Which of the following makes the same logical mistake as above?",
+    "choices": [
+      "Literature and art are not worthy of attention. Modernization must relies on science and technology, so science and technology are worthy of our attention. But literature and art are not science and technology.",
+      "Non-university can also become an outstanding talent. Gorky, Edison, Faraday, Franklin, etc. have not attended college, but they have all become outstanding talents.",
+      "The earth is a sphere, which can be proved from the fact that when we stand at a height and watch the sailing boat in the sea, we always see the mast first and then the hull. The reason for this is because the earth is a sphere.",
+      "I saw them coming out of this chemical plant several times before I realized that this young man who was eager to help patients was originally a worker in this chemical plant."
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: The traitor is a traitor, so you are a traitor, so I am a patriot.The words of a patriot are the most valuable, so my words are good.Since my words are good, you are undoubtedly a traitor! Which of the following makes the same logical mistake as above?\nA: Literature and art are not worthy of attention. Modernization must relies on science and technology, so science and technology are worthy of our attention. But literature and art are not science and technology.\nB: Non-university can also become an outstanding talent. Gorky, Edison, Faraday, Franklin, etc. have not attended college, but they have all become outstanding talents.\nC: The earth is a sphere, which can be proved from the fact that when we stand at a height and watch the sailing boat in the sea, we always see the mast first and then the hull. The reason for this is because the earth is a sphere.\nD: I saw them coming out of this chemical plant several times before I realized that this young man who was eager to help patients was originally a worker in this chemical plant.\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  The argument is based on a false premise. The fact that we see the mast first and then the hull is not because the earth is a sphere, but because the mast is higher than the hull. The earth is",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_psychology",
+    "question": "The perceived volume of a tone is mainly determined by its",
+    "choices": [
+      "frequency",
+      "timbre",
+      "amplitude",
+      "overtones"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: The perceived volume of a tone is mainly determined by its\nA: frequency\nB: timbre\nC: amplitude\nD: overtones\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " C: amplitude\nAnswer: <answer>C</answer>  The perceived volume of a tone is mainly determined by its amplitude. The frequency of a tone determines its pitch, and the timbre of a tone is determined by the relative amplitudes",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "medical_genetics",
+    "question": "Consanguinity shows a strong association with which pattern of inheritance?",
+    "choices": [
+      "Autosomal dominant",
+      "Autosomal recessive",
+      "X-linked dominant",
+      "X-linked recessive"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: Consanguinity shows a strong association with which pattern of inheritance?\nA: Autosomal dominant\nB: Autosomal recessive\nC: X-linked dominant\nD: X-linked recessive\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>  Consanguinity is the practice of marrying within the family. It increases the chances of homozygous recessive genotype in the offspring. This is because the chances of inheriting two copies of the recessive allele",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "professional_medicine",
+    "question": "A 55-year-old man comes to the physician because of a 2-week history of recurrent, widespread blister formation. Physical examination shows lesions that are most numerous in the flexural areas including the axillae and groin. The blisters do not break easily, and there are no oral lesions. These blisters are most likely the result of adhesion failure involving which of the following?",
+    "choices": [
+      "Basement membrane",
+      "Dermal papillae",
+      "Langerhans cells",
+      "Melanocytes"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: A 55-year-old man comes to the physician because of a 2-week history of recurrent, widespread blister formation. Physical examination shows lesions that are most numerous in the flexural areas including the axillae and groin. The blisters do not break easily, and there are no oral lesions. These blisters are most likely the result of adhesion failure involving which of the following?\nA: Basement membrane\nB: Dermal papillae\nC: Langerhans cells\nD: Melanocytes\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " <answer>A</answer>  The clinical presentation of widespread blistering in the flexural areas is most suggestive of bullous pemphigoid. Bullous pemphigoid is an autoimmune disease that results from autoantibodies against components of",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_world_history",
+    "question": "This question refers to the following information.\nAlthough in Protestant Europe, [Peter the Great] was surrounded by evidence of the new civil and political rights of individual men embodied in constitutions, bills of rights and parliaments, he did not return to Russia determined to share power with his people. On the contrary, he returned not only determined to change his country but also convinced that if Russia was to be transformed, it was he who must provide both the direction and the motive force. He would try to lead; but where education and persuasion were not enough, he could drive\u2014and if necessary flog\u2014the backward nation forward.\n\u2014Robert K. Massie, Peter the Great: His Life and World\nWhat term best describes Peter the Great's ruling style as described in the passage?",
+    "choices": [
+      "Egalitarian",
+      "Absolutist",
+      "Republican",
+      "Theocratic"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: This question refers to the following information.\nAlthough in Protestant Europe, [Peter the Great] was surrounded by evidence of the new civil and political rights of individual men embodied in constitutions, bills of rights and parliaments, he did not return to Russia determined to share power with his people. On the contrary, he returned not only determined to change his country but also convinced that if Russia was to be transformed, it was he who must provide both the direction and the motive force. He would try to lead; but where education and persuasion were not enough, he could drive\u2014and if necessary flog\u2014the backward nation forward.\n\u2014Robert K. Massie, Peter the Great: His Life and World\nWhat term best describes Peter the Great's ruling style as described in the passage?\nA: Egalitarian\nB: Absolutist\nC: Republican\nD: Theocratic\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>  The passage describes Peter the Great as a ruler who believed that he should provide both the direction and the motive force for his country. He was willing to use force to achieve his goals, and he did not believe in",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_macroeconomics",
+    "question": "If prices rise in the United States relative to other countries then",
+    "choices": [
+      "the value of the dollar will tend to appreciate.",
+      "the value of the dollar will tend to depreciate.",
+      "exchange rates will be affected but not the value of the dollar.",
+      "the exchange rate will not be affected."
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: If prices rise in the United States relative to other countries then\nA: the value of the dollar will tend to appreciate.\nB: the value of the dollar will tend to depreciate.\nC: exchange rates will be affected but not the value of the dollar.\nD: the exchange rate will not be affected.\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>  If prices rise in the United States relative to other countries, then the dollar will buy fewer goods in other countries. This means that the value of the dollar has fallen. The value of the dollar is the price of",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "moral_scenarios",
+    "question": "For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I completed my homework in my bedroom. Scenario 2 | I gave opioids to the patient in the rehab care center.",
+    "choices": [
+      "Wrong, Wrong",
+      "Wrong, Not wrong",
+      "Not wrong, Wrong",
+      "Not wrong, Not wrong"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I completed my homework in my bedroom. Scenario 2 | I gave opioids to the patient in the rehab care center.\nA: Wrong, Wrong\nB: Wrong, Not wrong\nC: Not wrong, Wrong\nD: Not wrong, Not wrong\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  In the first scenario, the main character is doing something that is morally neutral. In the second scenario, the main character is doing something that is morally wrong. The main character is giving opioids to a patient in a",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_macroeconomics",
+    "question": "Expansionary monetary policy is designed to",
+    "choices": [
+      "decrease the interest rate increase private investment increase aggregate demand and increase domestic output.",
+      "decrease the interest rate increase private investment increase aggregate demand and increase the unemployment rate.",
+      "increase the interest rate increase private investment increase aggregate demand and increase domestic output.",
+      "increase the interest rate decrease private investment increase aggregate demand and increase domestic output."
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Expansionary monetary policy is designed to\nA: decrease the interest rate increase private investment increase aggregate demand and increase domestic output.\nB: decrease the interest rate increase private investment increase aggregate demand and increase the unemployment rate.\nC: increase the interest rate increase private investment increase aggregate demand and increase domestic output.\nD: increase the interest rate decrease private investment increase aggregate demand and increase domestic output.\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " <answer>A</answer>  Expansionary monetary policy is a policy that is used to increase the level of economic activity in an economy. It is used to increase the level of aggregate demand in the economy. Expansionary monetary policy is used to increase",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "security_studies",
+    "question": "What is the function of sanctions?",
+    "choices": [
+      "As a means of exerting economic power to advance peace and freedom.",
+      "To end economic support for morally unacceptable regimes.",
+      "To isolate dangerous regimes and weaken threats to regional or global security.",
+      "All of these options."
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: What is the function of sanctions?\nA: As a means of exerting economic power to advance peace and freedom.\nB: To end economic support for morally unacceptable regimes.\nC: To isolate dangerous regimes and weaken threats to regional or global security.\nD: All of these options.\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Sanctions are a means of exerting economic power to advance peace and freedom. They are used to end economic support for morally unacceptable regimes. Sanctions are also used to isolate dangerous regimes and weaken threats to regional or",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "professional_psychology",
+    "question": "Thomas and Chess\u2019s (1977) \u201cgoodness-of-fit\u201d model predicts that maladjustment in children is due to:",
+    "choices": [
+      "a mismatch between the child\u2019s basic temperament and his/her parents\u2019 childrearing practices.",
+      "a mismatch between the child\u2019s attachment behaviors and his/her parents\u2019 response to those behaviors.",
+      "inconsistencies in the parenting styles of the child\u2019s caregivers.",
+      "inconsistencies in the child\u2019s sense of self and the feedback the child receives from caregivers about his/her behavior."
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Thomas and Chess\u2019s (1977) \u201cgoodness-of-fit\u201d model predicts that maladjustment in children is due to:\nA: a mismatch between the child\u2019s basic temperament and his/her parents\u2019 childrearing practices.\nB: a mismatch between the child\u2019s attachment behaviors and his/her parents\u2019 response to those behaviors.\nC: inconsistencies in the parenting styles of the child\u2019s caregivers.\nD: inconsistencies in the child\u2019s sense of self and the feedback the child receives from caregivers about his/her behavior.\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " A: a mismatch between the child\u2019s basic temperament and his/her parents\u2019 childrearing practices.  <answer>A</answer>  Thomas and Chess\u2019s (1977) \u201cgoodness-of-fit\u201d model suggests that maladjustment in children",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "miscellaneous",
+    "question": "Which of the following best describes the situation after the price is raised on a product that has an inelastic demand?",
+    "choices": [
+      "The quantity demanded will not change.",
+      "The quantity demanded will increase.",
+      "Total revenue will decrease.",
+      "Total revenue will not change."
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Which of the following best describes the situation after the price is raised on a product that has an inelastic demand?\nA: The quantity demanded will not change.\nB: The quantity demanded will increase.\nC: Total revenue will decrease.\nD: Total revenue will not change.\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " <answer>A</answer>  Inelastic demand means that the quantity demanded will not change much in response to a change in price. The total revenue will increase because the price increase will more than offset the decrease in quantity demanded. Therefore, the total",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "college_computer_science",
+    "question": "Which of the following is the name of the data structure in a compiler that is responsible for managing information about variables and their attributes?",
+    "choices": [
+      "Abstract Syntax Tree (AST)",
+      "Attribute Grammar",
+      "Symbol Table",
+      "Semantic Stack"
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Which of the following is the name of the data structure in a compiler that is responsible for managing information about variables and their attributes?\nA: Abstract Syntax Tree (AST)\nB: Attribute Grammar\nC: Symbol Table\nD: Semantic Stack\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  A symbol table is a data structure used to store information about the variables in a program. It is used to keep track of the variables and their attributes, such as their type, scope, and storage location. The",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "clinical_knowledge",
+    "question": "Which hormone is primarily responsible for fluid regulation?",
+    "choices": [
+      "Antidiuretic hormone.",
+      "Insulin.",
+      "Adrenaline.",
+      "Testosterone."
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: Which hormone is primarily responsible for fluid regulation?\nA: Antidiuretic hormone.\nB: Insulin.\nC: Adrenaline.\nD: Testosterone.\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " <answer>A</answer>  ADH (antidiuretic hormone) is primarily responsible for fluid regulation. It is secreted by the posterior pituitary gland and helps to regulate the amount of water in the body by controlling the amount of",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "prehistory",
+    "question": "During the late Miocene, carbon isotope analysis indicates environmental changes that would have impacted the hominid ancestors of modern humans. These changes are best characterized as:",
+    "choices": [
+      "a sudden drop in global temperatures resulting in a return to ice age conditions.",
+      "a sudden rise in global temperatures resulting in rising sea levels.",
+      "an expansion of grasslands and reduction in woodlands, resulting in regional mosaic environments.",
+      "a decline in large mammal populations and relative increase in other classes of vertebrate species."
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: During the late Miocene, carbon isotope analysis indicates environmental changes that would have impacted the hominid ancestors of modern humans. These changes are best characterized as:\nA: a sudden drop in global temperatures resulting in a return to ice age conditions.\nB: a sudden rise in global temperatures resulting in rising sea levels.\nC: an expansion of grasslands and reduction in woodlands, resulting in regional mosaic environments.\nD: a decline in large mammal populations and relative increase in other classes of vertebrate species.\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " <answer>C</answer>  The late Miocene was a time of significant environmental change. The global climate was generally warmer than it is today, and the continents were still in the process of drifting apart. The African continent was still connected to the",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "miscellaneous",
+    "question": "The loss of water in the form of vapor from plants is referred to as the",
+    "choices": [
+      "transpiration",
+      "respiration",
+      "oxidation",
+      "condensation"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: The loss of water in the form of vapor from plants is referred to as the\nA: transpiration\nB: respiration\nC: oxidation\nD: condensation\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " <answer>A</answer>  Transpiration is the process of water loss from plants in the form of water vapour. It occurs mainly through the stomata. The water is absorbed by the roots and is transported to the leaves through the xyle",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "computer_security",
+    "question": "Which of the following is a remote Trojan?",
+    "choices": [
+      "Troya",
+      "DaCryptic",
+      "BankerA",
+      "Game-Troj"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Which of the following is a remote Trojan?\nA: Troya\nB: DaCryptic\nC: BankerA\nD: Game-Troj\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " <answer>A</answer>  Trojan horse is a type of malware that disguises itself as a legitimate program or file. It is called a \"horse\" because it is a program that is used to deliver a payload of malicious code. The term",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "miscellaneous",
+    "question": "If you work as a 'dolly grip' what business are you in?",
+    "choices": [
+      "sheep farming",
+      "film production",
+      "construction",
+      "moving"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: If you work as a 'dolly grip' what business are you in?\nA: sheep farming\nB: film production\nC: construction\nD: moving\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>  A dolly grip is a member of the camera crew who is responsible for operating the dolly, a device that moves the camera along a track. The dolly grip is responsible for the smooth movement of the d",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "professional_psychology",
+    "question": "The major advantage of using a forced-choice method as an employee performance appraisal technique is that:",
+    "choices": [
+      "it is easy to develop and use.",
+      "it provides specific information for employee feedback.",
+      "it helps alleviate leniency and other biases.",
+      "it provides an objective measure of job performance."
+    ],
+    "answer": 2,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: The major advantage of using a forced-choice method as an employee performance appraisal technique is that:\nA: it is easy to develop and use.\nB: it provides specific information for employee feedback.\nC: it helps alleviate leniency and other biases.\nD: it provides an objective measure of job performance.\n\nAnswer: ",
+    "model_answer": "C",
+    "raw_response": " C: it helps alleviate leniency and other biases. <answer>C</answer> The forced-choice method is a performance appraisal technique that helps alleviate leniency and other biases. In this method, the rater is asked to choose between two",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "security_studies",
+    "question": "Which of the following conditions does not constitute 'human security'?",
+    "choices": [
+      "A condition where people are given relief from the traumas that afflict human development, are safe from threats and are protected from hurtful disruptions to their daily lives.",
+      "A condition in which every citizen is free from the threat of physical violence, regardless of their race, ethnicity or other identity.",
+      "A condition where people are guaranteed the ability to live and develop, free from political oppression or prejudice, safe from threats posed by their own or external state actors.",
+      "A condition where people exist independently of state support, where human life is self-sufficient in that individuals do not require the assistance of state apparatus in order to live securely."
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Which of the following conditions does not constitute 'human security'?\nA: A condition where people are given relief from the traumas that afflict human development, are safe from threats and are protected from hurtful disruptions to their daily lives.\nB: A condition in which every citizen is free from the threat of physical violence, regardless of their race, ethnicity or other identity.\nC: A condition where people are guaranteed the ability to live and develop, free from political oppression or prejudice, safe from threats posed by their own or external state actors.\nD: A condition where people exist independently of state support, where human life is self-sufficient in that individuals do not require the assistance of state apparatus in order to live securely.\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer> .  The concept of human security is a concept that was first introduced by the United Nations in 1994. It is a concept that focuses on the security of individuals and communities, rather than the security of states",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "prehistory",
+    "question": "A genetic study comparing the bones of a 7,000-year-old skeleton found in Germany, eight human skeletons dating to 8,000 years ago in Luxembourg, and more than 2,300 living Europeans found that the modern European genome included contributions from:",
+    "choices": [
+      "the earliest anatomically modern Homo sapiens who lived in Europe 45,000 years ago.",
+      "people genetically traceable to the Middle East who moved into Europe about 9,000 years ago.",
+      "people who moved there from west Asia less than 5,000 years ago.",
+      "all of the above."
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: A genetic study comparing the bones of a 7,000-year-old skeleton found in Germany, eight human skeletons dating to 8,000 years ago in Luxembourg, and more than 2,300 living Europeans found that the modern European genome included contributions from:\nA: the earliest anatomically modern Homo sapiens who lived in Europe 45,000 years ago.\nB: people genetically traceable to the Middle East who moved into Europe about 9,000 years ago.\nC: people who moved there from west Asia less than 5,000 years ago.\nD: all of the above.\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  The modern European genome is a mix of the earliest anatomically modern Homo sapiens who lived in Europe 45,000 years ago, people genetically traceable to the Middle East who moved into Europe about 9,",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "professional_law",
+    "question": "If certain fundamental rights are denied to some individuals but not others, then it is considered what type of problem?",
+    "choices": [
+      "Substantive due process problem",
+      "Equal protection problem",
+      "Procedural due process problem",
+      "None of these"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: If certain fundamental rights are denied to some individuals but not others, then it is considered what type of problem?\nA: Substantive due process problem\nB: Equal protection problem\nC: Procedural due process problem\nD: None of these\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>  The Equal Protection Clause of the Fourteenth Amendment states that no state shall \"deny to any person within its jurisdiction the equal protection of the laws.\" The clause is used to determine whether the government has treated similarly situated individuals",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_european_history",
+    "question": "This question refers to the following information.\n\"But you, my dear Pangloss,\" said Candide, \"how can it be that I behold you again?\"\n\"It is true,\" said Pangloss, \"that you saw me hanged&\u2026.A surgeon purchased my body, carried home, and dissected me. He began with making a crucial incision on me from the navel to the clavicula. One could not have been worse hanged than I was. The executioner of the Holy Inquisition was a sub-deacon, and knew how to burn people marvellously well, but he was not accustomed to hanging. The cord was wet and did not slip properly, and besides it was badly tied; in short, I still drew my breath, when the crucial incision made me give such a frightful scream that my surgeon fell flat upon his back&\u2026[At length he] sewed up my wounds; his wife even nursed me. I was upon my legs at the end of fifteen days&\u2026.\nOne day I took it into my head to step into a mosque, where I saw an old Iman and a very pretty young devotee who was saying her paternosters&\u2026.She dropped her bouquet; I picked it up, and presented it to her with a profound reverence. I was so long in delivering it that the Iman began to get angry, and seeing that I was a Christian he called out for help. They carried me before the cadi, who ordered me a hundred lashes on the soles of the feet and sent me to the galleys. I was chained to the very same galley and the same bench as the young Baron. On board this galley there were four young men from Marseilles, five Neapolitan priests, and two monks from Corfu, who told us similar adventures happened daily. The Baron maintained that he had suffered greater injustice than I&\u2026.We were continually disputing, and received twenty lashes with a bull's pizzle when the concatenation of universal events brought you to our galley, and you were good enough to ransom us.\"\n\"Well, my dear Pangloss,\" said Candide to him, \"when you had been hanged, dissected, whipped, and were tugging at the oar, did you always think that everything happens for the best?\"\n\"I am still of my first opinion,\" answered Pangloss, \"for I am a philosopher and I cannot retract, especially as Leibnitz could never be wrong; and besides, the pre-established harmony is the finest thing in the world, and so is his plenum and materia subtilis.\"\nVoltaire, French Enlightenment writer, Candide, 1759\nCandide's statement that \"everything always happens for the best\" can be seen as a reflection of the Enlightenment belief that",
+    "choices": [
+      "society can be perfected if you apply the scientific method to it",
+      "a people without a strong central authority are doomed to live in a state of nature",
+      "the only purpose of a government is to secure the rights of life, liberty, and property",
+      "only free markets can lead nations to wealth and happiness"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: This question refers to the following information.\n\"But you, my dear Pangloss,\" said Candide, \"how can it be that I behold you again?\"\n\"It is true,\" said Pangloss, \"that you saw me hanged&\u2026.A surgeon purchased my body, carried home, and dissected me. He began with making a crucial incision on me from the navel to the clavicula. One could not have been worse hanged than I was. The executioner of the Holy Inquisition was a sub-deacon, and knew how to burn people marvellously well, but he was not accustomed to hanging. The cord was wet and did not slip properly, and besides it was badly tied; in short, I still drew my breath, when the crucial incision made me give such a frightful scream that my surgeon fell flat upon his back&\u2026[At length he] sewed up my wounds; his wife even nursed me. I was upon my legs at the end of fifteen days&\u2026.\nOne day I took it into my head to step into a mosque, where I saw an old Iman and a very pretty young devotee who was saying her paternosters&\u2026.She dropped her bouquet; I picked it up, and presented it to her with a profound reverence. I was so long in delivering it that the Iman began to get angry, and seeing that I was a Christian he called out for help. They carried me before the cadi, who ordered me a hundred lashes on the soles of the feet and sent me to the galleys. I was chained to the very same galley and the same bench as the young Baron. On board this galley there were four young men from Marseilles, five Neapolitan priests, and two monks from Corfu, who told us similar adventures happened daily. The Baron maintained that he had suffered greater injustice than I&\u2026.We were continually disputing, and received twenty lashes with a bull's pizzle when the concatenation of universal events brought you to our galley, and you were good enough to ransom us.\"\n\"Well, my dear Pangloss,\" said Candide to him, \"when you had been hanged, dissected, whipped, and were tugging at the oar, did you always think that everything happens for the best?\"\n\"I am still of my first opinion,\" answered Pangloss, \"for I am a philosopher and I cannot retract, especially as Leibnitz could never be wrong; and besides, the pre-established harmony is the finest thing in the world, and so is his plenum and materia subtilis.\"\nVoltaire, French Enlightenment writer, Candide, 1759\nCandide's statement that \"everything always happens for the best\" can be seen as a reflection of the Enlightenment belief that\nA: society can be perfected if you apply the scientific method to it\nB: a people without a strong central authority are doomed to live in a state of nature\nC: the only purpose of a government is to secure the rights of life, liberty, and property\nD: only free markets can lead nations to wealth and happiness\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " A: society can be perfected if you apply the scientific method to it\n<answer> A </answer>  Enlightenment thinkers believed that the application of reason and the scientific method could lead to the improvement of society. This is reflected in Candide's",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "miscellaneous",
+    "question": "What animal represents the year 2000 on the Chinese calendar?",
+    "choices": [
+      "dragon",
+      "rabbit",
+      "tiger",
+      "monkey"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>B</answer>\n\nQuestion: What animal represents the year 2000 on the Chinese calendar?\nA: dragon\nB: rabbit\nC: tiger\nD: monkey\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": " <answer>A</answer>  The Chinese calendar is based on a 12-year cycle of animals. The animals are the rat, ox, tiger, rabbit, dragon, snake, horse, goat, monkey, rooster, dog, and pig",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_geography",
+    "question": "According to Alfred Weber's least-cost theory, which one of the following costs of production is the most important factor in locating an industry?",
+    "choices": [
+      "Labor",
+      "Transport",
+      "Raw materials",
+      "Agglomeration costs"
+    ],
+    "answer": 1,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: According to Alfred Weber's least-cost theory, which one of the following costs of production is the most important factor in locating an industry?\nA: Labor\nB: Transport\nC: Raw materials\nD: Agglomeration costs\n\nAnswer: ",
+    "model_answer": "B",
+    "raw_response": " <answer>B</answer>  According to Alfred Weber's least-cost theory, the most important factor in locating an industry is the cost of transporting raw materials to the factory. The theory states that the optimal location for an industry is where the raw materials",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "electrical_engineering",
+    "question": "A sinusoidal signal is analog signal, because",
+    "choices": [
+      "it can have a number of values between the negative and positive peaks",
+      "it is negative for one half cycle",
+      "it is positive for one half cycle",
+      "it has positive as well as negative values"
+    ],
+    "answer": 0,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>C</answer>\n\nQuestion: A sinusoidal signal is analog signal, because\nA: it can have a number of values between the negative and positive peaks\nB: it is negative for one half cycle\nC: it is positive for one half cycle\nD: it has positive as well as negative values\n\nAnswer: ",
+    "model_answer": "A",
+    "raw_response": "1\nHence, the correct option is (A). <answer>A</answer> 2. A sinusoidal signal is an analog signal, because it can have a number of values between the negative and positive peaks. 3. A sinus",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "human_aging",
+    "question": "A major reason for studying human aging is that",
+    "choices": [
+      "We are all growing older",
+      "The number and proportion of older adults is increasing",
+      "More job opportunities are available for those with some knowledge of aging",
+      "All of the above"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: A major reason for studying human aging is that\nA: We are all growing older\nB: The number and proportion of older adults is increasing\nC: More job opportunities are available for those with some knowledge of aging\nD: All of the above\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  The number of older adults is increasing, and this increase is expected to continue. This increase is due to the decline in the number of deaths and the increase in the number of births. The increase in the number of",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "conceptual_physics",
+    "question": "Electricity and magnetism connect to form",
+    "choices": [
+      "mass",
+      "energy",
+      "ultrahigh-frequency sound",
+      "light"
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>D</answer>\n\nQuestion: Electricity and magnetism connect to form\nA: mass\nB: energy\nC: ultrahigh-frequency sound\nD: light\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " D\nAnswer: <answer>D</answer>  Electricity and magnetism are two of the four fundamental forces of nature. They combine to form light. The electromagnetic force is the force that holds atoms and molecules together. It is the force that holds",
+    "parseable": true,
+    "correct": true
+  },
+  {
+    "subject": "high_school_microeconomics",
+    "question": "Deadweight loss occurs in",
+    "choices": [
+      "monopolistic competition as P > MC.",
+      "monopoly markets because P > MC.",
+      "oligopoly markets because P > MC.",
+      "All of the above."
+    ],
+    "answer": 3,
+    "prompt": "Answer the following multiple choice question by giving the most appropriate response. Answer should be one among [A, B, C, D]. Provide your answer inside <answer></answer> XML tags.\n\nEx: <answer>A</answer>\n\nQuestion: Deadweight loss occurs in\nA: monopolistic competition as P > MC.\nB: monopoly markets because P > MC.\nC: oligopoly markets because P > MC.\nD: All of the above.\n\nAnswer: ",
+    "model_answer": "D",
+    "raw_response": " <answer>D</answer>  Deadweight loss occurs in all the three market structures. In monopolistic competition, deadweight loss occurs because of the divergence between MC and MR. In monopoly markets, deadweight loss occurs because of the divergence between MC",
+    "parseable": true,
+    "correct": true
+  }
+]

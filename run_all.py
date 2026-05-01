@@ -9,8 +9,8 @@ def run(script, *args):
     result = subprocess.run(cmd, check=True)
     return result
 
-run("llama_mmlu.py")
-run("qwen_mmlu.py")
+# run("llama_mmlu.py")
+# run("qwen_mmlu.py")
 run("llama_bbh.py")
 run("qwen_bbh.py")
 

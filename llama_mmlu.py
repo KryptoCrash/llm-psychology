@@ -1,3 +1,4 @@
+import argparse
 import json
 import random
 import re
@@ -21,6 +22,11 @@ from transformer_lens.hook_points import (
 from transformer_lens import FactoredMatrix, HookedTransformer
 from transformer_lens.model_bridge import TransformerBridge
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--offset", type=int, default=0)
+parser.add_argument("--size", type=int, default=200)
+args = parser.parse_args()
+
 torch.set_grad_enabled(False)
 device = utils.get_device()
 
@@ -30,13 +36,13 @@ model = TransformerBridge.boot_transformers(
     dtype=torch.bfloat16,
     device=device,
 )
-model.enable_compatibility_mode(disable_warnings=True)
+# model.enable_compatibility_mode(disable_warnings=True)
 
 
 print("Loading MMLU dataset...")
 dataset = load_dataset("cais/mmlu", "all", cache_dir="./mmlu_cache")
 test_df = dataset["test"].to_pandas().sample(frac=1, random_state=42).reset_index(drop=True)
-test_df = test_df.iloc[:200]
+test_df = test_df.iloc[args.offset : args.offset + args.size]
 
 LETTER = ["A", "B", "C", "D"]
 

@@ -1,3 +1,4 @@
+import argparse
 import json
 import random
 import re
@@ -20,6 +21,11 @@ from transformer_lens.hook_points import (
 )
 from transformer_lens import FactoredMatrix, HookedTransformer
 from transformer_lens.model_bridge import TransformerBridge
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--offset", type=int, default=0)
+parser.add_argument("--size", type=int, default=200)
+args = parser.parse_args()
 
 torch.set_grad_enabled(False)
 device = utils.get_device()
@@ -47,7 +53,7 @@ for subtask in subtasks:
 
 random.seed(42)
 random.shuffle(all_rows)
-all_rows = all_rows[:200]
+all_rows = all_rows[args.offset : args.offset + args.size]
 
 correct = 0
 attempts = 0
@@ -58,7 +64,8 @@ for row in all_rows:
     prompt = (
         "Answer the following question by giving the most appropriate response. "
         "Provide your answer inside <answer></answer> XML tags.\n\n"
-        "Ex: <answer>{your answer here}</answer>\n\n"
+        "If the question is multiple choice respond just with the letter (ex  <answer>(A)</answer>)"
+        "Otherwise format your answer like this: <answer>{your answer here}</answer>\n\n"
         f"Question: {row['question']}\n\n"
         "Answer: "
     )
