@@ -154,7 +154,7 @@ def run_experiment(model_name, dataset, mode, explain=False, model=None, device=
     if model is None:
         model, device = load_model(model_name, device=device)
     elif device is None:
-        device = get_device()
+        device = model.device
     if batch_size is None:
         batch_size = 8 if explain else 16
 
@@ -356,7 +356,6 @@ def run_experiment(model_name, dataset, mode, explain=False, model=None, device=
                 attention_mask=model_inputs.get("attention_mask"),
                 max_new_tokens=max_tokens,
                 do_sample=True,
-                output_logits=True,
             )
             sequences = (
                 generation_output["sequences"]
