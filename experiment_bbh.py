@@ -3,19 +3,18 @@ import sys
 import itertools
 
 MODELS = ["llama", "qwen"]
-DATASETS = ["mmlu", "bbh"]
 MODES = [str(i) for i in range(1, 11)] + ["qd", "da"]
 EXPLAINS = [False, True]
 
-combos = list(itertools.product(MODELS, DATASETS, MODES, EXPLAINS))
-assert len(combos) == 96
+combos = list(itertools.product(MODELS, ["bbh"], MODES, EXPLAINS))
+assert len(combos) == 48
 
 for i, (model, dataset, mode, explain) in enumerate(combos, 1):
     cmd = [sys.executable, "multi_actor.py", "--mode", mode, "--model", model, "--dataset", dataset]
     if explain:
         cmd.append("--explain")
 
-    print(f"\n[{i}/96] {' '.join(cmd)}")
+    print(f"\n[{i}/48] {' '.join(cmd)}")
     subprocess.run(cmd, check=True)
 
-print("\nAll 96 experiments complete.")
+print("\nAll 48 BBH experiments complete.")
