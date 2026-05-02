@@ -1,0 +1,9 @@
+[project]
+name = "llm-psychology"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "transformer-lens>=3.1.0",
+]

@@ -54,6 +54,8 @@ with open(dataset_file, "r") as f:
     questions = json.load(f)
 
 rng = random.Random(42)
+tokenizer = model.tokenizer
+assert tokenizer is not None, "The loaded model must expose a tokenizer."
 
 
 def bbh_format(target, rng):
@@ -121,6 +123,18 @@ def da_answer(dataset, ground_truth, main_wrong, rng):
         return rng.choice(pool) if pool else str(v + 3)
     except ValueError:
         return "none of the above"
+
+
+def token_strings(token_ids):
+    return tokenizer.convert_ids_to_tokens(token_ids)
+
+
+def decode_tokens(token_ids):
+    return tokenizer.decode(
+        token_ids,
+        skip_special_tokens=True,
+        clean_up_tokenization_spaces=False,
+    )
 
 
 correct = 0
@@ -261,17 +275,34 @@ for row in questions:
                 + (f"Participant {n} Reasoning: " if args.explain else f"Participant {n}: ")
             )
 
+    model_inputs = tokenizer(prompt, return_tensors="pt")
+    model_inputs = {key: value.to(device) for key, value in model_inputs.items()}
+    prompt_length = model_inputs["input_ids"].shape[1]
+    prompt_token_ids = model_inputs["input_ids"][0].detach().cpu().tolist()
+    prompt_tokens = token_strings(prompt_token_ids)
+
     max_tokens = 300 if args.explain else 50
     answer = ""
+    response = ""
+    response_token_ids = []
+    response_tokens = []
     generation_attempts = 0
     for _ in range(10):
         generation_attempts += 1
-        outputs = model.generate(
-            prompt,
+        generation_output = model.generate(
+            **model_inputs,
             max_new_tokens=max_tokens,
             do_sample=True,
+            return_dict_in_generate=True,
         )
-        response = outputs[len(prompt):]
+        sequences = (
+            generation_output["sequences"]
+            if isinstance(generation_output, dict)
+            else generation_output.sequences
+        )
+        response_token_ids = sequences[0, prompt_length:].detach().cpu().tolist()
+        response_tokens = token_strings(response_token_ids)
+        response = decode_tokens(response_token_ids)
         if args.dataset == "mmlu":
             m = re.search(r"<answer>\s*([A-Za-z])\s*</answer>", response)
             if m:
@@ -298,9 +329,13 @@ for row in questions:
         "subject": row["subject"],
         "question": row["question"],
         "prompt": prompt,
+        "prompt_token_ids": prompt_token_ids,
+        "prompt_tokens": prompt_tokens,
         "generation_attempts": generation_attempts,
         "model_answer": answer,
         "is_correct": is_correct,
+        "response_token_ids": response_token_ids,
+        "response_tokens": response_tokens,
         "raw_response": response.strip(),
     }
     if args.dataset == "mmlu":
