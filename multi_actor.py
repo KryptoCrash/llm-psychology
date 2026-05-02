@@ -261,7 +261,7 @@ for row in questions:
                 + (f"Participant {n} Reasoning: " if args.explain else f"Participant {n}: ")
             )
 
-    max_tokens = 300 if args.explain else 80
+    max_tokens = 300 if args.explain else 50
     answer = ""
     generation_attempts = 0
     for _ in range(10):
