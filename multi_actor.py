@@ -290,10 +290,10 @@ for row in questions:
     for _ in range(10):
         generation_attempts += 1
         generation_output = model.generate(
-            **model_inputs,
+            model_inputs["input_ids"],
             max_new_tokens=max_tokens,
             do_sample=True,
-            return_dict_in_generate=True,
+            output_logits=True,
         )
         sequences = (
             generation_output["sequences"]
