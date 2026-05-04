@@ -1,0 +1,84 @@
+{
+  "seed": 42,
+  "activation_kind": "residual",
+  "baseline": "random_answers",
+  "position": "last_prompt_token",
+  "models": {
+    "qwen": {
+      "model_name": "Qwen/Qwen3-8B",
+      "experiment_count": 4,
+      "experiments": [
+        {
+          "experiment_file": "qwen_bbh_6_base.json",
+          "dataset": "bbh",
+          "mode": "6",
+          "prompt_style": "base",
+          "sample_count": 100,
+          "tensor_file": "experiment_layer_sweep_smoke/qwen/qwen_bbh_6_base_residual_diffmeans.pt"
+        },
+        {
+          "experiment_file": "qwen_bbh_9_explain.json",
+          "dataset": "bbh",
+          "mode": "9",
+          "prompt_style": "explain",
+          "sample_count": 100,
+          "tensor_file": "experiment_layer_sweep_smoke/qwen/qwen_bbh_9_explain_residual_diffmeans.pt"
+        },
+        {
+          "experiment_file": "qwen_mmlu_8_explain.json",
+          "dataset": "mmlu",
+          "mode": "8",
+          "prompt_style": "explain",
+          "sample_count": 100,
+          "tensor_file": "experiment_layer_sweep_smoke/qwen/qwen_mmlu_8_explain_residual_diffmeans.pt"
+        },
+        {
+          "experiment_file": "qwen_mmlu_qd_base.json",
+          "dataset": "mmlu",
+          "mode": "qd",
+          "prompt_style": "base",
+          "sample_count": 100,
+          "tensor_file": "experiment_layer_sweep_smoke/qwen/qwen_mmlu_qd_base_residual_diffmeans.pt"
+        }
+      ]
+    },
+    "llama": {
+      "model_name": "meta-llama/Llama-3.1-8B-Instruct",
+      "experiment_count": 4,
+      "experiments": [
+        {
+          "experiment_file": "llama_bbh_10_base.json",
+          "dataset": "bbh",
+          "mode": "10",
+          "prompt_style": "base",
+          "sample_count": 100,
+          "tensor_file": "experiment_layer_sweep_smoke/llama/llama_bbh_10_base_residual_diffmeans.pt"
+        },
+        {
+          "experiment_file": "llama_bbh_7_explain.json",
+          "dataset": "bbh",
+          "mode": "7",
+          "prompt_style": "explain",
+          "sample_count": 100,
+          "tensor_file": "experiment_layer_sweep_smoke/llama/llama_bbh_7_explain_residual_diffmeans.pt"
+        },
+        {
+          "experiment_file": "llama_mmlu_10_base.json",
+          "dataset": "mmlu",
+          "mode": "10",
+          "prompt_style": "base",
+          "sample_count": 100,
+          "tensor_file": "experiment_layer_sweep_smoke/llama/llama_mmlu_10_base_residual_diffmeans.pt"
+        },
+        {
+          "experiment_file": "llama_mmlu_da_explain.json",
+          "dataset": "mmlu",
+          "mode": "da",
+          "prompt_style": "explain",
+          "sample_count": 100,
+          "tensor_file": "experiment_layer_sweep_smoke/llama/llama_mmlu_da_explain_residual_diffmeans.pt"
+        }
+      ]
+    }
+  }
+}
