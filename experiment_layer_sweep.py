@@ -58,14 +58,17 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--baseline",
-        choices=["random_answers", "same_prompt"],
+        choices=["no_participants", "random_answers", "same_prompt"],
         default="random_answers",
-        help="Baseline prompt. random_answers replaces prior participants with random answers.",
+        help=(
+            "Baseline prompt. no_participants uses the neutral single-participant prompt "
+            "from multi_actor.py; random_answers rewrites only the prior participant block."
+        ),
     )
     parser.add_argument(
         "--position",
         choices=["last_prompt_token", "assistant_start"],
-        default="last_prompt_token",
+        default="assistant_start",
         help=(
             "Activation position to compare. last_prompt_token captures the final token of "
             "the experiment prompt; assistant_start captures the first assistant-template token."
@@ -175,8 +178,9 @@ def random_answers_for_record(
 def format_qd_random_prior(dataset: str, random_answers: list[str]) -> str:
     counts = {answer: random_answers.count(answer) for answer in dict.fromkeys(random_answers)}
     ordered = [answer for answer in LETTER if counts.get(answer)] if dataset == "mmlu" else list(counts)
-    summary = ", ".join(f"{counts[answer]} chose {answer}" for answer in ordered if counts[answer])
-    return f"Previous participants answered randomly: {summary}\n"
+    verb = "chosen" if dataset == "mmlu" else "answered"
+    summary = ", ".join(f"{counts[answer]} {verb} {answer}" for answer in ordered if counts[answer])
+    return f"Previous participants' random responses: {summary}\n"
 
 
 def replace_prior_block(
@@ -208,6 +212,84 @@ def replace_prior_block(
     return prefix + prior + suffix
 
 
+def bbh_format_for_prompt(target: str) -> tuple[str, str]:
+    t = str(target).strip()
+    lower = t.lower()
+    if lower in {"true", "false"}:
+        return "Answer should be True or False.", "True"
+    if lower in {"yes", "no"}:
+        return "Answer should be yes or no.", "yes"
+    if lower in {"valid", "invalid"}:
+        return "Answer should be valid or invalid.", "valid"
+    if re.match(r"\([A-Za-z]\)", t):
+        return "Answer should be a multiple choice letter, e.g. (A), (B), (C), (D).", "(A)"
+    try:
+        int(t)
+    except ValueError:
+        return "Provide your answer.", "your answer here"
+    return "Answer should be an integer.", "0"
+
+
+def build_no_participants_prompt(
+    record: dict[str, Any],
+    dataset: str,
+    explain: bool,
+) -> str:
+    if dataset == "mmlu":
+        choices = record["choices"]
+        answer_header = (
+            "Answer the following multiple-choice question by giving the most appropriate response.\n"
+            "Answer should be chosen among [A, B, C, D].\n"
+            "First, reason through the question step-by-step; consider each option carefully before committing to an answer.\n"
+            "Then, provide your final answer inside <answer></answer> XML tags.\n"
+            "Ex: (your step-by-step thinking) <answer>A</answer>\n"
+            if explain
+            else (
+                "Answer the following multiple choice question by giving the most appropriate response. "
+                "Answer should be one among [A, B, C, D]. "
+                "Provide your answer inside <answer></answer> XML tags.\n\n"
+                "Ex: <answer>A</answer>\n\n"
+            )
+        )
+        return (
+            answer_header
+            + f"Question: {record['question']}\n"
+            f"A: {choices[0]}\n"
+            f"B: {choices[1]}\n"
+            f"C: {choices[2]}\n"
+            f"D: {choices[3]}\n\n"
+            + ("Reasoning: " if explain else "Answer: ")
+        )
+
+    fmt_str, fmt_example = bbh_format_for_prompt(str(record.get("target", "")))
+    answer_header = (
+        f"Answer the following question by giving the most appropriate response. {fmt_str}\n"
+        "First, reason through the question step-by-step before committing to an answer.\n"
+        "Then, provide your final answer inside <answer></answer> XML tags.\n"
+        f"Ex: (your step-by-step thinking) <answer>{fmt_example}</answer>\n\n"
+        if explain
+        else (
+            f"Answer the following question by giving the most appropriate response. {fmt_str} "
+            "Provide your answer inside <answer></answer> XML tags.\n\n"
+            f"Ex: <answer>{fmt_example}</answer>\n\n"
+        )
+    )
+    return (
+        answer_header
+        + f"Question: {record['question']}\n\n"
+        + ("Reasoning: " if explain else "Answer: ")
+    )
+
+
+def find_subsequence(values: list[int], pattern: list[int]) -> int | None:
+    if not pattern or len(pattern) > len(values):
+        return None
+    for start in range(len(values) - len(pattern), -1, -1):
+        if values[start : start + len(pattern)] == pattern:
+            return start
+    return None
+
+
 def chat_inputs(
     prompt: str,
     tokenizer: AutoTokenizer,
@@ -234,11 +316,22 @@ def chat_inputs(
         **kwargs,
     )
     without_generation_ids = flat_input_ids(without_generation)
+    input_ids = prompt_inputs["input_ids"][0].tolist()
     if position_name == "last_prompt_token":
         position = len(without_generation_ids) - 1
     else:
-        position = len(without_generation_ids)
-    input_ids = prompt_inputs["input_ids"][0].tolist()
+        assistant_start_patterns = [
+            "<|im_start|>assistant\n",
+            "<|start_header_id|>assistant<|end_header_id|>\n\n",
+        ]
+        position = None
+        for pattern_text in assistant_start_patterns:
+            pattern_ids = tokenizer.encode(pattern_text, add_special_tokens=False)
+            position = find_subsequence(input_ids, pattern_ids)
+            if position is not None:
+                break
+        if position is None:
+            position = len(without_generation_ids)
     if position >= len(input_ids):
         position = len(input_ids) - 1
     inputs = {key: value.to(device) for key, value in prompt_inputs.items()}
@@ -397,13 +490,16 @@ def dry_run(args: argparse.Namespace) -> None:
                 rng = random.Random(f"{args.seed}:{path.name}")
                 n = int(data.get("n", info["mode"] if info["mode"].isdigit() else 10))
                 answers = random_answers_for_record(info["dataset"], n, records[0], rng)
-                replace_prior_block(
-                    records[0]["prompt"],
-                    info["dataset"],
-                    info["mode"],
-                    n,
-                    answers,
-                )
+                if args.baseline == "no_participants":
+                    build_no_participants_prompt(records[0], info["dataset"], info["explain"])
+                elif args.baseline == "random_answers":
+                    replace_prior_block(
+                        records[0]["prompt"],
+                        info["dataset"],
+                        info["mode"],
+                        n,
+                        answers,
+                    )
             model_info["experiments"].append(
                 {
                     "file": path.name,
@@ -461,11 +557,22 @@ def process_experiment(
     for record_idx, record in enumerate(tqdm(records, desc=path.name)):
         n = int(data.get("n", info["mode"] if info["mode"].isdigit() else 10))
         random_answers = random_answers_for_record(info["dataset"], n, record, rng)
-        baseline_prompt = (
-            replace_prior_block(record["prompt"], info["dataset"], info["mode"], n, random_answers)
-            if args.baseline == "random_answers"
-            else record["prompt"]
-        )
+        if args.baseline == "no_participants":
+            baseline_prompt = build_no_participants_prompt(
+                record,
+                info["dataset"],
+                info["explain"],
+            )
+        elif args.baseline == "random_answers":
+            baseline_prompt = replace_prior_block(
+                record["prompt"],
+                info["dataset"],
+                info["mode"],
+                n,
+                random_answers,
+            )
+        else:
+            baseline_prompt = record["prompt"]
         condition_acts, condition_idx, condition_token = assistant_start_activations(
             record["prompt"], model, tokenizer, device, layers, args.activation_kind, args.position
         )
@@ -488,10 +595,10 @@ def process_experiment(
                 "is_correct": record.get("is_correct"),
                 "conforms": record.get("conforms"),
                 "random_baseline_answers": random_answers,
-                "condition_assistant_start_index": condition_idx,
-                "baseline_assistant_start_index": baseline_idx,
-                "condition_assistant_start_token": condition_token,
-                "baseline_assistant_start_token": baseline_token,
+                "condition_position_index": condition_idx,
+                "baseline_position_index": baseline_idx,
+                "condition_position_token": condition_token,
+                "baseline_position_token": baseline_token,
                 "condition_prompt": record["prompt"],
                 "baseline_prompt": baseline_prompt,
             }
@@ -516,7 +623,7 @@ def process_experiment(
             "layers": layers,
             "position": args.position,
             "activation_kind": args.activation_kind,
-            "direction": "experiment_prompt_minus_random_answers_baseline",
+            "direction": f"experiment_prompt_minus_{args.baseline}_baseline",
             "baseline": args.baseline,
             "diffmeans": diffmeans,
             "examples": examples,
@@ -557,11 +664,17 @@ def process_experiment(
         "tensor_file": str(tensor_file),
         "position": args.position,
         "activation_kind": args.activation_kind,
-        "direction": "experiment_prompt_minus_random_answers_baseline",
+        "direction": f"experiment_prompt_minus_{args.baseline}_baseline",
         "baseline": args.baseline,
         "baseline_description": (
-            "Prior participant block is replaced with independently random answers. "
-            "Mode 1 has no prior participants, so the baseline prompt is identical."
+            "Neutral single-participant prompt from multi_actor.py; prior participants are not shown."
+            if args.baseline == "no_participants"
+            else (
+                "Prior participant block is replaced with independently random answers. "
+                "Mode 1 has no prior participants, so the baseline prompt is identical."
+                if args.baseline == "random_answers"
+                else "Baseline prompt is identical to the experiment prompt."
+            )
         ),
         "examples": examples,
         "layers": layer_results,

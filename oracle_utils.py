@@ -247,6 +247,26 @@ def find_pattern_in_tokens(
     return positions
 
 
+def flat_token_ids(tokenized: Any) -> list[int]:
+    if isinstance(tokenized, dict) or hasattr(tokenized, "keys"):
+        tokenized = tokenized["input_ids"]
+    if hasattr(tokenized, "ids"):
+        tokenized = tokenized.ids
+    if hasattr(tokenized, "tolist"):
+        tokenized = tokenized.tolist()
+    while isinstance(tokenized, (list, tuple)) and tokenized and not isinstance(
+        tokenized[0], int
+    ):
+        first = tokenized[0]
+        if hasattr(first, "ids"):
+            tokenized = first.ids
+        elif hasattr(first, "tolist"):
+            tokenized = first.tolist()
+        else:
+            tokenized = first
+    return list(tokenized)
+
+
 def create_oracle_input(
     prompt: str,
     layer: int,
@@ -283,6 +303,7 @@ def create_oracle_input(
         padding=False,
         enable_thinking=False,
     )
+    input_prompt_ids = flat_token_ids(input_prompt_ids)
 
     # Possibly force the model to respond with a specific prefix
     if forced_model_prefix is not None:
