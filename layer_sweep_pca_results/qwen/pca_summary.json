@@ -1492,5 +1492,6 @@
     "point_type"
   ],
   "activation_manifest": "layer_sweep_pca_results/qwen/activations/activation_manifest.json",
-  "pdf_file": "layer_sweep_pca_results/qwen/layer_sweep_pca_all_plots.pdf"
+  "pdf_file": "layer_sweep_pca_results/qwen/layer_sweep_pca_all_plots.pdf",
+  "html_file": "layer_sweep_pca_results/qwen/layer_sweep_pca_viewer.html"
 }

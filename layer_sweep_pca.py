@@ -121,6 +121,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--force-recompute", action="store_true")
     parser.add_argument("--skip-collection", action="store_true")
     parser.add_argument("--skip-plots", action="store_true")
+    parser.add_argument("--skip-static-plots", action="store_true")
+    parser.add_argument("--skip-html", action="store_true")
     parser.add_argument("--pca-device", default="auto", choices=["auto", "cpu", "cuda"])
     parser.add_argument("--pca-niter", type=int, default=4)
     parser.add_argument("--width", type=int, default=1200)
@@ -705,6 +707,599 @@ def write_pdf(path: Path, pages: list[np.ndarray]) -> None:
         )
 
 
+def rgb_to_hex(color: tuple[int, int, int]) -> str:
+    return "#" + "".join(f"{channel:02x}" for channel in color)
+
+
+def score_bounds(scores: np.ndarray) -> dict[str, float]:
+    x_values = scores[:, 0]
+    y_values = scores[:, 1]
+    x_min, x_max = np.percentile(x_values, [0.5, 99.5])
+    y_min, y_max = np.percentile(y_values, [0.5, 99.5])
+    if math.isclose(float(x_min), float(x_max)):
+        x_min -= 1.0
+        x_max += 1.0
+    if math.isclose(float(y_min), float(y_max)):
+        y_min -= 1.0
+        y_max += 1.0
+    x_pad = (x_max - x_min) * 0.06
+    y_pad = (y_max - y_min) * 0.06
+    return {
+        "x_min": round(float(x_min - x_pad), 6),
+        "x_max": round(float(x_max + x_pad), 6),
+        "y_min": round(float(y_min - y_pad), 6),
+        "y_max": round(float(y_max + y_pad), 6),
+    }
+
+
+def compact_scores(scores: np.ndarray) -> list[list[float]]:
+    return [
+        [round(float(row[0]), 5), round(float(row[1]), 5)]
+        for row in scores
+    ]
+
+
+def html_metadata(points: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    keys = [
+        "dataset",
+        "mode",
+        "n",
+        "qd",
+        "da",
+        "prompt_style",
+        "experiment_id",
+        "question_idx",
+        "subject",
+        "ground_truth",
+        "main_wrong",
+        "da_position",
+        "da_answer",
+        "point_type",
+    ]
+    return [
+        {"point_idx": idx, **{key: point.get(key) for key in keys}}
+        for idx, point in enumerate(points)
+    ]
+
+
+def write_html_viewer(path: Path, data: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = json.dumps(data, separators=(",", ":")).replace("</", "<\\/")
+    html = f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Layer Sweep PCA Viewer</title>
+  <style>
+    :root {{
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --ink: #1f2933;
+      --muted: #6b7280;
+      --line: #d7dce2;
+      --strong: #111827;
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }}
+    header {{
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 18px 24px 12px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }}
+    h1 {{
+      margin: 0;
+      font-size: 20px;
+      font-weight: 650;
+      letter-spacing: 0;
+    }}
+    .meta {{
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }}
+    main {{
+      padding: 16px 20px 22px;
+      display: grid;
+      gap: 14px;
+    }}
+    .toolbar {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      align-items: end;
+      padding: 12px 14px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }}
+    label {{
+      display: grid;
+      gap: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }}
+    select, button {{
+      font: inherit;
+    }}
+    select {{
+      min-width: 140px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      padding: 7px 30px 7px 9px;
+    }}
+    .viewer {{
+      display: grid;
+      grid-template-columns: minmax(620px, 1fr) 300px;
+      gap: 14px;
+      align-items: stretch;
+      min-height: 720px;
+    }}
+    .plot-shell {{
+      position: relative;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      min-height: 720px;
+      overflow: hidden;
+    }}
+    canvas {{
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 720px;
+    }}
+    aside {{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      overflow: auto;
+      max-height: 720px;
+    }}
+    h2 {{
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing: 0;
+    }}
+    .legend {{
+      display: grid;
+      gap: 7px;
+    }}
+    .legend-button {{
+      display: grid;
+      grid-template-columns: 14px 1fr auto;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      padding: 7px 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      cursor: default;
+      text-align: left;
+    }}
+    .legend-button.is-muted {{
+      color: #9ca3af;
+      background: #f4f5f7;
+    }}
+    .swatch {{
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18);
+    }}
+    .count {{
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }}
+    .summary {{
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+      font-size: 12px;
+    }}
+    .tooltip {{
+      position: absolute;
+      pointer-events: none;
+      display: none;
+      width: max-content;
+      max-width: 320px;
+      padding: 8px 9px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.14);
+      font-size: 12px;
+      color: var(--ink);
+      z-index: 5;
+    }}
+    @media (max-width: 980px) {{
+      .viewer {{
+        grid-template-columns: 1fr;
+      }}
+      aside {{
+        max-height: none;
+      }}
+      .plot-shell, canvas {{
+        min-height: 560px;
+      }}
+    }}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Layer Sweep PCA Viewer</h1>
+    <div class="meta" id="headerMeta"></div>
+  </header>
+  <main>
+    <section class="toolbar">
+      <label>Layer<select id="layerSelect"></select></label>
+      <label>Scope<select id="scopeSelect"></select></label>
+      <label>Color By<select id="colorSelect"></select></label>
+    </section>
+    <section class="viewer">
+      <div class="plot-shell">
+        <canvas id="plotCanvas"></canvas>
+        <div class="tooltip" id="tooltip"></div>
+      </div>
+      <aside>
+        <h2 id="legendTitle">Labels</h2>
+        <div class="legend" id="legend"></div>
+        <div class="summary" id="summary"></div>
+      </aside>
+    </section>
+  </main>
+  <script>
+    const DATA = {payload};
+    const canvas = document.getElementById("plotCanvas");
+    const ctx = canvas.getContext("2d");
+    const tooltip = document.getElementById("tooltip");
+    const layerSelect = document.getElementById("layerSelect");
+    const scopeSelect = document.getElementById("scopeSelect");
+    const colorSelect = document.getElementById("colorSelect");
+    const legend = document.getElementById("legend");
+    const summary = document.getElementById("summary");
+    const legendTitle = document.getElementById("legendTitle");
+    const headerMeta = document.getElementById("headerMeta");
+    const state = {{
+      layer: DATA.layers[0],
+      scope: DATA.scopes[0],
+      colorBy: DATA.plot_by.includes("mode") ? "mode" : DATA.plot_by[0],
+      highlight: null,
+    }};
+    let screenPoints = [];
+
+    function titleCase(value) {{
+      return String(value).replace(/_/g, " ").replace(/\\b\\w/g, match => match.toUpperCase());
+    }}
+
+    function colorFor(key, value) {{
+      return (DATA.palettes[key] && DATA.palettes[key][String(value)]) || "#4b5563";
+    }}
+
+    function hexToRgb(hex) {{
+      const clean = hex.replace("#", "");
+      return [
+        parseInt(clean.slice(0, 2), 16),
+        parseInt(clean.slice(2, 4), 16),
+        parseInt(clean.slice(4, 6), 16),
+      ];
+    }}
+
+    function rgba(hex, alpha) {{
+      const [r, g, b] = hexToRgb(hex);
+      return `rgba(${{r}}, ${{g}}, ${{b}}, ${{alpha}})`;
+    }}
+
+    function scopeIndices(scope) {{
+      return DATA.scope_indices[scope];
+    }}
+
+    function layerData() {{
+      return DATA.layer_scores[state.layer][state.scope];
+    }}
+
+    function labelValue(meta, key) {{
+      const value = meta[key];
+      return value === null || value === undefined ? "none" : String(value);
+    }}
+
+    function paletteOrder(key) {{
+      return Object.keys(DATA.palettes[key] || {{}});
+    }}
+
+    function sortedValues(key, counts) {{
+      const order = paletteOrder(key);
+      return Object.keys(counts).sort((a, b) => {{
+        const ai = order.indexOf(a);
+        const bi = order.indexOf(b);
+        if (ai !== -1 || bi !== -1) {{
+          if (ai === -1) return 1;
+          if (bi === -1) return -1;
+          return ai - bi;
+        }}
+        return a.localeCompare(b, undefined, {{ numeric: true }});
+      }});
+    }}
+
+    function currentCounts() {{
+      const counts = {{}};
+      for (const pointIdx of scopeIndices(state.scope)) {{
+        const label = labelValue(DATA.metadata[pointIdx], state.colorBy);
+        counts[label] = (counts[label] || 0) + 1;
+      }}
+      return counts;
+    }}
+
+    function configureControls() {{
+      for (const layer of DATA.layers) {{
+        const option = document.createElement("option");
+        option.value = layer;
+        option.textContent = `Layer ${{String(layer).padStart(2, "0")}}`;
+        layerSelect.appendChild(option);
+      }}
+      for (const scope of DATA.scopes) {{
+        const option = document.createElement("option");
+        option.value = scope;
+        option.textContent = titleCase(scope);
+        scopeSelect.appendChild(option);
+      }}
+      for (const key of DATA.plot_by) {{
+        const option = document.createElement("option");
+        option.value = key;
+        option.textContent = titleCase(key);
+        colorSelect.appendChild(option);
+      }}
+      layerSelect.value = state.layer;
+      scopeSelect.value = state.scope;
+      colorSelect.value = state.colorBy;
+    }}
+
+    function renderLegend() {{
+      const counts = currentCounts();
+      const values = sortedValues(state.colorBy, counts);
+      legendTitle.textContent = titleCase(state.colorBy);
+      legend.innerHTML = "";
+      for (const value of values) {{
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "legend-button";
+        button.dataset.label = value;
+        const swatch = document.createElement("span");
+        swatch.className = "swatch";
+        swatch.style.background = colorFor(state.colorBy, value);
+        const label = document.createElement("span");
+        label.textContent = value;
+        const count = document.createElement("span");
+        count.className = "count";
+        count.textContent = counts[value].toLocaleString();
+        button.append(swatch, label, count);
+        button.addEventListener("mouseenter", () => {{
+          state.highlight = value;
+          updateLegendState();
+          draw();
+        }});
+        button.addEventListener("mouseleave", () => {{
+          state.highlight = null;
+          updateLegendState();
+          draw();
+        }});
+        legend.appendChild(button);
+      }}
+      updateLegendState();
+    }}
+
+    function updateLegendState() {{
+      for (const button of legend.querySelectorAll(".legend-button")) {{
+        button.classList.toggle(
+          "is-muted",
+          state.highlight !== null && button.dataset.label !== state.highlight
+        );
+      }}
+    }}
+
+    function updateSummary() {{
+      const layer = layerData();
+      const ev = layer.explained_variance_ratio;
+      const indices = scopeIndices(state.scope);
+      headerMeta.textContent = `${{DATA.model.toUpperCase()}} | ${{DATA.point_count.toLocaleString()}} points`;
+      summary.innerHTML = `
+        <div>Scope: <strong>${{titleCase(state.scope)}}</strong></div>
+        <div>Layer: <strong>${{String(state.layer).padStart(2, "0")}}</strong></div>
+        <div>Points: <strong>${{indices.length.toLocaleString()}}</strong></div>
+        <div>PC1: <strong>${{(ev[0] * 100).toFixed(2)}}%</strong></div>
+        <div>PC2: <strong>${{(ev[1] * 100).toFixed(2)}}%</strong></div>
+      `;
+    }}
+
+    function resizeCanvas() {{
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const width = Math.max(640, Math.floor(rect.width));
+      const height = Math.max(480, Math.floor(rect.height));
+      if (canvas.width !== Math.floor(width * dpr) || canvas.height !== Math.floor(height * dpr)) {{
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }}
+      return {{ width, height }};
+    }}
+
+    function drawPoint(x, y, radius, fill) {{
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = fill;
+      ctx.fill();
+    }}
+
+    function draw() {{
+      const {{ width, height }} = resizeCanvas();
+      const plot = layerData();
+      const bounds = plot.bounds;
+      const scores = plot.scores;
+      const indices = scopeIndices(state.scope);
+      const left = 72;
+      const right = width - 34;
+      const top = 44;
+      const bottom = height - 62;
+      screenPoints = [];
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = "#f8fafc";
+      ctx.fillRect(left, top, right - left, bottom - top);
+      ctx.strokeStyle = "#d7dce2";
+      ctx.lineWidth = 1;
+      for (const frac of [0.25, 0.5, 0.75]) {{
+        const x = left + (right - left) * frac;
+        const y = top + (bottom - top) * frac;
+        ctx.beginPath();
+        ctx.moveTo(x, top);
+        ctx.lineTo(x, bottom);
+        ctx.moveTo(left, y);
+        ctx.lineTo(right, y);
+        ctx.stroke();
+      }}
+      ctx.strokeStyle = "#6b7280";
+      ctx.strokeRect(left, top, right - left, bottom - top);
+
+      ctx.fillStyle = "#111827";
+      ctx.font = "600 15px Inter, system-ui, sans-serif";
+      ctx.fillText(
+        `${{DATA.model.toUpperCase()}} ${{state.scope.toUpperCase()}} layer ${{String(state.layer).padStart(2, "0")}} by ${{titleCase(state.colorBy)}}`,
+        left,
+        24
+      );
+      ctx.fillStyle = "#6b7280";
+      ctx.font = "12px Inter, system-ui, sans-serif";
+      ctx.fillText(`PC1 ${{(plot.explained_variance_ratio[0] * 100).toFixed(1)}}%`, left, height - 24);
+      ctx.save();
+      ctx.translate(20, top + 86);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText(`PC2 ${{(plot.explained_variance_ratio[1] * 100).toFixed(1)}}%`, 0, 0);
+      ctx.restore();
+
+      const denominatorX = bounds.x_max - bounds.x_min || 1;
+      const denominatorY = bounds.y_max - bounds.y_min || 1;
+      function project(score) {{
+        const x = left + Math.min(1, Math.max(0, (score[0] - bounds.x_min) / denominatorX)) * (right - left);
+        const y = bottom - Math.min(1, Math.max(0, (score[1] - bounds.y_min) / denominatorY)) * (bottom - top);
+        return [x, y];
+      }}
+
+      const highlighted = [];
+      for (let i = 0; i < scores.length; i += 1) {{
+        const pointIdx = indices[i];
+        const meta = DATA.metadata[pointIdx];
+        const label = labelValue(meta, state.colorBy);
+        const [x, y] = project(scores[i]);
+        screenPoints.push({{ x, y, pointIdx, label }});
+        const isHighlighted = state.highlight !== null && label === state.highlight;
+        if (isHighlighted) {{
+          highlighted.push([x, y, label]);
+        }} else {{
+          const color = state.highlight === null ? colorFor(state.colorBy, label) : "#9ca3af";
+          drawPoint(x, y, state.highlight === null ? 2.1 : 1.7, rgba(color, state.highlight === null ? 0.68 : 0.22));
+        }}
+      }}
+      for (const [x, y, label] of highlighted) {{
+        drawPoint(x, y, 3.6, rgba(colorFor(state.colorBy, label), 0.92));
+        ctx.strokeStyle = "rgba(17, 24, 39, 0.28)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(x, y, 4.2, 0, Math.PI * 2);
+        ctx.stroke();
+      }}
+    }}
+
+    function refresh() {{
+      state.highlight = null;
+      renderLegend();
+      updateSummary();
+      draw();
+    }}
+
+    function nearestPoint(clientX, clientY) {{
+      const rect = canvas.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      let best = null;
+      let bestDistance = 64;
+      for (const point of screenPoints) {{
+        const dx = point.x - x;
+        const dy = point.y - y;
+        const distance = dx * dx + dy * dy;
+        if (distance < bestDistance) {{
+          bestDistance = distance;
+          best = point;
+        }}
+      }}
+      return best;
+    }}
+
+    canvas.addEventListener("mousemove", event => {{
+      const point = nearestPoint(event.clientX, event.clientY);
+      if (!point) {{
+        tooltip.style.display = "none";
+        return;
+      }}
+      const meta = DATA.metadata[point.pointIdx];
+      tooltip.innerHTML = `
+        <strong>${{meta.experiment_id}}</strong><br>
+        point ${{meta.point_idx}} | question ${{meta.question_idx}} | ${{meta.point_type}}<br>
+        dataset ${{meta.dataset}} | mode ${{meta.mode}} | ${{meta.prompt_style}}
+      `;
+      const shellRect = canvas.parentElement.getBoundingClientRect();
+      tooltip.style.left = `${{event.clientX - shellRect.left + 12}}px`;
+      tooltip.style.top = `${{event.clientY - shellRect.top + 12}}px`;
+      tooltip.style.display = "block";
+    }});
+    canvas.addEventListener("mouseleave", () => {{
+      tooltip.style.display = "none";
+    }});
+
+    layerSelect.addEventListener("change", () => {{
+      state.layer = layerSelect.value;
+      refresh();
+    }});
+    scopeSelect.addEventListener("change", () => {{
+      state.scope = scopeSelect.value;
+      refresh();
+    }});
+    colorSelect.addEventListener("change", () => {{
+      state.colorBy = colorSelect.value;
+      refresh();
+    }});
+    window.addEventListener("resize", draw);
+
+    configureControls();
+    refresh();
+  </script>
+</body>
+</html>
+"""
+    path.write_text(html)
+
+
 def run_pca_and_plots(
     points: list[dict[str, Any]],
     layers: list[int],
@@ -735,48 +1330,78 @@ def run_pca_and_plots(
     device = pca_device(args)
     scopes = [scope.strip() for scope in args.scopes.split(",") if scope.strip()]
     plot_keys = [key.strip() for key in args.plot_by.split(",") if key.strip()]
+    scope_index_map = {scope: scope_indices(points, scope) for scope in scopes}
+    html_data: dict[str, Any] | None = None
+    if not args.skip_html:
+        html_data = {
+            "model": args.model,
+            "model_name": MODEL_IDS[args.model],
+            "point_count": len(points),
+            "layers": [str(layer) for layer in layers],
+            "scopes": scopes,
+            "plot_by": plot_keys,
+            "metadata": html_metadata(points),
+            "scope_indices": scope_index_map,
+            "palettes": {
+                key: {label: rgb_to_hex(color) for label, color in palette.items()}
+                for key, palette in PALETTES.items()
+            },
+            "layer_scores": {},
+        }
 
     for layer in tqdm(layers, desc="Running per-layer PCA"):
         layer_summary = {}
         for scope in scopes:
-            indices = scope_indices(points, scope)
+            indices = scope_index_map[scope]
             scores, explained = fit_pca_scores(maps[layer], indices, device, args.pca_niter)
             scope_summary = {
                 "point_count": len(indices),
                 "explained_variance_ratio": explained,
                 "plots": {},
             }
+            if html_data is not None:
+                html_data["layer_scores"].setdefault(str(layer), {})[scope] = {
+                    "scores": compact_scores(scores),
+                    "bounds": score_bounds(scores),
+                    "explained_variance_ratio": [round(float(value), 8) for value in explained],
+                }
             for plot_key in plot_keys:
-                labels = category_values(points, indices, plot_key)
-                title = (
-                    f"{args.model.upper()} {scope.upper()} LAYER {layer:02d} "
-                    f"BY {plot_key.upper().replace('_', ' ')}"
-                )
-                image = render_plot(
-                    scores,
-                    labels,
-                    PALETTES[plot_key],
-                    title,
-                    explained,
-                    args.width,
-                    args.height,
-                    args.point_radius,
-                )
                 png_file = (
                     plot_dir
                     / scope
                     / f"by_{plot_key}"
                     / f"layer_{layer:02d}_{scope}_by_{plot_key}.png"
                 )
-                save_png(png_file, image)
-                pdf_pages.append(image)
+                if not args.skip_static_plots:
+                    labels = category_values(points, indices, plot_key)
+                    title = (
+                        f"{args.model.upper()} {scope.upper()} LAYER {layer:02d} "
+                        f"BY {plot_key.upper().replace('_', ' ')}"
+                    )
+                    image = render_plot(
+                        scores,
+                        labels,
+                        PALETTES[plot_key],
+                        title,
+                        explained,
+                        args.width,
+                        args.height,
+                        args.point_radius,
+                    )
+                    save_png(png_file, image)
+                    pdf_pages.append(image)
                 scope_summary["plots"][plot_key] = str(png_file)
             layer_summary[scope] = scope_summary
         summary["layers"][str(layer)] = layer_summary
 
     pdf_file = output_dir / "layer_sweep_pca_all_plots.pdf"
-    write_pdf(pdf_file, pdf_pages)
+    if not args.skip_static_plots:
+        write_pdf(pdf_file, pdf_pages)
     summary["pdf_file"] = str(pdf_file)
+    if html_data is not None:
+        html_file = output_dir / "layer_sweep_pca_viewer.html"
+        write_html_viewer(html_file, html_data)
+        summary["html_file"] = str(html_file)
     summary_file = output_dir / "pca_summary.json"
     summary_file.write_text(json.dumps(summary, indent=2))
     return summary
@@ -815,6 +1440,8 @@ def main() -> None:
     summary = run_pca_and_plots(points, layers, activation_manifest, args, output_dir)
     print(f"PCA summary saved to {output_dir / 'pca_summary.json'}")
     print(f"Multi-page PDF saved to {summary['pdf_file']}")
+    if summary.get("html_file"):
+        print(f"Interactive HTML saved to {summary['html_file']}")
 
 
 if __name__ == "__main__":
