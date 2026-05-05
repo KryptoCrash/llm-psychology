@@ -1,4 +1,15 @@
+"""Activation-steering primitives.
+
+Usage with multi_actor.run_experiment:
+
+    from steering import steering_hook, load_vector
+    vector = load_vector("path/to/diffmeans.pt", layer=22)
+    with steering_hook(runner.model, layer=22, vector=vector, alpha=1.0):
+        run_experiment("qwen", "mmlu", "3", model=runner, ...)
+"""
 from contextlib import contextmanager
+from pathlib import Path
+
 import torch
 
 
@@ -24,25 +35,40 @@ def make_resid_add_hook(vec: torch.Tensor, alpha: float):
     return hook
 
 
-@torch.no_grad()
-def steer(model, tokenizer, layer: int, vector: torch.Tensor, alpha: float,
-          prompts: list[str], max_new_tokens: int = 64, batch_size: int = 8):
-    """Add alpha * vector to the residual stream after model.model.layers[layer]
-    during inference on prompts. Returns decoded completions."""
-    target_module = model.model.layers[layer]
-    fwd_hooks = [(target_module, make_resid_add_hook(vector, alpha))]
+@contextmanager
+def steering_hook(model, layer: int, vector: torch.Tensor, alpha: float):
+    """Register an activation-steering forward hook on model.model.layers[layer]
+    that adds alpha * vector to the residual stream during inference. Expects a
+    HuggingFace causal LM with a `.model.layers` ModuleList (Qwen / Llama style).
+    The hook is removed automatically on context exit."""
+    target = model.model.layers[layer]
+    handle = target.register_forward_hook(make_resid_add_hook(vector, alpha))
+    try:
+        yield model
+    finally:
+        handle.remove()
 
-    outputs = []
-    for i in range(0, len(prompts), batch_size):
-        batch = prompts[i:i + batch_size]
-        enc = tokenizer(batch, return_tensors="pt", padding=True).to(model.device)
-        with add_hooks(module_forward_hooks=fwd_hooks):
-            gen = model.generate(
-                **enc,
-                max_new_tokens=max_new_tokens,
-                do_sample=False,
-                pad_token_id=tokenizer.pad_token_id,
+
+def load_vector(path, layer: int) -> torch.Tensor:
+    """Load a [4096] steering vector from a .pt file. Accepts either a bare
+    tensor or a dict containing a 'diffmeans' key mapping layer→tensor (the
+    format emitted by the layer sweep pipeline)."""
+    path = Path(path)
+    obj = torch.load(path, map_location="cpu", weights_only=False)
+    if isinstance(obj, dict):
+        if "diffmeans" not in obj:
+            raise ValueError(
+                f"{path} is a dict but has no 'diffmeans' key; got keys {list(obj.keys())}"
             )
-        gen = gen[:, enc.input_ids.shape[1]:]
-        outputs.extend(tokenizer.batch_decode(gen, skip_special_tokens=True))
-    return outputs
+        layer_to_vec = obj["diffmeans"]
+        if layer not in layer_to_vec:
+            raise KeyError(f"layer {layer} not in diffmeans (available: {sorted(layer_to_vec)})")
+        vector = layer_to_vec[layer]
+    elif isinstance(obj, torch.Tensor):
+        vector = obj
+    else:
+        raise TypeError(f"Expected tensor or dict in {path}, got {type(obj)}")
+    vector = vector.squeeze()
+    if vector.ndim != 1 or vector.shape[0] != 4096:
+        raise ValueError(f"Expected vector of shape [4096], got {tuple(vector.shape)}")
+    return vector

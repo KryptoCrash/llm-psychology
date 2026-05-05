@@ -1,9 +1,15 @@
 import argparse
 import json
+import os
 import random
 import re
+from contextlib import nullcontext
+from pathlib import Path
+
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
+
+from steering import load_vector, steering_hook
 
 MODEL_IDS = {
     "llama": "meta-llama/Llama-3.1-8B-Instruct",
@@ -149,7 +155,8 @@ def parse_answer(dataset, response):
     return m.group(1).strip() if m else ""
 
 
-def run_experiment(model_name, dataset, mode, explain=False, model=None, device=None, output_file=None, batch_size=None):
+def run_experiment(model_name, dataset, mode, explain=False, model=None, device=None, output_file=None, batch_size=None,
+                   steering_vector=None, steering_layer=None, steering_alpha=None, seed=None):
     n, use_qd, use_da = parse_mode(mode)
     if model is None:
         model, device = load_model(model_name, device=device)
@@ -157,6 +164,18 @@ def run_experiment(model_name, dataset, mode, explain=False, model=None, device=
         device = get_device()
     if batch_size is None:
         batch_size = 8 if explain else 16
+
+    if steering_vector is not None:
+        if steering_layer is None or steering_alpha is None:
+            raise ValueError("steering_vector requires steering_layer and steering_alpha")
+        steering_ctx = steering_hook(model.model, steering_layer, steering_vector, steering_alpha)
+    else:
+        steering_ctx = nullcontext()
+
+    if seed is not None:
+        torch.manual_seed(seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(seed)
 
     dataset_file = "combined_mmlu_correct.json" if dataset == "mmlu" else "combined_bbh_correct.json"
     with open(dataset_file, "r") as f:
@@ -341,40 +360,41 @@ def run_experiment(model_name, dataset, mode, explain=False, model=None, device=
 
     max_tokens = 300 if explain else 50
     pending = examples
-    for _ in range(10):
-        if not pending:
-            break
-        next_pending = []
-        pending_by_length = sorted(pending, key=lambda example: len(example["prompt_token_ids"]))
-        for batch in batched(pending_by_length, batch_size):
-            prompts = [example["prompt"] for example in batch]
-            model_inputs = tokenizer(prompts, return_tensors="pt", padding=True)
-            model_inputs = {key: value.to(device) for key, value in model_inputs.items()}
-            prompt_width = model_inputs["input_ids"].shape[1]
-            generation_output = model.generate(
-                model_inputs["input_ids"],
-                attention_mask=model_inputs.get("attention_mask"),
-                max_new_tokens=max_tokens,
-                do_sample=True,
-                output_logits=True,
-            )
-            sequences = (
-                generation_output["sequences"]
-                if isinstance(generation_output, dict)
-                else generation_output.sequences
-            )
-            for batch_index, example in enumerate(batch):
-                example["generation_attempts"] += 1
-                response_token_ids = sequences[batch_index, prompt_width:].detach().cpu().tolist()
-                response = decode_tokens(response_token_ids)
-                answer = parse_answer(dataset, response)
-                example["response_token_ids"] = response_token_ids
-                example["response_tokens"] = token_strings(response_token_ids)
-                example["raw_response"] = response.strip()
-                example["model_answer"] = answer
-                if not answer:
-                    next_pending.append(example)
-        pending = next_pending
+    with steering_ctx:
+        for _ in range(10):
+            if not pending:
+                break
+            next_pending = []
+            pending_by_length = sorted(pending, key=lambda example: len(example["prompt_token_ids"]))
+            for batch in batched(pending_by_length, batch_size):
+                prompts = [example["prompt"] for example in batch]
+                model_inputs = tokenizer(prompts, return_tensors="pt", padding=True)
+                model_inputs = {key: value.to(device) for key, value in model_inputs.items()}
+                prompt_width = model_inputs["input_ids"].shape[1]
+                generation_output = model.generate(
+                    model_inputs["input_ids"],
+                    attention_mask=model_inputs.get("attention_mask"),
+                    max_new_tokens=max_tokens,
+                    do_sample=True,
+                    output_logits=True,
+                )
+                sequences = (
+                    generation_output["sequences"]
+                    if isinstance(generation_output, dict)
+                    else generation_output.sequences
+                )
+                for batch_index, example in enumerate(batch):
+                    example["generation_attempts"] += 1
+                    response_token_ids = sequences[batch_index, prompt_width:].detach().cpu().tolist()
+                    response = decode_tokens(response_token_ids)
+                    answer = parse_answer(dataset, response)
+                    example["response_token_ids"] = response_token_ids
+                    example["response_tokens"] = token_strings(response_token_ids)
+                    example["raw_response"] = response.strip()
+                    example["model_answer"] = answer
+                    if not answer:
+                        next_pending.append(example)
+            pending = next_pending
 
     records = []
     for example in sorted(examples, key=lambda item: item["index"]):
@@ -437,13 +457,22 @@ def run_experiment(model_name, dataset, mode, explain=False, model=None, device=
     if n >= 2:
         conformed = [r for r in records if r.get("conforms") is True]
         summary["conformity_rate"] = len(conformed) / parseable if parseable else 0.0
+    if steering_vector is not None:
+        summary["steering"] = {
+            "layer": steering_layer,
+            "alpha": steering_alpha,
+        }
+    if seed is not None:
+        summary["seed"] = seed
     summary["results"] = records
 
     if output_file is None:
         explain_str = "explain" if explain else "base"
         output_file = f"{model_name}_{dataset}_{mode}_{explain_str}.json"
 
-    with open(output_file, "w") as f:
+    out_path = Path(output_file)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with out_path.open("w") as f:
         json.dump(summary, f, indent=2)
 
     print(f"model={model_name} dataset={dataset} mode={mode} explain={explain} | {correct} correct / {parseable} parseable (accuracy={accuracy:.3f})")
@@ -461,6 +490,19 @@ def main():
     parser.add_argument("--dataset", choices=["mmlu", "bbh"], default="mmlu")
     parser.add_argument("--explain", action="store_true", help="Chain-of-thought: model reasons step-by-step before answering")
     parser.add_argument("--batch-size", type=int, default=None, help="Number of prompts to generate at once")
+    parser.add_argument("--output-file", type=Path, default=None,
+                        help="Where to write the results JSON (default: auto-named in cwd).")
+    parser.add_argument("--seed", type=int, default=None,
+                        help="Seed torch RNG before generation for reproducible sampling.")
+    parser.add_argument("--vector-path", type=Path, default=None,
+                        help="Optional steering vector .pt (bare tensor or 'diffmeans' dict). "
+                             "Requires --layer and --alpha.")
+    parser.add_argument("--layer", type=int, default=None,
+                        help="Layer index to apply the steering vector to.")
+    parser.add_argument("--alpha", type=float, default=None,
+                        help="Scale applied to the steering vector.")
+    parser.add_argument("--normalize", action="store_true",
+                        help="Divide the steering vector by its L2 norm before scaling.")
     args = parser.parse_args()
 
     try:
@@ -468,7 +510,28 @@ def main():
     except ValueError as exc:
         parser.error(str(exc))
 
-    run_experiment(args.model, args.dataset, args.mode, args.explain, batch_size=args.batch_size)
+    steering_vector = None
+    if args.vector_path is not None:
+        if args.layer is None or args.alpha is None:
+            parser.error("--vector-path requires --layer and --alpha")
+        steering_vector = load_vector(args.vector_path, args.layer)
+        if args.normalize:
+            n = steering_vector.float().norm()
+            if n == 0:
+                parser.error("Cannot normalize a zero vector.")
+            steering_vector = (steering_vector.float() / n).to(steering_vector.dtype)
+    elif args.layer is not None or args.alpha is not None or args.normalize:
+        parser.error("--layer/--alpha/--normalize are only meaningful with --vector-path")
+
+    run_experiment(
+        args.model, args.dataset, args.mode, args.explain,
+        batch_size=args.batch_size,
+        output_file=str(args.output_file) if args.output_file else None,
+        steering_vector=steering_vector,
+        steering_layer=args.layer,
+        steering_alpha=args.alpha,
+        seed=args.seed,
+    )
 
 
 if __name__ == "__main__":

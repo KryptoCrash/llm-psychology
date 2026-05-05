@@ -1,87 +1,78 @@
-"""Run activation steering on Qwen3-8B.
+"""Orchestrate a steered + baseline pair of multi_actor runs.
 
-Prompts file format: plain text, one prompt per line. Blank lines are ignored.
-Output format: JSONL, one object per prompt with keys {"prompt", "completion",
-"layer", "alpha"}.
+Loads Qwen3-8B once, picks the multi_actor mode from the sign of --alpha
+(positive → '3', negative → '10'), and calls multi_actor.run_experiment
+twice with the same seed: once with the steering hook attached, once without.
+Two JSON files are written.
+
+For a single steered run (no baseline) or any other mode/dataset, call
+multi_actor.py directly with --vector-path/--layer/--alpha.
 """
 import argparse
-import json
 from pathlib import Path
 
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
-from steering import steer
-
-MODEL_NAME = "Qwen/Qwen3-8B"
-
-
-def load_prompts(path: Path) -> list[str]:
-    lines = path.read_text().splitlines()
-    return [ln for ln in (l.strip() for l in lines) if ln]
+from multi_actor import MODEL_IDS, CausalLMRunner, run_experiment
+from steering import load_vector
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--vector-path", type=Path, required=True,
-                    help="Path to a .pt file containing a single tensor of shape [4096].")
-    ap.add_argument("--prompts-path", type=Path, required=True,
-                    help="Plain text file, one prompt per line.")
+                    help="Path to a .pt with a [4096] tensor or a 'diffmeans' dict.")
     ap.add_argument("--layer", type=int, required=True, help="Layer index in 0..35.")
-    ap.add_argument("--alpha", type=float, required=True)
-    ap.add_argument("--output-path", type=Path, required=True)
-    ap.add_argument("--max-new-tokens", type=int, default=64)
-    ap.add_argument("--batch-size", type=int, default=8)
+    ap.add_argument("--alpha", type=float, required=True,
+                    help="Sign picks multi_actor mode (positive→'3', negative→'10'); "
+                         "magnitude is the steering scale. Cannot be 0.")
+    ap.add_argument("--output-path", type=Path, required=True,
+                    help="Steered output JSON; baseline written to <stem>_baseline<suffix>.")
+    ap.add_argument("--dataset", choices=["mmlu", "bbh"], default="mmlu")
+    ap.add_argument("--explain", action="store_true")
+    ap.add_argument("--normalize", action="store_true",
+                    help="Divide the steering vector by its L2 norm before applying alpha.")
+    ap.add_argument("--seed", type=int, default=42,
+                    help="Torch RNG seed (same value used for both runs for fair comparison).")
+    ap.add_argument("--batch-size", type=int, default=None)
     args = ap.parse_args()
 
+    if args.alpha == 0:
+        raise ValueError("--alpha must be non-zero (positive→mode '3', negative→mode '10').")
     if not (0 <= args.layer <= 35):
         raise ValueError(f"--layer must be in 0..35, got {args.layer}")
 
-    vector = torch.load(args.vector_path, map_location="cpu")
-    if not isinstance(vector, torch.Tensor):
-        raise TypeError(f"Expected a torch.Tensor in {args.vector_path}, got {type(vector)}")
-    vector = vector.squeeze()
-    if vector.ndim != 1 or vector.shape[0] != 4096:
-        raise ValueError(f"Expected vector of shape [4096], got {tuple(vector.shape)}")
+    mode = "3" if args.alpha > 0 else "10"
+    print(f"alpha={args.alpha} → multi_actor mode='{mode}'")
 
-    prompts = load_prompts(args.prompts_path)
-    if not prompts:
-        raise ValueError(f"No prompts found in {args.prompts_path}")
+    vector = load_vector(args.vector_path, args.layer)
+    if args.normalize:
+        norm = vector.float().norm()
+        if norm == 0:
+            raise ValueError("Cannot normalize a zero vector.")
+        vector = (vector.float() / norm).to(vector.dtype)
 
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-    if tokenizer.pad_token_id is None:
-        tokenizer.pad_token_id = tokenizer.eos_token_id
-    tokenizer.padding_side = "left"
+    runner = CausalLMRunner(MODEL_IDS["qwen"])
 
-    model = AutoModelForCausalLM.from_pretrained(
-        MODEL_NAME,
-        torch_dtype=torch.bfloat16,
-        device_map="auto",
-    )
-    model.eval()
-
-    completions = steer(
-        model=model,
-        tokenizer=tokenizer,
-        layer=args.layer,
-        vector=vector,
-        alpha=args.alpha,
-        prompts=prompts,
-        max_new_tokens=args.max_new_tokens,
-        batch_size=args.batch_size,
+    steered_path = args.output_path
+    baseline_path = steered_path.with_name(
+        steered_path.stem + "_baseline" + steered_path.suffix
     )
 
-    args.output_path.parent.mkdir(parents=True, exist_ok=True)
-    with args.output_path.open("w") as f:
-        for prompt, completion in zip(prompts, completions):
-            f.write(json.dumps({
-                "prompt": prompt,
-                "completion": completion,
-                "layer": args.layer,
-                "alpha": args.alpha,
-            }) + "\n")
+    print(f"\n=== STEERED  layer={args.layer} alpha={args.alpha} normalize={args.normalize} ===")
+    run_experiment(
+        "qwen", args.dataset, mode, args.explain,
+        model=runner, output_file=str(steered_path), batch_size=args.batch_size,
+        steering_vector=vector, steering_layer=args.layer, steering_alpha=args.alpha,
+        seed=args.seed,
+    )
 
-    print(f"Wrote {len(completions)} completions to {args.output_path}")
+    print(f"\n=== BASELINE  (alpha=0, same prompts, same seed) ===")
+    run_experiment(
+        "qwen", args.dataset, mode, args.explain,
+        model=runner, output_file=str(baseline_path), batch_size=args.batch_size,
+        seed=args.seed,
+    )
+
+    print(f"\nSteered:  {steered_path}")
+    print(f"Baseline: {baseline_path}")
 
 
 if __name__ == "__main__":
