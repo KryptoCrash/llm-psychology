@@ -104,7 +104,7 @@ FONT_5X7 = {
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Run per-layer PCA over regenerated layer-sweep condition/baseline activations."
+        description="Run per-layer PCA over regenerated layer-sweep activations."
     )
     parser.add_argument("--model", choices=sorted(MODEL_IDS), default="qwen")
     parser.add_argument("--input-dir", type=Path, default=Path("."))
@@ -115,6 +115,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--activation-kind", choices=["residual", "delta"], default="residual")
     parser.add_argument("--position", choices=["assistant_start"], default="assistant_start")
     parser.add_argument("--baseline", choices=["random_answers", "same_prompt"], default="random_answers")
+    parser.add_argument(
+        "--pca-input",
+        choices=["raw", "diff", "diffmean"],
+        default="raw",
+        help=(
+            "raw plots condition and baseline activations separately; diff plots one "
+            "condition-minus-baseline vector per question/config; diffmean plots one "
+            "mean condition-minus-baseline vector per experiment config."
+        ),
+    )
     parser.add_argument("--scopes", default="combined,mmlu,bbh")
     parser.add_argument("--plot-by", default="dataset,mode,prompt_style,point_type")
     parser.add_argument("--cache-dtype", choices=["float16", "float32"], default="float16")
@@ -229,7 +239,87 @@ def build_points(args: argparse.Namespace) -> list[dict[str, Any]]:
 
 
 def metadata_without_prompt(point: dict[str, Any]) -> dict[str, Any]:
-    return {key: value for key, value in point.items() if key != "prompt"}
+    return {
+        key: value
+        for key, value in point.items()
+        if key not in {"prompt", "source_point_indices", "source_pairs"}
+    }
+
+
+def validate_condition_baseline_pair(condition: dict[str, Any], baseline: dict[str, Any]) -> None:
+    expected_same = [
+        "dataset",
+        "mode",
+        "n",
+        "qd",
+        "da",
+        "prompt_style",
+        "experiment_id",
+        "question_idx",
+        "subject",
+        "ground_truth",
+        "main_wrong",
+        "da_position",
+        "da_answer",
+    ]
+    if condition.get("point_type") != "condition" or baseline.get("point_type") != "baseline":
+        raise ValueError("Expected condition/baseline point ordering")
+    for key in expected_same:
+        if condition.get(key) != baseline.get(key):
+            raise ValueError(f"Condition/baseline mismatch for {key}: {condition.get(key)!r} != {baseline.get(key)!r}")
+
+
+def build_analysis_points(raw_points: list[dict[str, Any]], pca_input: str) -> list[dict[str, Any]]:
+    if pca_input == "raw":
+        return [
+            {
+                **metadata_without_prompt(point),
+                "source_point_indices": [idx],
+            }
+            for idx, point in enumerate(raw_points)
+        ]
+
+    if len(raw_points) % 2 != 0:
+        raise ValueError("Expected an even number of raw condition/baseline points")
+
+    diff_points = []
+    grouped: dict[str, dict[str, Any]] = {}
+    for condition_idx in range(0, len(raw_points), 2):
+        baseline_idx = condition_idx + 1
+        condition = raw_points[condition_idx]
+        baseline = raw_points[baseline_idx]
+        validate_condition_baseline_pair(condition, baseline)
+        base = metadata_without_prompt(condition)
+        base["source_pairs"] = [(condition_idx, baseline_idx)]
+        base["source_point_indices"] = [condition_idx, baseline_idx]
+        if pca_input == "diff":
+            diff_points.append(
+                {
+                    **base,
+                    "point_type": "diff",
+                    "sample_count": 1,
+                }
+            )
+            continue
+
+        key = str(condition["experiment_id"])
+        if key not in grouped:
+            grouped[key] = {
+                **base,
+                "point_type": "diffmean",
+                "question_idx": "mean",
+                "subject": None,
+                "source_pairs": [],
+                "source_point_indices": [],
+                "sample_count": 0,
+            }
+        grouped[key]["source_pairs"].append((condition_idx, baseline_idx))
+        grouped[key]["source_point_indices"].extend([condition_idx, baseline_idx])
+        grouped[key]["sample_count"] += 1
+
+    if pca_input == "diff":
+        return diff_points
+    return list(grouped.values())
 
 
 def write_metadata(points: list[dict[str, Any]], output_dir: Path) -> None:
@@ -454,6 +544,35 @@ def fit_pca_scores(
     if device.type == "cuda":
         torch.cuda.empty_cache()
     return scores_np, [float(value) for value in explained]
+
+
+def build_analysis_matrix(layer_matrix: np.ndarray, analysis_points: list[dict[str, Any]], pca_input: str) -> np.ndarray:
+    if pca_input == "raw":
+        source_indices = [int(point["source_point_indices"][0]) for point in analysis_points]
+        if source_indices == list(range(len(source_indices))):
+            return layer_matrix
+        return np.array(layer_matrix[source_indices], copy=True)
+
+    hidden_dim = layer_matrix.shape[1]
+    matrix = np.empty((len(analysis_points), hidden_dim), dtype=np.float32)
+    for row_idx, point in enumerate(analysis_points):
+        pairs = point["source_pairs"]
+        if pca_input == "diff":
+            condition_idx, baseline_idx = pairs[0]
+            matrix[row_idx] = (
+                np.asarray(layer_matrix[condition_idx], dtype=np.float32)
+                - np.asarray(layer_matrix[baseline_idx], dtype=np.float32)
+            )
+            continue
+
+        diff_sum = np.zeros(hidden_dim, dtype=np.float32)
+        for condition_idx, baseline_idx in pairs:
+            diff_sum += (
+                np.asarray(layer_matrix[condition_idx], dtype=np.float32)
+                - np.asarray(layer_matrix[baseline_idx], dtype=np.float32)
+            )
+        matrix[row_idx] = diff_sum / len(pairs)
+    return matrix
 
 
 def scope_indices(points: list[dict[str, Any]], scope: str) -> list[int]:
@@ -755,6 +874,7 @@ def html_metadata(points: list[dict[str, Any]]) -> list[dict[str, Any]]:
         "da_position",
         "da_answer",
         "point_type",
+        "sample_count",
     ]
     return [
         {"point_idx": idx, **{key: point.get(key) for key in keys}}
@@ -1301,7 +1421,8 @@ def write_html_viewer(path: Path, data: dict[str, Any]) -> None:
 
 
 def run_pca_and_plots(
-    points: list[dict[str, Any]],
+    raw_points: list[dict[str, Any]],
+    analysis_points: list[dict[str, Any]],
     layers: list[int],
     manifest: dict[str, Any],
     args: argparse.Namespace,
@@ -1313,7 +1434,9 @@ def run_pca_and_plots(
     summary: dict[str, Any] = {
         "model": args.model,
         "model_name": MODEL_IDS[args.model],
-        "point_count": len(points),
+        "point_count": len(analysis_points),
+        "activation_point_count": len(raw_points),
+        "pca_input": args.pca_input,
         "layers": {},
         "scopes": args.scopes.split(","),
         "plot_by": args.plot_by.split(","),
@@ -1322,7 +1445,7 @@ def run_pca_and_plots(
     maps = open_activation_maps(
         activation_dir,
         layers,
-        len(points),
+        len(raw_points),
         int(manifest["hidden_dim"]),
         manifest["dtype"],
         "r",
@@ -1330,17 +1453,19 @@ def run_pca_and_plots(
     device = pca_device(args)
     scopes = [scope.strip() for scope in args.scopes.split(",") if scope.strip()]
     plot_keys = [key.strip() for key in args.plot_by.split(",") if key.strip()]
-    scope_index_map = {scope: scope_indices(points, scope) for scope in scopes}
+    scope_index_map = {scope: scope_indices(analysis_points, scope) for scope in scopes}
     html_data: dict[str, Any] | None = None
     if not args.skip_html:
         html_data = {
             "model": args.model,
             "model_name": MODEL_IDS[args.model],
-            "point_count": len(points),
+            "point_count": len(analysis_points),
+            "activation_point_count": len(raw_points),
+            "pca_input": args.pca_input,
             "layers": [str(layer) for layer in layers],
             "scopes": scopes,
             "plot_by": plot_keys,
-            "metadata": html_metadata(points),
+            "metadata": html_metadata(analysis_points),
             "scope_indices": scope_index_map,
             "palettes": {
                 key: {label: rgb_to_hex(color) for label, color in palette.items()}
@@ -1350,10 +1475,11 @@ def run_pca_and_plots(
         }
 
     for layer in tqdm(layers, desc="Running per-layer PCA"):
+        layer_matrix = build_analysis_matrix(maps[layer], analysis_points, args.pca_input)
         layer_summary = {}
         for scope in scopes:
             indices = scope_index_map[scope]
-            scores, explained = fit_pca_scores(maps[layer], indices, device, args.pca_niter)
+            scores, explained = fit_pca_scores(layer_matrix, indices, device, args.pca_niter)
             scope_summary = {
                 "point_count": len(indices),
                 "explained_variance_ratio": explained,
@@ -1373,7 +1499,7 @@ def run_pca_and_plots(
                     / f"layer_{layer:02d}_{scope}_by_{plot_key}.png"
                 )
                 if not args.skip_static_plots:
-                    labels = category_values(points, indices, plot_key)
+                    labels = category_values(analysis_points, indices, plot_key)
                     title = (
                         f"{args.model.upper()} {scope.upper()} LAYER {layer:02d} "
                         f"BY {plot_key.upper().replace('_', ' ')}"
@@ -1413,13 +1539,16 @@ def main() -> None:
     output_dir = args.output_dir / args.model
     output_dir.mkdir(parents=True, exist_ok=True)
     layers = select_layers(model_name, args.layers)
-    points = build_points(args)
-    write_metadata(points, output_dir)
+    raw_points = build_points(args)
+    analysis_points = build_analysis_points(raw_points, args.pca_input)
+    write_metadata(analysis_points, output_dir)
 
     manifest = {
         "model": args.model,
         "model_name": model_name,
-        "point_count": len(points),
+        "point_count": len(analysis_points),
+        "activation_point_count": len(raw_points),
+        "pca_input": args.pca_input,
         "layers": layers,
         "limit": args.limit,
         "datasets": DATASETS,
@@ -1434,10 +1563,10 @@ def main() -> None:
         print(json.dumps(manifest, indent=2))
         return
 
-    activation_manifest = collect_activation_cache(points, args.model, model_name, layers, args, output_dir)
+    activation_manifest = collect_activation_cache(raw_points, args.model, model_name, layers, args, output_dir)
     if args.skip_plots:
         return
-    summary = run_pca_and_plots(points, layers, activation_manifest, args, output_dir)
+    summary = run_pca_and_plots(raw_points, analysis_points, layers, activation_manifest, args, output_dir)
     print(f"PCA summary saved to {output_dir / 'pca_summary.json'}")
     print(f"Multi-page PDF saved to {summary['pdf_file']}")
     if summary.get("html_file"):
