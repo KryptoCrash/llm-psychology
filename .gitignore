@@ -1,2 +1,5 @@
 env/*
 mmlu_cache/*
+__pycache__/
+*.py[cod]
+layer_sweep_pca_results/**/activations/*.mmap

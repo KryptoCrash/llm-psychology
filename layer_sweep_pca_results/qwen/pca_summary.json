@@ -1,0 +1,1496 @@
+{
+  "model": "qwen",
+  "model_name": "Qwen/Qwen3-8B",
+  "point_count": 9600,
+  "layers": {
+    "0": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.1609017252922058,
+          0.08495418727397919
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_00_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_00_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_00_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_00_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.13648422062397003,
+          0.09432290494441986
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_00_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_00_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_00_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_00_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.18697009980678558,
+          0.08595824986696243
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_00_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_00_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_00_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_00_bbh_by_point_type.png"
+        }
+      }
+    },
+    "1": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.16882474720478058,
+          0.08362144231796265
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_01_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_01_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_01_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_01_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.14445272088050842,
+          0.08790162205696106
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_01_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_01_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_01_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_01_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.1921554058790207,
+          0.07001129537820816
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_01_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_01_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_01_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_01_bbh_by_point_type.png"
+        }
+      }
+    },
+    "2": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.15455582737922668,
+          0.08980859816074371
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_02_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_02_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_02_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_02_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.13906711339950562,
+          0.08733967691659927
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_02_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_02_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_02_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_02_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.17453452944755554,
+          0.08490604907274246
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_02_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_02_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_02_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_02_bbh_by_point_type.png"
+        }
+      }
+    },
+    "3": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.1193426176905632,
+          0.10855983197689056
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_03_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_03_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_03_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_03_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.14684152603149414,
+          0.08930296450853348
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_03_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_03_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_03_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_03_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.1282552182674408,
+          0.1088058352470398
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_03_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_03_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_03_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_03_bbh_by_point_type.png"
+        }
+      }
+    },
+    "4": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.13194812834262848,
+          0.11309615522623062
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_04_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_04_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_04_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_04_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.16250105202198029,
+          0.08959128707647324
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_04_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_04_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_04_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_04_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.14274819195270538,
+          0.10328749567270279
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_04_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_04_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_04_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_04_bbh_by_point_type.png"
+        }
+      }
+    },
+    "5": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.17954877018928528,
+          0.10689646750688553
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_05_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_05_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_05_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_05_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.20199906826019287,
+          0.08716452866792679
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_05_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_05_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_05_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_05_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.1713782697916031,
+          0.10050266236066818
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_05_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_05_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_05_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_05_bbh_by_point_type.png"
+        }
+      }
+    },
+    "6": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.15693135559558868,
+          0.11796009540557861
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_06_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_06_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_06_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_06_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.18287593126296997,
+          0.0733732283115387
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_06_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_06_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_06_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_06_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.1527368575334549,
+          0.11295676976442337
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_06_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_06_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_06_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_06_bbh_by_point_type.png"
+        }
+      }
+    },
+    "7": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.1596280038356781,
+          0.1332099586725235
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_07_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_07_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_07_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_07_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.19505605101585388,
+          0.07605312764644623
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_07_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_07_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_07_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_07_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.15827076137065887,
+          0.13295339047908783
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_07_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_07_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_07_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_07_bbh_by_point_type.png"
+        }
+      }
+    },
+    "8": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.1936883181333542,
+          0.11601601541042328
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_08_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_08_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_08_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_08_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.23105479776859283,
+          0.0886087492108345
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_08_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_08_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_08_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_08_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.19381102919578552,
+          0.114560067653656
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_08_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_08_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_08_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_08_bbh_by_point_type.png"
+        }
+      }
+    },
+    "9": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.22167006134986877,
+          0.10103075206279755
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_09_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_09_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_09_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_09_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.26043128967285156,
+          0.07791183143854141
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_09_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_09_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_09_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_09_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.2239946871995926,
+          0.10551933199167252
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_09_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_09_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_09_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_09_bbh_by_point_type.png"
+        }
+      }
+    },
+    "10": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.22810643911361694,
+          0.08271036297082901
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_10_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_10_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_10_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_10_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.27468106150627136,
+          0.09399556368589401
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_10_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_10_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_10_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_10_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.22653378546237946,
+          0.05897325649857521
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_10_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_10_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_10_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_10_bbh_by_point_type.png"
+        }
+      }
+    },
+    "11": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.1967875063419342,
+          0.07135512679815292
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_11_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_11_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_11_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_11_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.2429114133119583,
+          0.08039002120494843
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_11_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_11_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_11_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_11_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.19598616659641266,
+          0.08474274724721909
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_11_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_11_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_11_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_11_bbh_by_point_type.png"
+        }
+      }
+    },
+    "12": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.1611182540655136,
+          0.07619478553533554
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_12_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_12_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_12_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_12_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.20664085447788239,
+          0.0673515573143959
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_12_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_12_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_12_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_12_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.16165541112422943,
+          0.10453690588474274
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_12_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_12_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_12_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_12_bbh_by_point_type.png"
+        }
+      }
+    },
+    "13": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.17102190852165222,
+          0.0809139832854271
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_13_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_13_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_13_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_13_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.22590579092502594,
+          0.06762058287858963
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_13_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_13_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_13_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_13_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.16553515195846558,
+          0.09679283201694489
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_13_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_13_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_13_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_13_bbh_by_point_type.png"
+        }
+      }
+    },
+    "14": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.15740224719047546,
+          0.06918340176343918
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_14_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_14_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_14_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_14_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.20572911202907562,
+          0.0653020441532135
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_14_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_14_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_14_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_14_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.15655210614204407,
+          0.10259266197681427
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_14_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_14_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_14_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_14_bbh_by_point_type.png"
+        }
+      }
+    },
+    "15": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.16151849925518036,
+          0.07298648357391357
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_15_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_15_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_15_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_15_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.2167845219373703,
+          0.06397344917058945
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_15_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_15_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_15_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_15_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.15886461734771729,
+          0.0658421516418457
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_15_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_15_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_15_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_15_bbh_by_point_type.png"
+        }
+      }
+    },
+    "16": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.16006992757320404,
+          0.0695062056183815
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_16_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_16_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_16_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_16_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.21099898219108582,
+          0.05027869716286659
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_16_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_16_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_16_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_16_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.15324141085147858,
+          0.10557663440704346
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_16_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_16_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_16_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_16_bbh_by_point_type.png"
+        }
+      }
+    },
+    "17": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.15169109404087067,
+          0.06879404187202454
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_17_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_17_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_17_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_17_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.21056339144706726,
+          0.0777067095041275
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_17_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_17_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_17_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_17_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.1500154286623001,
+          0.10272350907325745
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_17_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_17_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_17_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_17_bbh_by_point_type.png"
+        }
+      }
+    },
+    "18": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.13206671178340912,
+          0.08626104146242142
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_18_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_18_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_18_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_18_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.18857598304748535,
+          0.08804459869861603
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_18_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_18_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_18_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_18_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.13156746327877045,
+          0.10894806683063507
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_18_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_18_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_18_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_18_bbh_by_point_type.png"
+        }
+      }
+    },
+    "19": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.11675398051738739,
+          0.08343549072742462
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_19_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_19_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_19_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_19_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.16765174269676208,
+          0.08429393172264099
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_19_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_19_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_19_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_19_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.11840952187776566,
+          0.11216304451227188
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_19_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_19_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_19_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_19_bbh_by_point_type.png"
+        }
+      }
+    },
+    "20": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.10507378727197647,
+          0.0885552167892456
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_20_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_20_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_20_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_20_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.15635663270950317,
+          0.0920788124203682
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_20_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_20_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_20_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_20_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.11175379902124405,
+          0.09881558269262314
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_20_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_20_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_20_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_20_bbh_by_point_type.png"
+        }
+      }
+    },
+    "21": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.09540075808763504,
+          0.09128031134605408
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_21_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_21_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_21_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_21_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.1408935934305191,
+          0.06506363302469254
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_21_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_21_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_21_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_21_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.10415229201316833,
+          0.09473510831594467
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_21_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_21_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_21_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_21_bbh_by_point_type.png"
+        }
+      }
+    },
+    "22": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.08209831267595291,
+          0.07144820690155029
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_22_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_22_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_22_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_22_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.13350006937980652,
+          0.09355711936950684
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_22_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_22_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_22_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_22_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.10799038410186768,
+          0.062154676765203476
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_22_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_22_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_22_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_22_bbh_by_point_type.png"
+        }
+      }
+    },
+    "23": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.08128765970468521,
+          0.06926999241113663
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_23_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_23_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_23_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_23_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.13014571368694305,
+          0.08849648386240005
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_23_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_23_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_23_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_23_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.10571799427270889,
+          0.06751501560211182
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_23_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_23_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_23_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_23_bbh_by_point_type.png"
+        }
+      }
+    },
+    "24": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.07342599332332611,
+          0.0655023381114006
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_24_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_24_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_24_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_24_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.1342155635356903,
+          0.07177095860242844
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_24_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_24_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_24_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_24_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.10629647225141525,
+          0.07767922431230545
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_24_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_24_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_24_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_24_bbh_by_point_type.png"
+        }
+      }
+    },
+    "25": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.07446088641881943,
+          0.06152575835585594
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_25_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_25_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_25_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_25_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.12923462688922882,
+          0.07239408791065216
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_25_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_25_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_25_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_25_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.11083050817251205,
+          0.06759871542453766
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_25_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_25_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_25_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_25_bbh_by_point_type.png"
+        }
+      }
+    },
+    "26": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.06998304277658463,
+          0.052877023816108704
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_26_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_26_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_26_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_26_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.1253391057252884,
+          0.07211911678314209
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_26_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_26_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_26_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_26_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.10821473598480225,
+          0.08895422518253326
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_26_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_26_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_26_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_26_bbh_by_point_type.png"
+        }
+      }
+    },
+    "27": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.07636324316263199,
+          0.055015984922647476
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_27_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_27_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_27_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_27_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.11338093131780624,
+          0.06850165128707886
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_27_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_27_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_27_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_27_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.10626481473445892,
+          0.09025673568248749
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_27_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_27_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_27_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_27_bbh_by_point_type.png"
+        }
+      }
+    },
+    "28": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.0722401812672615,
+          0.05888567492365837
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_28_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_28_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_28_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_28_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.10221171379089355,
+          0.06439406424760818
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_28_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_28_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_28_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_28_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.10029256343841553,
+          0.09049097448587418
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_28_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_28_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_28_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_28_bbh_by_point_type.png"
+        }
+      }
+    },
+    "29": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.06308779120445251,
+          0.05208561569452286
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_29_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_29_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_29_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_29_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.09016311913728714,
+          0.059120263904333115
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_29_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_29_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_29_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_29_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.10000669956207275,
+          0.09006910026073456
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_29_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_29_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_29_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_29_bbh_by_point_type.png"
+        }
+      }
+    },
+    "30": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.06662625074386597,
+          0.05168503522872925
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_30_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_30_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_30_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_30_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.08426114171743393,
+          0.0557822622358799
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_30_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_30_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_30_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_30_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.105326808989048,
+          0.10128766298294067
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_30_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_30_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_30_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_30_bbh_by_point_type.png"
+        }
+      }
+    },
+    "31": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.06371887773275375,
+          0.05117260292172432
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_31_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_31_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_31_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_31_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.0777089074254036,
+          0.049876343458890915
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_31_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_31_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_31_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_31_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.10366057604551315,
+          0.0966835767030716
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_31_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_31_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_31_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_31_bbh_by_point_type.png"
+        }
+      }
+    },
+    "32": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.06041647493839264,
+          0.047621067613363266
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_32_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_32_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_32_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_32_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.07160092145204544,
+          0.03980439901351929
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_32_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_32_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_32_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_32_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.10407374054193497,
+          0.10080263763666153
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_32_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_32_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_32_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_32_bbh_by_point_type.png"
+        }
+      }
+    },
+    "33": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.06217239797115326,
+          0.05207647383213043
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_33_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_33_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_33_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_33_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.06715879589319229,
+          0.05084139108657837
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_33_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_33_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_33_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_33_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.10001029074192047,
+          0.08373352885246277
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_33_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_33_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_33_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_33_bbh_by_point_type.png"
+        }
+      }
+    },
+    "34": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.06435985863208771,
+          0.046440813690423965
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_34_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_34_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_34_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_34_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.07374132424592972,
+          0.043358590453863144
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_34_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_34_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_34_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_34_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.0970534086227417,
+          0.09385184198617935
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_34_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_34_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_34_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_34_bbh_by_point_type.png"
+        }
+      }
+    },
+    "35": {
+      "combined": {
+        "point_count": 9600,
+        "explained_variance_ratio": [
+          0.1544061303138733,
+          0.06777741760015488
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/combined/by_dataset/layer_35_combined_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/combined/by_mode/layer_35_combined_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/combined/by_prompt_style/layer_35_combined_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/combined/by_point_type/layer_35_combined_by_point_type.png"
+        }
+      },
+      "mmlu": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.17436130344867706,
+          0.054926369339227676
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/mmlu/by_dataset/layer_35_mmlu_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/mmlu/by_mode/layer_35_mmlu_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/mmlu/by_prompt_style/layer_35_mmlu_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/mmlu/by_point_type/layer_35_mmlu_by_point_type.png"
+        }
+      },
+      "bbh": {
+        "point_count": 4800,
+        "explained_variance_ratio": [
+          0.09419923275709152,
+          0.07533951848745346
+        ],
+        "plots": {
+          "dataset": "layer_sweep_pca_results/qwen/pngs/bbh/by_dataset/layer_35_bbh_by_dataset.png",
+          "mode": "layer_sweep_pca_results/qwen/pngs/bbh/by_mode/layer_35_bbh_by_mode.png",
+          "prompt_style": "layer_sweep_pca_results/qwen/pngs/bbh/by_prompt_style/layer_35_bbh_by_prompt_style.png",
+          "point_type": "layer_sweep_pca_results/qwen/pngs/bbh/by_point_type/layer_35_bbh_by_point_type.png"
+        }
+      }
+    }
+  },
+  "scopes": [
+    "combined",
+    "mmlu",
+    "bbh"
+  ],
+  "plot_by": [
+    "dataset",
+    "mode",
+    "prompt_style",
+    "point_type"
+  ],
+  "activation_manifest": "layer_sweep_pca_results/qwen/activations/activation_manifest.json",
+  "pdf_file": "layer_sweep_pca_results/qwen/layer_sweep_pca_all_plots.pdf"
+}
