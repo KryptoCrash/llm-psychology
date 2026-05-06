@@ -22,6 +22,16 @@ from layer_sweep import (
     query_oracle_vector,
 )
 
+POSITION_ALIASES = {
+    "assistant_start_of_turn_token": "assistant_start",
+}
+
+
+def normalize_position(position: str | None) -> str | None:
+    if position is None:
+        return None
+    return POSITION_ALIASES.get(position, position)
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -105,9 +115,10 @@ def aggregate_experiment_file(
     if args.limit is not None:
         examples = examples[: args.limit]
 
-    if data.get("position") != args.position:
+    source_position = data.get("position")
+    if normalize_position(source_position) != args.position:
         raise ValueError(
-            f"{path.name} was generated with position={data.get('position')}, "
+            f"{path.name} was generated with position={source_position}, "
             f"but the aggregate is running with --position={args.position}"
         )
     if data.get("activation_kind") and data.get("activation_kind") != args.activation_kind:
