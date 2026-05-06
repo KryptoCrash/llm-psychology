@@ -1,7 +1,7 @@
 """Sweep multi_actor runs across one or more layers and alphas.
 
-Loads Qwen3-8B once and the diffmeans dict from the .pt once, then for each
-(layer, alpha) pair:
+Loads the chosen model once and the diffmeans dict from the .pt once, then
+for each (layer, alpha) pair:
   - positive alpha → multi_actor mode '3'
   - negative alpha → multi_actor mode '10'
 runs one steered pass. Baselines (alpha=0) are layer-independent — exactly
@@ -25,7 +25,11 @@ import torch
 from multi_actor import MODEL_IDS, CausalLMRunner, run_experiment
 
 
-MODEL_NAME = "qwen"  # run_steering currently only loads Qwen3-8B
+# Maximum layer index per supported model (0..MAX inclusive).
+MODEL_MAX_LAYER = {
+    "qwen": 35,   # Qwen3-8B has 36 transformer blocks
+    "llama": 31,  # Llama-3.1-8B-Instruct has 32 transformer blocks
+}
 
 
 def fmt_alpha(a: float) -> str:
@@ -33,20 +37,20 @@ def fmt_alpha(a: float) -> str:
     return f"{a:g}"
 
 
-def steered_path(out_dir: Path, dataset: str, mode: str, layer: int, alpha: float) -> Path:
-    return out_dir / f"{MODEL_NAME}_{dataset}_{mode}_layer{layer}_alpha{fmt_alpha(alpha)}.json"
+def steered_path(out_dir: Path, model_name: str, dataset: str, mode: str, layer: int, alpha: float) -> Path:
+    return out_dir / f"{model_name}_{dataset}_{mode}_layer{layer}_alpha{fmt_alpha(alpha)}.json"
 
 
-def baseline_path(out_dir: Path, dataset: str, mode: str) -> Path:
-    return out_dir / f"{MODEL_NAME}_{dataset}_{mode}_baseline.json"
+def baseline_path(out_dir: Path, model_name: str, dataset: str, mode: str) -> Path:
+    return out_dir / f"{model_name}_{dataset}_{mode}_baseline.json"
 
 
-def find_existing_baseline(out_dir: Path, dataset: str, mode: str) -> Path | None:
+def find_existing_baseline(out_dir: Path, model_name: str, dataset: str, mode: str) -> Path | None:
     """Match canonical {mode}_baseline.json or any legacy {mode}_layerN_*baseline*.json."""
-    canonical = out_dir / f"{MODEL_NAME}_{dataset}_{mode}_baseline.json"
+    canonical = out_dir / f"{model_name}_{dataset}_{mode}_baseline.json"
     if canonical.exists():
         return canonical
-    matches = sorted(out_dir.glob(f"{MODEL_NAME}_{dataset}_{mode}_*baseline*.json"))
+    matches = sorted(out_dir.glob(f"{model_name}_{dataset}_{mode}_*baseline*.json"))
     return matches[0] if matches else None
 
 
@@ -68,10 +72,14 @@ def load_diffmeans_dict(path: Path) -> dict[int, torch.Tensor]:
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--model", choices=sorted(MODEL_MAX_LAYER), default="qwen",
+                    help="Which model to load. 'qwen'=Qwen/Qwen3-8B (36 layers), "
+                         "'llama'=meta-llama/Llama-3.1-8B-Instruct (32 layers).")
     ap.add_argument("--vector-path", type=Path, required=True,
                     help="Path to a .pt with a 'diffmeans' dict (layer-sweep format).")
     ap.add_argument("--layers", type=int, nargs="+", required=True,
-                    help="One or more layer indices in 0..35.")
+                    help="One or more layer indices. Valid range depends on --model "
+                         "(qwen: 0..35, llama: 0..31).")
     ap.add_argument("--alphas", type=float, nargs="+", required=True,
                     help="One or more nonzero alphas. Positive→mode '3', negative→mode '10'. "
                          "One baseline per mode present (layer-independent).")
@@ -86,11 +94,14 @@ def main():
                     help="Overwrite existing output files instead of skipping them.")
     args = ap.parse_args()
 
+    model_name = args.model
+    max_layer = MODEL_MAX_LAYER[model_name]
+
     if any(a == 0 for a in args.alphas):
         raise ValueError("--alphas must all be nonzero (positive→mode '3', negative→mode '10').")
-    bad_layers = [L for L in args.layers if not (0 <= L <= 35)]
+    bad_layers = [L for L in args.layers if not (0 <= L <= max_layer)]
     if bad_layers:
-        raise ValueError(f"--layers must all be in 0..35, got {bad_layers}")
+        raise ValueError(f"--layers must all be in 0..{max_layer} for {model_name}, got {bad_layers}")
     if len(set(args.layers)) != len(args.layers):
         raise ValueError(f"--layers contains duplicates: {args.layers}")
 
@@ -109,16 +120,16 @@ def main():
     # Plan: baselines first (layer-independent, one per mode), then steered.
     plan = []  # list of (kind, path, mode, layer-or-None, alpha-or-None)
     for mode in sorted(modes_present):
-        existing = find_existing_baseline(args.output_dir, args.dataset, mode)
+        existing = find_existing_baseline(args.output_dir, model_name, args.dataset, mode)
         if existing and not args.force:
             print(f"[skip] mode={mode} baseline already exists: {existing.name}")
         else:
-            plan.append(("baseline", baseline_path(args.output_dir, args.dataset, mode), mode, None, None))
+            plan.append(("baseline", baseline_path(args.output_dir, model_name, args.dataset, mode), mode, None, None))
 
     for L in sorted(args.layers):
         for a in sorted(args.alphas):
             mode = "3" if a > 0 else "10"
-            sp = steered_path(args.output_dir, args.dataset, mode, L, a)
+            sp = steered_path(args.output_dir, model_name, args.dataset, mode, L, a)
             if sp.exists() and not args.force:
                 print(f"[skip] layer={L} alpha={fmt_alpha(a)} mode={mode}: {sp.name}")
             else:
@@ -130,7 +141,8 @@ def main():
 
     n_baselines = sum(1 for p in plan if p[0] == "baseline")
     n_steered = sum(1 for p in plan if p[0] == "steered")
-    print(f"\nPlanned runs: {n_baselines} baseline(s) + {n_steered} steered = {len(plan)} total")
+    print(f"\nModel: {model_name} ({MODEL_IDS[model_name]})")
+    print(f"Planned runs: {n_baselines} baseline(s) + {n_steered} steered = {len(plan)} total")
     for kind, path, mode, L, a in plan[:30]:
         if kind == "baseline":
             print(f"  - mode={mode:<3} baseline                  → {path.name}")
@@ -139,21 +151,21 @@ def main():
     if len(plan) > 30:
         print(f"  ... and {len(plan) - 30} more")
 
-    runner = CausalLMRunner(MODEL_IDS[MODEL_NAME])
+    runner = CausalLMRunner(MODEL_IDS[model_name])
 
     for i, (kind, path, mode, L, a) in enumerate(plan, 1):
         print(f"\n[{i}/{len(plan)}]", end=" ")
         if kind == "baseline":
             print(f"BASELINE mode={mode} (alpha=0, seed={args.seed})")
             run_experiment(
-                MODEL_NAME, args.dataset, mode, args.explain,
+                model_name, args.dataset, mode, args.explain,
                 model=runner, output_file=str(path), batch_size=args.batch_size,
                 seed=args.seed,
             )
         else:
             print(f"STEERED mode={mode} layer={L} alpha={a} seed={args.seed}")
             run_experiment(
-                MODEL_NAME, args.dataset, mode, args.explain,
+                model_name, args.dataset, mode, args.explain,
                 model=runner, output_file=str(path), batch_size=args.batch_size,
                 steering_vector=diffmeans[L], steering_layer=L, steering_alpha=a,
                 seed=args.seed,
