@@ -1,0 +1,117 @@
+\section{Results}
+\label{sec:results}
+
+We evaluate Qwen on two controlled 100-item stimulus sets, one from MMLU and one
+from BBH. Each item was selected because the model suite could answer it
+correctly without social context, so the experiment measures susceptibility to
+incorrect peer answers rather than general benchmark accuracy. We report
+accuracy as correct answers among parseable responses, and conformity as the
+fraction of parseable responses that match the repeated incorrect peer answer.
+For MMLU base prompting, parse failures are non-negligible under social pressure;
+therefore strict accuracy, which counts unparseable responses as wrong, is also
+important when interpreting those runs.
+
+Unless otherwise noted, confidence intervals are 95\% item-bootstrap intervals
+computed by resampling the 100 stimulus items with replacement. Paired contrasts
+use the same resampled item indices in both conditions and paired permutation
+tests over all-item strict accuracy. These intervals quantify uncertainty over
+stimulus items conditional on the saved generations and peer-answer assignments;
+they do not capture decoding-seed variability.
+
+\paragraph{Repeated incorrect answers induce conformity.}
+Table~\ref{tab:qwen-ma-results} summarizes the standard multi-actor condition.
+In base prompting, Qwen's accuracy falls sharply as incorrect peer answers are
+repeated, while conformity rises. On MMLU, accuracy drops from 0.990 at baseline
+to 0.637 at $n=10$, with conformity rising to 0.363. On BBH, accuracy drops from
+0.970 to 0.610, with conformity rising to 0.390. Explanation prompting
+substantially attenuates this effect on both datasets.
+
+\begin{table}[t]
+  \caption{Qwen performance in the standard multi-actor condition. MA averages
+  are over $n=2,\ldots,10$; MA10 is the strongest repeated-peer condition.}
+  \label{tab:qwen-ma-results}
+  \centering
+  \small
+  \begin{tabular}{llrrrrr}
+    \toprule
+    Dataset & Prompt & Baseline acc & MA avg acc & MA avg conf & MA10 acc & MA10 conf \\
+    \midrule
+    MMLU & base    & 0.990 & 0.793 & 0.202 & 0.637 & 0.363 \\
+    MMLU & explain & 0.970 & 0.902 & 0.066 & 0.867 & 0.082 \\
+    BBH  & base    & 0.970 & 0.717 & 0.221 & 0.610 & 0.390 \\
+    BBH  & explain & 0.950 & 0.861 & 0.099 & 0.808 & 0.152 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\input{generated/qwen_bootstrap_tables}
+
+\paragraph{Conformity scales with group size.}
+Across the standard multi-actor runs for $n=2,\ldots,10$, group size is strongly
+positively correlated with conformity and negatively correlated with accuracy
+(Table~\ref{tab:qwen-scaling}). The scaling is strongest under base prompting:
+on MMLU, $r(n,\mathrm{conformity})=0.966$ and
+$r(n,\mathrm{accuracy})=-0.972$. Explanation prompting reduces but does not
+eliminate the group-size trend.
+
+\begin{table}[t]
+  \caption{Correlation between group size and Qwen behavior in the standard
+  multi-actor condition for $n=2,\ldots,10$.}
+  \label{tab:qwen-scaling}
+  \centering
+  \small
+  \begin{tabular}{llrr}
+    \toprule
+    Dataset & Prompt & $r(n,\mathrm{accuracy})$ & $r(n,\mathrm{conformity})$ \\
+    \midrule
+    MMLU & base    & -0.972 & 0.966 \\
+    MMLU & explain & -0.630 & 0.724 \\
+    BBH  & base    & -0.700 & 0.846 \\
+    BBH  & explain & -0.519 & 0.710 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Deliberation reduces conformity.}
+Adding an explanation requirement before the final answer improves robustness at
+high social pressure. At $n=10$, explanation prompting reduces MMLU conformity
+from 0.363 to 0.082 and increases accuracy from 0.637 to 0.867. On BBH, it
+reduces conformity from 0.390 to 0.152 and increases accuracy from 0.610 to
+0.808. The effect is smaller at low group sizes, where base conformity is already
+low, but it becomes large once repeated peer pressure accumulates.
+
+\paragraph{Question distillation is a stronger mitigation than devil's advocate
+prompting.}
+Table~\ref{tab:qwen-mitigations} compares question distillation (QD) and devil's
+advocate (DA) prompting against the matched $n=10$ multi-actor condition. QD is
+especially effective for MMLU base prompting, improving accuracy by 0.276 and
+reducing conformity by 0.313. QD also reduces BBH base conformity by 0.200. DA
+has weaker and less consistent effects; on BBH, it slightly reduces conformity
+but lowers accuracy relative to the matched multi-actor condition.
+
+\begin{table}[t]
+  \caption{Mitigation effects relative to matched $n=10$ multi-actor prompting.
+  Positive accuracy deltas indicate higher accuracy; negative conformity deltas
+  indicate lower conformity.}
+  \label{tab:qwen-mitigations}
+  \centering
+  \small
+  \begin{tabular}{llrrrr}
+    \toprule
+    Dataset & Prompt & QD acc $\Delta$ & QD conf $\Delta$ & DA acc $\Delta$ & DA conf $\Delta$ \\
+    \midrule
+    MMLU & base    &  0.276 & -0.313 &  0.060 & -0.072 \\
+    MMLU & explain &  0.031 & -0.061 &  0.019 &  0.021 \\
+    BBH  & base    &  0.110 & -0.200 & -0.040 & -0.040 \\
+    BBH  & explain &  0.032 & -0.022 & -0.030 & -0.010 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Parseability affects MMLU base accuracy.}
+The Qwen MMLU base runs have lower parse rates under social pressure than the
+other settings. Averaged over standard multi-actor conditions, parseable-response
+accuracy is 0.793, but strict accuracy is 0.694. By contrast, BBH base
+parseability is nearly perfect, so its parseable and strict accuracies are almost
+identical. This suggests that final reporting should include parse rate or use
+strict accuracy as the primary accuracy metric.

@@ -1,0 +1,13 @@
+dataset,prompt,metric,pearson_r,pearson_r_ci_low,pearson_r_ci_high
+mmlu,base,strict_accuracy,-0.812711,-0.899118,-0.640663
+mmlu,base,conformity,0.966486,0.898403,0.984750
+mmlu,base,strict_conformity,0.976815,0.916380,0.989507
+mmlu,explain,strict_accuracy,-0.194856,-0.708918,0.432637
+mmlu,explain,conformity,0.723546,0.168599,0.833855
+mmlu,explain,strict_conformity,0.717712,0.193649,0.837530
+bbh,base,strict_accuracy,-0.705793,-0.848609,-0.365095
+bbh,base,conformity,0.846157,0.699872,0.907966
+bbh,base,strict_conformity,0.845326,0.696780,0.908544
+bbh,explain,strict_accuracy,-0.543660,-0.754138,0.044188
+bbh,explain,conformity,0.709735,0.158472,0.814030
+bbh,explain,strict_conformity,0.702728,0.161120,0.810684
