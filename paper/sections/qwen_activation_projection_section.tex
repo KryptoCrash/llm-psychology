@@ -202,30 +202,59 @@ average the five largest remaining cosines:
   \right\}.
 \]
 Here $\operatorname{top}_k$ denotes the $k$th-largest cosine in the set.
-Table~\ref{tab:qwen-layer-top5-cosines} summarizes these per-layer scores by
-layer range. The layer 23--33 band has a much larger average top-neighbor
-cosine than earlier layers. Within this band, layers 28--32 all have
+Figure~\ref{fig:qwen-layer-top5-cosines} plots these per-layer scores. The
+layer 23--33 band has a much larger average top-neighbor cosine than earlier
+layers. Its mean $s_\ell$ is 0.859, compared with 0.477 for layers 0--9 and
+0.538 for layers 10--21. Within this band, layers 28--32 all have
 $s_\ell \geq 0.882$; layer 31 has the largest value, $s_{31}=0.904$.
 For layers 23--33, the mean pairwise cosine within the band is 0.752, whereas
 the mean cosine from those layers to layers outside the band is 0.126. Thus the
 oracle-positive residual layers are also a band of mutually similar diffmean
 directions, rather than isolated high-norm layers.
 
-\begin{table}[t]
+\begin{figure}[t]
   \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.9\linewidth,
+      height=5.0cm,
+      xmin=0,
+      xmax=35,
+      ymin=0.35,
+      ymax=0.95,
+      xlabel={Layer},
+      ylabel={Mean top-5 cosine $s_\ell$},
+      xtick={0,5,10,15,20,25,30,35},
+      ytick={0.4,0.5,0.6,0.7,0.8,0.9},
+      grid=both,
+      major grid style={draw=gray!25},
+      minor grid style={draw=gray!10},
+      tick align=outside,
+      legend style={draw=none, fill=none, at={(0.03,0.97)}, anchor=north west},
+    ]
+      \addplot[draw=none, fill=blue!10, forget plot] coordinates {
+        (22.5,0.35) (33.5,0.35) (33.5,0.95) (22.5,0.95)
+      } \closedcycle;
+      \addplot[
+        color=black,
+        mark=*,
+        mark size=1.3pt,
+        line width=0.8pt,
+      ] coordinates {
+        (0,0.396) (1,0.512) (2,0.524) (3,0.537) (4,0.513) (5,0.488)
+        (6,0.494) (7,0.443) (8,0.415) (9,0.451) (10,0.475)
+        (11,0.497) (12,0.494) (13,0.436) (14,0.453) (15,0.487)
+        (16,0.537) (17,0.563) (18,0.577) (19,0.621) (20,0.655)
+        (21,0.660) (22,0.692) (23,0.748) (24,0.796) (25,0.840)
+        (26,0.861) (27,0.865) (28,0.882) (29,0.895) (30,0.902)
+        (31,0.904) (32,0.890) (33,0.868) (34,0.795) (35,0.540)
+      };
+      \addlegendentry{$s_\ell$}
+    \end{axis}
+  \end{tikzpicture}
   \caption{Layer-wise neighborhood cosine scores for the MMLU $n=8$ residual
   diffmean. For each layer, $s_\ell$ is the mean cosine similarity to the five
-  most similar other layers.}
-  \label{tab:qwen-layer-top5-cosines}
-  \begin{tabular}{lrrr}
-    \toprule
-    Layers & Mean $s_\ell$ & Min. $s_\ell$ & Max. $s_\ell$ \\
-    \midrule
-    0--9 & 0.477 & 0.396 & 0.537 \\
-    10--21 & 0.538 & 0.436 & 0.660 \\
-    22 & 0.692 & 0.692 & 0.692 \\
-    23--33 & 0.859 & 0.748 & 0.904 \\
-    34--35 & 0.668 & 0.540 & 0.795 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+  most similar other layers, excluding self-comparisons. The shaded region marks
+  layers 23--33.}
+  \label{fig:qwen-layer-top5-cosines}
+\end{figure}
