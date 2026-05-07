@@ -1,46 +1,192 @@
-# LLM Psychology – Conformity Experiments
+# LLM Psychology Reproducibility
 
-This project investigates whether LLMs exhibit conformity bias: does a model change its answer to a multiple-choice question when it sees prior (incorrect) answers from other "participants"?
+This branch contains the code, raw JSON outputs, activation artifacts, and paper
+generated files needed to reproduce the NeurIPS paper results.
 
-The model used throughout is **Llama-3.2-3B-Instruct**, loaded via TransformerLens.
-Questions are drawn from the **MMLU** benchmark.
+The paper branch was pushed first. This branch is based on that `paper` tip and
+then adds reproducibility files copied from the experiment branches:
 
----
+- `origin/patching`: activation-steering scripts and `runs/activation_patching/`
+- `origin/new_activation_oracles`: activation-oracle layer-sweep JSON outputs
+- `paper`: paper text, behavioral outputs, projection outputs, figures, and
+  generated summaries
 
-## Pipeline
+## Setup
 
-### Step 1 – Build the question bank
-**`test_llama.py`** samples MMLU questions, prompts the model with no social context, and collects the first 25 questions it answers correctly. These become the controlled stimulus set: questions the model *can* answer correctly under neutral conditions.
+Use Python 3.11 or newer. A GPU is expected for Qwen3-8B model runs.
 
-Output: `correct_questions.json`, `results.json`
-
-### Step 2 – Run conformity conditions
-**`multi_actor.py`** re-runs the model on `correct_questions.json` under varying levels of social pressure. Pass `n` (total number of participants) as an argument — the model plays Participant n, and the n−1 prior participants all give the same incorrect answer.
-
-| n | Condition |
-|---|---|
-| 1 | Baseline — no prior participants shown |
-| 2 | One prior participant shown, answering incorrectly |
-| ≥3 | n−1 prior participants shown, all answering incorrectly |
-
-Output: `multi_actor_{n}_results.json`
-
-Run as:
-```
-python multi_actor.py 3   # 3 total participants, 2 prior wrong answers
-python multi_actor.py 10  # 10 total participants, 9 prior wrong answers
+```bash
+uv sync
+source .venv/bin/activate
 ```
 
-If the model's response doesn't contain a parseable `<answer>X</answer>` tag, the question is retried (up to 10 times, with sampling) before being marked unparseable.
+If Hugging Face requires credentials for model or adapter downloads:
 
----
+```bash
+huggingface-cli login
+```
 
-## Supporting files
+## Behavioral Experiments
 
-| File | Purpose |
-|---|---|
-| `explore_mmlu.py` | One-off script to inspect the MMLU dataset structure |
-| `test_transformerlens.py` | Sanity-check that TransformerLens loads and generates correctly |
-| `correct_questions.json` | The 25 MMLU questions used as stimuli (model answers these correctly at baseline) |
-| `mmlu_cache/` | Local cache of the downloaded MMLU dataset |
-| `env/` | Python virtual environment |
+The paper evaluates `Qwen/Qwen3-8B` on 100 MMLU and 100 BBH items that the model
+answers correctly without social context. The checked-in paper JSON files are
+`qwen_{mmlu,bbh}_{1..10,qd,da}_{base,explain}.json`.
+
+Regenerate all 48 behavioral runs:
+
+```bash
+python qwen_experiment.py
+```
+
+Regenerate one condition:
+
+```bash
+python multi_actor.py --model qwen --dataset mmlu --mode 10 --output-file qwen_mmlu_10_base.json
+python multi_actor.py --model qwen --dataset bbh --mode da --explain --output-file qwen_bbh_da_explain.json
+```
+
+Regenerate behavioral tables, confidence intervals, and paper figures:
+
+```bash
+python data_analysis/bootstrap_qwen_results.py
+python data_analysis/plot_qwen_participants.py
+```
+
+Outputs:
+
+- `paper/generated/qwen_bootstrap_results.json`
+- `paper/generated/qwen_condition_bootstrap.csv`
+- `paper/generated/qwen_contrast_tests.csv`
+- `paper/generated/qwen_trend_bootstrap.csv`
+- `paper/figures/qwen_conformity_by_participants.{pdf,png}`
+- `paper/figures/qwen_accuracy_by_participants.{pdf,png}`
+- `paper/figures/qwen_mitigation_conformity.{pdf,png}`
+
+## Diffmean Directions and Activation Oracles
+
+The main activation direction is the MMLU `n=8`
+`all_wrong_minus_random_answers` residual diffmean at assistant start. The paper
+also uses the MMLU `n=10` residual diffmean as a projection check.
+
+Recompute the checked-in diffmean tensors:
+
+```bash
+python layer_sweep.py --models qwen --dataset mmlu --mode 8 --limit 100 --activation-kind residual --position assistant_start --baseline random_answers --output-dir layer_sweep_results
+python layer_sweep.py --models qwen --dataset mmlu --mode 10 --limit 100 --activation-kind residual --position assistant_start --baseline random_answers --output-dir layer_sweep_results
+python layer_sweep.py --models qwen --dataset bbh --mode 4 --limit 100 --activation-kind residual --position assistant_start --baseline random_answers --output-dir layer_sweep_results
+```
+
+Recompute the activation-oracle runs used in the paper:
+
+```bash
+python layer_sweep.py --models qwen --dataset mmlu --mode 8 --limit 100 --activation-kind residual --position assistant_start --baseline random_answers --run-oracle --output-dir layer_sweep_results
+python layer_sweep.py --models qwen --dataset mmlu --mode 8 --limit 100 --activation-kind residual --position assistant_start --baseline no_participants --run-oracle --output-dir layer_sweep_results
+python layer_sweep.py --models qwen --dataset mmlu --mode 8 --limit 100 --activation-kind delta --position assistant_start --baseline random_answers --run-oracle --output-dir layer_sweep_results
+python layer_sweep.py --models qwen --dataset mmlu --mode 8 --limit 100 --activation-kind delta --position assistant_start --baseline no_participants --run-oracle --output-dir layer_sweep_results
+```
+
+Summarize oracle outputs for the paper:
+
+```bash
+python data_analysis/summarize_activation_oracle_outputs.py
+```
+
+Output:
+
+- `paper/generated/qwen_activation_oracle_summary.json`
+
+## Projection Analysis
+
+Projection analysis computes mean layer-23 assistant-start residual activations
+for each saved Qwen condition and projects each condition mean onto the MMLU
+diffmean direction.
+
+```bash
+python project_experiment_activations.py \
+  --reference layer_sweep_results/qwen/layer_sweep_qwen_mmlu_mode_8_base_residual_assistant_start_all_wrong_minus_random_answers_n8_100_diffmeans.pt \
+  --runs-dir . \
+  --output-dir projection_results \
+  --layer 23
+
+python project_experiment_activations.py \
+  --reference layer_sweep_results/qwen/layer_sweep_qwen_mmlu_mode_10_base_residual_assistant_start_all_wrong_minus_random_answers_n10_100_diffmeans.pt \
+  --runs-dir . \
+  --output-dir projection_results \
+  --layer 23
+
+python data_analysis/projection_correlation_analysis.py
+```
+
+Outputs:
+
+- `projection_results/qwen_experiment_mean_activation_projection_layer23_onto_*.json`
+- `paper/generated/qwen_projection_correlation_summary.json`
+- `paper/generated/qwen_projection_correlations.csv`
+- `paper/generated/qwen_projection_prompt_deltas.csv`
+
+The projection script uses `projection_results/cache/` when present. Pass
+`--overwrite` to recompute activations from model forward passes.
+
+## Layer-Wise Cosine Structure
+
+The layer-wise cosine structure section uses cosine similarities between
+diffmean vectors, primarily the MMLU `n=8` residual diffmeans.
+
+```bash
+python analyze_qwen_diffmean_cosines.py \
+  --source-dirs layer_sweep_results/qwen \
+  --output-dir diffmean_cosine_results/qwen_layer_sweep_recomputed \
+  --neighbor-k 5 \
+  --top-k 25
+```
+
+Outputs:
+
+- `diffmean_cosine_results/qwen_layer_sweep_recomputed/analysis.md`
+- `diffmean_cosine_results/qwen_layer_sweep_recomputed/layer_topk_neighbors.csv`
+- `diffmean_cosine_results/qwen_layer_sweep_recomputed/layer_topk_neighbors.json`
+- `diffmean_cosine_results/qwen_layer_sweep_recomputed/layer_matrices/`
+
+The plotted values in the paper are copied from these layer-neighbor results
+into `paper/sections/qwen_activation_projection_section.tex`.
+
+## Activation Steering
+
+Raw steering outputs and figures copied from `origin/patching` are in
+`runs/activation_patching/`. The paper heatmap uses the single-layer sweep, and
+the multi-layer table uses the `qwen_*_ablation/` all-layer runs.
+
+Single-layer steering sweep, using the MMLU `n=8` diffmean tensor:
+
+```bash
+VECTOR=layer_sweep_results/qwen/layer_sweep_qwen_mmlu_mode_8_base_residual_assistant_start_all_wrong_minus_random_answers_n8_100_diffmeans.pt
+
+python run_steering.py --model qwen --dataset mmlu --vector-path "$VECTOR" --layers $(seq 0 35) --alphas -4 -2 -1 1 2 4 --output-dir runs/activation_patching/qwen_mmlu --seed 42
+python run_steering.py --model qwen --dataset bbh --vector-path "$VECTOR" --layers $(seq 0 35) --alphas -4 -2 -1 1 2 4 --output-dir runs/activation_patching/qwen_bbh --seed 42
+```
+
+All-layer single-vector steering with the layer-23 MMLU diffmean:
+
+```bash
+python run_ablation.py --dataset mmlu --mode 3 --alphas 0.1 --layer 23 --baseline --output-dir runs/activation_patching/qwen_mmlu_ablation --seed 42
+python run_ablation.py --dataset mmlu --mode 10 --alphas -0.1 --layer 23 --baseline --output-dir runs/activation_patching/qwen_mmlu_ablation --seed 42
+python run_ablation.py --dataset bbh --mode 3 --alphas 0.1 --layer 23 --baseline --output-dir runs/activation_patching/qwen_bbh_ablation --seed 42
+python run_ablation.py --dataset bbh --mode 10 --alphas -0.1 --layer 23 --baseline --output-dir runs/activation_patching/qwen_bbh_ablation --seed 42
+```
+
+The checked-in paper heatmap is:
+
+- `paper/figures/fig2_heatmap_dconf.png`
+
+The original patching branch also includes exploratory steering figures under
+`runs/activation_patching/figures/`.
+
+## Build the Paper
+
+```bash
+cd paper
+latexmk -pdf main.tex
+```
+
+The main paper source is `paper/main.tex`; section files are in
+`paper/sections/`.

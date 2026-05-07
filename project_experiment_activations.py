@@ -30,7 +30,7 @@ def parse_args() -> argparse.Namespace:
             "all_wrong_minus_random_answers_n8_100_diffmeans.pt"
         ),
     )
-    parser.add_argument("--runs-dir", type=Path, default=Path("runs/qwen"))
+    parser.add_argument("--runs-dir", type=Path, default=Path("."))
     parser.add_argument("--output-dir", type=Path, default=Path("projection_results"))
     parser.add_argument("--layer", type=int, default=23)
     parser.add_argument("--position", default="assistant_start")
@@ -45,10 +45,11 @@ def parse_args() -> argparse.Namespace:
 
 def discover_experiments(runs_dir: Path) -> list[Path]:
     paths = []
-    for path in sorted(runs_dir.glob("*/*.json")):
-        if EXPERIMENT_RE.fullmatch(path.name):
-            paths.append(path)
-    return paths
+    for pattern in ("*.json", "*/*.json"):
+        for path in sorted(runs_dir.glob(pattern)):
+            if EXPERIMENT_RE.fullmatch(path.name):
+                paths.append(path)
+    return sorted(set(paths))
 
 
 def load_reference(path: Path, layer: int) -> tuple[torch.Tensor, dict]:

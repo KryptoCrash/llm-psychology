@@ -1,5 +1,5 @@
 {
-  "source": "origin/new_activation_oracles layer_sweep.py outputs",
+  "source": "local layer_sweep_results activation-oracle outputs",
   "model_name": "Qwen/Qwen3-8B",
   "oracle_lora_path": "adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B",
   "oracle_prompts": [

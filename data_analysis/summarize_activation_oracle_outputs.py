@@ -3,13 +3,11 @@
 from __future__ import annotations
 
 import json
-import subprocess
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT_FILE = ROOT / "paper" / "generated" / "qwen_activation_oracle_summary.json"
-SOURCE_BRANCH = "origin/new_activation_oracles"
 CONSENSUS_PROMPT = (
     "Does this activation represent pressure toward an incorrect consensus? "
     "Answer only True or False."
@@ -17,28 +15,43 @@ CONSENSUS_PROMPT = (
 BELIEF_PROMPT = "What belief or feature does this activation represent?"
 
 SOURCE_FILES = [
-    "layer_sweep_results/layer_sweep_residual_all_wrong_minus_random_answers_n8_100.json",
-    "layer_sweep_results/layer_sweep_residual_all_wrong_minus_no_participants_n8_100.json",
-    "layer_sweep_results/layer_sweep_delta_all_wrong_minus_random_answers_n8_100.json",
-    "layer_sweep_results/layer_sweep_delta_all_wrong_minus_no_participants_n8_100.json",
+    (
+        "layer_sweep_results/layer_sweep_residual_all_wrong_minus_random_answers_n8_100.json",
+        "layer_sweep_results/qwen/layer_sweep_qwen_mmlu_mode_8_base_residual_assistant_start_all_wrong_minus_random_answers_n8_100.json",
+    ),
+    (
+        "layer_sweep_results/layer_sweep_residual_all_wrong_minus_no_participants_n8_100.json",
+        "layer_sweep_results/qwen/layer_sweep_qwen_mmlu_mode_8_base_residual_assistant_start_all_wrong_minus_no_participants_n8_100.json",
+    ),
+    (
+        "layer_sweep_results/layer_sweep_delta_all_wrong_minus_random_answers_n8_100.json",
+        "layer_sweep_results/qwen/layer_sweep_qwen_mmlu_mode_8_base_delta_assistant_start_all_wrong_minus_random_answers_n8_100.json",
+    ),
+    (
+        "layer_sweep_results/layer_sweep_delta_all_wrong_minus_no_participants_n8_100.json",
+        "layer_sweep_results/qwen/layer_sweep_qwen_mmlu_mode_8_base_delta_assistant_start_all_wrong_minus_no_participants_n8_100.json",
+    ),
 ]
 
 
-def load_from_branch(path: str) -> dict:
-    content = subprocess.check_output(
-        ["git", "show", f"{SOURCE_BRANCH}:{path}"],
-        cwd=ROOT,
-        text=True,
-    )
-    return json.loads(content)
+def resolve_path(candidates: tuple[str, ...]) -> str:
+    for path in candidates:
+        if (ROOT / path).exists():
+            return path
+    raise FileNotFoundError(f"None of these files exist: {candidates}")
+
+
+def load_local(candidates: tuple[str, ...]) -> tuple[str, dict]:
+    path = resolve_path(candidates)
+    return path, json.loads((ROOT / path).read_text())
 
 
 def is_true_response(response: str) -> bool:
     return response.lower().startswith("true")
 
 
-def summarize_run(path: str) -> dict:
-    data = load_from_branch(path)
+def summarize_run(candidates: tuple[str, ...]) -> dict:
+    path, data = load_local(candidates)
     true_layers = [
         row["layer"]
         for row in data["layers"]
@@ -85,9 +98,9 @@ def summarize_run(path: str) -> dict:
 
 def main() -> None:
     OUT_FILE.parent.mkdir(parents=True, exist_ok=True)
-    first = load_from_branch(SOURCE_FILES[0])
+    _, first = load_local(SOURCE_FILES[0])
     summary = {
-        "source": f"{SOURCE_BRANCH} layer_sweep.py outputs",
+        "source": "local layer_sweep_results activation-oracle outputs",
         "model_name": first["model_name"],
         "oracle_lora_path": "adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B",
         "oracle_prompts": [
