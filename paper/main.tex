@@ -16,7 +16,7 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 
-\title{A residual-stream signature of conformity in multi-agent prompts}
+\title{Mechanistic Interpretability of Conformity in LLMs}
 
 \author{Anonymous Authors}
 
@@ -25,21 +25,25 @@
 \maketitle
 
 \begin{abstract}
-LLMs increasingly operate in settings where they observe answers from other
-agents before responding. We study an Asch-style setting in which Qwen3-8B
-answers MMLU and BBH items it solves without social context, then sees repeated
-incorrect answers from prior ``participants.'' At ten participants, accuracy
-falls from 0.990 to 0.637 on MMLU and from 0.970 to 0.610 on BBH, while
-conformity to the repeated wrong answer rises to 0.363 and 0.390. Explanation
-prompting and question distillation reduce conformity. Difference-of-means
-directions comparing all-wrong peer contexts to random-peer-answer contexts are
-identified by an activation oracle as incorrect-consensus pressure in a
-late-middle layer band. At layer 23, MMLU projection scores increase with
-participant count, and layer-wise cosine structure shows a coherent MMLU
-contrast direction across layers 23--33. Activation steering with the layer-23
-direction increases conformity on $n=3$ prompts and reduces it on $n=10$
-prompts, giving causal evidence that this residual-stream direction contributes
-to Qwen's conformity behavior.
+LLMs increasingly operate in multi-agent and conversational settings, and recent
+behavioral work shows that they can conform to a unanimous incorrect majority,
+mirroring Asch's classical findings in humans. While mechanistic
+interpretability has been used to characterize adjacent social-compliance
+phenomena such as sycophancy, the internal representations that support
+conformity remain less understood. We address this gap by replicating and
+extending Asch-style conformity experiments in Qwen3-8B on MMLU and BIG-Bench
+Hard items that the model answers correctly without social context. We find that
+repeated incorrect peer answers reliably pull the model away from otherwise
+available answers, that this effect grows with the number of agreeing
+participants, and that explanation prompting and question distillation reduce
+conformity. We then apply difference-of-means (DiffMean) analysis to residual
+stream activations, comparing all-wrong peer contexts with random-peer-answer
+controls, and use activation oracles, projection analysis, and layer-wise cosine
+structure to localize a coherent representation of incorrect-consensus pressure
+in a late-middle layer band. Finally, activation steering with this direction
+both induces conformity in low-pressure prompts and suppresses it in
+high-pressure prompts, suggesting that peer-majority conformity is supported by
+a detectable and steerable residual-stream feature.
 \end{abstract}
 
 \section{Introduction}
