@@ -25,25 +25,25 @@
 \maketitle
 
 \begin{abstract}
-Language models are often evaluated as isolated question-answering systems, but
-deployed assistants increasingly see answers, rationales, or tool outputs from
-other agents. We study a controlled setting in which Qwen3-8B sees MMLU and BBH
-items it answered correctly without social context, then sees repeated
-incorrect answers from prior ``participants.'' Repetition reliably changes
-behavior: at ten participants, accuracy among parseable responses falls
-from 0.990 to 0.637 on MMLU and from 0.970 to 0.610 on BBH, while conformity to
-the repeated wrong answer rises to 0.363 and 0.390. Requiring an explanation
-before the final answer substantially reduces this effect. Question distillation
-also reduces conformity more consistently than devil's-advocate prompting in
-these experiments. We then test whether the social manipulation is linearly
-represented in the residual stream. Difference-of-means directions comparing
-all-wrong peer contexts to random-peer-answer contexts are labeled by an
-activation oracle as incorrect-consensus pressure in a late-middle layer band.
-At layer 23, MMLU-derived projection scores increase with participant count
-within MMLU while showing weak transfer to BBH. A layer-wise cosine analysis
-finds a high-similarity band among the MMLU diffmean directions in layers
-23--33. The activation analysis localizes a residual-stream correlate of the
-social manipulation.
+LLMs increasingly operate in multi-agent and conversational settings where they
+observe answers from other agents before responding. We study a controlled
+Asch-style setting in which Qwen3-8B answers MMLU and BBH items that it solves
+without social context, then sees repeated incorrect answers from prior
+``participants.'' Repetition reliably changes behavior: at ten participants,
+accuracy among parseable responses falls from 0.990 to 0.637 on MMLU and from
+0.970 to 0.610 on BBH, while conformity to the repeated wrong answer rises to
+0.363 and 0.390. Explanation prompting and question distillation reduce
+conformity in these experiments. We then analyze whether the social
+manipulation is represented in the residual stream. Difference-of-means
+directions comparing all-wrong peer contexts to random-peer-answer contexts are
+identified by an activation oracle as incorrect-consensus pressure in a
+late-middle layer band. At layer 23, MMLU-derived projection scores increase
+with participant count within MMLU while transferring weakly to BBH, and
+layer-wise cosine structure shows a coherent MMLU contrast direction across
+layers 23--33. Finally, activation steering with the layer-23 direction
+increases conformity on $n=3$ prompts and reduces it on $n=10$ prompts,
+providing causal evidence that this residual-stream direction contributes to
+Qwen's conformity behavior.
 \end{abstract}
 
 \section{Introduction}
@@ -77,8 +77,44 @@ We then examine Qwen's internal activations. Following work on contrastive
 activation directions \citep{panickssery2024caa,haon2025vla}, we construct
 difference-of-means directions between repeated-wrong and random-answer peer
 contexts at the assistant-start token. This yields an empirical localization,
-projection, and layer-wise cosine analysis of a social pressure manipulation,
-paired with behavioral mitigations and limitations on causal interpretation.
+projection, layer-wise cosine analysis, and activation-steering test of a
+social pressure manipulation.
+
+\section{Related work}
+\label{sec:related-work}
+
+\paragraph{Conformity and sycophancy in language models.}
+Asch's conformity experiments showed that a unanimous incorrect majority can
+alter human judgments \citep{asch1951effects}. Recent work adapts this paradigm
+to language models, finding that conformity varies with group size, unanimity,
+difficulty, uncertainty, and source characteristics
+\citep{zhu2025conformity,weng2025benchform,bellina2026conformity,zhong2025disentangling}.
+Conformity is related to sycophancy, where models match a user's stated view
+even when doing so conflicts with independent correctness
+\citep{perez2023sycophancy,sharma2023sycophancy}. Prompting interventions can
+reduce these behaviors, but behavioral mitigation alone does not identify the
+internal representation being modified.
+
+\paragraph{Linear activation directions.}
+Prior work has found behaviorally meaningful directions in language-model
+activations for truth, honesty, refusal, and persona-like traits
+\citep{burns2023discovering,marks2024geometry,arditi2024refusal,chen2025persona}.
+Representation engineering and contrastive activation addition use
+difference-of-means directions as population-level representations that can be
+monitored or steered at inference time
+\citep{zou2023representation,panickssery2024caa}. These methods motivate our
+use of all-wrong-minus-random diffmeans as candidate directions for the social
+pressure manipulation.
+
+\paragraph{Activation explanation and causal tests.}
+Linear directions require validation beyond diagnostic separability: a probe or
+direction can correlate with a property without controlling the model's
+behavior \citep{alain2017understanding,belinkov2022probing}. We therefore use
+activation oracles as a semantic localization tool
+\citep{karvonen2025activation} and activation steering as an intervention on
+the residual stream. This follows the broader use of activation patching and
+steering to test whether identified internal states influence model outputs
+\citep{meng2022locating,wang2023interpretability,panickssery2024caa}.
 
 \section{Experimental setup}
 \label{sec:setup}
@@ -127,6 +163,8 @@ not include decoding-seed variation.
 
 \input{sections/qwen_activation_projection_section.tex}
 
+\input{sections/causal_verification.tex}
+
 \section{Discussion}
 
 The behavioral results reproduce the central conformity pattern of
@@ -147,7 +185,10 @@ MMLU, and explanation prompting shifts condition means downward. The same MMLU
 directions do not align cleanly with BBH, so the projection result should be
 read as a within-MMLU localization. The layer-wise cosine analysis gives a
 separate check on the layer sweep: the MMLU $n=8$ diffmeans in layers 23--33
-are much more similar to nearby diffmeans than earlier layers are.
+are much more similar to nearby diffmeans than earlier layers are. Activation
+steering provides an intervention check: adding the layer-23 direction increases
+conformity on $n=3$ prompts, and subtracting it reduces conformity on $n=10$
+prompts, with stronger suppression on MMLU than BBH.
 
 \section{Limitations}
 \label{sec:limitations}
@@ -160,11 +201,15 @@ families, or arbitrary benchmark samples. The selected-item design is useful for
 isolating social susceptibility but intentionally overstates baseline accuracy
 relative to ordinary benchmark evaluation.
 
-The activation analysis is descriptive. The activation oracle is itself a model
-component, and its labels are evidence to inspect rather than ground truth. The
-projection analysis uses mean activations at a single position and selected
-layers, and the cosine analysis only compares diffmean directions across layers,
-so both can miss token-local mechanisms or more distributed representations.
+The activation analysis is still limited. The activation oracle is itself a
+model component, and its labels are evidence to inspect rather than ground
+truth. The projection analysis uses mean activations at a single position and
+selected layers, and the cosine analysis only compares diffmean directions
+across layers, so both can miss token-local mechanisms or more distributed
+representations. The steering results establish that the direction can influence
+behavior under these interventions, but they do not identify a complete
+mechanism or rule out other internal features that also contribute to
+conformity.
 
 \section{Reproducibility and ethics}
 \label{sec:reproducibility}
@@ -176,8 +221,9 @@ activation-oracle summaries, projection correlations, and layer-wise cosine
 comparisons are generated by
 \texttt{data\_analysis/summarize\_activation\_oracle\_outputs.py},
 \texttt{data\_analysis/projection\_correlation\_analysis.py}, and
-\texttt{analyze\_qwen\_diffmean\_cosines.py}. The Qwen result files and
-generated CSV/JSON summaries are included with the draft. The
+\texttt{analyze\_qwen\_diffmean\_cosines.py}. Section~\ref{sec:causal-verification}
+reports the activation-steering protocol and summary results. The Qwen result
+files and generated CSV/JSON summaries are included with the draft. The
 experiments use public benchmarks and open model weights; no human subjects or
 crowdsourced workers are involved.
 
@@ -192,23 +238,44 @@ analysis of a failure mode and report limitations on generalization and control.
 {\small
 \begin{thebibliography}{99}
 
+\bibitem[Alain and Bengio(2017)]{alain2017understanding}
+Guillaume Alain and Yoshua Bengio.
+\newblock Understanding intermediate layers using linear classifier probes.
+\newblock In \emph{International Conference on Learning Representations
+Workshop}, 2017.
+
+\bibitem[Arditi et~al.(2024)]{arditi2024refusal}
+Andy Arditi, Oscar Balcells Obeso, Aaquib Syed, Daniel Paleka, Nina Rimsky,
+Wes Gurnee, and Neel Nanda.
+\newblock Refusal in language models is mediated by a single direction.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2024.
+
 \bibitem[Asch(1951)]{asch1951effects}
 Solomon E. Asch.
 \newblock Effects of group pressure upon the modification and distortion of
 judgments.
 \newblock In H. Guetzkow, editor, \emph{Groups, Leadership and Men}, 1951.
 
-\bibitem[Basu et~al.(2026)]{basu2026actionability}
-Sanjay Basu, Sadiq Y. Patel, Parth Sheth, Bhairavi Muralidharan, Namrata
-Elamaran, Aakriti Kinra, John Morgan, and Rajaie Batniji.
-\newblock Interpretability without actionability: mechanistic methods cannot
-correct language model errors despite near-perfect internal representations.
-\newblock \emph{arXiv preprint arXiv:2603.18353}, 2026.
-
 \bibitem[Bellina et~al.(2026)]{bellina2026conformity}
 Alessandro Bellina, Giordano De Marzo, and David Garcia.
 \newblock Conformity and social impact on AI agents.
 \newblock \emph{arXiv preprint arXiv:2601.05384}, 2026.
+
+\bibitem[Belinkov(2022)]{belinkov2022probing}
+Yonatan Belinkov.
+\newblock Probing classifiers: Promises, shortcomings, and advances.
+\newblock \emph{Computational Linguistics}, 48(1):207--219, 2022.
+
+\bibitem[Burns et~al.(2023)]{burns2023discovering}
+Collin Burns, Haotian Ye, Dan Klein, and Jacob Steinhardt.
+\newblock Discovering latent knowledge in language models without supervision.
+\newblock In \emph{International Conference on Learning Representations}, 2023.
+
+\bibitem[Chen et~al.(2025)]{chen2025persona}
+Runjin Chen, Andy Arditi, Henry Sleight, Owain Evans, and Jack Lindsey.
+\newblock Persona vectors: Monitoring and controlling character traits in
+language models.
+\newblock \emph{arXiv preprint arXiv:2507.21509}, 2025.
 
 \bibitem[H\"aon et~al.(2025)]{haon2025vla}
 Bear H\"aon, Kaylene Stocking, Ian Chuang, and Claire Tomlin.
@@ -222,16 +289,46 @@ Song, and Jacob Steinhardt.
 \newblock Measuring massive multitask language understanding.
 \newblock In \emph{International Conference on Learning Representations}, 2021.
 
+\bibitem[Karvonen et~al.(2025)]{karvonen2025activation}
+Adam Karvonen, James Chua, Cl\'ement Dumas, Kit Fraser-Taliente, Subhash
+Kantamneni, Julian Minder, Euan Ong, Arnab Sen Sharma, Daniel Wen, Owain Evans,
+and Samuel Marks.
+\newblock Activation oracles: Training and evaluating LLMs as general-purpose
+activation explainers.
+\newblock \emph{arXiv preprint arXiv:2512.15674}, 2025.
+
+\bibitem[Marks and Tegmark(2024)]{marks2024geometry}
+Samuel Marks and Max Tegmark.
+\newblock The geometry of truth: Emergent linear structure in large language
+model representations of true/false datasets.
+\newblock \emph{arXiv preprint arXiv:2310.06824}, 2024.
+
+\bibitem[Meng et~al.(2022)]{meng2022locating}
+Kevin Meng, David Bau, Alex Andonian, and Yonatan Belinkov.
+\newblock Locating and editing factual associations in GPT.
+\newblock \emph{Advances in Neural Information Processing Systems}, 2022.
+
 \bibitem[Panickssery et~al.(2024)]{panickssery2024caa}
 Nina Panickssery, Nick Gabrieli, Julian Schulz, Meg Tong, Evan Hubinger, and
 Alexander Matt Turner.
 \newblock Steering Llama 2 via contrastive activation addition.
 \newblock \emph{arXiv preprint arXiv:2312.06681}, 2024.
 
+\bibitem[Perez et~al.(2023)]{perez2023sycophancy}
+Ethan Perez et~al.
+\newblock Simple synthetic data reduces sycophancy in large language models.
+\newblock \emph{arXiv preprint arXiv:2308.03958}, 2023.
+
 \bibitem[Qwen Team(2025)]{qwen2025technical}
 Qwen Team.
 \newblock Qwen3 technical report.
 \newblock \emph{arXiv preprint arXiv:2505.09388}, 2025.
+
+\bibitem[Sharma et~al.(2023)]{sharma2023sycophancy}
+Mrinank Sharma, Meg Tong, Tomasz Korbak, David Duvenaud, Amanda Askell, Samuel
+R. Bowman, and Ethan Perez.
+\newblock Towards understanding sycophancy in language models.
+\newblock \emph{arXiv preprint arXiv:2310.13548}, 2023.
 
 \bibitem[Suzgun et~al.(2023)]{suzgun2023bbh}
 Mirac Suzgun, Nathan Scales, Nathanael Sch\"arli, Sebastian Gehrmann, Yi Tay,
@@ -240,6 +337,19 @@ Jason Wei.
 \newblock Challenging BIG-Bench tasks and whether chain-of-thought can solve
 them.
 \newblock In \emph{Findings of ACL}, 2023.
+
+\bibitem[Wang et~al.(2023)]{wang2023interpretability}
+Kevin Wang, Alexandre Variengien, Arthur Conmy, Buck Shlegeris, and Jacob
+Steinhardt.
+\newblock Interpretability in the wild: A circuit for indirect object
+identification in GPT-2 small.
+\newblock In \emph{International Conference on Learning Representations}, 2023.
+
+\bibitem[Weng et~al.(2025)]{weng2025benchform}
+Zhiyuan Weng, Guikun Chen, and Wenguan Wang.
+\newblock Do as we do, not as you think: The conformity of large language
+models.
+\newblock In \emph{International Conference on Learning Representations}, 2025.
 
 \bibitem[Zhong et~al.(2025)]{zhong2025disentangling}
 Huixin Zhong, Yanan Liu, Qi Cao, Shijin Wang, Zijing Ye, Zimu Wang, and Shiyao
@@ -252,6 +362,14 @@ uncertainty-moderated dual-process mechanism.
 Xiaochen Zhu, Caiqi Zhang, Tom Stafford, Nigel Collier, and Andreas Vlachos.
 \newblock Conformity in large language models.
 \newblock \emph{arXiv preprint arXiv:2410.12428}, 2025.
+
+\bibitem[Zou et~al.(2023)]{zou2023representation}
+Andy Zou, Long Phan, Sarah Chen, James Campbell, Phillip Guo, Richard Ren,
+Alexander Pan, Xuwang Yin, Mantas Mazeika, Ann-Kathrin Dombrowski, Shashwat
+Goel, Nathaniel Li, Michael J. Byun, Zifan Wang, Alex Mallen, Steven Basart,
+Sanmi Koyejo, Dawn Song, Matt Fredrikson, J. Zico Kolter, and Dan Hendrycks.
+\newblock Representation engineering: A top-down approach to AI transparency.
+\newblock \emph{arXiv preprint arXiv:2310.01405}, 2023.
 
 \end{thebibliography}
 }

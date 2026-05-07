@@ -58,7 +58,8 @@ can produce in the matched no-peer setting.
 
 \paragraph{Conformity scales with group size.}
 Across the standard multi-actor conditions for $n=2,\ldots,10$, group size is
-strongly positively correlated with conformity and negatively correlated with accuracy
+strongly positively correlated with conformity and negatively correlated with
+accuracy
 (Figures~\ref{fig:qwen-conformity-participants}--\ref{fig:qwen-accuracy-participants}).
 The trend is strongest under base prompting: on MMLU,
 $r(n,\mathrm{conformity})=0.966$ (95\% CI [0.898, 0.985]) and
@@ -79,9 +80,9 @@ reduces conformity from 0.390 to 0.152 and increases accuracy from 0.610 to
 0.329], $p<0.001$) and +0.198 on BBH (95\% CI [0.090, 0.308],
 $p<0.001$). The effect is smaller at low group sizes, where base
 conformity is already low, but it becomes large once repeated peer pressure
-accumulates. The intervention has the most room to help when the repeated
-answer has already become a strong cue, so its effect is concentrated at large
-participant counts.
+accumulates. Because low-$n$ base conformity is already small, most of the
+measured gain comes from larger participant counts, where the repeated answer is
+more often selected.
 
 \paragraph{Question distillation is more consistent than devil's advocate
 prompting.}
@@ -98,10 +99,11 @@ borderline under the paired permutation test (+0.110, 95\% CI [0.010, 0.210],
 $p=0.063$). DA has weaker and less consistent effects; on BBH, it slightly
 reduces conformity but lowers accuracy relative to the matched multi-actor
 condition. QD removes the repeated list of individual answers while preserving
-the information that the prior participants agree, so its effect measures the
-cost of listing the same answer repeatedly. DA breaks unanimity by adding a
-competing peer response; the BBH accuracy drop shows that breaking unanimity
-does not guarantee recovery of the model's original answer.
+the information that the prior participants agree. Its improvement therefore
+shows that repeated presentation contributes beyond the statement of agreement
+alone. DA breaks unanimity by adding a competing peer response; the BBH accuracy
+drop shows that this prompt change does not guarantee recovery of the model's
+original answer.
 
 \begin{figure}[t]
   \centering

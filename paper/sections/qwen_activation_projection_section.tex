@@ -26,8 +26,9 @@ with $N=100$ items for each tensor. The random-answer contrast preserves
 much of the prompt length and participant-list structure, so the contrast
 isolates repeated agreement on the same wrong answer. The main direction in
 this section is the MMLU $n=8$ \texttt{all\_wrong\_minus\_random\_answers}
-residual direction, a high-pressure condition with nontrivial behavioral
-conformity (0.281 under base prompting). We use the analogous MMLU $n=10$
+residual direction, where the model observes seven repeated incorrect peer
+answers and has nontrivial behavioral conformity (0.281 under base prompting).
+We use the analogous MMLU $n=10$
 direction as a check in the projection analysis below.
 
 \paragraph{Activation oracle responses.}
@@ -128,19 +129,20 @@ form that lowers conformity also moves the mean state away from the
 repeated-wrong direction.
 
 These projections provide a representation-level validation of the diffmean. A
-contrastive direction has value beyond its construction examples when it gives
-structure to held-out condition means. Here, the MMLU direction orders MMLU
-condition means by participant count, so it tracks the amount of repeated
-wrong-answer evidence in the residual stream. Its weak BBH correlations bound
-the result to the MMLU dataset and prompt family in these runs.
+contrastive direction is more informative when it gives structure to the broader
+set of condition means, beyond the pairwise activation difference used to define
+it. Here, the MMLU direction orders MMLU condition means by participant count,
+so it tracks the amount of repeated wrong-answer evidence in the residual
+stream. Its weak BBH correlations bound the result to the MMLU dataset and
+prompt family in these runs.
 
 \paragraph{Layer-wise cosine structure.}
 We use the layer-wise cosine matrix of the MMLU $n=8$ residual diffmeans to
 test whether the oracle-positive band is geometrically clustered. Because
 $d^\ell$ is a paired all-wrong-minus-random contrast, this compares the
 layerwise effect of replacing random peer answers with a repeated wrong answer,
-with item identity and broad participant-list structure shared across the two
-prompts. For each layer $\ell$, we compute the cosine similarity between
+with item identity and participant-list format matched across the two prompts.
+For each layer $\ell$, we compute the cosine similarity between
 $d^\ell$ and every other layer's diffmean, exclude the self-comparison, and
 average the five largest remaining cosines:
 \[
