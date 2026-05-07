@@ -43,7 +43,7 @@ def parse_args():
         "--sample-experiments",
         type=int,
         default=None,
-        help="Accepted for config parity with experiment_layer_sweep.py; synthetic sweeps do not use experiment files.",
+        help="Compatibility option; synthetic sweeps do not use saved experiment files.",
     )
     parser.add_argument("--layers", default="all", help='Comma-separated layers, or "all".')
     parser.add_argument(

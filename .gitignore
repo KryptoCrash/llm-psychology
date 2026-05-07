@@ -5,3 +5,4 @@ __pycache__/
 .DS_Store
 activation_cache/
 diffmean_cosine_results/
+runs/activation_patching/

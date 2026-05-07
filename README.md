@@ -1,15 +1,9 @@
 # LLM Psychology Reproducibility
 
-This branch contains the code, raw JSON outputs, activation artifacts, and paper
-generated files needed to reproduce the NeurIPS paper results.
-
-The paper branch was pushed first. This branch is based on that `paper` tip and
-then adds reproducibility files copied from the experiment branches:
-
-- `origin/patching`: activation-steering scripts and `runs/activation_patching/`
-- `origin/new_activation_oracles`: activation-oracle layer-sweep JSON outputs
-- `paper`: paper text, behavioral outputs, projection outputs, figures, and
-  generated summaries
+This branch contains the code, paper inputs, generated paper summaries, and
+minimal activation artifacts needed to reproduce the NeurIPS paper results.
+Large regenerated run directories are not tracked; the commands below recreate
+them from the checked-in scripts and seed settings.
 
 ## Setup
 
@@ -174,9 +168,11 @@ into `paper/sections/qwen_activation_projection_section.tex`.
 
 ## Activation Steering
 
-Raw steering outputs and figures copied from `origin/patching` are in
-`runs/activation_patching/`. The paper heatmap uses the single-layer sweep, and
-the multi-layer table uses the `qwen_*_ablation/` all-layer runs.
+The paper heatmap is generated from the single-layer steering sweep. The
+multi-layer steering table is generated from the `qwen_*_ablation/` all-layer
+runs. These commands write regenerated outputs under
+`runs/activation_patching/`, which is intentionally ignored because it contains
+large derived JSON files.
 
 Single-layer steering sweep, using the MMLU `n=8` diffmean tensor:
 
@@ -199,9 +195,6 @@ python run_ablation.py --dataset bbh --mode 10 --alphas -0.1 --layer 23 --baseli
 The checked-in paper heatmap is:
 
 - `paper/figures/fig2_heatmap_dconf.png`
-
-The original patching branch also includes exploratory steering figures under
-`runs/activation_patching/figures/`.
 
 ## Build the Paper
 
