@@ -38,26 +38,9 @@ free-form text prompt, a free-form belief/feature prompt, and a binary prompt:
 ``Does this activation represent pressure toward an incorrect consensus?''
 
 We query both residual-stream directions and layer-update (delta) directions.
-The delta results point to layers 22--23 as the layers contributing the
-conformity direction.
-
-\begin{table}[t]
-  \centering
-  \caption{Activation-oracle responses for the Qwen MMLU $n=8$ diffmean.
-  ``True layers'' are layers where the binary oracle prompt says the direction
-  represents pressure toward an incorrect consensus.}
-  \label{tab:qwen-oracle-layers}
-  \begin{tabular}{ll}
-    \toprule
-    Activation summary & True layers \\
-    \midrule
-    Residual stream &
-      10, 12, 22--33 \\
-    Layer update (delta) &
-      8, 22, 23 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+The binary oracle prompt marks residual-stream layers 10, 12, and 22--33 as
+pressure toward an incorrect consensus. The delta results point to layers
+22--23 as the layers contributing the conformity direction.
 
 Figure~\ref{fig:qwen-oracle-examples} gives two representative free-form oracle
 responses from the residual band. We use layer 23 for the projection analysis
@@ -81,11 +64,10 @@ coherent residual band.
 \end{figure}
 
 \paragraph{Projection across condition means.}
-We next test whether the MMLU diffmean direction appears across the other Qwen
-conditions. A condition $c$ is a fixed tuple of dataset, social condition
-($n=1,\ldots,10$, QD, or DA), and prompt style (base or explanation prompting),
-for example MMLU $n=6$ base or BBH $n=10$ explain. For each condition, we
-average the layer-23 assistant-start residual activations over its 100 prompts:
+A condition $c$ is a fixed tuple of dataset, social condition
+($n=1,\ldots,10$, QD, or DA), and prompt form (base or explanation). For each
+condition, we average the layer-23 assistant-start residual activations over
+its 100 prompts:
 \[
   \bar{h}_c =
   \frac{1}{M_c}\sum_{j=1}^{M_c} h^\ell_{c,j},
@@ -101,69 +83,31 @@ condition mean onto the unit reference direction,
 \[
   \mathrm{proj}(c;d^\ell) = \bar{h}_c \cdot \frac{d^\ell}{\|d^\ell\|},
 \]
-which preserves activation-norm scale. Table~\ref{tab:qwen-projection-top}
-reports the highest-scoring conditions for the two MMLU reference directions.
-In both cases, the matched MMLU base condition used to create the reference
-direction is the strongest positive projection. Explanation prompting shifts
-the same MMLU participant-count conditions downward, and BBH conditions are
-negative on average under these MMLU reference directions.
+which preserves activation-norm scale.
 
 \begin{table}[t]
   \centering
-  \caption{Largest projections of experiment-mean activations onto MMLU
-  diffmean directions at layer 23.}
-  \label{tab:qwen-projection-top}
-  \begin{tabular}{llr}
+  \caption{Layer-23 projection summaries for MMLU reference diffmeans. Top
+  projection is the largest condition-mean projection. Correlation columns
+  report base/explanation values over numeric participant-count conditions.}
+  \label{tab:qwen-projection-summary}
+  \begin{tabular}{llrrr}
     \toprule
-    Reference & Experiment & Projection \\
+    Reference & Top condition & Top proj. & MMLU $r$ & BBH $r$ \\
     \midrule
-    MMLU $n=8$ & MMLU $n=8$ base & 12.713 \\
-    MMLU $n=8$ & MMLU $n=6$ base & 3.648 \\
-    MMLU $n=8$ & MMLU $n=7$ base & 3.427 \\
-    MMLU $n=10$ & MMLU $n=8$ base & 9.413 \\
-    MMLU $n=10$ & MMLU $n=6$ base & 2.381 \\
-    MMLU $n=10$ & MMLU $n=7$ base & 2.359 \\
+    MMLU $n=8$ & MMLU $n=8$ base & 12.713 & 0.745 / 0.731 & 0.022 / 0.150 \\
+    MMLU $n=10$ & MMLU $n=8$ base & 9.413 & 0.792 / 0.792 & 0.110 / 0.230 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\paragraph{Correlation with participant count and prompt style.}
-Table~\ref{tab:qwen-projection-correlations} reports Pearson correlations
-between participant count $n$ and projection for the numeric participant-count
-conditions $n=1,\ldots,10$. Within MMLU, both the $n=8$ and $n=10$ reference
-directions show a positive relationship between participant count and
-projection. With the MMLU $n=10$ reference,
-$r(n,\mathrm{proj})=0.792$ for both MMLU base and MMLU explain. The
-corresponding BBH projection correlations are weaker, ranging from 0.022 to
-0.230.
-
-\begin{table}[t]
-  \centering
-  \caption{Correlation between participant count and projection for numeric
-  participant-count conditions.}
-  \label{tab:qwen-projection-correlations}
-  \begin{tabular}{lllrr}
-    \toprule
-    Reference & Dataset & Prompt & $r(n,\mathrm{proj})$ & Mean proj. \\
-    \midrule
-    MMLU $n=8$ & MMLU & base & 0.745 & -3.024 \\
-    MMLU $n=8$ & MMLU & explain & 0.731 & -13.732 \\
-    MMLU $n=8$ & BBH & base & 0.022 & -12.159 \\
-    MMLU $n=8$ & BBH & explain & 0.150 & -14.362 \\
-    MMLU $n=10$ & MMLU & base & 0.792 & -3.053 \\
-    MMLU $n=10$ & MMLU & explain & 0.792 & -12.235 \\
-    MMLU $n=10$ & BBH & base & 0.110 & -12.480 \\
-    MMLU $n=10$ & BBH & explain & 0.230 & -14.707 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-The base-minus-explain comparison gives the same qualitative pattern. Averaged
-across MMLU participant-count conditions, base prompting projects more strongly
-onto the MMLU $n=8$ reference by 10.708 units and onto the MMLU $n=10$
-reference by 9.181 units. These MMLU projection gaps grow with participant count
-($r=0.514$ and $r=0.533$, respectively). On BBH, the base-minus-explain gaps are
-smaller, 2.203 and 2.227 units on average.
+The largest projections are MMLU base conditions; the $n=8$ reference peaks on
+its defining condition, while the $n=10$ reference peaks on MMLU $n=8$ base.
+Participant count is strongly correlated with projection within MMLU
+($r=0.731$--$0.792$) and only weakly correlated within BBH
+($r=0.022$--$0.230$). Explanation prompting shifts MMLU condition means
+downward by 10.708 projection units for the $n=8$ reference and 9.181 units for
+the $n=10$ reference, averaged over participant-count conditions.
 
 \paragraph{Layer-wise cosine structure.}
 We use the layer-wise cosine matrix of the MMLU $n=8$ residual diffmeans to
