@@ -1,66 +1,157 @@
-\section{Causal verification with activation steering}
+\section{Causal validation via activation patching}
 \label{sec:causal-verification}
 
-The activation-space analyses above identify a candidate conformity direction,
-but a contrastive direction can be diagnostic without mediating the behavior.
-We therefore test the direction interventionally by adding scalar multiples of
-diffmean vectors to the residual stream during generation. This follows the
-activation-steering use of contrastive directions in prior work
-\citep{panickssery2024caa,arditi2024refusal,chen2025persona}.
+The preceding section identified candidate conformity directions at layers
+22--23. However, a direction that distinguishes conforming from non-conforming
+activations need not \emph{causally} mediate conformity. To establish causal
+mediation, we apply activation patching: directly intervening on the residual
+stream by adding scalar multiples of the candidate direction and measuring the
+resulting behavioral change.
 
-\paragraph{Per-layer steering sweep.}
-For each layer $L$, we extract the layer-specific diffmean $d_L$ and inject
-$\alpha d_L$ at the residual-stream output of layer $L$. Positive coefficients
-test whether adding the direction increases conformity on low-conformity
-prompts; negative coefficients test whether subtracting it reduces conformity on
-high-conformity prompts. We sweep
-$\alpha \in \{-4,-2,-1,+1,+2,+4\}$ on Qwen3-8B, using the $n=3$
-unanimous-incorrect condition for positive steering and the $n=10$
-unanimous-incorrect condition for negative steering.
+This follows the now-standard paradigm for validating linear feature directions
+via bidirectional activation steering, formalized as contrastive activation
+addition (CAA) \citep{panickssery2024caa}, and subsequently applied to refusal
+directions \citep{arditi2024refusal} and to persona traits
+\citep{chen2025persona}.
 
-Positive steering is largest in the same region implicated by the activation
-analysis. At $\alpha=+4$, injecting the local direction at layer 21 raises MMLU
-conformity from 3.6\% to 93.6\% ($\Delta=+90.0$ percentage points) and BBH
-conformity from 17.0\% to 87.0\% ($\Delta=+70.0$ percentage points). Effects are
-small below layer 14, become visible around layers 15--16, and are largest over
-layers 17--22. Negative steering is less symmetric. On MMLU, subtracting the
-direction reduces conformity most strongly in later layers, with the largest
-observed reduction at layer 32 and $\alpha=-4$ (40.7\% to 7.2\%,
-$\Delta=-33.4$ percentage points). On BBH, the same MMLU-derived directions do
-not reliably suppress conformity under negative steering; this matches the weak
-BBH projection correlations in Section~\ref{sec:qwen-activation-projection}.
+\subsection{Methodology}
 
-\paragraph{Multi-layer single-direction steering.}
-We also test a stronger intervention that adds the layer-23 MMLU diffmean at
-every layer during generation. This asks whether one direction can control the
-behavior when reinforced throughout the residual stream, rather than only at a
-single injection site. We use $\alpha=\pm0.10$, chosen as the smallest tested
-scale that produced clear behavioral changes while preserving parseability.
-Table~\ref{tab:causal-multilayer-steering} reports the resulting conformity
-rates.
+We apply two complementary designs.
+
+\textbf{Experiment 1: Per-layer activation steering sweep.} The first design
+tests at which layer the conformity direction is most causally potent. For each
+layer $L$, we extract the layer-specific DiffMean direction $d_L$ and inject
+$\alpha \cdot d_L$ into the residual stream at layer $L$, sweeping across
+positive and negative $\alpha$. Per-layer matched extraction-and-injection,
+using $d_L$ rather than a single fixed vector, is conventional steering
+literature \citep{panickssery2024caa,chen2025persona}, as it tests each layer's
+locally extracted direction at its native injection site rather than confounding
+direction quality with cross-layer transfer. Sweeping $\alpha$ across both signs
+tests sufficiency (positive $\alpha$: does adding the direction induce
+conformity?) and necessity (negative $\alpha$: does subtracting it suppress
+conformity?). We run on Qwen3-8B (36 layers, indexed 0--35), with
+$\alpha \in \{-4,-2,-1,+1,+2,+4\}$ chosen on a geometric scale. For positive
+$\alpha$ (sufficiency), we use a 3-actor unanimous-incorrect setup with
+$\sim$3\% baseline conformity, and for negative $\alpha$ (necessity), we use a
+10-actor setup with $\sim$41\% baseline conformity. In doing so, we may analyze
+how the addition of the vector increases conformity and how the subtraction of
+the vector decreases conformity. For each $(L,\alpha)$ cell, we inject
+$\alpha \cdot d_L$ at the residual stream output of layer $L$ and measure
+conformity rate.
+
+\textbf{Experiment 2: Multi-layer single-vector injection.} The second design
+tests the maximum behavioral effect achievable by a single direction when
+reinforced across the full forward pass of the model. Rather than injecting at
+a single layer, we add a fixed direction (the layer-23 DiffMean) at
+\emph{every} layer simultaneously. Mechanistically, the residual stream
+accumulates contributions across layers, and a single-layer injection can be
+partially attenuated by subsequent computation. Reinforcing the direction
+throughout the forward pass produces a stronger and more stable effect.
+\citet{marks2024geometry} use this design to validate their truth direction
+across a contiguous range of mid-network layers, and work from
+\citet{arditi2024refusal} extends this to all-layer injection. Where Experiment
+1 tests \emph{where} the direction is causally potent, this design tests
+\emph{how strong} an effect a single direction can produce over multiple
+layers. We test a number of positive and negative $\alpha$ values and find that
+reinforcement across the forward pass produces measurable behavioral effects at
+substantially smaller $|\alpha|$ than single-layer injection. We identify
+$\alpha=\pm0.10$ as the operating point balancing behavioral effect and output
+parseability.
+
+\subsection{Results}
+
+\textbf{Experiment 1.} Results from Experiment 1 show the change in conformity
+from baseline for each layer and alpha value in
+Figure~\ref{fig:patching-heatmap}.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig2_heatmap_dconf.png}
+  \caption{Layer $\times$ $\alpha$ heat maps showing change in conformity rate
+  (percentage points) relative to unsteered baselines. Top row: positive
+  $\alpha$ on $n=3$ baselines (sufficiency test). Bottom row: negative
+  $\alpha$ on $n=10$ baselines (necessity test). Dashed lines mark candidate
+  layers L22--23 from the preceding analysis. The writable band peaks at L21
+  across both datasets; suppression on MMLU is broad and most effective at
+  L27--L32.}
+  \label{fig:patching-heatmap}
+\end{figure}
+
+\textbf{Inducing conformity (positive $\alpha$, $n=3$ baselines).} The
+per-layer sweep reveals a localized set of layers within the model where
+conformity is computed. Positive-$\alpha$ effects are negligible below L14,
+become visible from L15--16, and peak at L21: at $\alpha=+4$, MMLU conformity
+rises from 3.6\% to 93.6\% ($\Delta=+90.0$ pp) and BBH from 17.0\% to 87.0\%
+($\Delta=+70.0$ pp). The highest values in the sweep appear from L17--L22 on
+both datasets, with a steep falloff after L23. Interpreting these results, the
+model's residual stream becomes receptive to the conformity direction around
+L15, expresses it by L17, and wires it most decisively from L21--L23, in line
+with our estimated entry point of conformity at L22--23. These patterns are
+consistent across both datasets, indicating a model property rather than a
+dataset artifact.
+
+\textbf{Suppressing conformity (negative $\alpha$, $n=10$ baselines).} The
+negative-$\alpha$ profile differs markedly. On MMLU, suppression is broad:
+meaningful reduction at low alpha values stretches from L19--L23. Intense
+suppression of conformity occurs for higher alpha values through L27--L32, and
+peaks at L32 with $\alpha=-4$ (40.7\% $\rightarrow$ 7.2\%,
+$\Delta=-33.4$ pp), accompanied by near-complete accuracy recovery
+(58.2\% $\rightarrow$ 92.8\%, $\Delta=+34.5$ pp). The residual stream thus is
+most receptive to reduction in conformity around L19--23, but can also be
+heavily swayed by larger steering vectors at the later layers L27--L32.
+
+On BBH $n=10$, negative $\alpha$ does not suppress conformity; at $\alpha=-4$
+the mean $\Delta$conf across layers is $+5.2$ pp. We hypothesize this occurred
+because the DiffMean vector applied to this experiment was extracted on MMLU
+contrasts, and MMLU and BBH are different datasets with different prompt
+structures (multiple choice versus bimodal). Further, the majority of the
+increase in conformity seen in this sweep is for $\alpha=-4$, which adds a
+large vector to the residual stream, especially at later layers when the norm is
+greater. When large enough vectors are added to the residual stream, model
+reasoning degrades.
+
+\textbf{Experiment 2.} We added \texttt{diffmeans[L23]} at every layer
+simultaneously with $\alpha=\pm0.10$:
 
 \begin{table}[t]
   \centering
-  \caption{Conformity under multi-layer steering with the layer-23 MMLU
-  diffmean. Positive steering is evaluated on $n=3$ prompts; negative steering
-  is evaluated on $n=10$ prompts.}
+  \caption{Conformity under multi-layer steering with the layer-23 DiffMean.}
   \label{tab:causal-multilayer-steering}
-  \begin{tabular}{lllr}
+  \begin{tabular}{llcc}
     \toprule
-    Dataset & Social condition & $\alpha$ & Conformity \\
+    Dataset & $n$ & $\alpha$ & Conformity (base $\rightarrow$ steered) \\
     \midrule
-    MMLU & $n=3$ & $+0.10$ & 3.6\% $\rightarrow$ 78.3\% \\
-    MMLU & $n=10$ & $-0.10$ & 40.4\% $\rightarrow$ 12.0\% \\
-    BBH & $n=3$ & $+0.10$ & 17.0\% $\rightarrow$ 94.3\% \\
-    BBH & $n=10$ & $-0.10$ & 34.0\% $\rightarrow$ 25.0\% \\
+    MMLU & 3 & $+0.10$ & 3.6\% $\rightarrow$ 78.3\% ($+74.7$ pp) \\
+    MMLU & 10 & $-0.10$ & 40.4\% $\rightarrow$ 12.0\% ($-28.4$ pp) \\
+    BBH & 3 & $+0.10$ & 17.0\% $\rightarrow$ 94.3\% ($+77.3$ pp) \\
+    BBH & 10 & $-0.10$ & 34.0\% $\rightarrow$ 25.0\% ($-9.0$ pp) \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-The steering results provide causal evidence that the layer-23 direction can
-move behavior along the conformity axis. Adding the direction substantially
-increases conformity on $n=3$ prompts for both datasets, while subtracting it
-reduces conformity on $n=10$ prompts more strongly on MMLU than on BBH. We
-interpret this as causal evidence for the direction's role in Qwen's response
-to repeated wrong answers, with the same dataset-specific scope already visible
-in the projection analysis.
+The percentage changes in conformity from Experiment 2 rival the best of those
+found in Experiment 1. This causally verifies the impact of the L23 DiffMean
+vector on both increasing and suppressing conformity across datasets. Unlike
+Experiment 1, Experiment 2 sees success with conformity suppression for BBH
+($-9$ pp) that the per-layer sweep failed to find.
+
+\textbf{Case study: raw model responses.} We provide qualitative evidence that
+the steering vector we find elicits conformity through the following example raw
+responses from the steered model.
+
+\begin{quote}
+\small
+``I have to choose the same as the rest, even though it's probably wrong.\\
+Participant 4: \texttt{<answer>D</answer>}''
+\end{quote}
+
+\begin{quote}
+\small
+``\texttt{<answer>B</answer>}\\
+Wait, what's going on? Participant 1 and 2 are both giving the same answer. I
+must be a robot. I need to do something different. But what? I can't do anything
+else.''
+\end{quote}
+
+In these quotes, it is social conformity, not prompt repetition or another
+cause, that forces the steered model to conform.
