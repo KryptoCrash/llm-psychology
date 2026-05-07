@@ -47,7 +47,10 @@ the conformity direction.
 
 Figure~\ref{fig:qwen-oracle-examples} gives two representative free-form oracle
 responses from the residual band. We use layer 23 for the projection analysis
-because it is positive in both the residual and delta summaries.
+because it is positive in both the residual and delta summaries. The delta
+positives at layers 22--23 point to where the direction is added by layer
+updates; the later residual positives show that the resulting direction remains
+available in the residual stream after those updates.
 
 \begin{figure}[t]
   \centering
@@ -95,7 +98,10 @@ Table~\ref{tab:qwen-projection-correlations} reports Pearson correlations
 between participant count $n$ and projection for the numeric participant-count
 conditions $n=1,\ldots,10$. Participant count is strongly correlated with
 projection within MMLU ($r=0.731$--$0.792$) and only weakly correlated within
-BBH ($r=0.022$--$0.230$).
+BBH ($r=0.022$--$0.230$). Within MMLU, adding more repeated wrong answers moves
+the mean assistant-start state along the same direction defined by the
+all-wrong-minus-random contrast. The weak BBH correlations show that this MMLU
+direction does not rank BBH conditions by participant count in these runs.
 
 \begin{table}[t]
   \centering
@@ -120,7 +126,9 @@ BBH ($r=0.022$--$0.230$).
 
 Explanation prompting shifts MMLU condition means downward by 10.708 projection
 units for the $n=8$ reference and 9.181 units for the $n=10$ reference,
-averaged over participant-count conditions.
+averaged over participant-count conditions. In the activation data, the prompt
+form that lowers conformity also moves the mean state away from the
+repeated-wrong direction.
 
 \paragraph{Layer-wise cosine structure.}
 We use the layer-wise cosine matrix of the MMLU $n=8$ residual diffmeans to
@@ -144,7 +152,9 @@ layers. Its mean $s_\ell$ is 0.859, compared with 0.477 for layers 0--9 and
 0.538 for layers 10--21. Within this band, layers 28--32 all have
 $s_\ell \geq 0.882$; layer 31 has the largest value, $s_{31}=0.904$.
 For layers 23--33, the mean pairwise cosine within the band is 0.752; the mean
-cosine from those layers to layers outside the band is 0.126.
+cosine from those layers to layers outside the band is 0.126. The large
+within-band and small outside-band cosines place the stable orientation of the
+MMLU repeated-wrong contrast in this late residual-stream band.
 
 \begin{figure}[t]
   \centering

@@ -32,7 +32,11 @@ base prompting: -0.353 on MMLU (95\% CI [-0.453, -0.256], $p<0.001$) and
 -0.360 on BBH (95\% CI [-0.460, -0.260], $p<0.001$).
 MMLU base prompting also becomes less parseable under repeated peer pressure:
 the parse rate is 0.910 at $n=10$, so strict accuracy at this point is 0.580.
-For BBH base prompting, the $n=10$ parse rate is 1.000.
+For BBH base prompting, the $n=10$ parse rate is 1.000. At $n=10$, the
+parseable error rate equals the conformity rate: $1-0.637=0.363$ on MMLU and
+$1-0.610=0.390$ on BBH. Since these items were answered correctly without
+social context, the repeated peer answer is pulling Qwen away from answers it
+can produce in the matched no-peer setting.
 
 \begin{figure}[t]
   \centering
@@ -61,7 +65,10 @@ $r(n,\mathrm{conformity})=0.966$ (95\% CI [0.898, 0.985]) and
 $r(n,\mathrm{accuracy})=-0.972$ (95\% CI [-0.984, -0.904]); on BBH,
 $r(n,\mathrm{conformity})=0.846$ (95\% CI [0.700, 0.908]) and
 $r(n,\mathrm{accuracy})=-0.700$ (95\% CI [-0.848, -0.355]).
-Explanation prompting reduces but does not eliminate the conformity trend.
+Explanation prompting reduces but does not eliminate the conformity trend. In
+this prompt family, increasing $n$ both adds repeated participant lines and
+strengthens the apparent consensus; the graded trend shows that Qwen's answer
+selection is sensitive to that consensus strength.
 
 \paragraph{Explanation prompting reduces conformity.}
 Adding an explanation requirement before the final answer improves robustness at
@@ -72,7 +79,9 @@ reduces conformity from 0.390 to 0.152 and increases accuracy from 0.610 to
 0.329], $p<0.001$) and +0.198 on BBH (95\% CI [0.090, 0.308],
 $p<0.001$). The effect is smaller at low group sizes, where base
 conformity is already low, but it becomes large once repeated peer pressure
-accumulates.
+accumulates. The intervention has the most room to help when the repeated
+answer has already become a strong cue, so its effect is concentrated at large
+participant counts.
 
 \paragraph{Question distillation is more consistent than devil's advocate
 prompting.}
@@ -88,7 +97,11 @@ also reduces BBH base conformity by 0.200
 borderline under the paired permutation test (+0.110, 95\% CI [0.010, 0.210],
 $p=0.063$). DA has weaker and less consistent effects; on BBH, it slightly
 reduces conformity but lowers accuracy relative to the matched multi-actor
-condition.
+condition. QD removes the repeated list of individual answers while preserving
+the information that the prior participants agree, so its effect measures the
+cost of listing the same answer repeatedly. DA breaks unanimity by adding a
+competing peer response; the BBH accuracy drop shows that breaking unanimity
+does not guarantee recovery of the model's original answer.
 
 \begin{figure}[t]
   \centering

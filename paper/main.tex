@@ -144,11 +144,10 @@ adding peer-answer text. The activation oracle marks residual-stream layers 10,
 results point to layers 22--23 as contributing the conformity direction.
 Projections onto the layer-23 direction increase with participant count within
 MMLU, and explanation prompting shifts condition means downward. The same MMLU
-directions do not align cleanly with BBH, suggesting either task-specific
-representations, prompt-format confounds, or insufficiently stable directions at
-this sample size. The layer-wise cosine analysis gives a separate check on the
-layer sweep: the MMLU $n=8$ diffmeans in layers 23--33 are much more similar to
-nearby diffmeans than earlier layers are.
+directions do not align cleanly with BBH, so the projection result should be
+read as a within-MMLU localization. The layer-wise cosine analysis gives a
+separate check on the layer sweep: the MMLU $n=8$ diffmeans in layers 23--33
+are much more similar to nearby diffmeans than earlier layers are.
 
 \section{Limitations}
 \label{sec:limitations}
