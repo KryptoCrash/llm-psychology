@@ -2,8 +2,8 @@
 \label{sec:results}
 
 We evaluate Qwen on two controlled 100-item stimulus sets, one from MMLU and one
-from BBH. Each item was selected from saved no-social-context screening runs, so
-the experiment measures susceptibility to
+from BBH. Each item was selected by no-social-context screening, so the
+experiment measures susceptibility to
 incorrect peer answers rather than general benchmark accuracy. We report
 accuracy as correct answers among parseable responses, and conformity as the
 fraction of parseable responses that match the repeated incorrect peer answer.
@@ -15,8 +15,8 @@ Unless otherwise noted, confidence intervals are 95\% item-bootstrap intervals
 computed by resampling the 100 stimulus items with replacement. Paired contrasts
 use the same resampled item indices in both conditions and paired permutation
 tests over item-level correctness among examples parseable in both conditions.
-These intervals quantify uncertainty over stimulus items conditional on the saved
-generations and peer-answer assignments; they do not capture decoding-seed
+These intervals quantify uncertainty over stimulus items conditional on the
+observed generations and peer-answer assignments; they do not capture decoding-seed
 variability.
 
 \paragraph{Repeated incorrect answers induce conformity.}
@@ -52,7 +52,7 @@ For BBH base prompting, the $n=10$ parse rate is 1.000.
 \end{figure}
 
 \paragraph{Conformity scales with group size.}
-Across the standard multi-actor runs for $n=2,\ldots,10$, group size is strongly
+Across the standard multi-actor conditions for $n=2,\ldots,10$, group size is strongly
 positively correlated with conformity and negatively correlated with accuracy
 (\ref{fig:qwen-conformity-participants}--\ref{fig:qwen-accuracy-participants}).
 The trend is strongest under base prompting: on MMLU,
