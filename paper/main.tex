@@ -27,23 +27,17 @@
 \begin{abstract}
 LLMs increasingly operate in multi-agent and conversational settings, and recent
 behavioral work shows that they can conform to a unanimous incorrect majority,
-mirroring Asch's classical findings in humans. While mechanistic
-interpretability has been used to characterize adjacent social-compliance
-phenomena such as sycophancy, the internal representations that support
-conformity remain less understood. We address this gap by replicating and
-extending Asch-style conformity experiments in Qwen3-8B on MMLU and BIG-Bench
-Hard items that the model answers correctly without social context. We find that
-repeated incorrect peer answers reliably pull the model away from otherwise
-available answers, that this effect grows with the number of agreeing
-participants, and that explanation prompting and question distillation reduce
-conformity. We then apply difference-of-means (DiffMean) analysis to residual
-stream activations, comparing all-wrong peer contexts with random-peer-answer
-controls, and use activation oracles, projection analysis, and layer-wise cosine
-structure to localize a coherent representation of incorrect-consensus pressure
-in a late-middle layer band. Finally, activation steering with this direction
-both induces conformity in low-pressure prompts and suppresses it in
-high-pressure prompts, suggesting that peer-majority conformity is supported by
-a detectable and steerable residual-stream feature.
+mirroring Asch's classical findings in humans. We study this behavior in
+Qwen3-8B on questions the model answers correctly without social context, then
+ask whether the resulting conformity can be seen and manipulated inside the
+model. Repeated incorrect peer answers pull the model away from otherwise
+available answers, with conformity increasing as the apparent consensus grows;
+simple prompt changes such as explanation prompting and question distillation
+reduce the effect. In activation space, we find a late-middle residual-stream
+direction associated with incorrect consensus pressure. Steering along this
+direction can both increase and reduce conformity, suggesting that
+peer-majority conformity is supported by a detectable and steerable internal
+feature.
 \end{abstract}
 
 \section{Introduction}
