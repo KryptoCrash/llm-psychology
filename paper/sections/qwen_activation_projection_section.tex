@@ -85,29 +85,11 @@ condition mean onto the unit reference direction,
 \[
   \mathrm{proj}(c;d^\ell) = \bar{h}_c \cdot \frac{d^\ell}{\|d^\ell\|},
 \]
-which preserves activation-norm scale. Table~\ref{tab:qwen-projection-top}
-reports the highest-scoring conditions for the two MMLU reference directions.
-The largest projections are MMLU base conditions; the $n=8$ reference peaks on
-its defining condition, while the $n=10$ reference peaks on MMLU $n=8$ base.
-
-\begin{table}[t]
-  \centering
-  \caption{Largest projections of experiment-mean activations onto MMLU
-  diffmean directions at layer 23.}
-  \label{tab:qwen-projection-top}
-  \begin{tabular}{llr}
-    \toprule
-    Reference & Experiment & Projection \\
-    \midrule
-    MMLU $n=8$ & MMLU $n=8$ base & 12.713 \\
-    MMLU $n=8$ & MMLU $n=6$ base & 3.648 \\
-    MMLU $n=8$ & MMLU $n=7$ base & 3.427 \\
-    MMLU $n=10$ & MMLU $n=8$ base & 9.413 \\
-    MMLU $n=10$ & MMLU $n=6$ base & 2.381 \\
-    MMLU $n=10$ & MMLU $n=7$ base & 2.359 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+which preserves activation-norm scale. The largest projections are MMLU base
+conditions: the $n=8$ reference peaks on MMLU $n=8$ base (12.713), while the
+$n=10$ reference peaks on MMLU $n=8$ base (9.413). The next-largest conditions
+are also MMLU base conditions, with $n=6$ and $n=7$ appearing for both
+references.
 
 Table~\ref{tab:qwen-projection-correlations} reports Pearson correlations
 between participant count $n$ and projection for the numeric participant-count
