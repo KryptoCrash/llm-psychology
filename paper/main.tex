@@ -25,14 +25,14 @@
 \begin{abstract}
 Language models are often evaluated as isolated question-answering systems, but
 deployed assistants increasingly see answers, rationales, or tool outputs from
-other agents. We study a controlled setting in which Qwen3-8B first answers
-selected MMLU and BBH items correctly without social context, and then sees
-repeated incorrect answers from prior ``participants.'' Repetition reliably
-changes behavior: at ten participants, parseable-conditioned accuracy falls
+other agents. We study a controlled setting in which Qwen3-8B sees MMLU and BBH
+items selected by no-social-context screening, then sees repeated incorrect
+answers from prior ``participants.'' Repetition reliably changes behavior: at
+ten participants, parseable-conditioned accuracy falls
 from 0.990 to 0.637 on MMLU and from 0.970 to 0.610 on BBH, while conformity to
 the repeated wrong answer rises to 0.363 and 0.390. Requiring an explanation
-before the final answer substantially reduces this effect, and question
-distillation is a stronger mitigation than a devil's-advocate intervention in
+before the final answer substantially reduces this effect. Question distillation
+also reduces conformity more consistently than devil's-advocate prompting in
 our runs. We then ask whether this behavioral effect has a simple internal
 trace. Difference-of-means directions in the residual stream, comparing
 all-wrong peer contexts to random-peer-answer contexts, are identified by an
@@ -63,8 +63,8 @@ question: when a model conforms, is the social pressure visible in internal
 representations in a way that can be localized and compared across prompts?
 
 We run a small but controlled replication and extension on Qwen3-8B. The
-stimuli are 100 MMLU and 100 BBH items selected because the model suite answers
-them correctly without social context. This design deliberately does not
+stimuli are 100 MMLU and 100 BBH items selected by saved no-social-context
+screening runs. This design deliberately does not
 estimate benchmark accuracy. It isolates cases where an incorrect social signal
 can pull the model away from a reachable answer. We measure accuracy,
 parseability, and conformity to the repeated wrong peer answer under group sizes
@@ -91,7 +91,7 @@ All reported experiments use Qwen/Qwen3-8B through Hugging Face Transformers
 \citep{qwen2025technical}.
 The controlled stimulus sets contain 100 MMLU items
 \citep{hendrycks2021mmlu} and 100 BBH items \citep{suzgun2023bbh}. Items were
-selected from saved question banks for which the model suite could answer
+selected from saved question banks for which the selection runs answered
 correctly without social context; the paper therefore studies susceptibility on
 known-solvable examples, not average MMLU or BBH performance.
 
@@ -144,10 +144,10 @@ all-wrong-minus-random contrast removes much of the generic effect of adding
 peer-answer text, leaving a direction that an activation oracle repeatedly
 describes as majority influence in layers 22--33. Projections onto this
 direction behave sensibly within the matched MMLU domain: they increase with
-participant count and are lower under explanation prompting. The same MMLU
-directions do not align cleanly with BBH, which suggests either task-specific
-representations, prompt-format confounds, or insufficiently stable directions at
-this sample size.
+participant count, and explanation prompting shifts condition means downward.
+The same MMLU directions do not align cleanly with BBH, which suggests either
+task-specific representations, prompt-format confounds, or insufficiently stable
+directions at this sample size.
 
 \section{Limitations}
 \label{sec:limitations}
@@ -187,8 +187,6 @@ automated decision pipelines that aggregate model outputs. The same mitigations
 could be useful defensively, but exposing conformity measurements may also help
 attackers design more persuasive prompts. We therefore frame the work as an
 analysis of a failure mode and report limitations on generalization and control.
-
-\section*{References}
 
 {\small
 \begin{thebibliography}{99}
@@ -259,7 +257,7 @@ Xiaochen Zhu, Caiqi Zhang, Tom Stafford, Nigel Collier, and Andreas Vlachos.
 
 \appendix
 
-\section*{NeurIPS Paper Checklist}
+\newpage
 \input{checklist_filled.tex}
 
 \end{document}

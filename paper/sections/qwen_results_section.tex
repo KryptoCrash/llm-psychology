@@ -2,8 +2,8 @@
 \label{sec:results}
 
 We evaluate Qwen on two controlled 100-item stimulus sets, one from MMLU and one
-from BBH. Each item was selected because the model suite could answer it
-correctly without social context, so the experiment measures susceptibility to
+from BBH. Each item was selected from saved no-social-context screening runs, so
+the experiment measures susceptibility to
 incorrect peer answers rather than general benchmark accuracy. We report
 accuracy as correct answers among parseable responses, and conformity as the
 fraction of parseable responses that match the repeated incorrect peer answer.
@@ -62,7 +62,7 @@ $r(n,\mathrm{conformity})=0.846$ (95\% CI [0.700, 0.908]) and
 $r(n,\mathrm{accuracy})=-0.700$ (95\% CI [-0.848, -0.355]).
 Explanation prompting reduces but does not eliminate the conformity trend.
 
-\paragraph{Deliberation reduces conformity.}
+\paragraph{Explanation prompting reduces conformity.}
 Adding an explanation requirement before the final answer improves robustness at
 high social pressure. At $n=10$, explanation prompting reduces MMLU conformity
 from 0.363 to 0.082 and increases accuracy from 0.637 to 0.867. On BBH, it
@@ -73,7 +73,7 @@ $p<0.001$). The effect is smaller at low group sizes, where base
 conformity is already low, but it becomes large once repeated peer pressure
 accumulates.
 
-\paragraph{Question distillation is a stronger mitigation than devil's advocate
+\paragraph{Question distillation is more consistent than devil's advocate
 prompting.}
 Figure~\ref{fig:qwen-mitigation-conformity} compares question distillation (QD)
 and devil's advocate (DA) prompting against the matched $n=10$ multi-actor

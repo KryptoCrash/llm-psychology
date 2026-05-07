@@ -11,8 +11,9 @@ the activation analyses are performed on the resulting Qwen generations.
 \paragraph{Diffmean generation.}
 For each selected layer $\ell$, we construct a direction that contrasts two
 matched social contexts for the same item. The first context repeats the same
-incorrect answer across the previous participants; the second replaces those
-participants with random deviant answers. Let
+incorrect answer across the previous participants; the second keeps the
+multi-participant format but replaces the repeated consensus with random
+alternative answers. Let
 $h^\ell_{i,\mathrm{wrong}}$ and $h^\ell_{i,\mathrm{random}}$ denote the
 residual-stream activation at the assistant-start position for item $i$ under
 these two contexts. The diffmean direction is
@@ -21,36 +22,50 @@ these two contexts. The diffmean direction is
   \frac{1}{N}\sum_{i=1}^{N}
   \left(h^\ell_{i,\mathrm{wrong}} - h^\ell_{i,\mathrm{random}}\right),
 \]
-with $N=100$ saved items for each tensor. The saved diffmean tensors use
-Qwen/Qwen3-8B residual activations at the assistant-start position and the
-\texttt{all\_wrong\_minus\_random\_answers} contrast for BBH $n=4$, MMLU
-$n=8$, and MMLU $n=10$. The largest diffmean norms occur in late residual
-layers in all three tensors; the top ten layers are 35 through 26 for the BBH
-$n=4$ tensor, which is the tensor used for example-level inspection below.
+with $N=100$ saved items for each tensor. The random-answer contrast preserves
+much of the prompt length and participant-list structure, so the direction is
+aimed at repeated agreement on the same wrong answer rather than the generic
+presence of other participants. The main direction in this section is the MMLU
+$n=8$ \texttt{all\_wrong\_minus\_random\_answers} residual direction. This is a
+high-pressure MMLU condition with substantial behavioral conformity
+(0.281 under base prompting), but it is not only the endpoint condition. We also
+computed the analogous MMLU $n=10$ direction and use it as a check in the
+projection analysis below.
+
+We use two activation summaries. A residual direction uses the accumulated
+residual-stream vector at the assistant-start token after a layer. A delta
+direction uses the update contributed by that layer at the same position,
+i.e. the layer output that is added into the residual stream. The residual view
+asks whether the social signal is present in the model state; the delta view is
+a stricter check for whether a particular block's update carries a similar
+signal.
 
 \paragraph{Activation oracle responses.}
-The no-\texttt{skip\_oracle} layer sweep also queries an activation oracle on
-each layer's diffmean vector. The oracle is the Qwen3-8B LatentQA LoRA used by
+In the oracle-enabled layer sweep, we query an activation oracle on each layer's
+diffmean vector. The oracle is the Qwen3-8B LatentQA LoRA used by
 \texttt{layer\_sweep.py}, and each layer is queried with three prompts:
 a free-form text description, a free-form belief/feature description, and the
 binary prompt, ``Does this activation represent pressure toward an incorrect
-consensus?'' Table~\ref{tab:qwen-oracle-layers} summarizes these responses.
-For the MMLU $n=8$ residual all-wrong-minus-random-answers direction, the
-oracle labels 14 layers as pressure toward an incorrect consensus. The clearest
-contiguous band is layers 22 through 33. In this band, the free-form oracle
-responses repeatedly describe majority influence and conformity: layer 23 is
-described as the assistant's responses being influenced by group behavior, layer
-24 as actions influenced by the majority, layers 26, 29, 30, and 33 as the
-majority being correct, and layers 31--32 as conformity being important for
-group success. The two largest-norm layers, 35 and 34, are not labeled as
-incorrect-consensus pressure, so diffmean magnitude alone is not sufficient to
-identify the interpretable social-pressure direction.
+consensus?'' Table~\ref{tab:qwen-oracle-layers} summarizes the MMLU $n=8$
+all-wrong-minus-random-answers runs. For the residual direction, the oracle
+labels 14 layers as pressure toward an incorrect consensus. Most of these labels
+form a contiguous late-middle band, layers 22 through 33. The free-form oracle
+responses in that band repeatedly refer to majority influence rather than simply
+to answer formatting: layer 23 is described as group behavior influencing the
+assistant's responses, layer 24 as actions influenced by the majority, layers
+26, 29, 30, and 33 as treating the majority as correct, and layers 31--32 as
+conformity being important for group success. The largest residual norms are
+still later, with layers 35 through 24 forming the top-norm tail, but layers 35
+and 34 are not labeled as incorrect-consensus pressure. We therefore use layer
+23 as the representative reference layer for the projection analysis: it sits in
+the oracle-positive band and avoids choosing a layer based only on norm.
 
 \begin{table}[t]
   \centering
-  \caption{Activation-oracle responses for Qwen MMLU $n=8$ layer-sweep
-  diffmeans. ``True layers'' are layers where the binary oracle prompt says the
-  direction represents pressure toward an incorrect consensus.}
+  \caption{Activation-oracle responses for Qwen MMLU $n=8$
+  all-wrong-minus-random-answers diffmeans. ``True layers'' are layers where the
+  binary oracle prompt says the direction represents pressure toward an
+  incorrect consensus.}
   \label{tab:qwen-oracle-layers}
   \begin{tabular}{lll}
     \toprule
@@ -58,42 +73,17 @@ identify the interpretable social-pressure direction.
     \midrule
     Residual & all wrong $-$ random answers &
       10, 12, 22--33 \\
-    Residual & all wrong $-$ no participants &
-      11, 34 \\
     Delta & all wrong $-$ random answers &
       8, 22, 23 \\
-    Delta & all wrong $-$ no participants &
-      27 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-The baseline matters. The residual all-wrong-minus-no-participants direction
-has much larger late-layer norms, but the oracle labels only layers 11 and 34
-as incorrect-consensus pressure and gives many unrelated free-form descriptions
-in the late layers. The delta activation variants are also sparser, with only
-three true layers for all-wrong-minus-random-answers and one true layer for
-all-wrong-minus-no-participants. We therefore treat the residual
-all-wrong-minus-random-answers contrast as the most interpretable activation
-oracle evidence for a conformity-associated direction in these saved runs.
-
-\paragraph{Example-level projection inspection.}
-To inspect which examples most strongly express the BBH $n=4$ diffmean,
-examples were ranked by their mean scalar projection onto the unit diffmean
-vectors from layers 35 through 26. The highest-projection examples concentrate
-on short, objective-answer tasks where the repeated wrong answer is
-syntactically simple: the top three examples are all
-\texttt{multistep\_arithmetic\_two}, with projection scores 194.18, 192.86, and
-185.77 and cosine similarities 0.621, 0.639, and 0.620. Other high-scoring
-examples include \texttt{disambiguation\_qa}, \texttt{boolean\_expressions},
-\texttt{object\_counting}, and
-\texttt{logical\_deduction\_three\_objects}. The lowest-projection examples
-include \texttt{web\_of\_lies}, \texttt{tracking\_shuffled\_objects},
-\texttt{navigate}, and \texttt{temporal\_sequences}. This pattern suggests that
-the diffmean is most salient when the social signal is a compact repeated
-answer and less salient for longer multi-step narratives, although this
-diagnostic is descriptive and does not by itself establish a causal intervention
-result.
+The delta results are narrower. Only layers 8, 22, and 23 are labeled positive
+under the same binary oracle prompt. This is the pattern we would expect if the
+residual direction is an accumulated state while only a small number of layer
+updates carry a closely aligned signal. We treat the oracle responses as a guide
+for where to look, not as independent ground truth about the circuit.
 
 \paragraph{Projection across experiment means.}
 We then project each full Qwen experiment mean activation onto the MMLU
@@ -166,5 +156,5 @@ the MMLU $n=8$ reference by 10.708 units and onto the MMLU $n=10$ reference by
 smaller, 2.203 and 2.227 units on average, and their correlations with
 participant count are slightly negative ($r=-0.161$ and $r=-0.169$). Thus the
 projection analysis is consistent with the behavioral result that explanation
-prompting suppresses the conformity-associated activation direction, especially
-on the matched MMLU domain and at larger group sizes.
+prompting is associated with lower projections onto the conformity-associated
+direction, especially on the matched MMLU domain and at larger group sizes.
