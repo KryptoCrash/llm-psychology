@@ -196,11 +196,31 @@ behavior under these interventions, but does not identify a complete mechanism.
 \section{Reproducibility and ethics}
 \label{sec:reproducibility}
 
-The repository contains the generation scripts, analysis scripts, Qwen result
-files, and generated CSV/JSON summaries used for the behavioral and activation
-figures. Section~\ref{sec:causal-verification} reports the activation-steering
-protocol and summary results. The experiments use public benchmarks and open
-model weights; no human subjects or crowdsourced workers are involved.
+The release repository contains the full code used for the experiments,
+including generation scripts, activation-caching and DiffMean scripts,
+activation-oracle scripts, activation-steering scripts, raw Qwen result files,
+activation artifacts, and generated CSV/JSON summaries used for the behavioral
+and activation figures. Section~\ref{sec:causal-verification} reports the
+activation-steering protocol and summary results. The experiments use public
+benchmarks and open model weights; no human subjects or crowdsourced workers are
+involved.
+
+All reported experiments were run on a node with two NVIDIA H100 GPUs. Behavioral
+inference takes approximately 1 hour, activation patching takes approximately
+2.5 hours, and activation caching, DiffMean construction, and activation-oracle
+queries together take approximately 1 hour. All remaining analyses and figure
+generation runs take under 30 minutes each.
+
+The upstream assets are credited and used under their stated terms: Qwen/Qwen3-8B
+is released under Apache-2.0, MMLU from \citet{hendrycks2021mmlu} is released
+under the MIT License, and BIG-Bench Hard from \citet{suzgun2023bbh} is released
+under the MIT License. The activation-oracle adapter
+\texttt{adamkarvonen/checkpoints\_latentqa\_cls\_past\_lens\_addition\_Qwen3-8B}
+is identified by Hugging Face repository ID and cited through
+\citet{karvonen2025activation}; we do not redistribute Qwen weights or the
+adapter weights, and users retrieve them from Hugging Face under the upstream
+model-card terms. The released experiment code and derived paper artifacts are
+distributed under the MIT License, subject to those upstream asset licenses.
 
 The main ethical concern is deployment rather than data collection. The results
 show that multi-agent or socially framed prompts can amplify a repeated wrong

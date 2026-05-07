@@ -26,6 +26,28 @@ If Hugging Face requires credentials for model or adapter downloads:
 huggingface-cli login
 ```
 
+## Compute and Runtime
+
+The reported experiments were run on a node with 2x NVIDIA H100 GPUs.
+Approximate wall-clock runtimes are:
+
+- Behavioral inference: 1 hour.
+- Activation patching and steering: 2.5 hours.
+- Activation caching, DiffMean construction, and activation-oracle runs: 1 hour.
+- All remaining analyses and figure generation: under 30 minutes each.
+
+## Licenses and Upstream Assets
+
+This repository's code and derived paper artifacts are released under the MIT
+License; see `LICENSE`. Upstream assets retain their own licenses and terms:
+
+- `Qwen/Qwen3-8B`: Apache-2.0.
+- MMLU (`hendrycks/test`): MIT License.
+- BIG-Bench Hard (`suzgunmirac/BIG-Bench-Hard`): MIT License.
+- `adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B`: used as a
+  Hugging Face adapter checkpoint under its upstream model-card terms; the
+  release does not redistribute the adapter weights.
+
 ## Behavioral Experiments
 
 The paper evaluates `Qwen/Qwen3-8B` on 100 MMLU and 100 BBH items that the model

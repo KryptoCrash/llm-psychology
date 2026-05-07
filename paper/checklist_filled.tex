@@ -69,8 +69,8 @@
 
 \item {\bf Open access to data and code}
     \item[] Question: Does the paper provide open access to the data and code, with sufficient instructions to faithfully reproduce the main experimental results, as described in supplemental material?
-    \item[] Answer: \answerNo{}
-    \item[] Justification: The repository contains the generation scripts, analysis scripts, Qwen result JSON files, and generated CSV/JSON summaries. Steering code and raw steering outputs should be added to the release package before submission if the intervention results remain a main claim. The release should be anonymized before submission if the repository URL is included.
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Section~\ref{sec:reproducibility} states that the release repository contains the full experimental code, raw Qwen result files, activation artifacts, steering outputs, and generated CSV/JSON summaries. The release README gives exact setup and reproduction commands for the behavioral, activation-oracle, projection, cosine, and steering results.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that paper does not include experiments requiring code.
@@ -114,8 +114,8 @@
 
 \item {\bf Experiments compute resources}
     \item[] Question: For each experiment, does the paper provide sufficient information on the computer resources (type of compute workers, memory, time of execution) needed to reproduce the experiments?
-    \item[] Answer: \answerNo{}
-    \item[] Justification: The draft identifies the model and scripts, but exact GPU type, memory, wall-clock runtime, and total compute accounting were not recorded in the current artifacts.
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Section~\ref{sec:reproducibility} states that all reported experiments used a 2x NVIDIA H100 GPU node and reports approximate wall-clock runtimes: 1 hour for behavioral inference, 2.5 hours for activation patching, 1 hour for activation caching, DiffMean, and activation-oracle runs, and under 30 minutes for remaining analyses and figures.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper does not include experiments.
@@ -164,8 +164,8 @@
 
 \item {\bf Licenses for existing assets}
     \item[] Question: Are the creators or original owners of assets (e.g., code, data, models), used in the paper, properly credited and are the license and terms of use explicitly mentioned and properly respected?
-    \item[] Answer: \answerNo{}
-    \item[] Justification: The draft cites MMLU, BBH, Qwen, and related papers, but it does not yet list the exact licenses or terms for each existing asset.
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Section~\ref{sec:reproducibility} credits Qwen/Qwen3-8B, MMLU, BIG-Bench Hard, and the activation-oracle adapter; it lists Apache-2.0 for Qwen and MIT licenses for MMLU and BIG-Bench Hard, and states that Qwen and adapter weights are not redistributed and must be retrieved under their upstream Hugging Face model-card terms.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper does not use existing assets.
@@ -180,8 +180,8 @@
 
 \item {\bf New assets}
     \item[] Question: Are new assets introduced in the paper well documented and is the documentation provided alongside the assets?
-    \item[] Answer: \answerNo{}
-    \item[] Justification: The repository includes generated outputs, analysis artifacts, and scripts, but the current draft package does not yet include a concise artifact README and license statement for the generated files.
+    \item[] Answer: \answerYes{}
+    \item[] Justification: The release repository documents the scripts, raw JSON outputs, activation artifacts, generated summaries, and paper figures in its README. Section~\ref{sec:reproducibility} states that the released experiment code and derived paper artifacts are distributed under the MIT License, subject to upstream asset licenses.
     \item[] Guidelines:
     \begin{itemize}
         \item The answer \answerNA{} means that the paper does not release new assets.
