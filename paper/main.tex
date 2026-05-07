@@ -42,9 +42,8 @@ activation oracle as incorrect-consensus pressure in a late-middle layer band.
 At layer 23, MMLU-derived projection scores increase with participant count
 within MMLU while showing weak transfer to BBH. A layer-wise cosine analysis
 finds a high-similarity band among the MMLU diffmean directions in layers
-23--33. The activation analysis is diagnostic rather than causal: it localizes a
-residual-stream correlate of the social manipulation, but does not establish a
-steering direction for conformity.
+23--33. The activation analysis localizes a residual-stream correlate of the
+social manipulation.
 \end{abstract}
 
 \section{Introduction}
@@ -68,24 +67,18 @@ localized in internal representations and compared across prompts?
 
 We run a small but controlled replication and extension on Qwen3-8B. The
 stimuli are 100 MMLU and 100 BBH items selected by no-social-context screening.
-This design deliberately does not estimate benchmark accuracy. It isolates
-cases where an incorrect social signal can pull the model away from a reachable
-answer. We measure accuracy, parseability, and conformity to the repeated wrong
-peer answer under group sizes
+This isolates cases where an incorrect social signal can pull the model away
+from a reachable answer. We measure accuracy, parseability, and conformity to
+the repeated wrong peer answer under group sizes
 $n=1,\ldots,10$, with and without an explanation requirement, plus question
 distillation and devil's-advocate mitigations from \citet{zhu2025conformity}.
 
-We then examine Qwen's internal activations. Following the broader line of work
-that uses contrastive directions in activation space to expose or steer
-high-level model behaviors \citep{panickssery2024caa,haon2025vla}, we construct
+We then examine Qwen's internal activations. Following work on contrastive
+activation directions \citep{panickssery2024caa,haon2025vla}, we construct
 difference-of-means directions between repeated-wrong and random-answer peer
-contexts at the assistant-start token. Unlike activation-steering work, our
-analysis stops short of claiming control. This caution is deliberate: recent
-evidence suggests that even strong internal representations need not translate
-into reliable output correction \citep{basu2026actionability}. Our contribution
-is therefore an empirical localization, projection, and layer-wise cosine
-analysis of a social pressure manipulation, paired with behavioral mitigations
-and explicit limitations.
+contexts at the assistant-start token. This yields an empirical localization,
+projection, and layer-wise cosine analysis of a social pressure manipulation,
+paired with behavioral mitigations and limitations on causal interpretation.
 
 \section{Experimental setup}
 \label{sec:setup}
@@ -169,9 +162,7 @@ The activation analysis is descriptive. The activation oracle is itself a model
 component, and its labels are evidence to inspect rather than ground truth. The
 projection analysis uses mean activations at a single position and selected
 layers, and the cosine analysis only compares diffmean directions across layers,
-so both can miss token-local mechanisms or more distributed representations. We
-also do not perform activation patching or steering interventions here; causal
-claims about the direction would require those experiments.
+so both can miss token-local mechanisms or more distributed representations.
 
 \section{Reproducibility and ethics}
 \label{sec:reproducibility}

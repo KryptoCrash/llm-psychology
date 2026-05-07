@@ -24,13 +24,11 @@ these two contexts. The diffmean direction is
 \]
 with $N=100$ items for each tensor. The random-answer contrast preserves
 much of the prompt length and participant-list structure, so the contrast
-isolates repeated agreement on the same wrong answer more closely than a
-no-participant baseline would. The main direction in this section is the MMLU
-$n=8$ \texttt{all\_wrong\_minus\_random\_answers} residual direction. This is a
-high-pressure MMLU condition with nontrivial behavioral conformity
-(0.281 under base prompting), but it is not the $n=10$ endpoint. We also
-compute the analogous MMLU $n=10$ direction and use it as a check in the
-projection analysis below.
+isolates repeated agreement on the same wrong answer. The main direction in
+this section is the MMLU $n=8$ \texttt{all\_wrong\_minus\_random\_answers}
+residual direction, a high-pressure condition with nontrivial behavioral
+conformity (0.281 under base prompting). We use the analogous MMLU $n=10$
+direction as a check in the projection analysis below.
 
 We use two activation summaries. A residual direction uses the accumulated
 residual-stream vector at the assistant-start token after a layer. A delta
@@ -47,20 +45,17 @@ LatentQA LoRA used by \texttt{layer\_sweep.py}. Each layer is queried with a
 free-form text prompt, a free-form belief/feature prompt, and a binary prompt:
 ``Does this activation represent pressure toward an incorrect consensus?''
 
-The residual MMLU $n=8$ direction gives a localized pattern. The binary
-oracle prompt marks layers 10, 12, and 22--33 as positive, with the dense part
-of the positive set in layers 22--33. The free-form responses in this band are
-not merely answer-format descriptions. Layer 23 is described as group behavior
-influencing the assistant's responses; layer 24 as actions influenced by the
-majority; layers 26, 29, 30, and 33 as treating the majority as correct; and
-layers 31--32 as conformity being important for group success. The residual
-direction indicates where the signal is linearly accessible in the model state;
-the delta direction gives a more local view of which block updates are aligned
-with that signal. On this criterion, layers 22 and 23 are the relevant
-transition layers: both are positive in the delta summary, and both sit inside
-the larger residual band. We use layer 23 for the projection analysis because it
-is in this delta-positive transition region, rather than selecting a layer
-solely by residual-vector norm.
+The residual MMLU $n=8$ direction gives a localized pattern. The binary oracle
+prompt marks layers 10, 12, and 22--33 as positive, with the dense part of the
+positive set in layers 22--33. The free-form responses in this band refer to
+majority influence: layer 23 is described as group behavior influencing the
+assistant's responses; layer 24 as actions influenced by the majority; layers
+26, 29, 30, and 33 as treating the majority as correct; and layers 31--32 as
+conformity being important for group success. The residual direction indicates
+where the signal is linearly accessible in the model state; the delta direction
+identifies block updates aligned with that signal. We use layer 23 for the
+projection analysis because layers 22 and 23 are positive in the delta summary
+and lie inside the larger residual band.
 
 \begin{table}[t]
   \centering
@@ -84,10 +79,7 @@ The delta results are much sparser than the residual results: only layers 8, 22,
 and 23 are marked positive. We interpret this as evidence that the residual
 stream contains a broader conformity-related direction over layers 22--33, while
 the layer updates at 22 and 23 are the narrowest places in this sweep where the
-same direction appears in the layer contribution. This interpretation is
-descriptive: the oracle responses motivate a layer choice for projection and
-cosine comparison, but do not by themselves establish that the direction causally
-mediates the behavioral effect.
+same direction appears in the layer contribution.
 
 \paragraph{Projection across condition means.}
 We next test whether the MMLU diffmean direction appears across the other Qwen
@@ -101,9 +93,8 @@ average the layer-23 assistant-start residual activations over its 100 prompts:
   \qquad \ell=23,\; M_c=100,
 \]
 where $h^\ell_{c,j}$ is the residual-stream activation for prompt $j$ in
-condition $c$. This mean activation is not an average over generated answer
-tokens; it is the average model state at the assistant-start position, before
-the model emits its response.
+condition $c$. This mean activation is the average model state at the
+assistant-start position, before response generation.
 
 Given a reference diffmean $d^\ell$ from the MMLU $n=8$ or $n=10$
 all-wrong-minus-random-answers contrast, we report the scalar projection of the
@@ -116,9 +107,9 @@ and the corresponding cosine similarity,
   \mathrm{cos}(c;d^\ell) =
   \frac{\bar{h}_c \cdot d^\ell}{\|\bar{h}_c\|\,\|d^\ell\|}.
 \]
-The projection preserves the scale of the condition mean in activation-norm
-units, while the cosine reports only angular alignment. Table~\ref{tab:qwen-projection-top}
-reports the highest-scoring conditions for the two MMLU reference directions.
+The projection preserves activation-norm scale; the cosine reports angular
+alignment. Table~\ref{tab:qwen-projection-top} reports the highest-scoring
+conditions for the two MMLU reference directions.
 In both cases, the matched MMLU base condition used to create the reference
 direction is the strongest positive projection. Explanation prompting shifts
 the same MMLU participant-count conditions downward, and BBH conditions are
@@ -148,11 +139,10 @@ Table~\ref{tab:qwen-projection-correlations} reports Pearson correlations
 between participant count $n$ and the projection or cosine values for the
 numeric participant-count conditions $n=1,\ldots,10$. Within MMLU, both the
 $n=8$ and $n=10$ reference directions show a positive relationship between
-participant count and projection, for both base prompting and explanation
-prompting. For example, with the MMLU $n=10$ reference, $r(n,\mathrm{proj})$ is
-0.792 for MMLU base and 0.792 for MMLU explain. The corresponding BBH
-correlations are weak, ranging from 0.022 to 0.230 for projection, indicating
-limited cross-dataset alignment for these MMLU-derived directions.
+participant count and projection. With the MMLU $n=10$ reference,
+$r(n,\mathrm{proj})=0.792$ for both MMLU base and MMLU explain. The
+corresponding BBH projection correlations are weaker, ranging from 0.022 to
+0.230.
 
 \begin{table}[t]
   \centering
@@ -180,16 +170,12 @@ across MMLU participant-count conditions, base prompting projects more strongly
 onto the MMLU $n=8$ reference by 10.708 units and onto the MMLU $n=10$
 reference by 9.181 units. These MMLU projection gaps grow with participant count
 ($r=0.514$ and $r=0.533$, respectively). On BBH, the base-minus-explain gaps are
-smaller, 2.203 and 2.227 units on average, and their correlations with
-participant count are slightly negative ($r=-0.161$ and $r=-0.169$). Thus the
-projection analysis is consistent with the behavioral result that explanation
-prompting is associated with lower projections onto the conformity-associated
-direction, especially on the matched MMLU domain and at larger group sizes.
+smaller, 2.203 and 2.227 units on average.
 
 \paragraph{Layer-wise cosine structure.}
-Finally, we use the layer-wise cosine matrix of the MMLU $n=8$ residual
-diffmeans to check whether the oracle-positive band is also geometrically
-clustered. For each layer $\ell$, we compute the cosine similarity between
+We use the layer-wise cosine matrix of the MMLU $n=8$ residual diffmeans to
+test whether the oracle-positive band is geometrically clustered. For each
+layer $\ell$, we compute the cosine similarity between
 $d^\ell$ and every other layer's diffmean, exclude the self-comparison, and
 average the five largest remaining cosines:
 \[
@@ -207,10 +193,8 @@ layer 23--33 band has a much larger average top-neighbor cosine than earlier
 layers. Its mean $s_\ell$ is 0.859, compared with 0.477 for layers 0--9 and
 0.538 for layers 10--21. Within this band, layers 28--32 all have
 $s_\ell \geq 0.882$; layer 31 has the largest value, $s_{31}=0.904$.
-For layers 23--33, the mean pairwise cosine within the band is 0.752, whereas
-the mean cosine from those layers to layers outside the band is 0.126. Thus the
-oracle-positive residual layers are also a band of mutually similar diffmean
-directions, rather than isolated high-norm layers.
+For layers 23--33, the mean pairwise cosine within the band is 0.752; the mean
+cosine from those layers to layers outside the band is 0.126.
 
 \begin{figure}[t]
   \centering
