@@ -6,7 +6,7 @@ residual stream. The prompts and social manipulations follow the base
 multi-actor setup of \citet{zhu2025conformity}; the activation analysis examines
 the resulting assistant-start states under these controlled social contexts.
 
-\paragraph{Diffmean generation.}
+\paragraph{Diffmean directions.}
 For each selected layer $\ell$, we construct a direction that contrasts two
 matched social contexts for the same item. The first context repeats the same
 incorrect answer across the previous participants; the second keeps the
@@ -23,22 +23,22 @@ these two contexts. The diffmean direction is
   \left(h^\ell_{i,\mathrm{wrong}} - h^\ell_{i,\mathrm{random}}\right),
 \]
 with $N=100$ items for each tensor. The random-answer contrast preserves
-much of the prompt length and participant-list structure, so the direction is
-aimed at repeated agreement on the same wrong answer rather than the generic
-presence of other participants. The main direction in this section is the MMLU
+much of the prompt length and participant-list structure, so the contrast
+isolates repeated agreement on the same wrong answer more closely than a
+no-participant baseline would. The main direction in this section is the MMLU
 $n=8$ \texttt{all\_wrong\_minus\_random\_answers} residual direction. This is a
-high-pressure MMLU condition with substantial behavioral conformity
-(0.281 under base prompting), but it is not only the endpoint condition. We also
-computed the analogous MMLU $n=10$ direction and use it as a check in the
-cosine analysis below.
+high-pressure MMLU condition with nontrivial behavioral conformity
+(0.281 under base prompting), but it is not the $n=10$ endpoint. We also
+compute the analogous MMLU $n=10$ direction and use it as a check in the
+projection analysis below.
 
 We use two activation summaries. A residual direction uses the accumulated
 residual-stream vector at the assistant-start token after a layer. A delta
 direction uses the update contributed by that layer at the same position,
-i.e. the layer output that is added into the residual stream. The residual view
-asks whether the social signal is present in the model state; the delta view is
-a stricter check for whether a particular block's update carries a similar
-signal.
+i.e. the layer output that is added into the residual stream. The residual
+summary tests whether the social signal is present in the accumulated model
+state; the delta summary tests whether a particular block's update is aligned
+with the same direction.
 
 \paragraph{Activation oracle responses.}
 For the MMLU $n=8$ direction, we also asked an activation oracle for a short
@@ -47,21 +47,20 @@ LatentQA LoRA used by \texttt{layer\_sweep.py}. Each layer is queried with a
 free-form text prompt, a free-form belief/feature prompt, and a binary prompt:
 ``Does this activation represent pressure toward an incorrect consensus?''
 
-The residual MMLU $n=8$ direction gives a fairly coherent pattern. The binary
+The residual MMLU $n=8$ direction gives a localized pattern. The binary
 oracle prompt marks layers 10, 12, and 22--33 as positive, with the dense part
-of the run in layers 22--33. The free-form responses in this band are also not
-just generic answer-format descriptions. Layer 23 is described as group behavior
+of the positive set in layers 22--33. The free-form responses in this band are
+not merely answer-format descriptions. Layer 23 is described as group behavior
 influencing the assistant's responses; layer 24 as actions influenced by the
 majority; layers 26, 29, 30, and 33 as treating the majority as correct; and
 layers 31--32 as conformity being important for group success. The residual
-direction alone shows where the signal is linearly accessible in the model
-state; the delta direction gives a more local view of where that signal is being
-written. On this criterion, layers 22 and 23 are the key layers: both are
-positive in the delta summary, and both sit inside the larger residual band.
-For the cosine analysis, we therefore use layer 23. This choice treats layer
-23 as a point where the conformity-related information is being made linearly
-available in the residual stream, while avoiding a selection rule based only on
-large late-layer norms.
+direction indicates where the signal is linearly accessible in the model state;
+the delta direction gives a more local view of which block updates are aligned
+with that signal. On this criterion, layers 22 and 23 are the relevant
+transition layers: both are positive in the delta summary, and both sit inside
+the larger residual band. We use layer 23 for the projection analysis because it
+is in this delta-positive transition region, rather than selecting a layer
+solely by residual-vector norm.
 
 \begin{table}[t]
   \centering
@@ -84,67 +83,149 @@ large late-layer norms.
 The delta results are much sparser than the residual results: only layers 8, 22,
 and 23 are marked positive. We interpret this as evidence that the residual
 stream contains a broader conformity-related direction over layers 22--33, while
-the layer updates at 22 and 23 are where this information is most clearly being
-computed or written into a linearly readable form. This interpretation is still
-descriptive: the oracle responses motivate a layer choice for cosine
-comparison, but do not by themselves establish that the direction causally
+the layer updates at 22 and 23 are the narrowest places in this sweep where the
+same direction appears in the layer contribution. This interpretation is
+descriptive: the oracle responses motivate a layer choice for projection and
+cosine comparison, but do not by themselves establish that the direction causally
 mediates the behavioral effect.
 
-\paragraph{Cosine similarity across diffmean directions.}
-We next ask whether the layer-23 MMLU direction is stable across related
+\paragraph{Projection across condition means.}
+We next test whether the MMLU diffmean direction appears across the other Qwen
 conditions. A condition $c$ is a fixed tuple of dataset, social condition
-($n=2,\ldots,10$, QD, or DA), and prompt style (base or explanation prompting),
-for example MMLU $n=6$ base or BBH $n=10$ explain. For two conditions $a$ and
-$b$, with layer-23 diffmean directions $d^\ell_a$ and $d^\ell_b$, we compute
+($n=1,\ldots,10$, QD, or DA), and prompt style (base or explanation prompting),
+for example MMLU $n=6$ base or BBH $n=10$ explain. For each condition, we
+average the layer-23 assistant-start residual activations over its 100 prompts:
 \[
-  \mathrm{cos}(a,b;\ell) =
-  \frac{d^\ell_a \cdot d^\ell_b}{\|d^\ell_a\|\,\|d^\ell_b\|},
-  \qquad \ell=23.
+  \bar{h}_c =
+  \frac{1}{M_c}\sum_{j=1}^{M_c} h^\ell_{c,j},
+  \qquad \ell=23,\; M_c=100,
 \]
-This is a comparison between contrast directions, not a projection of mean
-condition activations. It therefore tests whether different social conditions
-yield a similar repeated-wrong-minus-random-answer direction in the residual
-stream.
+where $h^\ell_{c,j}$ is the residual-stream activation for prompt $j$ in
+condition $c$. This mean activation is not an average over generated answer
+tokens; it is the average model state at the assistant-start position, before
+the model emits its response.
 
-Table~\ref{tab:qwen-diffmean-cosines} reports layer-23 cosine similarities
-against the MMLU $n=8$ and $n=10$ base references. The MMLU directions are
-stable across high-participant MMLU conditions: the MMLU $n=8$ reference has
-cosines 0.961, 0.972, 0.953, and 0.932 with MMLU base $n=6,7,9,10$,
-respectively, and the MMLU $n=10$ reference has cosine 0.978 with MMLU base
-$n=9$. Explanation prompting preserves the broad direction but lowers the mean
-cosine. BBH directions are also positively aligned after the low-participant
-conditions, but the alignment is weaker than within MMLU. For example, BBH
-$n=10$ base has cosine 0.388 with the MMLU $n=8$ reference and 0.542 with the
-MMLU $n=10$ reference.
+Given a reference diffmean $d^\ell$ from the MMLU $n=8$ or $n=10$
+all-wrong-minus-random-answers contrast, we report the scalar projection of the
+condition mean onto the unit reference direction,
+\[
+  \mathrm{proj}(c;d^\ell) = \bar{h}_c \cdot \frac{d^\ell}{\|d^\ell\|},
+\]
+and the corresponding cosine similarity,
+\[
+  \mathrm{cos}(c;d^\ell) =
+  \frac{\bar{h}_c \cdot d^\ell}{\|\bar{h}_c\|\,\|d^\ell\|}.
+\]
+The projection preserves the scale of the condition mean in activation-norm
+units, while the cosine reports only angular alignment. Table~\ref{tab:qwen-projection-top}
+reports the highest-scoring conditions for the two MMLU reference directions.
+In both cases, the matched MMLU base condition used to create the reference
+direction is the strongest positive projection. Explanation prompting shifts
+the same MMLU participant-count conditions downward, and BBH conditions are
+negative on average under these MMLU reference directions.
 
 \begin{table}[t]
   \centering
-  \caption{Layer-23 cosine similarity between MMLU reference diffmeans and
-  numeric participant-count diffmeans. Means and correlations are over
-  $n=2,\ldots,10$; the MMLU base row for the reference condition includes the
-  self-cosine of 1.}
-  \label{tab:qwen-diffmean-cosines}
-  \begin{tabular}{lllrrr}
+  \caption{Largest projections of experiment-mean activations onto MMLU
+  diffmean directions at layer 23.}
+  \label{tab:qwen-projection-top}
+  \begin{tabular}{llrr}
     \toprule
-    Reference & Dataset & Prompt & Mean cos. & $r(n,\mathrm{cos})$ & Cos. at $n=10$ \\
+    Reference & Experiment & Projection & Cosine \\
     \midrule
-    MMLU $n=8$ & MMLU & base & 0.769 & 0.730 & 0.932 \\
-    MMLU $n=8$ & MMLU & explain & 0.695 & 0.793 & 0.899 \\
-    MMLU $n=8$ & BBH & base & 0.430 & 0.436 & 0.388 \\
-    MMLU $n=8$ & BBH & explain & 0.335 & 0.582 & 0.397 \\
-    MMLU $n=10$ & MMLU & base & 0.776 & 0.754 & 1.000 \\
-    MMLU $n=10$ & MMLU & explain & 0.736 & 0.787 & 0.958 \\
-    MMLU $n=10$ & BBH & base & 0.511 & 0.600 & 0.542 \\
-    MMLU $n=10$ & BBH & explain & 0.412 & 0.721 & 0.534 \\
+    MMLU $n=8$ & MMLU $n=8$ base & 12.713 & 0.088 \\
+    MMLU $n=8$ & MMLU $n=6$ base & 3.648 & 0.025 \\
+    MMLU $n=8$ & MMLU $n=7$ base & 3.427 & 0.024 \\
+    MMLU $n=10$ & MMLU $n=8$ base & 9.413 & 0.065 \\
+    MMLU $n=10$ & MMLU $n=6$ base & 2.381 & 0.017 \\
+    MMLU $n=10$ & MMLU $n=7$ base & 2.359 & 0.016 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-The cosine analysis supports a narrower conclusion than activation steering
-would require. The repeated-wrong contrast produces a stable layer-23 direction
-within MMLU, especially from moderate to high participant counts, and this
-direction has partial but weaker alignment with BBH. Explanation prompting does
-not remove the direction; rather, its directions are less aligned with the MMLU
-base references on average. These results are consistent with the behavioral
-pattern while remaining descriptive: they show representational similarity
-between contrast directions, not causal control over the final answer.
+\paragraph{Correlation with participant count and prompt style.}
+Table~\ref{tab:qwen-projection-correlations} reports Pearson correlations
+between participant count $n$ and the projection or cosine values for the
+numeric participant-count conditions $n=1,\ldots,10$. Within MMLU, both the
+$n=8$ and $n=10$ reference directions show a positive relationship between
+participant count and projection, for both base prompting and explanation
+prompting. For example, with the MMLU $n=10$ reference, $r(n,\mathrm{proj})$ is
+0.792 for MMLU base and 0.792 for MMLU explain. The corresponding BBH
+correlations are weak, ranging from 0.022 to 0.230 for projection, indicating
+limited cross-dataset alignment for these MMLU-derived directions.
+
+\begin{table}[t]
+  \centering
+  \caption{Correlation between participant count and projection/cosine
+  similarity for numeric participant-count conditions.}
+  \label{tab:qwen-projection-correlations}
+  \begin{tabular}{lllrrr}
+    \toprule
+    Reference & Dataset & Prompt & $r(n,\mathrm{proj})$ & $r(n,\mathrm{cos})$ & Mean proj. \\
+    \midrule
+    MMLU $n=8$ & MMLU & base & 0.745 & 0.745 & -3.024 \\
+    MMLU $n=8$ & MMLU & explain & 0.731 & 0.722 & -13.732 \\
+    MMLU $n=8$ & BBH & base & 0.022 & -0.047 & -12.159 \\
+    MMLU $n=8$ & BBH & explain & 0.150 & 0.083 & -14.362 \\
+    MMLU $n=10$ & MMLU & base & 0.792 & 0.793 & -3.053 \\
+    MMLU $n=10$ & MMLU & explain & 0.792 & 0.785 & -12.235 \\
+    MMLU $n=10$ & BBH & base & 0.110 & 0.034 & -12.480 \\
+    MMLU $n=10$ & BBH & explain & 0.230 & 0.159 & -14.707 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The base-minus-explain comparison gives the same qualitative pattern. Averaged
+across MMLU participant-count conditions, base prompting projects more strongly
+onto the MMLU $n=8$ reference by 10.708 units and onto the MMLU $n=10$
+reference by 9.181 units. These MMLU projection gaps grow with participant count
+($r=0.514$ and $r=0.533$, respectively). On BBH, the base-minus-explain gaps are
+smaller, 2.203 and 2.227 units on average, and their correlations with
+participant count are slightly negative ($r=-0.161$ and $r=-0.169$). Thus the
+projection analysis is consistent with the behavioral result that explanation
+prompting is associated with lower projections onto the conformity-associated
+direction, especially on the matched MMLU domain and at larger group sizes.
+
+\paragraph{Layer-wise cosine structure.}
+Finally, we use the layer-wise cosine matrix of the MMLU $n=8$ residual
+diffmeans to check whether the oracle-positive band is also geometrically
+clustered. For each layer $\ell$, we compute the cosine similarity between
+$d^\ell$ and every other layer's diffmean, exclude the self-comparison, and
+average the five largest remaining cosines:
+\[
+  s_\ell =
+  \frac{1}{5}\sum_{k=1}^{5}
+  \operatorname{top}_k
+  \left\{
+    \frac{d^\ell \cdot d^m}{\|d^\ell\|\,\|d^m\|}
+    : m \neq \ell
+  \right\}.
+\]
+Here $\operatorname{top}_k$ denotes the $k$th-largest cosine in the set.
+Table~\ref{tab:qwen-layer-top5-cosines} summarizes these per-layer scores by
+layer range. The layer 23--33 band has a much larger average top-neighbor
+cosine than earlier layers. Within this band, layers 28--32 all have
+$s_\ell \geq 0.882$; layer 31 has the largest value, $s_{31}=0.904$.
+For layers 23--33, the mean pairwise cosine within the band is 0.752, whereas
+the mean cosine from those layers to layers outside the band is 0.126. Thus the
+oracle-positive residual layers are also a band of mutually similar diffmean
+directions, rather than isolated high-norm layers.
+
+\begin{table}[t]
+  \centering
+  \caption{Layer-wise neighborhood cosine scores for the MMLU $n=8$ residual
+  diffmean. For each layer, $s_\ell$ is the mean cosine similarity to the five
+  most similar other layers.}
+  \label{tab:qwen-layer-top5-cosines}
+  \begin{tabular}{lrrr}
+    \toprule
+    Layers & Mean $s_\ell$ & Min. $s_\ell$ & Max. $s_\ell$ \\
+    \midrule
+    0--9 & 0.477 & 0.396 & 0.537 \\
+    10--21 & 0.538 & 0.436 & 0.660 \\
+    22 & 0.692 & 0.692 & 0.692 \\
+    23--33 & 0.859 & 0.748 & 0.904 \\
+    34--35 & 0.668 & 0.540 & 0.795 \\
+    \bottomrule
+  \end{tabular}
+\end{table}

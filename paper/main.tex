@@ -33,15 +33,16 @@ from 0.990 to 0.637 on MMLU and from 0.970 to 0.610 on BBH, while conformity to
 the repeated wrong answer rises to 0.363 and 0.390. Requiring an explanation
 before the final answer substantially reduces this effect. Question distillation
 also reduces conformity more consistently than devil's-advocate prompting in
-these experiments. We then ask whether this behavioral effect has a simple
-internal trace. Difference-of-means directions in the residual stream, comparing
-all-wrong peer contexts to random-peer-answer contexts, are identified by an
-activation oracle as pressure toward an incorrect consensus in a late-middle
-layer band. At the layer selected from this analysis, MMLU-derived diffmean
-directions are highly aligned across high-participant MMLU conditions and show
-weaker, but still positive, alignment with BBH. The activation analysis is
-diagnostic rather than causal: it shows that the social manipulation is visible
-in the residual stream, not that we can yet steer conformity reliably.
+these experiments. We then test whether the social manipulation is linearly
+represented in the residual stream. Difference-of-means directions comparing
+all-wrong peer contexts to random-peer-answer contexts are labeled by an
+activation oracle as incorrect-consensus pressure in a late-middle layer band.
+At layer 23, MMLU-derived projection scores increase with participant count
+within MMLU while showing weak transfer to BBH. A layer-wise cosine analysis
+finds a high-similarity band among the MMLU diffmean directions in layers
+23--33. The activation analysis is diagnostic rather than causal: it localizes a
+residual-stream correlate of the social manipulation, but does not establish a
+steering direction for conformity.
 \end{abstract}
 
 \section{Introduction}
@@ -60,15 +61,15 @@ agent-like settings, with sensitivity to group size, unanimity, difficulty, and
 source characteristics \citep{bellina2026conformity}, and argue that uncertainty
 moderates whether models underweight or overweight public signals
 \citep{zhong2025disentangling}. These behavioral results raise a mechanistic
-question: when a model conforms, is the social pressure visible in internal
-representations in a way that can be localized and compared across prompts?
+question: when a model conforms, can the social-pressure manipulation be
+localized in internal representations and compared across prompts?
 
 We run a small but controlled replication and extension on Qwen3-8B. The
 stimuli are 100 MMLU and 100 BBH items selected by no-social-context screening.
 This design deliberately does not estimate benchmark accuracy. It isolates
 cases where an incorrect social signal can pull the model away from a reachable
-answer. We measure accuracy,
-parseability, and conformity to the repeated wrong peer answer under group sizes
+answer. We measure accuracy, parseability, and conformity to the repeated wrong
+peer answer under group sizes
 $n=1,\ldots,10$, with and without an explanation requirement, plus question
 distillation and devil's-advocate mitigations from \citet{zhu2025conformity}.
 
@@ -80,9 +81,9 @@ contexts at the assistant-start token. Unlike activation-steering work, our
 analysis stops short of claiming control. This caution is deliberate: recent
 evidence suggests that even strong internal representations need not translate
 into reliable output correction \citep{basu2026actionability}. Our contribution
-is therefore an empirical localization and cosine-similarity analysis of a social
-pressure manipulation, paired with behavioral mitigations and explicit
-limitations.
+is therefore an empirical localization, projection, and layer-wise cosine
+analysis of a social pressure manipulation, paired with behavioral mitigations
+and explicit limitations.
 
 \section{Experimental setup}
 \label{sec:setup}
@@ -118,13 +119,13 @@ experimental protocol.
 \paragraph{Decoding and metrics.}
 Generation uses sampling with the model's default generation configuration,
 batching 16 prompts for base prompts and 8 for explanation prompts. The system
-retries unparseable outputs up to ten times and records the final generation. Accuracy
-is correct answers divided by parseable responses. Conformity is the fraction of
-parseable responses that match the repeated wrong peer answer. We also report
-parse rates because MMLU base prompts have nontrivial format failures under
-social pressure. Confidence intervals are item-bootstrap intervals over the 100
-selected items; they condition on the observed generations and do not include
-decoding-seed variation.
+retries unparseable outputs up to ten times and records the final generation.
+Accuracy is correct answers divided by parseable responses. Conformity is the
+fraction of parseable responses that match the repeated wrong peer answer. We
+also report parse rates because MMLU base prompts have nontrivial format
+failures under social pressure. Confidence intervals are item-bootstrap
+intervals over the 100 selected items; they condition on the observed
+generations and do not include decoding-seed variation.
 
 \input{sections/qwen_results_section.tex}
 
@@ -141,15 +142,15 @@ especially on MMLU base prompting, but it is not uniformly accuracy-improving
 once explanation prompting is already active.
 
 The activation results give a more tentative mechanistic picture. The
-all-wrong-minus-random contrast removes much of the generic effect of adding
-peer-answer text, leaving a direction that an activation oracle repeatedly
-describes as majority influence in layers 22--33. Layer-23 cosine similarities
-between diffmean directions behave sensibly within the matched MMLU domain:
-high-participant MMLU directions are strongly aligned with the MMLU $n=8$ and
-$n=10$ references, and explanation prompting lowers the average alignment. The
-same MMLU directions align less strongly with BBH, suggesting either
-task-specific representations, prompt-format effects, or insufficiently stable
-directions at this sample size.
+all-wrong-minus-random contrast controls for much of the generic effect of
+adding peer-answer text, leaving a direction that an activation oracle labels as
+majority influence in layers 22--33. Projections onto this direction increase
+with participant count within MMLU, and explanation prompting shifts condition
+means downward. The same MMLU directions do not align cleanly with BBH,
+suggesting either task-specific representations, prompt-format confounds, or
+insufficiently stable directions at this sample size. The layer-wise cosine
+analysis gives a separate check on the layer sweep: the MMLU $n=8$ diffmeans in
+layers 23--33 are much more similar to nearby diffmeans than earlier layers are.
 
 \section{Limitations}
 \label{sec:limitations}
@@ -164,11 +165,11 @@ relative to ordinary benchmark evaluation.
 
 The activation analysis is descriptive. The activation oracle is itself a model
 component, and its labels are evidence to inspect rather than ground truth. The
-cosine analysis compares diffmean directions at a single position and selected
-layer, so it can miss token-local mechanisms or more distributed
-representations. We also
-do not perform activation patching or steering interventions here; causal claims
-about the direction would require those experiments.
+projection analysis uses mean activations at a single position and selected
+layers, and the cosine analysis only compares diffmean directions across layers,
+so both can miss token-local mechanisms or more distributed representations. We
+also do not perform activation patching or steering interventions here; causal
+claims about the direction would require those experiments.
 
 \section{Reproducibility and ethics}
 \label{sec:reproducibility}
@@ -176,8 +177,10 @@ about the direction would require those experiments.
 The repository contains the scripts used for generation and analysis. The
 behavioral sweep is run by \texttt{python qwen\_experiment.py}; item-bootstrap
 tables are generated by \texttt{python data\_analysis/bootstrap\_qwen\_results.py};
-activation-oracle summaries and cosine comparisons are generated by
-\texttt{data\_analysis/summarize\_activation\_oracle\_outputs.py} and
+activation-oracle summaries, projection correlations, and layer-wise cosine
+comparisons are generated by
+\texttt{data\_analysis/summarize\_activation\_oracle\_outputs.py},
+\texttt{data\_analysis/projection\_correlation\_analysis.py}, and
 \texttt{analyze\_qwen\_diffmean\_cosines.py}. The Qwen result files and
 generated CSV/JSON summaries are included with the draft. The
 experiments use public benchmarks and open model weights; no human subjects or

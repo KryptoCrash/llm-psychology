@@ -39,6 +39,12 @@ def parse_args() -> argparse.Namespace:
         default=25,
         help="Number of strongest positive/negative/absolute non-self pairs to report.",
     )
+    parser.add_argument(
+        "--neighbor-k",
+        type=int,
+        default=5,
+        help="Number of nearest other layers used for per-layer coherence summaries.",
+    )
     return parser.parse_args()
 
 
@@ -164,6 +170,76 @@ def write_matrix_csv(path: Path, layers: list[int], matrix: torch.Tensor) -> Non
         writer.writerow(["layer", *layers])
         for layer, row in zip(layers, matrix.tolist(), strict=True):
             writer.writerow([layer, *[f"{value:.8f}" for value in row]])
+
+
+def layer_neighbor_rows(
+    artifact: dict[str, Any],
+    cosine: torch.Tensor,
+    neighbor_k: int,
+) -> list[dict[str, Any]]:
+    rows = []
+    layers = artifact["layers"]
+    if neighbor_k < 1:
+        raise ValueError("--neighbor-k must be at least 1")
+    if neighbor_k >= len(layers):
+        raise ValueError("--neighbor-k must be smaller than the number of layers")
+
+    for i, layer in enumerate(layers):
+        neighbors = sorted(
+            (
+                (float(cosine[i, j].item()), layers[j])
+                for j in range(len(layers))
+                if j != i
+            ),
+            reverse=True,
+        )[:neighbor_k]
+        rows.append(
+            {
+                **row_metadata(artifact),
+                "layer": layer,
+                "neighbor_k": neighbor_k,
+                "mean_topk_cosine": sum(value for value, _ in neighbors) / neighbor_k,
+                "top_neighbor_layers": [neighbor for _, neighbor in neighbors],
+                "top_neighbor_cosines": [value for value, _ in neighbors],
+            }
+        )
+    return rows
+
+
+def write_layer_neighbor_csv(path: Path, rows: list[dict[str, Any]]) -> None:
+    fieldnames = [
+        "label",
+        "dataset",
+        "mode",
+        "explain",
+        "n",
+        "position",
+        "activation_kind",
+        "direction",
+        "baseline",
+        "layer",
+        "neighbor_k",
+        "mean_topk_cosine",
+        "top_neighbor_layers",
+        "top_neighbor_cosines",
+        "source_file",
+    ]
+    with path.open("w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(
+                {
+                    **{key: row.get(key) for key in fieldnames},
+                    "mean_topk_cosine": f"{row['mean_topk_cosine']:.8f}",
+                    "top_neighbor_layers": " ".join(
+                        str(layer) for layer in row["top_neighbor_layers"]
+                    ),
+                    "top_neighbor_cosines": " ".join(
+                        f"{value:.8f}" for value in row["top_neighbor_cosines"]
+                    ),
+                }
+            )
 
 
 def global_bundle(artifacts: list[dict[str, Any]]) -> dict[str, Any]:
@@ -320,6 +396,7 @@ def write_summary(
     artifact_summaries: list[dict[str, Any]],
     global_rows: list[dict[str, Any]],
     report: dict[str, list[dict[str, Any]]],
+    layer_neighbors: list[dict[str, Any]],
 ) -> None:
     lines = [
         "# Qwen Diffmean Layer Cosine Analysis",
@@ -345,6 +422,27 @@ def write_summary(
                 norm_max=row["diffmean_norm_max"],
                 norm_mean=row["diffmean_norm_mean"],
             )
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Strongest Per-Layer Neighborhoods",
+            "",
+            "| rank | artifact | layer | mean top-k cosine | neighbor layers |",
+            "|---:|---|---:|---:|---|",
+        ]
+    )
+    for rank, row in enumerate(
+        sorted(layer_neighbors, key=lambda item: item["mean_topk_cosine"], reverse=True)[
+            :25
+        ],
+        1,
+    ):
+        neighbor_layers = ", ".join(str(layer) for layer in row["top_neighbor_layers"])
+        lines.append(
+            f"| {rank} | {row['label']} | {row['layer']} | "
+            f"{row['mean_topk_cosine']:.6f} | {neighbor_layers} |"
         )
 
     def add_pairs(title: str, rows: list[dict[str, Any]]) -> None:
@@ -378,6 +476,10 @@ def main() -> None:
 
     artifacts = load_diffmean_artifacts(args.source_dirs)
     artifact_summaries = write_per_artifact_outputs(artifacts, matrices_dir)
+    layer_neighbors = []
+    for artifact in artifacts:
+        cosine = safe_cosine_matrix(artifact["vectors"])
+        layer_neighbors.extend(layer_neighbor_rows(artifact, cosine, args.neighbor_k))
 
     bundle = global_bundle(artifacts)
     rows = bundle["rows"]
@@ -396,10 +498,12 @@ def main() -> None:
         diffmeans_dir / "qwen_layer_sweep_diffmeans_and_cosines.pt",
     )
     write_json(diffmeans_dir / "qwen_layer_sweep_diffmeans_metadata.json", artifact_summaries)
+    write_json(args.output_dir / "layer_topk_neighbors.json", layer_neighbors)
+    write_layer_neighbor_csv(args.output_dir / "layer_topk_neighbors.csv", layer_neighbors)
     write_json(args.output_dir / "top_cross_artifact_pairs.json", report)
     write_pair_csv(args.output_dir / "cross_artifact_pairs.csv", pairs)
     write_activation_metadata(artifacts, activations_dir)
-    write_summary(args.output_dir / "analysis.md", artifact_summaries, rows, report)
+    write_summary(args.output_dir / "analysis.md", artifact_summaries, rows, report, layer_neighbors)
 
     print(f"Loaded {len(artifacts)} Qwen diffmean artifacts")
     print(f"Wrote {args.output_dir}")
