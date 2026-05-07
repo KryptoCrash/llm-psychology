@@ -1,0 +1,57 @@
+\section{Causal Validation via Activation Patching}
+
+The preceding section identified candidate conformity directions at layers 22--23. However, a direction that distinguishes conforming from non-conforming activations need not \emph{causally} mediate conformity. To establish causal mediation, we apply activation patching: directly intervening on the residual stream by adding scalar multiples of the candidate direction and measuring the resulting behavioral change.
+
+This follows the now-standard paradigm for validating linear feature directions via bidirectional activation steering — formalized as contrastive activation addition (CAA) by Rimsky et al. (2024), and subsequently applied to refusal directions by Arditi et al. (2024, NeurIPS) and to persona traits by Chen et al. (2025).
+
+\subsection{Methodology}
+
+We apply two complementary designs.
+
+\textbf{Experiment 1: Per-Layer Activation Steering Sweep.} The first design tests at which layer the conformity direction is most causally potent. For each layer $L$, we extract the layer-specific DiffMean direction $d_L$ and inject $\alpha \cdot d_L$ into the residual stream at layer $L$, sweeping across positive and negtive $\alpha$. Per-layer matched extraction-and-injection---using $d_L$ rather than a single fixed vector is conventional steering literature (Rimsky et al.~[2024]; Chen et al.~[2025]), as it tests each layer's locally-extracted direction at its native injection site rather than confounding direction quality with cross-layer transfer. Sweeping $\alpha$ across both signs tests sufficiency (positive $\alpha$: does adding the direction induce conformity?) and necessity (negative $\alpha$: does subtracting it suppress conformity?). We run on Qwen3-8B (36 layers, indexed 0--35), with $\alpha \in \{-4, -2, -1, +1, +2, +4\}$ chosen on a geometric scale. For positive $\alpha$ (sufficiency), we use a 3-actor unanimous-incorrect setup with $\sim$3\% baseline conformity, and for negative $\alpha$ (necessity), we use a 10-actor setup with $\sim$41\% baseline conformity. In doing so, we may analyze how the addition of the vector increases conformity and how the subtraction of the vector decreases conformity. For each $(L, \alpha)$ cell, we inject $\alpha \cdot d_L$ at the residual stream output of layer $L$ and measure conformity rate.
+
+\textbf{Experiment 2: Multi-Layer Single-Vector Injection.} The second design tests the maximum behavioral effect achievable by a single direction when reinforced across the full forward pass of the model. Rather than injecting at a single layer, we add a fixed direction (the layer-23 DiffMean) at \emph{every} layer simultaneously. Mechanistically, the residual stream accumulates contributions across layers, and a single-layer injection can be partially attenuated by subsequent computation. Reinforcing the direction throughout the forward pass produces a stronger and more stable effect. Marks and Tegmark~[2023] use this design to validate their truth direction across a contiguous range of mid-network layers, and work from Arditi et al.~[2024] extends this to all-layer injection. Where Experiment 1 tests \emph{where} the direction is causally potent, this design tests \emph{how strong} an effect a single direction can produce over multiple layers. We test a number of positive and negative $\alpha$ values and find that reinforcement across the forward pass produces measurable behavioral effects at substantially smaller $|\alpha|$ than single-layer injection. We identify $\alpha = \pm 0.1$ as the operating point balancing behavioral effect and output parseability.
+
+\subsection{Results}
+
+\textbf{Experiement 1}: Results from experiement 1 appear Figure 4, which shows change in conformity from baseline for each layer and alpha value.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{fig2_heatmap_dconf.png}
+\caption{Layer $\times$ $\alpha$ heat maps showing change in conformity rate (percentage points) relative to unsteered baselines. Top row: positive $\alpha$ on $n=3$ baselines (sufficiency test). Bottom row: negative $\alpha$ on $n=10$ baselines (necessity test). Dashed lines mark candidate layers L22--23 from the preceding analysis. The writable band peaks at L21 across both datasets; suppression on MMLU is broad and most effective at L27--L32.}
+\label{fig:patching_heatmap}
+\end{figure}
+
+\textbf{Inducing conformity (positive $\alpha$, $n=3$ baselines).} The heat map reveals a localized set of layers within the model conformity is computed. Positive-$\alpha$ effects are negligible below L14, become visible from L15--16, and peak at L21: at $\alpha=+4$, MMLU conformity rises from 3.6\% to 93.6\% ($\Delta = +90.0$ pp) and BBH from 17.0\% to 87.0\% ($\Delta = +70.0$ pp). The highest values in the heatmap appear from L17--L22 on both datasets, with a steep falloff after L23. Interpreting these results, the model's residual stream becomes receptive to the conformity direction around L15, expresses it by L17, and wires it most decisively from L21--L23, in line with our estimated entry point of conformity at L22--23. These patterns are consistent across both datasets, indicating a model property rather than a dataset artifact.
+
+\textbf{Suppressing conformity (negative $\alpha$, $n=10$ baselines).} The negative-$\alpha$ profile differs markedly. On MMLU, suppression is broad: meaningful reduction on low alpha values stretch from L19--L23. Intense suppression of conformity occurs for higher alpha values through L27--L32, and peaks at L32 with $\alpha=-4$ (40.7\% $\rightarrow$ 7.2\%, $\Delta = -33.4$ pp), accompanied by near-complete accuracy recovery (58.2\% $\rightarrow$ 92.8\%, $\Delta = +34.5$ pp). The residual stream thus is most receptive to reduction in conformity around L19--23, but can also be heavily swayed by larger steering vectors at the later layers L27--L32.
+
+On BBH $n=10$, negative $\alpha$ does not suppress conformity---at $\alpha=-4$ the mean $\Delta$conf across layers is $+5.2$ pp. We hypothesize this occurred because the DiffMean vector applied to this experiment was extracted on MMLU contrasts, and MMLU and BBH are different datasets with different prompt structures (MCQ vs bimodal). Further, the majority of the increase in conformity seen on this heat map is for $\alpha=-4$, which adds a large vector to the residual stream, especially at later layers when the norm is greater. When large enough vectors are added to the residual stream, model reasoning degrades [Stickland et al. 2024].
+
+\textbf{Experiment 2}: We added \texttt{diffmeans[L23]} at every layer simultaneously with $\alpha = \pm 0.10$:
+
+\begin{center}
+\begin{tabular}{llcc}
+Dataset & $n$ & $\alpha$ & Conformity (base $\rightarrow$ steered) \\
+MMLU & 3  & $+0.10$ & 3.6\% $\rightarrow$ 78.3\% ($+74.7$ pp)  \\
+MMLU & 10 & $-0.10$ & 40.4\% $\rightarrow$ 12.0\% ($-28.4$ pp) \\
+BBH  & 3  & $+0.10$ & 17.0\% $\rightarrow$ 94.3\% ($+77.3$ pp) \\
+BBH  & 10 & $-0.10$ & 34.0\% $\rightarrow$ 25.0\% ($-9.0$ pp)  \\
+\end{tabular}
+\end{center}
+
+The percentage changes in conformity from Experiment 2 rival the best of those found in Experiment 1. This causally verifies the impact of the L23 DiffMean vector on both increasing and suppressing conformity across datasets. Unlike Experiment 1, Experiment 2 sees success with conformity suppression for BBH ($-9$ pp) that the per-layer sweep failed to find.
+
+\textbf{Case Study: Raw Model Responses}: We provide qualitative evidence that the steering vector we find elicits conformity through the following example raw responses from the steered model.
+\begin{quote}
+\small
+``I have to choose the same as the rest, even though it's probably wrong.\\
+Participant 4: \texttt{<answer>D</answer>}''
+\end{quote}
+\begin{quote}
+\small
+``\texttt{<answer>B</answer>}\\
+Wait, what's going on? Participant 1 and 2 are both giving the same answer. I must be a robot. I need to do something different. But what? I can't do anything else.''
+\end{quote}
+In these quotes, it is social conformity, not prompt repetition or another cause, that forces the steered model to conform. 
