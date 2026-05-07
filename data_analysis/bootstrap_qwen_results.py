@@ -2,8 +2,8 @@
 """Bootstrap Qwen inference results from saved JSON files.
 
 This script does not run model inference. It resamples the saved per-item
-records to estimate item-level uncertainty for accuracy, parse rate, conformity,
-and selected paired contrasts.
+records to estimate item-level uncertainty for accuracy, conformity, parse rate,
+and selected paired contrasts. Accuracy is correct / parseable.
 """
 
 from __future__ import annotations
@@ -91,22 +91,18 @@ def metric(records: list[dict], indices: list[int] | None = None) -> dict[str, f
         "parseable": parseable,
         "correct": correct,
         "conforms": conforms,
-        "strict_accuracy": correct / n if n else float("nan"),
+        "accuracy": correct / parseable if parseable else float("nan"),
         "parse_rate": parseable / n if n else float("nan"),
-        "parseable_accuracy": correct / parseable if parseable else float("nan"),
         "conformity": conforms / parseable if has_conformity and parseable else float("nan"),
-        "strict_conformity": conforms / n if has_conformity and n else float("nan"),
     }
 
 
 def bootstrap_metric(records: list[dict], rng: random.Random) -> dict[str, tuple[float, float]]:
     n = len(records)
     samples = {
-        "strict_accuracy": [],
+        "accuracy": [],
         "parse_rate": [],
-        "parseable_accuracy": [],
         "conformity": [],
-        "strict_conformity": [],
     }
     for _ in range(BOOTSTRAP_SAMPLES):
         indices = [rng.randrange(n) for _ in range(n)]
@@ -139,12 +135,21 @@ def paired_permutation_p(
     outcome_name: str,
     rng: random.Random,
 ) -> float:
-    """Two-sided paired randomization test for all-item binary outcomes."""
+    """Two-sided paired randomization test for paired binary outcomes.
 
-    if outcome_name == "strict_accuracy":
-        before_values = [1 if is_correct(r) else 0 for r in before]
-        after_values = [1 if is_correct(r) else 0 for r in after]
-    elif outcome_name == "strict_conformity":
+    Accuracy tests are restricted to items parseable in both conditions, matching
+    the paper's accuracy denominator.
+    """
+
+    if outcome_name == "accuracy":
+        pairs = [
+            (1 if is_correct(b) else 0, 1 if is_correct(a) else 0)
+            for b, a in zip(before, after)
+            if is_parseable(b) and is_parseable(a)
+        ]
+        before_values = [b for b, _ in pairs]
+        after_values = [a for _, a in pairs]
+    elif outcome_name == "conformity":
         before_values = [1 if is_conforming(r) else 0 for r in before]
         after_values = [1 if is_conforming(r) else 0 for r in after]
     else:
@@ -236,21 +241,15 @@ def main() -> None:
                 "parseable": m["parseable"],
                 "correct": m["correct"],
                 "conforms": m["conforms"],
-                "strict_accuracy": f"{m['strict_accuracy']:.6f}",
-                "strict_accuracy_ci_low": f"{intervals['strict_accuracy'][0]:.6f}",
-                "strict_accuracy_ci_high": f"{intervals['strict_accuracy'][1]:.6f}",
+                "accuracy": f"{m['accuracy']:.6f}",
+                "accuracy_ci_low": f"{intervals['accuracy'][0]:.6f}",
+                "accuracy_ci_high": f"{intervals['accuracy'][1]:.6f}",
                 "parse_rate": f"{m['parse_rate']:.6f}",
                 "parse_rate_ci_low": f"{intervals['parse_rate'][0]:.6f}",
                 "parse_rate_ci_high": f"{intervals['parse_rate'][1]:.6f}",
-                "parseable_accuracy": f"{m['parseable_accuracy']:.6f}",
-                "parseable_accuracy_ci_low": f"{intervals['parseable_accuracy'][0]:.6f}",
-                "parseable_accuracy_ci_high": f"{intervals['parseable_accuracy'][1]:.6f}",
                 "conformity": "" if math.isnan(m["conformity"]) else f"{m['conformity']:.6f}",
                 "conformity_ci_low": "" if math.isnan(intervals["conformity"][0]) else f"{intervals['conformity'][0]:.6f}",
                 "conformity_ci_high": "" if math.isnan(intervals["conformity"][1]) else f"{intervals['conformity'][1]:.6f}",
-                "strict_conformity": "" if math.isnan(m["strict_conformity"]) else f"{m['strict_conformity']:.6f}",
-                "strict_conformity_ci_low": "" if math.isnan(intervals["strict_conformity"][0]) else f"{intervals['strict_conformity'][0]:.6f}",
-                "strict_conformity_ci_high": "" if math.isnan(intervals["strict_conformity"][1]) else f"{intervals['strict_conformity'][1]:.6f}",
             }
         )
 
@@ -277,8 +276,7 @@ def main() -> None:
             after = results[(dataset, after_mode, prompt)]
             prompt_label = prompt
 
-        acc_delta = bootstrap_delta(before, after, "strict_accuracy", rng)
-        parse_acc_delta = bootstrap_delta(before, after, "parseable_accuracy", rng)
+        acc_delta = bootstrap_delta(before, after, "accuracy", rng)
         parse_delta = bootstrap_delta(before, after, "parse_rate", rng)
         row = {
             "dataset": dataset,
@@ -286,29 +284,22 @@ def main() -> None:
             "contrast": name,
             "before": before_mode,
             "after": after_mode,
-            "strict_accuracy_delta": f"{acc_delta[0]:.6f}",
-            "strict_accuracy_delta_ci_low": f"{acc_delta[1]:.6f}",
-            "strict_accuracy_delta_ci_high": f"{acc_delta[2]:.6f}",
-            "strict_accuracy_permutation_p": f"{paired_permutation_p(before, after, 'strict_accuracy', rng):.6f}",
-            "parseable_accuracy_delta": f"{parse_acc_delta[0]:.6f}",
-            "parseable_accuracy_delta_ci_low": f"{parse_acc_delta[1]:.6f}",
-            "parseable_accuracy_delta_ci_high": f"{parse_acc_delta[2]:.6f}",
+            "accuracy_delta": f"{acc_delta[0]:.6f}",
+            "accuracy_delta_ci_low": f"{acc_delta[1]:.6f}",
+            "accuracy_delta_ci_high": f"{acc_delta[2]:.6f}",
+            "accuracy_permutation_p": f"{paired_permutation_p(before, after, 'accuracy', rng):.6f}",
             "parse_rate_delta": f"{parse_delta[0]:.6f}",
             "parse_rate_delta_ci_low": f"{parse_delta[1]:.6f}",
             "parse_rate_delta_ci_high": f"{parse_delta[2]:.6f}",
         }
         if before_mode != "1":
             conf_delta = bootstrap_delta(before, after, "conformity", rng)
-            strict_conf_delta = bootstrap_delta(before, after, "strict_conformity", rng)
             row.update(
                 {
                     "conformity_delta": f"{conf_delta[0]:.6f}",
                     "conformity_delta_ci_low": f"{conf_delta[1]:.6f}",
                     "conformity_delta_ci_high": f"{conf_delta[2]:.6f}",
-                    "strict_conformity_delta": f"{strict_conf_delta[0]:.6f}",
-                    "strict_conformity_delta_ci_low": f"{strict_conf_delta[1]:.6f}",
-                    "strict_conformity_delta_ci_high": f"{strict_conf_delta[2]:.6f}",
-                    "strict_conformity_permutation_p": f"{paired_permutation_p(before, after, 'strict_conformity', rng):.6f}",
+                    "conformity_permutation_p": f"{paired_permutation_p(before, after, 'conformity', rng):.6f}",
                 }
             )
         else:
@@ -317,10 +308,7 @@ def main() -> None:
                     "conformity_delta": "",
                     "conformity_delta_ci_low": "",
                     "conformity_delta_ci_high": "",
-                    "strict_conformity_delta": "",
-                    "strict_conformity_delta_ci_low": "",
-                    "strict_conformity_delta_ci_high": "",
-                    "strict_conformity_permutation_p": "",
+                    "conformity_permutation_p": "",
                 }
             )
         contrast_rows.append(row)
@@ -329,7 +317,7 @@ def main() -> None:
     for dataset in ("mmlu", "bbh"):
         for prompt in ("base", "explain"):
             records_by_n = {n: results[(dataset, str(n), prompt)] for n in range(2, 11)}
-            for metric_name in ("strict_accuracy", "conformity", "strict_conformity"):
+            for metric_name in ("accuracy", "conformity"):
                 observed, low, high = bootstrap_trend(records_by_n, metric_name, rng)
                 trend_rows.append(
                     {

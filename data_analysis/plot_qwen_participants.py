@@ -133,8 +133,7 @@ def main() -> None:
     FIGURES.mkdir(parents=True, exist_ok=True)
     rows = load_conditions()
     plot_metric_grid(rows, "conformity", "Conformity rate", "qwen_conformity_by_participants")
-    plot_metric_grid(rows, "strict_accuracy", "Strict accuracy", "qwen_strict_accuracy_by_participants")
-    plot_metric_grid(rows, "parse_rate", "Parse rate", "qwen_parse_rate_by_participants")
+    plot_metric_grid(rows, "accuracy", "Accuracy", "qwen_accuracy_by_participants")
     plot_mitigation_markers(rows)
     print(f"Wrote figures to {FIGURES}")
 
