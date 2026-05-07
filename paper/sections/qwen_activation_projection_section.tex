@@ -98,10 +98,7 @@ Table~\ref{tab:qwen-projection-correlations} reports Pearson correlations
 between participant count $n$ and projection for the numeric participant-count
 conditions $n=1,\ldots,10$. Participant count is strongly correlated with
 projection within MMLU ($r=0.731$--$0.792$) and only weakly correlated within
-BBH ($r=0.022$--$0.230$). Within MMLU, adding more repeated wrong answers moves
-the mean assistant-start state along the same direction defined by the
-all-wrong-minus-random contrast. The weak BBH correlations show that this MMLU
-direction does not rank BBH conditions by participant count in these runs.
+BBH ($r=0.022$--$0.230$).
 
 \begin{table}[t]
   \centering
@@ -130,10 +127,20 @@ averaged over participant-count conditions. In the activation data, the prompt
 form that lowers conformity also moves the mean state away from the
 repeated-wrong direction.
 
+These projections provide a representation-level validation of the diffmean. A
+contrastive direction has value beyond its construction examples when it gives
+structure to held-out condition means. Here, the MMLU direction orders MMLU
+condition means by participant count, so it tracks the amount of repeated
+wrong-answer evidence in the residual stream. Its weak BBH correlations bound
+the result to the MMLU dataset and prompt family in these runs.
+
 \paragraph{Layer-wise cosine structure.}
 We use the layer-wise cosine matrix of the MMLU $n=8$ residual diffmeans to
-test whether the oracle-positive band is geometrically clustered. For each
-layer $\ell$, we compute the cosine similarity between
+test whether the oracle-positive band is geometrically clustered. Because
+$d^\ell$ is a paired all-wrong-minus-random contrast, this compares the
+layerwise effect of replacing random peer answers with a repeated wrong answer,
+with item identity and broad participant-list structure shared across the two
+prompts. For each layer $\ell$, we compute the cosine similarity between
 $d^\ell$ and every other layer's diffmean, exclude the self-comparison, and
 average the five largest remaining cosines:
 \[
@@ -155,6 +162,13 @@ For layers 23--33, the mean pairwise cosine within the band is 0.752; the mean
 cosine from those layers to layers outside the band is 0.126. The large
 within-band and small outside-band cosines place the stable orientation of the
 MMLU repeated-wrong contrast in this late residual-stream band.
+
+This gives a geometry check on the oracle sweep. The oracle labels layers in
+the band as related to incorrect-consensus pressure, and the cosine analysis
+shows that the corresponding diffmean vectors are aligned with each other in
+activation space. Together with the delta result at layers 22--23, this supports
+the interpretation that the direction is added near the start of the band and
+then maintained across later residual-stream states.
 
 \begin{figure}[t]
   \centering
