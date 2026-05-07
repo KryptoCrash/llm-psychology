@@ -1,0 +1,93 @@
+\documentclass[10pt]{article}
+
+% ---- Page geometry ----
+% Text block: 5.5in wide x 9in tall.
+% Left margin: 1.5in. Top margin: 1in (text starts 1in from top of page).
+\usepackage[
+  letterpaper,
+  booktabs,
+  textwidth=5.5in,
+  textheight=9in,
+  left=1.5in,
+  top=1in,
+  headheight=0pt,
+  headsep=0pt,
+  includehead=false,
+  includefoot=false
+]{geometry}
+
+% ---- Typography ----
+% Times New Roman as the preferred typeface.
+\usepackage{times}
+\usepackage{natbib}
+\usepackage{mathptmx}
+
+% 10pt type with 11pt leading.
+\renewcommand{\baselinestretch}{1.0}
+\makeatletter
+\renewcommand\normalsize{%
+  \@setfontsize\normalsize{10pt}{11pt}%
+  \abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@
+  \abovedisplayshortskip \z@ \@plus3\p@
+  \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
+  \belowdisplayskip \abovedisplayskip
+  \let\@listi\@listI}
+\makeatother
+
+% Paragraphs separated by 1/2 line space (5.5pt), no indentation.
+\setlength{\parskip}{5.5pt}
+\setlength{\parindent}{0pt}
+
+\usepackage{graphicx}
+
+% ---- Custom title: 17pt, initial caps/lower case, bold, centered,
+%      between two horizontal rules (top 4pt, bottom 1pt),
+%      with 1/4 inch space above and below title to rules. ----
+\makeatletter
+\renewcommand{\maketitle}{%
+  \begin{center}%
+    {\rule{\textwidth}{4pt}}\\[0.25in]%
+    {\fontsize{17pt}{20pt}\selectfont\bfseries \@title \par}%
+    \vspace{0.25in}%
+    {\rule{\textwidth}{1pt}}\\[1em]%
+    {\normalsize \textbf{\@author} \par}%
+    \vspace{0.5em}%
+    {\normalsize \@date \par}%
+  \end{center}%
+  \vspace{1em}%
+}
+\makeatother
+
+\title{Interpretability of LLM Conformity}
+\author{Eric Yachbes, Keshav Rangan}
+\date{May 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  LLMs increasingly operate in multi-agent and conversational settings, and recent behavioral work shows they conform to a unanimous incorrect majority, mirroring Asch’s classical findings in humans. While mechanistic interpretability has been used to characterize adjacent social-compliance phenomena such as sycophancy, the internal representations that drive conformity remain unexplored. We address this gap by replicating Asch conformity experiments and providing a mechanistic analysis of the resulting conforming behavior in Qwen3-8B and Llama3.1-8B-Instruct, evaluated on MMLU and BIG-Bench Hard. Consistent with prior work, we find that conformity scales with the number of agreeing participants, largely collapses under a single dissenter, and is reduced under paraphrasing of participant responses. We apply difference-of-means (DiffMean) on activations to obtain a candidate conformity direction, and use activation oracles together with cosine-similarity and norm analyses to localize computation of conformity to a few layers in models. Finally, we use activation patching to demonstrate causal influences on conformity, isolating peer-majority conformity as a mid-late-layer linear feature that is both detectable and steerable.
+\end{abstract}
+
+\section{Introduction}
+
+\section{Literature Review}
+
+\textbf{Conformity in Large Language Models}: Asch's classical conformity experiments established that a unanimous incorrect majority can drive substantial conformity in human subjects, rising under task uncertainty and collapsing in the presence of even a single dissenter [Asch, 1956]. Recent work has begun translating this work to LLMs to uncover whether they display similar conforming behavior. Zhu et al. [2025] adapt Asch's experiments over eight open-source models and six question-answer datasets to find that the majority of LLMs conform to a unanimous incorrect majority and that LLM conformity scales inversely with model confidence. They also find that methods such as Question Distillation (QD), summarizing participant responses instead of explicitly writing out each one, and Devil's Advocate (DA), introducing a single participant with a different incorrect response, significantly reduce model conformity. Weng et al. [2025] formalize the phenomenon over multi-round interaction with BENCHFORM, a benchmark derived from the BIG-Bench Hard dataset with five interaction protocols whose metrics, such as conformity rate and independence rate, we adopt. 
+
+\textbf{Sycophancy and Behavior Mitigation}: Conformity sits within a broader family of social compliance behaviors that includes sycophancy, originally surfaced as an inverse-scaling effect by Perez et al. [2023] and traced by Sharma et al. [2024] to RLHF preference data that rewards agreement with users. Behavior mitigations of conformity and sycophancy have been proposed via prompting techniques to improve reasoning and reflection [Weng et al., 2025; Sharma et al., 2024], yet these approaches address the behavioral symptoms of social compliance, without addressing the internal representations that produce them.
+
+\textbf{Linear Representations and Probing}: A growing body of evidence supports the linear representation hypothesis: high-level concepts in language models correspond to recoverable directions in model activations [Park et al., 2024]. Linear directions have been identified for truthfulness [Marks \& Tegmark, 2024; Burns et al., 2023], honesty [Li et al., 2023], and a wide range of other behavioral traits via interpretability methods. Linear probes have a long history as diagnostic tools for what intermediate layers encode [Alain \& Bengio, 2017], though Belinkov [2022] cautions that probes can succeed even when the underlying property is not represented in the model, motivating the use of low-capacity probes. 
+
+\textbf{Steering Vectors and DiffMean}: Turner et al. [2024] showed that simple contrasting natural-language prompt pairs suffice to compute steering vectors, directions in the residual stream that shift model behavior. Rimsky et al. [2024] generalized this into Contrastive Activation Addition (CAA), the difference-of-means (DiffMean) method which we adopt: residual-stream activations are averaged across positive and negative behavior examples, and the resulting difference vector both reads and steers the target model behavior. Marks and Tegmark [2024] further showed that DiffMean directions are more causally implicated than logistic regression probes — providing warrant for our approach. Anthropic's persona vectors paper [Chen et al., 2025] automates DiffMean for a number of character traits, including sycophancy, to enable monitoring and steering to mitigate unwanted behaviors. 
+
+\textbf{Activation Oracles and Patching}: More recently, activation oracles [Karvonen et al., 2025] have been used to train LLMs to answer arbitrary natural-language questions about activations from a target model. We use activation oracles to uncover where in the model conforming behaviors are introduced, later using this layer-specific information to calculate a DiffMean direction that encodes conformity. A direction's causal role is established through intervention. Activation patching, replacing activations from a clean run with those from a corrupted run with an added direction, tests which components modify a behavior [Meng et al., 2022]. Patching has also been used to reverse-engineer full circuits in controlled tasks [Wang et al., 2023]. 
+
+\textbf{Interpretability of LLM Sycophancy}: Recent mechanistic work on sycophancy shows that distinct sycophantic sub-behaviors live along separable linear directions and admit independent steering [Vennemeyer et al., 2025], and that user opinions override learned model knowledge in mid-to-late layers on Qwen and Llama [Yang et al., 2025]. These studies, however, leave open whether the conformity behavior shares a mechanism with sycophancy or constitutes a distinct circuit. We close this gap by locating a conformity-specific direction in Qwen-3-8B, and testing its causal sufficiency via steering and activation patching.
+
+
+\input{causal_verification}
+
+\section{Discussion}
+
+\end{document}
