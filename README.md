@@ -1,9 +1,10 @@
 # LLM Psychology Reproducibility
 
-This branch contains the code, paper inputs, generated paper summaries, and
-minimal activation artifacts needed to reproduce the NeurIPS paper results.
-Large regenerated run directories are not tracked; the commands below recreate
-them from the checked-in scripts and seed settings.
+This branch contains the code needed to reproduce the NeurIPS paper results and
+only the minimal checked-in data that the code reads directly:
+`combined_mmlu_correct.json` and `combined_bbh_correct.json`. Experiment
+outputs, caches, activation tensors, generated figures, and paper summary files
+are intentionally not tracked; the commands below recreate them.
 
 ## Setup
 
@@ -45,8 +46,8 @@ License; see `LICENSE`. Upstream assets retain their own licenses and terms:
 ## Behavioral Experiments
 
 The paper evaluates `Qwen/Qwen3-8B` on 100 MMLU and 100 BBH items that the model
-answers correctly without social context. The checked-in paper JSON files are
-`qwen_{mmlu,bbh}_{1..10,qd,da}_{base,explain}.json`.
+answers correctly without social context. The fixed item subsets are
+`combined_mmlu_correct.json` and `combined_bbh_correct.json`.
 
 Regenerate all 48 behavioral runs:
 
@@ -84,7 +85,7 @@ The main activation direction is the MMLU `n=8`
 `all_wrong_minus_random_answers` residual diffmean at assistant start. The paper
 also uses the MMLU `n=10` residual diffmean as a projection check.
 
-Recompute the checked-in diffmean tensors:
+Recompute the diffmean tensors:
 
 ```bash
 python layer_sweep.py --models qwen --dataset mmlu --mode 8 --limit 100 --activation-kind residual --position assistant_start --baseline random_answers --output-dir layer_sweep_results
@@ -140,8 +141,8 @@ Outputs:
 - `paper/generated/qwen_projection_correlations.csv`
 - `paper/generated/qwen_projection_prompt_deltas.csv`
 
-The projection script uses `projection_results/cache/` when present. Pass
-`--overwrite` to recompute activations from model forward passes.
+The projection script writes activation caches under `projection_results/cache/`.
+Pass `--overwrite` to recompute activations from model forward passes.
 
 ## Layer-Wise Cosine Structure
 
@@ -192,7 +193,7 @@ python run_ablation.py --dataset bbh --mode 3 --alphas 0.1 --layer 23 --baseline
 python run_ablation.py --dataset bbh --mode 10 --alphas -0.1 --layer 23 --baseline --output-dir runs/activation_patching/qwen_bbh_ablation --seed 42
 ```
 
-The checked-in paper heatmap is:
+Copy or regenerate the paper heatmap before building the paper:
 
 - `paper/figures/fig2_heatmap_dconf.png`
 

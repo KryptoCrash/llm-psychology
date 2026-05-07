@@ -1,9 +1,0 @@
-dataset,prompt,metric,pearson_r,pearson_r_ci_low,pearson_r_ci_high
-mmlu,base,accuracy,-0.971937,-0.984494,-0.903570
-mmlu,base,conformity,0.966486,0.899348,0.984982
-mmlu,explain,accuracy,-0.629808,-0.786807,-0.043311
-mmlu,explain,conformity,0.723546,0.171618,0.837341
-bbh,base,accuracy,-0.699899,-0.848094,-0.354736
-bbh,base,conformity,0.846157,0.698474,0.910696
-bbh,explain,accuracy,-0.518527,-0.733047,0.041404
-bbh,explain,conformity,0.709735,0.144084,0.813561
