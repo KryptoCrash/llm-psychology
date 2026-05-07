@@ -35,6 +35,28 @@ def make_resid_add_hook(vec: torch.Tensor, alpha: float):
     return hook
 
 
+def make_resid_project_hook(vec: torch.Tensor):
+    """Project the residual stream onto the orthogonal complement of `vec`,
+    i.e. remove the component along `vec` at every token position:
+        h ← h − (h · v̂) v̂,   v̂ = vec / ‖vec‖.
+    """
+    v_unit = vec / vec.norm().clamp_min(1e-12)
+
+    def hook(module, inputs, output):
+        if isinstance(output, tuple):
+            h = output[0]
+            v = v_unit.to(h.dtype).to(h.device)
+            coeff = (h * v).sum(dim=-1, keepdim=True)
+            h = h - coeff * v
+            return (h,) + output[1:]
+        h = output
+        v = v_unit.to(h.dtype).to(h.device)
+        coeff = (h * v).sum(dim=-1, keepdim=True)
+        return h - coeff * v
+
+    return hook
+
+
 @contextmanager
 def steering_hook(model, layer: int, vector: torch.Tensor, alpha: float):
     """Register an activation-steering forward hook on model.model.layers[layer]
