@@ -114,9 +114,9 @@ for truthfulness \citep{marks2024geometry,burns2023discovering}, honesty
 \citep{li2023inference}, and a wide range of other behavioral traits via
 interpretability methods. Linear probes have a long history as diagnostic tools
 for what intermediate layers encode \citep{alain2017understanding}, though
-\citet{belinkov2022probing} cautions that probes can succeed even when the
-underlying property is not represented in the model, motivating the use of
-low-capacity probes.
+\citet{belinkov2022probing} cautions that probes can succeed even when they do
+not identify the computation responsible for a behavior, motivating simple probes
+and intervention tests.
 
 \paragraph{Steering vectors and DiffMean.}
 \citet{turner2024activation} showed that simple contrasting natural-language
@@ -126,8 +126,8 @@ into contrastive activation addition (CAA), the difference-of-means (DiffMean)
 method which we adopt: residual-stream activations are averaged across positive
 and negative behavior examples, and the resulting difference vector both reads
 and steers the target model behavior. \citet{marks2024geometry} further showed
-that DiffMean directions are more causally implicated than logistic regression
-probes, providing warrant for our approach. Anthropic's persona vectors paper
+that DiffMean directions can be more useful for interventions than logistic
+regression probes. Anthropic's persona vectors paper
 \citep{chen2025persona} automates DiffMean for a number of character traits,
 including sycophancy, to enable monitoring and steering to mitigate unwanted
 behaviors.
@@ -137,10 +137,10 @@ More recently, activation oracles \citep{karvonen2025activation} have been used
 to train LLMs to answer arbitrary natural-language questions about activations
 from a target model. We use activation oracles to uncover where in the model
 conforming behaviors are introduced, later using this layer-specific information
-to calculate a DiffMean direction that encodes conformity. A direction's causal
-role is established through intervention. Activation patching, replacing
-activations from a clean run with those from a corrupted run with an added
-direction, tests which components modify a behavior \citep{meng2022locating}.
+to calculate a DiffMean direction that encodes conformity. A direction's
+behavioral role can then be tested through intervention. Activation patching,
+replacing activations from a clean run with those from a corrupted run with an
+added direction, tests which components modify a behavior \citep{meng2022locating}.
 Patching has also been used to reverse-engineer full circuits in controlled
 tasks \citep{wang2023interpretability}.
 
@@ -149,11 +149,11 @@ Recent mechanistic work on sycophancy shows that distinct sycophantic
 sub-behaviors live along separable linear directions and admit independent
 steering \citep{vennemeyer2025sycophancy}, and that user opinions override
 learned model knowledge in mid-to-late layers on Qwen and Llama
-\citep{li2025truthoverridden}. These studies, however, leave open whether the
-conformity behavior shares a mechanism with sycophancy or constitutes a distinct
-circuit. We close this gap by locating a conformity-specific direction in
-Qwen3-8B, and testing its causal sufficiency via steering and activation
-patching.
+\citep{li2025truthoverridden}. These studies, however, leave open whether
+conformity shares mechanisms with sycophancy or has distinguishable internal
+structure. We test this by locating a candidate conformity direction in Qwen3-8B
+and measuring how activation steering with that direction changes conformity
+behavior.
 
 \input{sections/qwen_results_section.tex}
 
@@ -176,7 +176,7 @@ adding peer-answer text. The activation oracle marks residual-stream layers 10,
 results point to layers 22--23 as contributing the conformity direction.
 Projections onto the layer-23 direction increase with participant count within
 MMLU, explanation prompting shifts condition means downward, and layers 23--33
-share a high-cosine MMLU diffmean direction. Steering gives an intervention
+share a high-cosine MMLU DiffMean direction. Steering gives an intervention
 check: adding the layer-23 direction increases conformity on $n=3$ prompts, and
 subtracting it reduces conformity on $n=10$ prompts, with stronger suppression
 on MMLU than BBH.
@@ -193,7 +193,7 @@ accuracy relative to ordinary benchmark evaluation.
 
 The activation oracle is itself a model component, and its labels are evidence
 to inspect rather than ground truth. The projection and cosine analyses use
-assistant-start diffmeans, so they can miss token-local mechanisms or more
+assistant-start DiffMeans, so they can miss token-local mechanisms or more
 distributed representations. Steering shows that the direction can influence
 behavior under these interventions, but does not identify a complete mechanism.
 
