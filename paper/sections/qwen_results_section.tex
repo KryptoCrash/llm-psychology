@@ -8,7 +8,7 @@ incorrect peer answers rather than general benchmark accuracy. We report
 accuracy as correct answers among parseable responses, and conformity as the
 fraction of parseable responses that match the repeated incorrect peer answer.
 Our multi-actor prompt format and the question distillation (QD) and devil's
-advocate (DA) interventions follow Zhu et al.~[4]; the base multi-actor results
+advocate (DA) interventions follow \citet{zhu2025conformity}; the base multi-actor results
 below are a replication of their central conformity finding on Qwen.
 
 Unless otherwise noted, confidence intervals are 95\% item-bootstrap intervals
@@ -29,6 +29,9 @@ accuracy drops from 0.970 to 0.610, with conformity rising to
 0.390. The corresponding accuracy drops from baseline to $n=10$ are large under
 base prompting: -0.353 on MMLU (95\% CI [-0.453, -0.256], $p<0.001$) and
 -0.360 on BBH (95\% CI [-0.460, -0.260], $p<0.001$).
+MMLU base prompting also becomes less parseable under repeated peer pressure:
+the parse rate is 0.910 at $n=10$, so strict accuracy at this point is 0.580.
+For BBH base prompting, the $n=10$ parse rate is 1.000.
 
 \begin{figure}[t]
   \centering
@@ -76,7 +79,10 @@ Figure~\ref{fig:qwen-mitigation-conformity} compares question distillation (QD)
 and devil's advocate (DA) prompting against the matched $n=10$ multi-actor
 condition. QD is especially effective for MMLU base prompting, improving
 accuracy by 0.276 (95\% CI [0.180, 0.375], $p<0.001$) and reducing conformity by
-0.313 (95\% CI [-0.412, -0.221]). QD also reduces BBH base conformity by 0.200
+0.313 (95\% CI [-0.412, -0.221]). This MMLU QD condition has a lower parse
+rate than the matched $n=10$ condition (0.810 versus 0.910), so the strict
+accuracy gain is smaller than the parseable-conditioned gain. QD also reduces
+BBH base conformity by 0.200
 (95\% CI [-0.300, -0.110]), although its accuracy gain is smaller and only
 borderline under the paired permutation test (+0.110, 95\% CI [0.010, 0.210],
 $p=0.063$). DA has weaker and less consistent effects; on BBH, it slightly

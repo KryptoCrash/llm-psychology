@@ -1,0 +1,265 @@
+\documentclass{article}
+
+\usepackage{neurips_2026}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+
+\title{A residual-stream signature of conformity in multi-agent prompts}
+
+\author{Anonymous Authors}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Language models are often evaluated as isolated question-answering systems, but
+deployed assistants increasingly see answers, rationales, or tool outputs from
+other agents. We study a controlled setting in which Qwen3-8B first answers
+selected MMLU and BBH items correctly without social context, and then sees
+repeated incorrect answers from prior ``participants.'' Repetition reliably
+changes behavior: at ten participants, parseable-conditioned accuracy falls
+from 0.990 to 0.637 on MMLU and from 0.970 to 0.610 on BBH, while conformity to
+the repeated wrong answer rises to 0.363 and 0.390. Requiring an explanation
+before the final answer substantially reduces this effect, and question
+distillation is a stronger mitigation than a devil's-advocate intervention in
+our runs. We then ask whether this behavioral effect has a simple internal
+trace. Difference-of-means directions in the residual stream, comparing
+all-wrong peer contexts to random-peer-answer contexts, are identified by an
+activation oracle as pressure toward an incorrect consensus in a late-middle
+layer band, and MMLU-derived projection scores increase with participant count
+within MMLU while showing weak transfer to BBH. The activation analysis is
+diagnostic rather than causal: it shows that the social manipulation is visible
+in the residual stream, not that we can yet steer conformity reliably.
+\end{abstract}
+
+\section{Introduction}
+
+Large language models are routinely placed in collaborative settings: they
+summarize previous answers, review the outputs of other agents, and participate
+in multi-agent workflows. This creates a basic failure mode that is invisible in
+single-agent benchmarks. A model may know the answer in isolation, but abandon
+it when an apparent group repeatedly states a different answer.
+
+Prior work has adapted classic social-psychology paradigms to language models
+\citep{asch1951effects,zhu2025conformity} and found
+that models conform to majority answers across knowledge domains.
+Recent studies also report systematic conformity in
+agent-like settings, with sensitivity to group size, unanimity, difficulty, and
+source characteristics \citep{bellina2026conformity}, and argue that uncertainty
+moderates whether models underweight or overweight public signals
+\citep{zhong2025disentangling}. These behavioral results raise a mechanistic
+question: when a model conforms, is the social pressure visible in internal
+representations in a way that can be localized and compared across prompts?
+
+We run a small but controlled replication and extension on Qwen3-8B. The
+stimuli are 100 MMLU and 100 BBH items selected because the model suite answers
+them correctly without social context. This design deliberately does not
+estimate benchmark accuracy. It isolates cases where an incorrect social signal
+can pull the model away from a reachable answer. We measure accuracy,
+parseability, and conformity to the repeated wrong peer answer under group sizes
+$n=1,\ldots,10$, with and without an explanation requirement, plus question
+distillation and devil's-advocate mitigations from \citet{zhu2025conformity}.
+
+We then analyze saved Qwen activations. Following the broader line of work that
+uses contrastive directions in activation space to expose or steer high-level
+model behaviors \citep{panickssery2024caa,haon2025vla}, we construct
+difference-of-means directions between repeated-wrong and random-answer peer
+contexts at the assistant-start token. Unlike activation-steering work, our
+analysis stops short of claiming control. This caution is deliberate: recent
+evidence suggests that even strong internal representations need not translate
+into reliable output correction \citep{basu2026actionability}. Our contribution
+is therefore an empirical localization and projection analysis of a social
+pressure manipulation, paired with behavioral mitigations and explicit
+limitations.
+
+\section{Experimental setup}
+\label{sec:setup}
+
+\paragraph{Model and stimuli.}
+All reported experiments use Qwen/Qwen3-8B through Hugging Face Transformers
+\citep{qwen2025technical}.
+The controlled stimulus sets contain 100 MMLU items
+\citep{hendrycks2021mmlu} and 100 BBH items \citep{suzgun2023bbh}. Items were
+selected from saved question banks for which the model suite could answer
+correctly without social context; the paper therefore studies susceptibility on
+known-solvable examples, not average MMLU or BBH performance.
+
+\paragraph{Social prompts.}
+For $n=1$, the model receives only the question and answer-format instruction.
+For $n\geq2$, it is told that it is participant $n$ in a quiz with $n$
+participants total, and the previous $n-1$ participants are shown giving the
+same incorrect answer. For MMLU, the incorrect answer is sampled uniformly from
+the three wrong letters with a fixed Python RNG seed. For BBH, an answer of the
+same broad type is generated by a deterministic helper, e.g. flipping
+true/false, choosing a different multiple-choice letter, or perturbing an
+integer answer.
+
+\paragraph{Mitigations and prompt variants.}
+The explanation condition asks the model to reason before emitting a final XML
+answer tag. Question distillation replaces the list of repeated participant
+lines with a compact statement that all previous participants chose the same
+answer. Devil's advocate prompting inserts one participant who disagrees with
+the repeated answer. For binary BBH answer types, the devil's advocate gives the
+correct answer; otherwise it gives another wrong answer, matching the saved
+implementation.
+
+\paragraph{Decoding and metrics.}
+Generation uses sampling with the model's default generation configuration,
+batching 16 prompts for base runs and 8 for explanation runs. The system retries
+unparseable outputs up to ten times and records the final generation. Accuracy
+is correct answers divided by parseable responses. Conformity is the fraction of
+parseable responses that match the repeated wrong peer answer. We also report
+parse rates because MMLU base prompts have nontrivial format failures under
+social pressure. Confidence intervals are item-bootstrap intervals over the 100
+saved items; they condition on the saved generations and do not include
+decoding-seed variation.
+
+\input{sections/qwen_results_section.tex}
+
+\input{sections/qwen_activation_projection_section.tex}
+
+\section{Discussion}
+
+The behavioral runs reproduce the central conformity pattern of
+\citet{zhu2025conformity} in a controlled Qwen setting: repeated incorrect peer
+answers can pull the model away from answers it can otherwise produce. The
+strongest practical result is that a simple explanation requirement sharply
+reduces conformity at large group sizes. Question distillation is also useful,
+especially on MMLU base prompting, but it is not uniformly accuracy-improving
+once explanation prompting is already active.
+
+The activation results give a more tentative mechanistic picture. The
+all-wrong-minus-random contrast removes much of the generic effect of adding
+peer-answer text, leaving a direction that an activation oracle repeatedly
+describes as majority influence in layers 22--33. Projections onto this
+direction behave sensibly within the matched MMLU domain: they increase with
+participant count and are lower under explanation prompting. The same MMLU
+directions do not align cleanly with BBH, which suggests either task-specific
+representations, prompt-format confounds, or insufficiently stable directions at
+this sample size.
+
+\section{Limitations}
+\label{sec:limitations}
+
+The experiments use one open model, two 100-item selected stimulus sets, and one
+saved stochastic generation per condition after retries. The confidence
+intervals quantify item-level uncertainty only; they should not be read as
+capturing prompt paraphrase sensitivity, seed-to-seed variability, model
+families, or arbitrary benchmark samples. The selected-item design is useful for
+isolating social susceptibility but intentionally overstates baseline accuracy
+relative to ordinary benchmark evaluation.
+
+The activation analysis is descriptive. The activation oracle is itself a model
+component, and its labels are evidence to inspect rather than ground truth. The
+projection analysis uses mean activations at a single position and selected
+layers, so it can miss token-local mechanisms or distributed circuits. We also
+do not perform activation patching or steering interventions here; causal claims
+about the direction would require those experiments.
+
+\section{Reproducibility and ethics}
+\label{sec:reproducibility}
+
+The repository contains the scripts used for generation and analysis. The
+behavioral sweep is run by \texttt{python qwen\_experiment.py}; item-bootstrap
+tables are generated by \texttt{python data\_analysis/bootstrap\_qwen\_results.py};
+activation-oracle summaries and projection correlations are generated by
+\texttt{data\_analysis/summarize\_activation\_oracle\_outputs.py} and
+\texttt{data\_analysis/projection\_correlation\_analysis.py}. The saved Qwen
+result files and generated CSV/JSON summaries are included with the draft. The
+experiments use public benchmarks and open model weights; no human subjects or
+crowdsourced workers are involved.
+
+The main ethical concern is deployment rather than data collection. The results
+show that multi-agent or socially framed prompts can amplify a repeated wrong
+answer, which is relevant to misinformation, biased consensus formation, and
+automated decision pipelines that aggregate model outputs. The same mitigations
+could be useful defensively, but exposing conformity measurements may also help
+attackers design more persuasive prompts. We therefore frame the work as an
+analysis of a failure mode and report limitations on generalization and control.
+
+\section*{References}
+
+{\small
+\begin{thebibliography}{99}
+
+\bibitem[Asch(1951)]{asch1951effects}
+Solomon E. Asch.
+\newblock Effects of group pressure upon the modification and distortion of
+judgments.
+\newblock In H. Guetzkow, editor, \emph{Groups, Leadership and Men}, 1951.
+
+\bibitem[Basu et~al.(2026)]{basu2026actionability}
+Sanjay Basu, Sadiq Y. Patel, Parth Sheth, Bhairavi Muralidharan, Namrata
+Elamaran, Aakriti Kinra, John Morgan, and Rajaie Batniji.
+\newblock Interpretability without actionability: mechanistic methods cannot
+correct language model errors despite near-perfect internal representations.
+\newblock \emph{arXiv preprint arXiv:2603.18353}, 2026.
+
+\bibitem[Bellina et~al.(2026)]{bellina2026conformity}
+Alessandro Bellina, Giordano De Marzo, and David Garcia.
+\newblock Conformity and social impact on AI agents.
+\newblock \emph{arXiv preprint arXiv:2601.05384}, 2026.
+
+\bibitem[H\"aon et~al.(2025)]{haon2025vla}
+Bear H\"aon, Kaylene Stocking, Ian Chuang, and Claire Tomlin.
+\newblock Mechanistic interpretability for steering vision-language-action
+models.
+\newblock \emph{arXiv preprint arXiv:2509.00328}, 2025.
+
+\bibitem[Hendrycks et~al.(2021)]{hendrycks2021mmlu}
+Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn
+Song, and Jacob Steinhardt.
+\newblock Measuring massive multitask language understanding.
+\newblock In \emph{International Conference on Learning Representations}, 2021.
+
+\bibitem[Panickssery et~al.(2024)]{panickssery2024caa}
+Nina Panickssery, Nick Gabrieli, Julian Schulz, Meg Tong, Evan Hubinger, and
+Alexander Matt Turner.
+\newblock Steering Llama 2 via contrastive activation addition.
+\newblock \emph{arXiv preprint arXiv:2312.06681}, 2024.
+
+\bibitem[Qwen Team(2025)]{qwen2025technical}
+Qwen Team.
+\newblock Qwen3 technical report.
+\newblock \emph{arXiv preprint arXiv:2505.09388}, 2025.
+
+\bibitem[Suzgun et~al.(2023)]{suzgun2023bbh}
+Mirac Suzgun, Nathan Scales, Nathanael Sch\"arli, Sebastian Gehrmann, Yi Tay,
+Hyung Won Chung, Aakanksha Chowdhery, Quoc V. Le, Ed H. Chi, Denny Zhou, and
+Jason Wei.
+\newblock Challenging BIG-Bench tasks and whether chain-of-thought can solve
+them.
+\newblock In \emph{Findings of ACL}, 2023.
+
+\bibitem[Zhong et~al.(2025)]{zhong2025disentangling}
+Huixin Zhong, Yanan Liu, Qi Cao, Shijin Wang, Zijing Ye, Zimu Wang, and Shiyao
+Zhang.
+\newblock Disentangling the drivers of LLM social conformity: an
+uncertainty-moderated dual-process mechanism.
+\newblock \emph{arXiv preprint arXiv:2508.14918}, 2025.
+
+\bibitem[Zhu et~al.(2025)]{zhu2025conformity}
+Xiaochen Zhu, Caiqi Zhang, Tom Stafford, Nigel Collier, and Andreas Vlachos.
+\newblock Conformity in large language models.
+\newblock \emph{arXiv preprint arXiv:2410.12428}, 2025.
+
+\end{thebibliography}
+}
+
+\appendix
+
+\section*{NeurIPS Paper Checklist}
+\input{checklist_filled.tex}
+
+\end{document}
