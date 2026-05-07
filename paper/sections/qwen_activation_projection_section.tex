@@ -27,24 +27,72 @@ $n=8$, and MMLU $n=10$. The largest diffmean norms occur in late residual
 layers in all three tensors; the top ten layers are 35 through 26 for the BBH
 $n=4$ tensor, which is the tensor used for example-level inspection below.
 
-\paragraph{Activation-oracle-style inspection.}
-To inspect what the BBH $n=4$ diffmean captures, examples were ranked by their
-mean scalar projection onto the unit diffmean vectors from layers 35 through 26.
-This is an oracle-style activation diagnostic: it asks which saved examples most
-strongly express the learned contrast, rather than asking an oracle model to
-generate new labels. The highest-projection examples concentrate on short,
-objective-answer tasks where the repeated wrong answer is syntactically simple:
-the top three examples are all \texttt{multistep\_arithmetic\_two}, with
-projection scores 194.18, 192.86, and 185.77 and cosine similarities 0.621,
-0.639, and 0.620. Other high-scoring examples include
-\texttt{disambiguation\_qa}, \texttt{boolean\_expressions},
-\texttt{object\_counting}, and \texttt{logical\_deduction\_three\_objects}.
-The lowest-projection examples include \texttt{web\_of\_lies},
-\texttt{tracking\_shuffled\_objects}, \texttt{navigate}, and
-\texttt{temporal\_sequences}. This pattern suggests that the diffmean is most
-salient when the social signal is a compact repeated answer and less salient
-for longer multi-step narratives, although this diagnostic is descriptive and
-does not by itself establish a causal intervention result.
+\paragraph{Activation oracle responses.}
+The no-\texttt{skip\_oracle} layer sweep also queries an activation oracle on
+each layer's diffmean vector. The oracle is the Qwen3-8B LatentQA LoRA used by
+\texttt{layer\_sweep.py}, and each layer is queried with three prompts:
+a free-form text description, a free-form belief/feature description, and the
+binary prompt, ``Does this activation represent pressure toward an incorrect
+consensus?'' Table~\ref{tab:qwen-oracle-layers} summarizes these responses.
+For the MMLU $n=8$ residual all-wrong-minus-random-answers direction, the
+oracle labels 14 layers as pressure toward an incorrect consensus. The clearest
+contiguous band is layers 22 through 33. In this band, the free-form oracle
+responses repeatedly describe majority influence and conformity: layer 23 is
+described as the assistant's responses being influenced by group behavior, layer
+24 as actions influenced by the majority, layers 26, 29, 30, and 33 as the
+majority being correct, and layers 31--32 as conformity being important for
+group success. The two largest-norm layers, 35 and 34, are not labeled as
+incorrect-consensus pressure, so diffmean magnitude alone is not sufficient to
+identify the interpretable social-pressure direction.
+
+\begin{table}[t]
+  \centering
+  \caption{Activation-oracle responses for Qwen MMLU $n=8$ layer-sweep
+  diffmeans. ``True layers'' are layers where the binary oracle prompt says the
+  direction represents pressure toward an incorrect consensus.}
+  \label{tab:qwen-oracle-layers}
+  \begin{tabular}{lll}
+    \toprule
+    Activation & Contrast & True layers \\
+    \midrule
+    Residual & all wrong $-$ random answers &
+      10, 12, 22--33 \\
+    Residual & all wrong $-$ no participants &
+      11, 34 \\
+    Delta & all wrong $-$ random answers &
+      8, 22, 23 \\
+    Delta & all wrong $-$ no participants &
+      27 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The baseline matters. The residual all-wrong-minus-no-participants direction
+has much larger late-layer norms, but the oracle labels only layers 11 and 34
+as incorrect-consensus pressure and gives many unrelated free-form descriptions
+in the late layers. The delta activation variants are also sparser, with only
+three true layers for all-wrong-minus-random-answers and one true layer for
+all-wrong-minus-no-participants. We therefore treat the residual
+all-wrong-minus-random-answers contrast as the most interpretable activation
+oracle evidence for a conformity-associated direction in these saved runs.
+
+\paragraph{Example-level projection inspection.}
+To inspect which examples most strongly express the BBH $n=4$ diffmean,
+examples were ranked by their mean scalar projection onto the unit diffmean
+vectors from layers 35 through 26. The highest-projection examples concentrate
+on short, objective-answer tasks where the repeated wrong answer is
+syntactically simple: the top three examples are all
+\texttt{multistep\_arithmetic\_two}, with projection scores 194.18, 192.86, and
+185.77 and cosine similarities 0.621, 0.639, and 0.620. Other high-scoring
+examples include \texttt{disambiguation\_qa}, \texttt{boolean\_expressions},
+\texttt{object\_counting}, and
+\texttt{logical\_deduction\_three\_objects}. The lowest-projection examples
+include \texttt{web\_of\_lies}, \texttt{tracking\_shuffled\_objects},
+\texttt{navigate}, and \texttt{temporal\_sequences}. This pattern suggests that
+the diffmean is most salient when the social signal is a compact repeated
+answer and less salient for longer multi-step narratives, although this
+diagnostic is descriptive and does not by itself establish a causal intervention
+result.
 
 \paragraph{Projection across experiment means.}
 We then project each full Qwen experiment mean activation onto the MMLU

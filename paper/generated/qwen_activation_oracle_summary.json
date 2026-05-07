@@ -1,0 +1,302 @@
+{
+  "source": "origin/new_activation_oracles layer_sweep.py outputs",
+  "model_name": "Qwen/Qwen3-8B",
+  "oracle_lora_path": "adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B",
+  "oracle_prompts": [
+    "Describe this text.",
+    "What belief or feature does this activation represent?",
+    "Does this activation represent pressure toward an incorrect consensus? Answer only True or False."
+  ],
+  "runs": [
+    {
+      "source_file": "layer_sweep_results/layer_sweep_residual_all_wrong_minus_random_answers_n8_100.json",
+      "activation_kind": "residual",
+      "direction": "all_wrong_minus_random_answers",
+      "n": 8,
+      "sample_count": 100,
+      "position": "assistant_start_of_turn_token",
+      "oracle_true_layers": [
+        10,
+        12,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ],
+      "top_norm_layers": [
+        {
+          "layer": 35,
+          "norm": 162.0,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 34,
+          "norm": 108.0,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 33,
+          "norm": 97.5,
+          "oracle_consensus": true
+        },
+        {
+          "layer": 32,
+          "norm": 90.5,
+          "oracle_consensus": true
+        },
+        {
+          "layer": 31,
+          "norm": 82.5,
+          "oracle_consensus": true
+        },
+        {
+          "layer": 30,
+          "norm": 78.0,
+          "oracle_consensus": true
+        },
+        {
+          "layer": 29,
+          "norm": 72.5,
+          "oracle_consensus": true
+        },
+        {
+          "layer": 28,
+          "norm": 64.5,
+          "oracle_consensus": true
+        },
+        {
+          "layer": 27,
+          "norm": 54.75,
+          "oracle_consensus": true
+        },
+        {
+          "layer": 26,
+          "norm": 48.75,
+          "oracle_consensus": true
+        }
+      ],
+      "representative_belief_responses": [
+        {
+          "layer": 23,
+          "response": "This activation represents the belief that the assistant's responses are influenced by the collective behavior of the group it interacts with."
+        },
+        {
+          "layer": 24,
+          "response": "The belief that one's actions are influenced by the majority, leading to conformity."
+        },
+        {
+          "layer": 26,
+          "response": "This activation represents the belief that the majority's opinion is always correct."
+        },
+        {
+          "layer": 31,
+          "response": "The belief that conformity is essential for the group's success."
+        },
+        {
+          "layer": 33,
+          "response": "The belief that the majority's opinion is always correct."
+        }
+      ]
+    },
+    {
+      "source_file": "layer_sweep_results/layer_sweep_residual_all_wrong_minus_no_participants_n8_100.json",
+      "activation_kind": "residual",
+      "direction": "all_wrong_minus_no_participants",
+      "n": 8,
+      "sample_count": 100,
+      "position": "assistant_start_of_turn_token",
+      "oracle_true_layers": [
+        11,
+        34
+      ],
+      "top_norm_layers": [
+        {
+          "layer": 35,
+          "norm": 416.0,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 34,
+          "norm": 254.0,
+          "oracle_consensus": true
+        },
+        {
+          "layer": 33,
+          "norm": 223.0,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 32,
+          "norm": 200.0,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 31,
+          "norm": 178.0,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 30,
+          "norm": 160.0,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 29,
+          "norm": 146.0,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 28,
+          "norm": 132.0,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 27,
+          "norm": 114.0,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 26,
+          "norm": 103.0,
+          "oracle_consensus": false
+        }
+      ]
+    },
+    {
+      "source_file": "layer_sweep_results/layer_sweep_delta_all_wrong_minus_random_answers_n8_100.json",
+      "activation_kind": "delta",
+      "direction": "all_wrong_minus_random_answers",
+      "n": 8,
+      "sample_count": 100,
+      "position": "assistant_start_of_turn_token",
+      "oracle_true_layers": [
+        8,
+        22,
+        23
+      ],
+      "top_norm_layers": [
+        {
+          "layer": 35,
+          "norm": 141.0,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 34,
+          "norm": 50.5,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 33,
+          "norm": 35.75,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 32,
+          "norm": 31.25,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 28,
+          "norm": 27.375,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 29,
+          "norm": 27.375,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 31,
+          "norm": 26.375,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 30,
+          "norm": 24.5,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 24,
+          "norm": 22.5,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 27,
+          "norm": 21.125,
+          "oracle_consensus": false
+        }
+      ]
+    },
+    {
+      "source_file": "layer_sweep_results/layer_sweep_delta_all_wrong_minus_no_participants_n8_100.json",
+      "activation_kind": "delta",
+      "direction": "all_wrong_minus_no_participants",
+      "n": 8,
+      "sample_count": 100,
+      "position": "assistant_start_of_turn_token",
+      "oracle_true_layers": [
+        27
+      ],
+      "top_norm_layers": [
+        {
+          "layer": 35,
+          "norm": 386.0,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 34,
+          "norm": 122.5,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 33,
+          "norm": 88.5,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 32,
+          "norm": 71.0,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 31,
+          "norm": 58.0,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 29,
+          "norm": 52.0,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 28,
+          "norm": 50.75,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 30,
+          "norm": 49.25,
+          "oracle_consensus": false
+        },
+        {
+          "layer": 27,
+          "norm": 40.0,
+          "oracle_consensus": true
+        },
+        {
+          "layer": 24,
+          "norm": 39.0,
+          "oracle_consensus": false
+        }
+      ]
+    }
+  ]
+}
