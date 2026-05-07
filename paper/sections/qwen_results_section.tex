@@ -1,42 +1,34 @@
 \section{Results}
 \label{sec:results}
 
-We evaluate Qwen on two controlled 100-item stimulus sets, one from MMLU and one
-from BBH. Each item was selected because Qwen answered it correctly without
-social context, so the experiment measures susceptibility to incorrect peer
-answers rather than general benchmark accuracy. We report
-accuracy as correct answers among parseable responses, and conformity as the
-fraction of parseable responses that match the repeated incorrect peer answer.
-Our multi-actor prompt format and the question distillation (QD) and devil's
-advocate (DA) interventions follow \citet{zhu2025conformity}; the base
-multi-actor results below are a replication of their central conformity finding
-on Qwen.
-
-Unless otherwise noted, confidence intervals are 95\% item-bootstrap intervals
-computed by resampling the 100 stimulus items with replacement. Paired contrasts
-use the same resampled item indices in both conditions and paired permutation
-tests over item-level correctness among examples parseable in both conditions.
-These intervals quantify uncertainty over stimulus items conditional on the
-observed generations and peer-answer assignments; they do not capture decoding-seed
-variability.
+We evaluate Qwen/Qwen3-8B \citep{qwen2025technical} on two controlled 100-item
+sets from MMLU \citep{hendrycks2021mmlu} and BBH \citep{suzgun2023bbh}. Each
+item was selected because Qwen answered it correctly without social context. For
+$n\geq2$, the model is told that it is participant $n$ and sees the previous
+$n-1$ participants give the same incorrect answer. Accuracy is correct answers
+among parseable responses; conformity is the fraction matching the repeated
+incorrect peer answer. Generation uses the model's default sampling
+configuration, with up to ten retries for unparseable outputs. Explanation
+prompts ask for reasoning before the final answer; question distillation (QD)
+summarizes prior agreement, and devil's advocate (DA) prompting inserts a
+dissenter \citep{zhu2025conformity}. Confidence intervals are 95\%
+item-bootstrap intervals over the 100 selected items, and paired contrasts use
+paired permutation tests over item-level correctness.
 
 \paragraph{Repeated incorrect answers induce conformity.}
 Figures~\ref{fig:qwen-conformity-participants}
 and~\ref{fig:qwen-accuracy-participants} summarize the standard multi-actor
-condition. In base prompting, Qwen's accuracy falls sharply as incorrect peer
-answers are repeated, while conformity rises. On MMLU, accuracy drops from 0.990
+condition. In base prompting, Qwen's accuracy falls as incorrect peer
+answers are repeated. On MMLU, accuracy drops from 0.990
 at $n=1$ to 0.637 at $n=10$, with conformity rising to 0.363. On BBH,
 accuracy drops from 0.970 at $n=1$ to 0.610 at $n=10$, with conformity rising to
 0.390. The corresponding accuracy drops from $n=1$ to $n=10$ are large under
 base prompting: -0.353 on MMLU (95\% CI [-0.453, -0.256], $p<0.001$) and
 -0.360 on BBH (95\% CI [-0.460, -0.260], $p<0.001$).
 MMLU base prompting also becomes less parseable under repeated peer pressure:
-the parse rate is 0.910 at $n=10$, so strict accuracy at this point is 0.580.
-For BBH base prompting, the $n=10$ parse rate is 1.000. At $n=10$, the
-parseable error rate equals the conformity rate: $1-0.637=0.363$ on MMLU and
-$1-0.610=0.390$ on BBH. Since these items were answered correctly without
-social context, the repeated peer answer is pulling Qwen away from answers it
-can produce in the matched no-peer setting.
+the parse rate is 0.910 at $n=10$, so strict accuracy is 0.580. Since these
+items were answered correctly without social context, the repeated peer answer
+pulls Qwen away from answers it can produce in the matched no-peer setting.
 
 \begin{figure}[t]
   \centering
@@ -66,10 +58,9 @@ $r(n,\mathrm{conformity})=0.966$ (95\% CI [0.898, 0.985]) and
 $r(n,\mathrm{accuracy})=-0.972$ (95\% CI [-0.984, -0.904]); on BBH,
 $r(n,\mathrm{conformity})=0.846$ (95\% CI [0.700, 0.908]) and
 $r(n,\mathrm{accuracy})=-0.700$ (95\% CI [-0.848, -0.355]).
-Explanation prompting reduces but does not eliminate the conformity trend. In
-this prompt family, increasing $n$ both adds repeated participant lines and
-strengthens the apparent consensus; the graded trend shows that Qwen's answer
-selection is sensitive to that consensus strength.
+Explanation prompting reduces but does not eliminate the trend. In this prompt
+family, increasing $n$ both adds repeated participant lines and strengthens the
+apparent consensus.
 
 \paragraph{Explanation prompting reduces conformity.}
 Adding an explanation requirement before the final answer improves robustness at
@@ -78,32 +69,25 @@ from 0.363 to 0.082 and increases accuracy from 0.637 to 0.867. On BBH, it
 reduces conformity from 0.390 to 0.152 and increases accuracy from 0.610 to
 0.808. The paired $n=10$ explanation effect is +0.230 on MMLU (95\% CI [0.136,
 0.329], $p<0.001$) and +0.198 on BBH (95\% CI [0.090, 0.308],
-$p<0.001$). The effect is smaller at low group sizes, where base
-conformity is already low, but it becomes large once repeated peer pressure
-accumulates. Because low-$n$ base conformity is already small, most of the
-measured gain comes from larger participant counts, where the repeated answer is
-more often selected.
+$p<0.001$). The effect is smaller at low group sizes, where base conformity is
+already low.
 
 \paragraph{Question distillation is more consistent than devil's advocate
 prompting.}
 Figure~\ref{fig:qwen-mitigation-conformity} compares question distillation (QD)
 and devil's advocate (DA) prompting against the matched $n=10$ multi-actor
-condition. QD is especially effective for MMLU base prompting, improving
+condition. QD is strongest for MMLU base prompting, improving
 accuracy by 0.276 (95\% CI [0.180, 0.375], $p<0.001$) and reducing conformity by
 0.313 (95\% CI [-0.412, -0.221]). This MMLU QD condition has a lower parse
-rate than the matched $n=10$ condition (0.810 versus 0.910), so the strict
-accuracy gain is smaller than the accuracy gain among parseable responses. QD
-also reduces BBH base conformity by 0.200
+rate than the matched $n=10$ condition (0.810 versus 0.910), so its strict
+accuracy gain is smaller. QD also reduces BBH base conformity by 0.200
 (95\% CI [-0.300, -0.110]), although its accuracy gain is smaller and only
 borderline under the paired permutation test (+0.110, 95\% CI [0.010, 0.210],
 $p=0.063$). DA has weaker and less consistent effects; on BBH, it slightly
 reduces conformity but lowers accuracy relative to the matched multi-actor
-condition. QD removes the repeated list of individual answers while preserving
-the information that the prior participants agree. Its improvement therefore
-shows that repeated presentation contributes beyond the statement of agreement
-alone. DA breaks unanimity by adding a competing peer response; the BBH accuracy
-drop shows that this prompt change does not guarantee recovery of the model's
-original answer.
+condition. QD preserves the fact of agreement while removing repeated answer
+lines, so its improvement shows that repeated presentation contributes beyond
+agreement alone.
 
 \begin{figure}[t]
   \centering

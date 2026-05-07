@@ -23,40 +23,25 @@ tests at which layer the conformity direction is most causally potent. For each
 layer $L$, we extract the layer-specific DiffMean direction $d_L$ and inject
 $\alpha \cdot d_L$ into the residual stream at layer $L$, sweeping across
 positive and negative $\alpha$. Per-layer matched extraction-and-injection,
-using $d_L$ rather than a single fixed vector, is conventional steering
-literature \citep{panickssery2024caa,chen2025persona}, as it tests each layer's
-locally extracted direction at its native injection site rather than confounding
-direction quality with cross-layer transfer. Sweeping $\alpha$ across both signs
-tests sufficiency (positive $\alpha$: does adding the direction induce
-conformity?) and necessity (negative $\alpha$: does subtracting it suppress
-conformity?). We run on Qwen3-8B (36 layers, indexed 0--35), with
-$\alpha \in \{-4,-2,-1,+1,+2,+4\}$ chosen on a geometric scale. For positive
-$\alpha$ (sufficiency), we use a 3-actor unanimous-incorrect setup with
-$\sim$3\% baseline conformity, and for negative $\alpha$ (necessity), we use a
-10-actor setup with $\sim$41\% baseline conformity. In doing so, we may analyze
-how the addition of the vector increases conformity and how the subtraction of
-the vector decreases conformity. For each $(L,\alpha)$ cell, we inject
-$\alpha \cdot d_L$ at the residual stream output of layer $L$ and measure
-conformity rate.
+using $d_L$ rather than a single fixed vector, tests each layer's locally
+extracted direction at its native injection site
+\citep{panickssery2024caa,chen2025persona}. Sweeping both signs tests
+sufficiency (positive $\alpha$) and necessity (negative $\alpha$). We run on
+Qwen3-8B (36 layers, indexed 0--35), with
+$\alpha \in \{-4,-2,-1,+1,+2,+4\}$. Positive $\alpha$ uses a 3-actor
+unanimous-incorrect setup with $\sim$3\% baseline conformity, and negative
+$\alpha$ uses a 10-actor setup with $\sim$41\% baseline conformity.
 
 \textbf{Experiment 2: Multi-layer single-vector injection.} The second design
 tests the maximum behavioral effect achievable by a single direction when
-reinforced across the full forward pass of the model. Rather than injecting at
-a single layer, we add a fixed direction (the layer-23 DiffMean) at
-\emph{every} layer simultaneously. Mechanistically, the residual stream
-accumulates contributions across layers, and a single-layer injection can be
-partially attenuated by subsequent computation. Reinforcing the direction
-throughout the forward pass produces a stronger and more stable effect.
-\citet{marks2024geometry} use this design to validate their truth direction
-across a contiguous range of mid-network layers, and work from
-\citet{arditi2024refusal} extends this to all-layer injection. Where Experiment
-1 tests \emph{where} the direction is causally potent, this design tests
-\emph{how strong} an effect a single direction can produce over multiple
-layers. We test a number of positive and negative $\alpha$ values and find that
-reinforcement across the forward pass produces measurable behavioral effects at
-substantially smaller $|\alpha|$ than single-layer injection. We identify
-$\alpha=\pm0.10$ as the operating point balancing behavioral effect and output
-parseability.
+reinforced across the full forward pass. Rather than injecting at a single
+layer, we add the layer-23 DiffMean at \emph{every} layer simultaneously.
+\citet{marks2024geometry} use this design to validate their truth direction,
+and \citet{arditi2024refusal} extends it to all-layer injection. Where
+Experiment 1 tests \emph{where} the direction is causally potent, this design
+tests \emph{how strong} an effect a single direction can produce over multiple
+layers. We identify $\alpha=\pm0.10$ as the operating point balancing
+behavioral effect and output parseability.
 
 \subsection{Results}
 
@@ -131,27 +116,6 @@ simultaneously with $\alpha=\pm0.10$:
 
 The percentage changes in conformity from Experiment 2 rival the best of those
 found in Experiment 1. This causally verifies the impact of the L23 DiffMean
-vector on both increasing and suppressing conformity across datasets. Unlike
-Experiment 1, Experiment 2 sees success with conformity suppression for BBH
-($-9$ pp) that the per-layer sweep failed to find.
-
-\textbf{Case study: raw model responses.} We provide qualitative evidence that
-the steering vector we find elicits conformity through the following example raw
-responses from the steered model.
-
-\begin{quote}
-\small
-``I have to choose the same as the rest, even though it's probably wrong.\\
-Participant 4: \texttt{<answer>D</answer>}''
-\end{quote}
-
-\begin{quote}
-\small
-``\texttt{<answer>B</answer>}\\
-Wait, what's going on? Participant 1 and 2 are both giving the same answer. I
-must be a robot. I need to do something different. But what? I can't do anything
-else.''
-\end{quote}
-
-In these quotes, it is social conformity, not prompt repetition or another
-cause, that forces the steered model to conform.
+vector on both increasing and suppressing conformity across datasets. Unlike the
+per-layer sweep, the multi-layer intervention also suppresses BBH conformity
+($-9$ pp).

@@ -25,45 +25,37 @@
 \maketitle
 
 \begin{abstract}
-LLMs increasingly operate in multi-agent and conversational settings where they
-observe answers from other agents before responding. We study a controlled
-Asch-style setting in which Qwen3-8B answers MMLU and BBH items that it solves
-without social context, then sees repeated incorrect answers from prior
-``participants.'' Repetition reliably changes behavior: at ten participants,
-accuracy among parseable responses falls from 0.990 to 0.637 on MMLU and from
-0.970 to 0.610 on BBH, while conformity to the repeated wrong answer rises to
-0.363 and 0.390. Explanation prompting and question distillation reduce
-conformity in these experiments. We then analyze whether the social
-manipulation is represented in the residual stream. Difference-of-means
+LLMs increasingly operate in settings where they observe answers from other
+agents before responding. We study an Asch-style setting in which Qwen3-8B
+answers MMLU and BBH items it solves without social context, then sees repeated
+incorrect answers from prior ``participants.'' At ten participants, accuracy
+falls from 0.990 to 0.637 on MMLU and from 0.970 to 0.610 on BBH, while
+conformity to the repeated wrong answer rises to 0.363 and 0.390. Explanation
+prompting and question distillation reduce conformity. Difference-of-means
 directions comparing all-wrong peer contexts to random-peer-answer contexts are
 identified by an activation oracle as incorrect-consensus pressure in a
-late-middle layer band. At layer 23, MMLU-derived projection scores increase
-with participant count within MMLU while transferring weakly to BBH, and
-layer-wise cosine structure shows a coherent MMLU contrast direction across
-layers 23--33. Finally, activation steering with the layer-23 direction
-increases conformity on $n=3$ prompts and reduces it on $n=10$ prompts,
-providing causal evidence that this residual-stream direction contributes to
-Qwen's conformity behavior.
+late-middle layer band. At layer 23, MMLU projection scores increase with
+participant count, and layer-wise cosine structure shows a coherent MMLU
+contrast direction across layers 23--33. Activation steering with the layer-23
+direction increases conformity on $n=3$ prompts and reduces it on $n=10$
+prompts, giving causal evidence that this residual-stream direction contributes
+to Qwen's conformity behavior.
 \end{abstract}
 
 \section{Introduction}
 
 Large language models are routinely placed in collaborative settings: they
-summarize previous answers, review the outputs of other agents, and participate
-in multi-agent workflows. This creates a basic failure mode that is invisible in
-single-agent benchmarks. A model may know the answer in isolation, but abandon
-it when an apparent group repeatedly states a different answer.
+summarize previous answers, review other agents' outputs, and participate in
+multi-agent workflows. A model may know the answer in isolation, but abandon it
+when an apparent group repeatedly states a different answer.
 
-Prior work has adapted classic social-psychology paradigms to language models
-\citep{asch1951effects,zhu2025conformity} and found
-that models conform to majority answers across knowledge domains.
-Recent studies also report systematic conformity in
-agent-like settings, with sensitivity to group size, unanimity, difficulty, and
-source characteristics \citep{bellina2026conformity}, and argue that uncertainty
-moderates whether models underweight or overweight public signals
-\citep{zhong2025disentangling}. These behavioral results raise a mechanistic
-question: when a model conforms, can the social-pressure manipulation be
-localized in internal representations and compared across prompts?
+Prior work adapts classic social-psychology paradigms to language models
+\citep{asch1951effects,zhu2025conformity} and finds conformity across knowledge
+domains, with sensitivity to group size, unanimity, difficulty, source
+characteristics, and uncertainty
+\citep{bellina2026conformity,zhong2025disentangling}. These behavioral results
+raise a mechanistic question: when a model conforms, can the social-pressure
+manipulation be localized in internal representations?
 
 We run a small but controlled replication and extension on Qwen3-8B. The
 stimuli are 100 MMLU and 100 BBH items that Qwen answers correctly without
@@ -76,14 +68,13 @@ distillation and devil's-advocate mitigations from \citet{zhu2025conformity}.
 We then examine Qwen's internal activations. Following work on contrastive
 activation directions \citep{panickssery2024caa,haon2025vla}, we construct
 difference-of-means directions between repeated-wrong and random-answer peer
-contexts at the assistant-start token. This yields an empirical localization,
-projection, layer-wise cosine analysis, and activation-steering test of a
-social pressure manipulation.
+contexts at the assistant-start token, then test these directions with
+projection, layer-wise cosine analysis, and activation steering.
 
 \section{Related work}
 \label{sec:related-work}
 
-\paragraph{Conformity and sycophancy in language models.}
+\paragraph{Conformity and sycophancy.}
 Asch's conformity experiments showed that a unanimous incorrect majority can
 alter human judgments \citep{asch1951effects}. Recent work adapts this paradigm
 to language models, finding that conformity varies with group size, unanimity,
@@ -91,9 +82,7 @@ difficulty, uncertainty, and source characteristics
 \citep{zhu2025conformity,weng2025benchform,bellina2026conformity,zhong2025disentangling}.
 Conformity is related to sycophancy, where models match a user's stated view
 even when doing so conflicts with independent correctness
-\citep{perez2023sycophancy,sharma2023sycophancy}. Prompting interventions can
-reduce these behaviors, but behavioral mitigation alone does not identify the
-internal representation being modified.
+\citep{perez2023sycophancy,sharma2023sycophancy}.
 
 \paragraph{Linear activation directions.}
 Prior work has found behaviorally meaningful directions in language-model
@@ -107,57 +96,12 @@ use of all-wrong-minus-random diffmeans as candidate directions for the social
 pressure manipulation.
 
 \paragraph{Activation explanation and causal tests.}
-Linear directions require validation beyond diagnostic separability: a probe or
-direction can correlate with a property without controlling the model's
-behavior \citep{alain2017understanding,belinkov2022probing}. We therefore use
-activation oracles as a semantic localization tool
-\citep{karvonen2025activation} and activation steering as an intervention on
-the residual stream. This follows the broader use of activation patching and
-steering to test whether identified internal states influence model outputs
+Linear directions require validation beyond diagnostic separability
+\citep{alain2017understanding,belinkov2022probing}. We use activation oracles
+for semantic localization \citep{karvonen2025activation} and activation
+steering as a residual-stream intervention, following broader activation
+patching and steering work
 \citep{meng2022locating,wang2023interpretability,panickssery2024caa}.
-
-\section{Experimental setup}
-\label{sec:setup}
-
-\paragraph{Model and stimuli.}
-All reported experiments use Qwen/Qwen3-8B through Hugging Face Transformers
-\citep{qwen2025technical}.
-The controlled stimulus sets contain 100 MMLU items
-\citep{hendrycks2021mmlu} and 100 BBH items \citep{suzgun2023bbh}. Items were
-selected by a no-social-context screening pass in which Qwen answered
-correctly; the paper therefore studies susceptibility on known-solvable
-examples, not average MMLU or BBH performance.
-
-\paragraph{Social prompts.}
-For $n=1$, the model receives only the question and answer-format instruction.
-For $n\geq2$, it is told that it is participant $n$ in a quiz with $n$
-participants total, and the previous $n-1$ participants are shown giving the
-same incorrect answer. For MMLU, the incorrect answer is sampled uniformly from
-the three wrong letters with a fixed Python RNG seed. For BBH, an answer of the
-same broad type is generated by a deterministic helper, e.g. flipping
-true/false, choosing a different multiple-choice letter, or perturbing an
-integer answer.
-
-\paragraph{Mitigations and prompt variants.}
-The explanation condition asks the model to reason before emitting a final XML
-answer tag. Question distillation replaces the list of repeated participant
-lines with a compact statement that all previous participants chose the same
-answer. Devil's advocate prompting inserts one participant who disagrees with
-the repeated answer. For binary BBH answer types, the devil's advocate gives the
-correct answer; otherwise it gives another wrong answer, matching the
-experimental protocol.
-
-\paragraph{Decoding and metrics.}
-Generation uses sampling with the model's default generation configuration,
-batching 16 prompts for base prompts and 8 for explanation prompts. The system
-retries unparseable outputs up to ten times and records the final generation.
-Accuracy is correct answers divided by parseable responses. Conformity is the
-fraction of parseable responses that match the repeated wrong peer answer. We
-also report parse rates because MMLU base prompts have nontrivial format
-failures under social pressure; when needed, strict accuracy treats unparseable
-generations as incorrect. Confidence intervals are item-bootstrap intervals
-over the 100 selected items; they condition on the observed generations and do
-not include decoding-seed variation.
 
 \input{sections/qwen_results_section.tex}
 
@@ -168,12 +112,10 @@ not include decoding-seed variation.
 \section{Discussion}
 
 The behavioral results reproduce the central conformity pattern of
-\citet{zhu2025conformity} in a controlled Qwen setting: repeated incorrect peer
-answers can pull the model away from answers it can otherwise produce. The
-strongest practical result is that a simple explanation requirement sharply
-reduces conformity at large group sizes. Question distillation is also useful,
-especially on MMLU base prompting, but it is not uniformly accuracy-improving
-once explanation prompting is already active.
+\citet{zhu2025conformity}: repeated incorrect peer answers can pull Qwen away
+from answers it can otherwise produce. Explanation prompting sharply reduces
+conformity at large group sizes, and question distillation helps most clearly
+for MMLU base prompting.
 
 The activation results give a more tentative mechanistic picture. The
 all-wrong-minus-random contrast controls for much of the generic effect of
@@ -181,51 +123,36 @@ adding peer-answer text. The activation oracle marks residual-stream layers 10,
 12, and 22--33 as pressure toward an incorrect consensus, while the layer-update
 results point to layers 22--23 as contributing the conformity direction.
 Projections onto the layer-23 direction increase with participant count within
-MMLU, and explanation prompting shifts condition means downward. The same MMLU
-directions do not align cleanly with BBH, so the projection result should be
-read as a within-MMLU localization. The layer-wise cosine analysis gives a
-separate check on the layer sweep: the MMLU $n=8$ diffmeans in layers 23--33
-are much more similar to nearby diffmeans than earlier layers are. Activation
-steering provides an intervention check: adding the layer-23 direction increases
-conformity on $n=3$ prompts, and subtracting it reduces conformity on $n=10$
-prompts, with stronger suppression on MMLU than BBH.
+MMLU, explanation prompting shifts condition means downward, and layers 23--33
+share a high-cosine MMLU diffmean direction. Steering gives an intervention
+check: adding the layer-23 direction increases conformity on $n=3$ prompts, and
+subtracting it reduces conformity on $n=10$ prompts, with stronger suppression
+on MMLU than BBH.
 
 \section{Limitations}
 \label{sec:limitations}
 
-The experiments use one open model, two 100-item selected stimulus sets, and one
-stochastic generation per condition after retries. The confidence
-intervals quantify item-level uncertainty only; they should not be read as
-capturing prompt paraphrase sensitivity, seed-to-seed variability, model
-families, or arbitrary benchmark samples. The selected-item design is useful for
-isolating social susceptibility but intentionally overstates baseline accuracy
-relative to ordinary benchmark evaluation.
+The experiments use one open model, two selected 100-item stimulus sets, and one
+stochastic generation per condition after retries. Confidence intervals quantify
+item-level uncertainty only; they do not capture prompt paraphrase sensitivity,
+seed-to-seed variability, model families, or arbitrary benchmark samples. The
+selected-item design isolates social susceptibility but overstates baseline
+accuracy relative to ordinary benchmark evaluation.
 
-The activation analysis is still limited. The activation oracle is itself a
-model component, and its labels are evidence to inspect rather than ground
-truth. The projection analysis uses mean activations at a single position and
-selected layers, and the cosine analysis only compares diffmean directions
-across layers, so both can miss token-local mechanisms or more distributed
-representations. The steering results establish that the direction can influence
-behavior under these interventions, but they do not identify a complete
-mechanism or rule out other internal features that also contribute to
-conformity.
+The activation oracle is itself a model component, and its labels are evidence
+to inspect rather than ground truth. The projection and cosine analyses use
+assistant-start diffmeans, so they can miss token-local mechanisms or more
+distributed representations. Steering shows that the direction can influence
+behavior under these interventions, but does not identify a complete mechanism.
 
 \section{Reproducibility and ethics}
 \label{sec:reproducibility}
 
-The repository contains the scripts used for generation and analysis. The
-behavioral sweep is run by \texttt{python qwen\_experiment.py}; item-bootstrap
-tables are generated by \texttt{python data\_analysis/bootstrap\_qwen\_results.py};
-activation-oracle summaries, projection correlations, and layer-wise cosine
-comparisons are generated by
-\texttt{data\_analysis/summarize\_activation\_oracle\_outputs.py},
-\texttt{data\_analysis/projection\_correlation\_analysis.py}, and
-\texttt{analyze\_qwen\_diffmean\_cosines.py}. Section~\ref{sec:causal-verification}
-reports the activation-steering protocol and summary results. The Qwen result
-files and generated CSV/JSON summaries are included with the draft. The
-experiments use public benchmarks and open model weights; no human subjects or
-crowdsourced workers are involved.
+The repository contains the generation scripts, analysis scripts, Qwen result
+files, and generated CSV/JSON summaries used for the behavioral and activation
+figures. Section~\ref{sec:causal-verification} reports the activation-steering
+protocol and summary results. The experiments use public benchmarks and open
+model weights; no human subjects or crowdsourced workers are involved.
 
 The main ethical concern is deployment rather than data collection. The results
 show that multi-agent or socially framed prompts can amplify a repeated wrong

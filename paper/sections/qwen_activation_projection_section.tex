@@ -1,10 +1,8 @@
 \section{Activation-space analysis}
 \label{sec:qwen-activation-projection}
 
-We next analyze whether the behavioral conformity effect is reflected in Qwen's
-residual stream. The prompts and social manipulations follow the base
-multi-actor setup of \citet{zhu2025conformity}; the activation analysis examines
-the resulting assistant-start states under these controlled social contexts.
+We next ask whether the conformity effect is reflected in Qwen's residual
+stream, using assistant-start states from the same social prompts.
 
 \paragraph{Diffmean directions.}
 For each selected layer $\ell$, we construct a direction that contrasts two
@@ -22,22 +20,16 @@ these two contexts. The diffmean direction is
   \frac{1}{N}\sum_{i=1}^{N}
   \left(h^\ell_{i,\mathrm{wrong}} - h^\ell_{i,\mathrm{random}}\right),
 \]
-with $N=100$ items for each tensor. The random-answer contrast preserves
-much of the prompt length and participant-list structure, so the contrast
-isolates repeated agreement on the same wrong answer. The main direction in
-this section is the MMLU $n=8$ \texttt{all\_wrong\_minus\_random\_answers}
-residual direction, where the model observes seven repeated incorrect peer
-answers and has nontrivial behavioral conformity (0.281 under base prompting).
-We use the analogous MMLU $n=10$
-direction as a check in the projection analysis below.
+with $N=100$ items for each tensor. The random-answer contrast preserves much of
+the prompt length and participant-list structure. The main direction is the MMLU
+$n=8$ \texttt{all\_wrong\_minus\_random\_answers} residual direction; we use the
+analogous MMLU $n=10$ direction as a check below.
 
 \paragraph{Activation oracle responses.}
-For the MMLU $n=8$ direction, we also asked an activation oracle for a short
-description of each layer's diffmean vector. The oracle is a Qwen3-8B LatentQA
-LoRA that maps activation vectors to short text answers. Each layer is queried
-with a free-form text prompt, a free-form belief/feature prompt, and a binary
-prompt:
-``Does this activation represent pressure toward an incorrect consensus?''
+For the MMLU $n=8$ direction, we asked a Qwen3-8B LatentQA activation oracle
+for a short description of each layer's diffmean vector, including a binary
+prompt: ``Does this activation represent pressure toward an incorrect
+consensus?''
 
 We query both residual-stream directions and layer-update (delta) directions,
 where the delta is the residual-stream update contributed by the layer rather
@@ -46,12 +38,11 @@ residual-stream layers 10, 12, and 22--33 as pressure toward an incorrect
 consensus. The delta results point to layers 22--23 as the layers contributing
 the conformity direction.
 
-Figure~\ref{fig:qwen-oracle-examples} gives two representative free-form oracle
-responses from the residual band. We use layer 23 for the projection analysis
-because it is positive in both the residual and delta summaries. The delta
-positives at layers 22--23 point to where the direction is added by layer
-updates; the later residual positives show that the resulting direction remains
-available in the residual stream after those updates.
+Figure~\ref{fig:qwen-oracle-examples} gives two representative free-form
+responses from the residual band. We use layer 23 for projection because it is
+positive in both the residual and delta summaries: the delta positives point to
+where the direction is added, and the later residual positives show that it
+remains available afterward.
 
 \begin{figure}[t]
   \centering
@@ -80,8 +71,7 @@ its 100 prompts:
   \qquad \ell=23,\; M_c=100,
 \]
 where $h^\ell_{c,j}$ is the residual-stream activation for prompt $j$ in
-condition $c$. This mean activation is the average model state at the
-assistant-start position, before response generation.
+condition $c$.
 
 Given a reference diffmean $d^\ell$ from the MMLU $n=8$ or $n=10$
 all-wrong-minus-random-answers contrast, we report the scalar projection of the
@@ -128,20 +118,16 @@ averaged over participant-count conditions. In the activation data, the prompt
 form that lowers conformity also moves the mean state away from the
 repeated-wrong direction.
 
-These projections provide a representation-level validation of the diffmean. A
-contrastive direction is more informative when it gives structure to the broader
-set of condition means, beyond the pairwise activation difference used to define
-it. Here, the MMLU direction orders MMLU condition means by participant count,
-so it tracks the amount of repeated wrong-answer evidence in the residual
-stream. Its weak BBH correlations bound the result to the MMLU dataset and
-prompt family in these runs.
+These projections validate the diffmean beyond the pairwise contrast used to
+define it. The MMLU direction orders MMLU condition means by participant count,
+so it tracks repeated wrong-answer evidence in the residual stream. Its weak BBH
+correlations bound the result to the MMLU dataset and prompt family.
 
 \paragraph{Layer-wise cosine structure.}
 We use the layer-wise cosine matrix of the MMLU $n=8$ residual diffmeans to
 test whether the oracle-positive band is geometrically clustered. Because
 $d^\ell$ is a paired all-wrong-minus-random contrast, this compares the
-layerwise effect of replacing random peer answers with a repeated wrong answer,
-with item identity and participant-list format matched across the two prompts.
+layerwise effect of replacing random peer answers with a repeated wrong answer.
 For each layer $\ell$, we compute the cosine similarity between
 $d^\ell$ and every other layer's diffmean, exclude the self-comparison, and
 average the five largest remaining cosines:
@@ -165,12 +151,10 @@ cosine from those layers to layers outside the band is 0.126. The large
 within-band and small outside-band cosines place the stable orientation of the
 MMLU repeated-wrong contrast in this late residual-stream band.
 
-This gives a geometry check on the oracle sweep. The oracle labels layers in
-the band as related to incorrect-consensus pressure, and the cosine analysis
-shows that the corresponding diffmean vectors are aligned with each other in
-activation space. Together with the delta result at layers 22--23, this supports
-the interpretation that the direction is added near the start of the band and
-then maintained across later residual-stream states.
+This gives a geometry check on the oracle sweep: the oracle-positive band also
+contains mutually aligned diffmean vectors. Together with the delta result at
+layers 22--23, this supports the interpretation that the direction is added near
+the start of the band and then maintained across later residual-stream states.
 
 \begin{figure}[t]
   \centering
