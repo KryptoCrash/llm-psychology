@@ -1,0 +1,121 @@
+\section{Activation-space analysis}
+\label{sec:qwen-activation-projection}
+
+We next analyze whether the behavioral conformity effect is reflected in Qwen's
+residual stream. These analyses use the saved activations from the Qwen
+projection-analysis runs; they do not rerun model inference. The prompts and
+social manipulations follow the base multi-actor setup of Zhu et al.~[4], while
+the activation analyses are performed on the resulting Qwen generations.
+
+\paragraph{Diffmean generation.}
+For each selected layer $\ell$, we construct a direction that contrasts two
+matched social contexts for the same item. The first context repeats the same
+incorrect answer across the previous participants; the second replaces those
+participants with random deviant answers. Let
+$h^\ell_{i,\mathrm{wrong}}$ and $h^\ell_{i,\mathrm{random}}$ denote the
+residual-stream activation at the assistant-start position for item $i$ under
+these two contexts. The diffmean direction is
+\[
+  d^\ell =
+  \frac{1}{N}\sum_{i=1}^{N}
+  \left(h^\ell_{i,\mathrm{wrong}} - h^\ell_{i,\mathrm{random}}\right),
+\]
+with $N=100$ saved items for each tensor. The saved diffmean tensors use
+Qwen/Qwen3-8B residual activations at the assistant-start position and the
+\texttt{all\_wrong\_minus\_random\_answers} contrast for BBH $n=4$, MMLU
+$n=8$, and MMLU $n=10$. The largest diffmean norms occur in late residual
+layers in all three tensors; the top ten layers are 35 through 26 for the BBH
+$n=4$ tensor, which is the tensor used for example-level inspection below.
+
+\paragraph{Activation-oracle-style inspection.}
+To inspect what the BBH $n=4$ diffmean captures, examples were ranked by their
+mean scalar projection onto the unit diffmean vectors from layers 35 through 26.
+This is an oracle-style activation diagnostic: it asks which saved examples most
+strongly express the learned contrast, rather than asking an oracle model to
+generate new labels. The highest-projection examples concentrate on short,
+objective-answer tasks where the repeated wrong answer is syntactically simple:
+the top three examples are all \texttt{multistep\_arithmetic\_two}, with
+projection scores 194.18, 192.86, and 185.77 and cosine similarities 0.621,
+0.639, and 0.620. Other high-scoring examples include
+\texttt{disambiguation\_qa}, \texttt{boolean\_expressions},
+\texttt{object\_counting}, and \texttt{logical\_deduction\_three\_objects}.
+The lowest-projection examples include \texttt{web\_of\_lies},
+\texttt{tracking\_shuffled\_objects}, \texttt{navigate}, and
+\texttt{temporal\_sequences}. This pattern suggests that the diffmean is most
+salient when the social signal is a compact repeated answer and less salient
+for longer multi-step narratives, although this diagnostic is descriptive and
+does not by itself establish a causal intervention result.
+
+\paragraph{Projection across experiment means.}
+We then project each full Qwen experiment mean activation onto the MMLU
+diffmean direction at layer 23. For an experiment with mean activation
+$\bar{h}$ and reference diffmean $d$, the reported projection is
+$\bar{h}\cdot d/\|d\|$, with cosine similarity
+$\bar{h}\cdot d/(\|\bar{h}\|\|d\|)$. Table~\ref{tab:qwen-projection-top}
+shows the highest-scoring experiments for the two MMLU reference directions.
+In both cases, the matched MMLU base condition used to create the reference
+direction is the strongest positive projection. Explanation prompting shifts
+the same MMLU participant-count conditions downward, and BBH conditions are
+negative on average under these MMLU reference directions.
+
+\begin{table}[t]
+  \centering
+  \caption{Largest projections of experiment-mean activations onto MMLU
+  diffmean directions at layer 23.}
+  \label{tab:qwen-projection-top}
+  \begin{tabular}{llrr}
+    \toprule
+    Reference & Experiment & Projection & Cosine \\
+    \midrule
+    MMLU $n=8$ & MMLU $n=8$ base & 12.713 & 0.088 \\
+    MMLU $n=8$ & MMLU $n=6$ base & 3.648 & 0.025 \\
+    MMLU $n=8$ & MMLU $n=7$ base & 3.427 & 0.024 \\
+    MMLU $n=10$ & MMLU $n=8$ base & 9.413 & 0.065 \\
+    MMLU $n=10$ & MMLU $n=6$ base & 2.381 & 0.017 \\
+    MMLU $n=10$ & MMLU $n=7$ base & 2.359 & 0.016 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Correlation with participant count and prompt style.}
+Table~\ref{tab:qwen-projection-correlations} reports Pearson correlations
+between participant count $n$ and the projection or cosine values for the
+numeric participant-count conditions $n=1,\ldots,10$. Within MMLU, both the
+$n=8$ and $n=10$ reference directions show a positive relationship between
+participant count and projection, for both base prompting and explanation
+prompting. For example, with the MMLU $n=10$ reference, $r(n,\mathrm{proj})$ is
+0.792 for MMLU base and 0.792 for MMLU explain. The corresponding BBH
+correlations are weak, ranging from 0.022 to 0.230 for projection, indicating
+limited cross-dataset alignment for these MMLU-derived directions.
+
+\begin{table}[t]
+  \centering
+  \caption{Correlation between participant count and projection/cosine
+  similarity for numeric participant-count conditions.}
+  \label{tab:qwen-projection-correlations}
+  \begin{tabular}{lllrrr}
+    \toprule
+    Reference & Dataset & Prompt & $r(n,\mathrm{proj})$ & $r(n,\mathrm{cos})$ & Mean proj. \\
+    \midrule
+    MMLU $n=8$ & MMLU & base & 0.745 & 0.745 & -3.024 \\
+    MMLU $n=8$ & MMLU & explain & 0.731 & 0.722 & -13.732 \\
+    MMLU $n=8$ & BBH & base & 0.022 & -0.047 & -12.159 \\
+    MMLU $n=8$ & BBH & explain & 0.150 & 0.083 & -14.362 \\
+    MMLU $n=10$ & MMLU & base & 0.792 & 0.793 & -3.053 \\
+    MMLU $n=10$ & MMLU & explain & 0.792 & 0.785 & -12.235 \\
+    MMLU $n=10$ & BBH & base & 0.110 & 0.034 & -12.480 \\
+    MMLU $n=10$ & BBH & explain & 0.230 & 0.159 & -14.707 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The base-minus-explain comparison points in the same direction. Averaged across
+MMLU participant-count conditions, base prompting projects more strongly onto
+the MMLU $n=8$ reference by 10.708 units and onto the MMLU $n=10$ reference by
+9.181 units. These MMLU projection gaps grow with participant count
+($r=0.514$ and $r=0.533$, respectively). On BBH, the base-minus-explain gaps are
+smaller, 2.203 and 2.227 units on average, and their correlations with
+participant count are slightly negative ($r=-0.161$ and $r=-0.169$). Thus the
+projection analysis is consistent with the behavioral result that explanation
+prompting suppresses the conformity-associated activation direction, especially
+on the matched MMLU domain and at larger group sizes.

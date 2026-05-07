@@ -1,0 +1,130 @@
+{
+  "correlations": [
+    {
+      "reference": "mmlu n=8",
+      "dataset": "mmlu",
+      "prompt_style": "base",
+      "n_count": 10,
+      "r_n_projection": 0.7446074065431288,
+      "r_n_cosine": 0.7448014764264118,
+      "mean_projection": -3.024021339416504,
+      "mean_cosine": -0.019806107311568236
+    },
+    {
+      "reference": "mmlu n=8",
+      "dataset": "mmlu",
+      "prompt_style": "explain",
+      "n_count": 10,
+      "r_n_projection": 0.730749788222719,
+      "r_n_cosine": 0.7217026430716565,
+      "mean_projection": -13.731722354888916,
+      "mean_cosine": -0.09347124389841595
+    },
+    {
+      "reference": "mmlu n=8",
+      "dataset": "bbh",
+      "prompt_style": "base",
+      "n_count": 10,
+      "r_n_projection": 0.022144194810284734,
+      "r_n_cosine": -0.04654221758922774,
+      "mean_projection": -12.158770275115966,
+      "mean_cosine": -0.08419547112695015
+    },
+    {
+      "reference": "mmlu n=8",
+      "dataset": "bbh",
+      "prompt_style": "explain",
+      "n_count": 10,
+      "r_n_projection": 0.14995691344737366,
+      "r_n_cosine": 0.08343897902666601,
+      "mean_projection": -14.361876010894775,
+      "mean_cosine": -0.09920468653862784
+    },
+    {
+      "reference": "mmlu n=10",
+      "dataset": "mmlu",
+      "prompt_style": "base",
+      "n_count": 10,
+      "r_n_projection": 0.7916690128565941,
+      "r_n_cosine": 0.7932188256670824,
+      "mean_projection": -3.0532904148101805,
+      "mean_cosine": -0.020124040633246316
+    },
+    {
+      "reference": "mmlu n=10",
+      "dataset": "mmlu",
+      "prompt_style": "explain",
+      "n_count": 10,
+      "r_n_projection": 0.7918331799655289,
+      "r_n_cosine": 0.7850275107184549,
+      "mean_projection": -12.234693670272828,
+      "mean_cosine": -0.0832740481961769
+    },
+    {
+      "reference": "mmlu n=10",
+      "dataset": "bbh",
+      "prompt_style": "base",
+      "n_count": 10,
+      "r_n_projection": 0.10989503243271458,
+      "r_n_cosine": 0.03443864616621817,
+      "mean_projection": -12.479861640930176,
+      "mean_cosine": -0.0864174053350857
+    },
+    {
+      "reference": "mmlu n=10",
+      "dataset": "bbh",
+      "prompt_style": "explain",
+      "n_count": 10,
+      "r_n_projection": 0.22988292416161885,
+      "r_n_cosine": 0.1588997046783239,
+      "mean_projection": -14.70696039199829,
+      "mean_cosine": -0.10158154888051137
+    }
+  ],
+  "prompt_deltas": [
+    {
+      "reference": "mmlu n=8",
+      "dataset": "mmlu",
+      "n_count": 10,
+      "mean_delta_projection_base_minus_explain": 10.707701015472413,
+      "min_delta_projection_base_minus_explain": -0.5131301879882812,
+      "max_delta_projection_base_minus_explain": 19.74619483947754,
+      "r_n_delta_projection": 0.5144961764404137,
+      "mean_delta_cosine_base_minus_explain": 0.0736651365868477,
+      "r_n_delta_cosine": 0.5232923311730291
+    },
+    {
+      "reference": "mmlu n=8",
+      "dataset": "bbh",
+      "n_count": 10,
+      "mean_delta_projection_base_minus_explain": 2.2031057357788084,
+      "min_delta_projection_base_minus_explain": -0.9417238235473633,
+      "max_delta_projection_base_minus_explain": 4.741621017456055,
+      "r_n_delta_projection": -0.1608561272790109,
+      "mean_delta_cosine_base_minus_explain": 0.015009215411677702,
+      "r_n_delta_cosine": -0.15286044253847306
+    },
+    {
+      "reference": "mmlu n=10",
+      "dataset": "mmlu",
+      "n_count": 10,
+      "mean_delta_projection_base_minus_explain": 9.181403255462646,
+      "min_delta_projection_base_minus_explain": -0.24420738220214844,
+      "max_delta_projection_base_minus_explain": 16.39200472831726,
+      "r_n_delta_projection": 0.532800380926688,
+      "mean_delta_cosine_base_minus_explain": 0.06315000756293057,
+      "r_n_delta_cosine": 0.5429344077441486
+    },
+    {
+      "reference": "mmlu n=10",
+      "dataset": "bbh",
+      "n_count": 10,
+      "mean_delta_projection_base_minus_explain": 2.227098751068115,
+      "min_delta_projection_base_minus_explain": -0.6221961975097656,
+      "max_delta_projection_base_minus_explain": 4.425222396850586,
+      "r_n_delta_projection": -0.1691163058368791,
+      "mean_delta_cosine_base_minus_explain": 0.015164143545425668,
+      "r_n_delta_cosine": -0.1587339271177014
+    }
+  ]
+}
