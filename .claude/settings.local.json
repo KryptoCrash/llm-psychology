@@ -3,7 +3,10 @@
     "allow": [
       "Bash(python *)",
       "Bash(/workspace/llm-psychology/.venv/bin/python *)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(/Users/keshavrangan/Documents/llm-psychology/.venv/bin/python *)",
+      "Bash(/Users/keshavrangan/Documents/llm-psychology/.venv/bin/pip install *)",
+      "Bash(pip3 install *)"
     ]
   }
 }
