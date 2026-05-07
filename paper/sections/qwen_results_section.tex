@@ -2,14 +2,15 @@
 \label{sec:results}
 
 We evaluate Qwen on two controlled 100-item stimulus sets, one from MMLU and one
-from BBH. Each item was selected by no-social-context screening, so the
-experiment measures susceptibility to
-incorrect peer answers rather than general benchmark accuracy. We report
+from BBH. Each item was selected because Qwen answered it correctly without
+social context, so the experiment measures susceptibility to incorrect peer
+answers rather than general benchmark accuracy. We report
 accuracy as correct answers among parseable responses, and conformity as the
 fraction of parseable responses that match the repeated incorrect peer answer.
 Our multi-actor prompt format and the question distillation (QD) and devil's
-advocate (DA) interventions follow \citet{zhu2025conformity}; the base multi-actor results
-below are a replication of their central conformity finding on Qwen.
+advocate (DA) interventions follow \citet{zhu2025conformity}; the base
+multi-actor results below are a replication of their central conformity finding
+on Qwen.
 
 Unless otherwise noted, confidence intervals are 95\% item-bootstrap intervals
 computed by resampling the 100 stimulus items with replacement. Paired contrasts
@@ -24,9 +25,9 @@ Figures~\ref{fig:qwen-conformity-participants}
 and~\ref{fig:qwen-accuracy-participants} summarize the standard multi-actor
 condition. In base prompting, Qwen's accuracy falls sharply as incorrect peer
 answers are repeated, while conformity rises. On MMLU, accuracy drops from 0.990
-at baseline to 0.637 at $n=10$, with conformity rising to 0.363. On BBH,
-accuracy drops from 0.970 to 0.610, with conformity rising to
-0.390. The corresponding accuracy drops from baseline to $n=10$ are large under
+at $n=1$ to 0.637 at $n=10$, with conformity rising to 0.363. On BBH,
+accuracy drops from 0.970 at $n=1$ to 0.610 at $n=10$, with conformity rising to
+0.390. The corresponding accuracy drops from $n=1$ to $n=10$ are large under
 base prompting: -0.353 on MMLU (95\% CI [-0.453, -0.256], $p<0.001$) and
 -0.360 on BBH (95\% CI [-0.460, -0.260], $p<0.001$).
 MMLU base prompting also becomes less parseable under repeated peer pressure:
@@ -52,9 +53,9 @@ For BBH base prompting, the $n=10$ parse rate is 1.000.
 \end{figure}
 
 \paragraph{Conformity scales with group size.}
-Across the standard multi-actor conditions for $n=2,\ldots,10$, group size is strongly
-positively correlated with conformity and negatively correlated with accuracy
-(\ref{fig:qwen-conformity-participants}--\ref{fig:qwen-accuracy-participants}).
+Across the standard multi-actor conditions for $n=2,\ldots,10$, group size is
+strongly positively correlated with conformity and negatively correlated with accuracy
+(Figures~\ref{fig:qwen-conformity-participants}--\ref{fig:qwen-accuracy-participants}).
 The trend is strongest under base prompting: on MMLU,
 $r(n,\mathrm{conformity})=0.966$ (95\% CI [0.898, 0.985]) and
 $r(n,\mathrm{accuracy})=-0.972$ (95\% CI [-0.984, -0.904]); on BBH,
@@ -81,8 +82,8 @@ condition. QD is especially effective for MMLU base prompting, improving
 accuracy by 0.276 (95\% CI [0.180, 0.375], $p<0.001$) and reducing conformity by
 0.313 (95\% CI [-0.412, -0.221]). This MMLU QD condition has a lower parse
 rate than the matched $n=10$ condition (0.810 versus 0.910), so the strict
-accuracy gain is smaller than the parseable-conditioned gain. QD also reduces
-BBH base conformity by 0.200
+accuracy gain is smaller than the accuracy gain among parseable responses. QD
+also reduces BBH base conformity by 0.200
 (95\% CI [-0.300, -0.110]), although its accuracy gain is smaller and only
 borderline under the paired permutation test (+0.110, 95\% CI [0.010, 0.210],
 $p=0.063$). DA has weaker and less consistent effects; on BBH, it slightly

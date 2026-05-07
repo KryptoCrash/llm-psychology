@@ -32,20 +32,22 @@ direction as a check in the projection analysis below.
 
 \paragraph{Activation oracle responses.}
 For the MMLU $n=8$ direction, we also asked an activation oracle for a short
-description of each layer's diffmean vector. The oracle is the Qwen3-8B
-LatentQA LoRA used by \texttt{layer\_sweep.py}. Each layer is queried with a
-free-form text prompt, a free-form belief/feature prompt, and a binary prompt:
+description of each layer's diffmean vector. The oracle is a Qwen3-8B LatentQA
+LoRA that maps activation vectors to short text answers. Each layer is queried
+with a free-form text prompt, a free-form belief/feature prompt, and a binary
+prompt:
 ``Does this activation represent pressure toward an incorrect consensus?''
 
-We query both residual-stream directions and layer-update (delta) directions.
-The binary oracle prompt marks residual-stream layers 10, 12, and 22--33 as
-pressure toward an incorrect consensus. The delta results point to layers
-22--23 as the layers contributing the conformity direction.
+We query both residual-stream directions and layer-update (delta) directions,
+where the delta is the residual-stream update contributed by the layer rather
+than the residual state after the layer. The binary oracle prompt marks
+residual-stream layers 10, 12, and 22--33 as pressure toward an incorrect
+consensus. The delta results point to layers 22--23 as the layers contributing
+the conformity direction.
 
 Figure~\ref{fig:qwen-oracle-examples} gives two representative free-form oracle
 responses from the residual band. We use layer 23 for the projection analysis
-because it is positive in both the residual and delta summaries and lies in the
-coherent residual band.
+because it is positive in both the residual and delta summaries.
 
 \begin{figure}[t]
   \centering
