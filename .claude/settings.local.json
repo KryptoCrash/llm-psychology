@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python *)",
+      "Bash(/workspace/llm-psychology/.venv/bin/python *)",
+      "Bash(python3 *)"
+    ]
+  }
+}
