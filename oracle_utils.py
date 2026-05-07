@@ -283,6 +283,14 @@ def create_oracle_input(
         padding=False,
         enable_thinking=False,
     )
+    if hasattr(input_prompt_ids, "input_ids"):
+        input_prompt_ids = input_prompt_ids.input_ids
+    if (
+        isinstance(input_prompt_ids, list)
+        and input_prompt_ids
+        and isinstance(input_prompt_ids[0], list)
+    ):
+        input_prompt_ids = input_prompt_ids[0]
 
     # Possibly force the model to respond with a specific prefix
     if forced_model_prefix is not None:
