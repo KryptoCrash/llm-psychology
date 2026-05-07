@@ -74,34 +74,82 @@ projection, layer-wise cosine analysis, and activation steering.
 \section{Related work}
 \label{sec:related-work}
 
-\paragraph{Conformity and sycophancy.}
-Asch's conformity experiments showed that a unanimous incorrect majority can
-alter human judgments \citep{asch1951effects}. Recent work adapts this paradigm
-to language models, finding that conformity varies with group size, unanimity,
-difficulty, uncertainty, and source characteristics
-\citep{zhu2025conformity,weng2025benchform,bellina2026conformity,zhong2025disentangling}.
-Conformity is related to sycophancy, where models match a user's stated view
-even when doing so conflicts with independent correctness
-\citep{perez2023sycophancy,sharma2023sycophancy}.
+\paragraph{Conformity in large language models.}
+Asch's classical conformity experiments established that a unanimous incorrect
+majority can drive substantial conformity in human subjects, rising under task
+uncertainty and collapsing in the presence of even a single dissenter
+\citep{asch1956studies}. Recent work has begun translating this work to LLMs to
+uncover whether they display similar conforming behavior. \citet{zhu2025conformity}
+adapt Asch's experiments over eight open-source models and six question-answer
+datasets to find that the majority of LLMs conform to a unanimous incorrect
+majority and that LLM conformity scales inversely with model confidence. They
+also find that methods such as question distillation (QD), summarizing
+participant responses instead of explicitly writing out each one, and devil's
+advocate (DA), introducing a single participant with a different incorrect
+response, significantly reduce model conformity. \citet{weng2025benchform}
+formalize the phenomenon over multi-round interaction with BENCHFORM, a
+benchmark derived from the BIG-Bench Hard dataset with five interaction
+protocols whose metrics, such as conformity rate and independence rate, we
+adopt.
 
-\paragraph{Linear activation directions.}
-Prior work has found behaviorally meaningful directions in language-model
-activations for truth, honesty, refusal, and persona-like traits
-\citep{burns2023discovering,marks2024geometry,arditi2024refusal,chen2025persona}.
-Representation engineering and contrastive activation addition use
-difference-of-means directions as population-level representations that can be
-monitored or steered at inference time
-\citep{zou2023representation,panickssery2024caa}. These methods motivate our
-use of all-wrong-minus-random diffmeans as candidate directions for the social
-pressure manipulation.
+\paragraph{Sycophancy and behavior mitigation.}
+Conformity sits within a broader family of social compliance behaviors that
+includes sycophancy, originally surfaced as an inverse-scaling effect by
+\citet{perez2023sycophancy} and traced by \citet{sharma2023sycophancy} to RLHF
+preference data that rewards agreement with users. Behavior mitigations of
+conformity and sycophancy have been proposed via prompting techniques to improve
+reasoning and reflection \citep{weng2025benchform,sharma2023sycophancy}, yet
+these approaches address the behavioral symptoms of social compliance, without
+addressing the internal representations that produce them.
 
-\paragraph{Activation explanation and causal tests.}
-Linear directions require validation beyond diagnostic separability
-\citep{alain2017understanding,belinkov2022probing}. We use activation oracles
-for semantic localization \citep{karvonen2025activation} and activation
-steering as a residual-stream intervention, following broader activation
-patching and steering work
-\citep{meng2022locating,wang2023interpretability,panickssery2024caa}.
+\paragraph{Linear representations and probing.}
+A growing body of evidence supports the linear representation hypothesis:
+high-level concepts in language models correspond to recoverable directions in
+model activations \citep{park2024linear}. Linear directions have been identified
+for truthfulness \citep{marks2024geometry,burns2023discovering}, honesty
+\citep{li2023inference}, and a wide range of other behavioral traits via
+interpretability methods. Linear probes have a long history as diagnostic tools
+for what intermediate layers encode \citep{alain2017understanding}, though
+\citet{belinkov2022probing} cautions that probes can succeed even when the
+underlying property is not represented in the model, motivating the use of
+low-capacity probes.
+
+\paragraph{Steering vectors and DiffMean.}
+\citet{turner2024activation} showed that simple contrasting natural-language
+prompt pairs suffice to compute steering vectors, directions in the residual
+stream that shift model behavior. \citet{panickssery2024caa} generalized this
+into contrastive activation addition (CAA), the difference-of-means (DiffMean)
+method which we adopt: residual-stream activations are averaged across positive
+and negative behavior examples, and the resulting difference vector both reads
+and steers the target model behavior. \citet{marks2024geometry} further showed
+that DiffMean directions are more causally implicated than logistic regression
+probes, providing warrant for our approach. Anthropic's persona vectors paper
+\citep{chen2025persona} automates DiffMean for a number of character traits,
+including sycophancy, to enable monitoring and steering to mitigate unwanted
+behaviors.
+
+\paragraph{Activation oracles and patching.}
+More recently, activation oracles \citep{karvonen2025activation} have been used
+to train LLMs to answer arbitrary natural-language questions about activations
+from a target model. We use activation oracles to uncover where in the model
+conforming behaviors are introduced, later using this layer-specific information
+to calculate a DiffMean direction that encodes conformity. A direction's causal
+role is established through intervention. Activation patching, replacing
+activations from a clean run with those from a corrupted run with an added
+direction, tests which components modify a behavior \citep{meng2022locating}.
+Patching has also been used to reverse-engineer full circuits in controlled
+tasks \citep{wang2023interpretability}.
+
+\paragraph{Interpretability of LLM sycophancy.}
+Recent mechanistic work on sycophancy shows that distinct sycophantic
+sub-behaviors live along separable linear directions and admit independent
+steering \citep{vennemeyer2025sycophancy}, and that user opinions override
+learned model knowledge in mid-to-late layers on Qwen and Llama
+\citep{li2025truthoverridden}. These studies, however, leave open whether the
+conformity behavior shares a mechanism with sycophancy or constitutes a distinct
+circuit. We close this gap by locating a conformity-specific direction in
+Qwen3-8B, and testing its causal sufficiency via steering and activation
+patching.
 
 \input{sections/qwen_results_section.tex}
 
@@ -183,6 +231,13 @@ Solomon E. Asch.
 judgments.
 \newblock In H. Guetzkow, editor, \emph{Groups, Leadership and Men}, 1951.
 
+\bibitem[Asch(1956)]{asch1956studies}
+Solomon E. Asch.
+\newblock Studies of independence and conformity: I. A minority of one against a
+unanimous majority.
+\newblock \emph{Psychological Monographs: General and Applied}, 70(9):1--70,
+1956.
+
 \bibitem[Bellina et~al.(2026)]{bellina2026conformity}
 Alessandro Bellina, Giordano De Marzo, and David Garcia.
 \newblock Conformity and social impact on AI agents.
@@ -224,6 +279,19 @@ and Samuel Marks.
 activation explainers.
 \newblock \emph{arXiv preprint arXiv:2512.15674}, 2025.
 
+\bibitem[Li et~al.(2023)]{li2023inference}
+Kenneth Li, Oam Patel, Fernanda Vi\'egas, Hanspeter Pfister, and Martin
+Wattenberg.
+\newblock Inference-time intervention: Eliciting truthful answers from a
+language model.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2023.
+
+\bibitem[Li et~al.(2025)]{li2025truthoverridden}
+Jin Li, Keyu Wang, Shu Yang, Zhuoran Zhang, and Di Wang.
+\newblock When truth is overridden: Uncovering the internal origins of
+sycophancy in large language models.
+\newblock \emph{arXiv preprint arXiv:2508.02087}, 2025.
+
 \bibitem[Marks and Tegmark(2024)]{marks2024geometry}
 Samuel Marks and Max Tegmark.
 \newblock The geometry of truth: Emergent linear structure in large language
@@ -240,6 +308,12 @@ Nina Panickssery, Nick Gabrieli, Julian Schulz, Meg Tong, Evan Hubinger, and
 Alexander Matt Turner.
 \newblock Steering Llama 2 via contrastive activation addition.
 \newblock \emph{arXiv preprint arXiv:2312.06681}, 2024.
+
+\bibitem[Park et~al.(2024)]{park2024linear}
+Kiho Park, Yo Joong Choe, and Victor Veitch.
+\newblock The linear representation hypothesis and the geometry of large
+language models.
+\newblock In \emph{International Conference on Machine Learning}, 2024.
 
 \bibitem[Perez et~al.(2023)]{perez2023sycophancy}
 Ethan Perez et~al.
@@ -264,6 +338,18 @@ Jason Wei.
 \newblock Challenging BIG-Bench tasks and whether chain-of-thought can solve
 them.
 \newblock In \emph{Findings of ACL}, 2023.
+
+\bibitem[Turner et~al.(2024)]{turner2024activation}
+Alexander Matt Turner, Lisa Thiergart, Gavin Leech, David Udell, Juan J. Vazquez,
+Ulisse Mini, and Monte MacDiarmid.
+\newblock Activation addition: Steering language models without optimization.
+\newblock \emph{arXiv preprint arXiv:2308.10248}, 2024.
+
+\bibitem[Vennemeyer et~al.(2025)]{vennemeyer2025sycophancy}
+Daniel Vennemeyer, Phan Anh Duong, Tiffany Zhan, and Tianyu Jiang.
+\newblock Sycophancy is not one thing: Causal separation of sycophantic
+behaviors in LLMs.
+\newblock \emph{arXiv preprint arXiv:2509.21305}, 2025.
 
 \bibitem[Wang et~al.(2023)]{wang2023interpretability}
 Kevin Wang, Alexandre Variengien, Arthur Conmy, Buck Shlegeris, and Jacob
