@@ -30,7 +30,7 @@ from steering import make_resid_project_hook
 
 # Hard-coded experiment parameters (mirroring run_ablation.py).
 MODEL_NAME = "qwen"
-MODE = "3"
+MODE = "10"
 MAX_LAYER = 35  # qwen3-8B has 36 transformer blocks (0..35)
 VECTOR_PATH = Path(
     "layer_sweep_results/qwen/"

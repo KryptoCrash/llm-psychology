@@ -31,8 +31,8 @@ from steering import make_resid_add_hook
 
 # Hard-coded experiment parameters.
 MODEL_NAME = "qwen"
-MODE = "3"
-ALPHAS = [0.15]
+MODE = "10"
+ALPHAS = [-0.15, -0.2]
 MAX_LAYER = 35  # qwen3-8B has 36 transformer blocks (0..35)
 VECTOR_PATH = Path(
     "layer_sweep_results/qwen/"
