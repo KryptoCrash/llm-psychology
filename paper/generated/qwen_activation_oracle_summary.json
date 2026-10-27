@@ -1,5 +1,5 @@
 {
-  "source": "local layer_sweep_results activation-oracle outputs",
+  "source": "local results/layer_sweep activation-oracle outputs",
   "model_name": "Qwen/Qwen3-8B",
   "oracle_lora_path": "adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B",
   "oracle_prompts": [
@@ -9,7 +9,7 @@
   ],
   "runs": [
     {
-      "source_file": "layer_sweep_results/layer_sweep_residual_all_wrong_minus_random_answers_n8_100.json",
+      "source_file": "results/layer_sweep/layer_sweep_residual_all_wrong_minus_random_answers_n8_100.json",
       "activation_kind": "residual",
       "direction": "all_wrong_minus_random_answers",
       "n": 8,
@@ -107,7 +107,7 @@
       ]
     },
     {
-      "source_file": "layer_sweep_results/layer_sweep_residual_all_wrong_minus_no_participants_n8_100.json",
+      "source_file": "results/layer_sweep/layer_sweep_residual_all_wrong_minus_no_participants_n8_100.json",
       "activation_kind": "residual",
       "direction": "all_wrong_minus_no_participants",
       "n": 8,
@@ -171,7 +171,7 @@
       ]
     },
     {
-      "source_file": "layer_sweep_results/layer_sweep_delta_all_wrong_minus_random_answers_n8_100.json",
+      "source_file": "results/layer_sweep/layer_sweep_delta_all_wrong_minus_random_answers_n8_100.json",
       "activation_kind": "delta",
       "direction": "all_wrong_minus_random_answers",
       "n": 8,
@@ -236,7 +236,7 @@
       ]
     },
     {
-      "source_file": "layer_sweep_results/layer_sweep_delta_all_wrong_minus_no_participants_n8_100.json",
+      "source_file": "results/layer_sweep/layer_sweep_delta_all_wrong_minus_no_participants_n8_100.json",
       "activation_kind": "delta",
       "direction": "all_wrong_minus_no_participants",
       "n": 8,

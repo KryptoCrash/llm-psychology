@@ -25,13 +25,13 @@ def parse_args() -> argparse.Namespace:
         "--reference",
         type=Path,
         default=Path(
-            "layer_sweep_results/qwen/"
+            "results/layer_sweep/qwen/"
             "layer_sweep_qwen_mmlu_mode_8_base_residual_assistant_start_"
             "all_wrong_minus_random_answers_n8_100_diffmeans.pt"
         ),
     )
-    parser.add_argument("--runs-dir", type=Path, default=Path("."))
-    parser.add_argument("--output-dir", type=Path, default=Path("projection_results"))
+    parser.add_argument("--runs-dir", type=Path, default=Path("results/behavioral"))
+    parser.add_argument("--output-dir", type=Path, default=Path("results/projection"))
     parser.add_argument("--layer", type=int, default=23)
     parser.add_argument("--position", default="assistant_start")
     parser.add_argument("--activation-kind", default="residual")

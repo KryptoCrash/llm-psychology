@@ -34,7 +34,7 @@ DEFAULT_MODE = "10"
 DEFAULT_ALPHAS = [-0.15, -0.2]
 MAX_LAYER = 35  # qwen3-8B has 36 transformer blocks (0..35)
 VECTOR_PATH = Path(
-    "layer_sweep_results/qwen/"
+    "results/layer_sweep/qwen/"
     "layer_sweep_qwen_mmlu_mode_8_base_residual_assistant_start_all_wrong_minus_random_answers_n8_100_diffmeans.pt"
 )
 
@@ -134,8 +134,8 @@ def annotate_summary(path: Path, alpha: float, n_layers: int, source_layer: int 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--output-dir", type=Path, default=Path("runs"),
-                    help="Directory for output JSONs (default: runs/).")
+    ap.add_argument("--output-dir", type=Path, default=Path("results/activation_patching"),
+                    help="Directory for output JSONs (default: results/activation_patching/).")
     ap.add_argument("--dataset", choices=["mmlu", "bbh"], default="mmlu")
     ap.add_argument("--mode", choices=["3", "10"], default=DEFAULT_MODE)
     ap.add_argument("--alphas", type=float, nargs="+", default=DEFAULT_ALPHAS)

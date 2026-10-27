@@ -16,10 +16,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REPORTS = [
     ROOT
-    / "projection_results"
+    / "results" / "projection"
     / "qwen_experiment_mean_activation_projection_layer23_onto_layer_sweep_qwen_mmlu_mode_8_base_residual_assistant_start_all_wrong_minus_random_answers_n8_100_diffmeans.json",
     ROOT
-    / "projection_results"
+    / "results" / "projection"
     / "qwen_experiment_mean_activation_projection_layer23_onto_layer_sweep_qwen_mmlu_mode_10_base_residual_assistant_start_all_wrong_minus_random_answers_n10_100_diffmeans.json",
 ]
 OUT_DIR = ROOT / "paper" / "generated"

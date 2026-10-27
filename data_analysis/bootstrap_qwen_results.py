@@ -209,7 +209,7 @@ def main() -> None:
     results: dict[tuple[str, str, str], list[dict]] = {}
     keys_by_dataset: dict[str, list[tuple]] = {}
 
-    for path in sorted(ROOT.glob("qwen_*.json")):
+    for path in sorted((ROOT / "results" / "behavioral").glob("*/qwen_*.json")):
         match = RESULT_RE.match(path.name)
         if not match:
             continue

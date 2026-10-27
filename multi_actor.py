@@ -17,6 +17,8 @@ MODEL_IDS = {
 }
 
 LETTER = ["A", "B", "C", "D"]
+DATA_DIR = Path("data")
+BEHAVIORAL_DIR = Path("results/behavioral")
 
 
 class CausalLMRunner:
@@ -177,7 +179,7 @@ def run_experiment(model_name, dataset, mode, explain=False, model=None, device=
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(seed)
 
-    dataset_file = "combined_mmlu_correct.json" if dataset == "mmlu" else "combined_bbh_correct.json"
+    dataset_file = DATA_DIR / f"combined_{dataset}_correct.json"
     with open(dataset_file, "r") as f:
         questions = json.load(f)
 
@@ -468,7 +470,7 @@ def run_experiment(model_name, dataset, mode, explain=False, model=None, device=
 
     if output_file is None:
         explain_str = "explain" if explain else "base"
-        output_file = f"{model_name}_{dataset}_{mode}_{explain_str}.json"
+        output_file = BEHAVIORAL_DIR / dataset / f"{model_name}_{dataset}_{mode}_{explain_str}.json"
 
     out_path = Path(output_file)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -491,7 +493,7 @@ def main():
     parser.add_argument("--explain", action="store_true", help="Chain-of-thought: model reasons step-by-step before answering")
     parser.add_argument("--batch-size", type=int, default=None, help="Number of prompts to generate at once")
     parser.add_argument("--output-file", type=Path, default=None,
-                        help="Where to write the results JSON (default: auto-named in cwd).")
+                        help="Where to write the results JSON (default: auto-named under results/behavioral/<dataset>/).")
     parser.add_argument("--seed", type=int, default=None,
                         help="Seed torch RNG before generation for reproducible sampling.")
     parser.add_argument("--vector-path", type=Path, default=None,

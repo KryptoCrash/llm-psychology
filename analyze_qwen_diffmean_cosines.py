@@ -11,7 +11,7 @@ import torch
 import torch.nn.functional as F
 
 
-DEFAULT_SOURCE_DIRS = [Path("layer_sweep_results/qwen")]
+DEFAULT_SOURCE_DIRS = [Path("results/layer_sweep/qwen")]
 
 
 def parse_args() -> argparse.Namespace:
@@ -31,7 +31,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=Path("diffmean_cosine_results/qwen_layer_sweep"),
+        default=Path("results/diffmean_cosine/qwen_layer_sweep"),
     )
     parser.add_argument(
         "--top-k",

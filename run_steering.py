@@ -83,8 +83,8 @@ def main():
     ap.add_argument("--alphas", type=float, nargs="+", required=True,
                     help="One or more nonzero alphas. Positive→mode '3', negative→mode '10'. "
                          "One baseline per mode present (layer-independent).")
-    ap.add_argument("--output-dir", type=Path, default=Path("runs"),
-                    help="Directory for output JSONs (default: runs/).")
+    ap.add_argument("--output-dir", type=Path, default=Path("results/activation_patching"),
+                    help="Directory for output JSONs (default: results/activation_patching/).")
     ap.add_argument("--dataset", choices=["mmlu", "bbh"], default="mmlu")
     ap.add_argument("--explain", action="store_true")
     ap.add_argument("--seed", type=int, default=42,

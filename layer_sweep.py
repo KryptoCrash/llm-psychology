@@ -24,8 +24,8 @@ EXPERIMENT_FILE_RE = re.compile(r"(llama|qwen)_(mmlu|bbh)_(.+)_(base|explain)(?:
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--models", default="qwen", help="Comma-separated model keys.")
-    parser.add_argument("--input-dir", type=Path, default=Path("."))
-    parser.add_argument("--output-dir", type=Path, default=Path("layer_sweep_results"))
+    parser.add_argument("--input-dir", type=Path, default=Path("data"))
+    parser.add_argument("--output-dir", type=Path, default=Path("results/layer_sweep"))
     parser.add_argument("--dataset", choices=["mmlu", "bbh"], default="mmlu")
     parser.add_argument(
         "--mode",

@@ -16,20 +16,20 @@ BELIEF_PROMPT = "What belief or feature does this activation represent?"
 
 SOURCE_FILES = [
     (
-        "layer_sweep_results/layer_sweep_residual_all_wrong_minus_random_answers_n8_100.json",
-        "layer_sweep_results/qwen/layer_sweep_qwen_mmlu_mode_8_base_residual_assistant_start_all_wrong_minus_random_answers_n8_100.json",
+        "results/layer_sweep/layer_sweep_residual_all_wrong_minus_random_answers_n8_100.json",
+        "results/layer_sweep/qwen/layer_sweep_qwen_mmlu_mode_8_base_residual_assistant_start_all_wrong_minus_random_answers_n8_100.json",
     ),
     (
-        "layer_sweep_results/layer_sweep_residual_all_wrong_minus_no_participants_n8_100.json",
-        "layer_sweep_results/qwen/layer_sweep_qwen_mmlu_mode_8_base_residual_assistant_start_all_wrong_minus_no_participants_n8_100.json",
+        "results/layer_sweep/layer_sweep_residual_all_wrong_minus_no_participants_n8_100.json",
+        "results/layer_sweep/qwen/layer_sweep_qwen_mmlu_mode_8_base_residual_assistant_start_all_wrong_minus_no_participants_n8_100.json",
     ),
     (
-        "layer_sweep_results/layer_sweep_delta_all_wrong_minus_random_answers_n8_100.json",
-        "layer_sweep_results/qwen/layer_sweep_qwen_mmlu_mode_8_base_delta_assistant_start_all_wrong_minus_random_answers_n8_100.json",
+        "results/layer_sweep/layer_sweep_delta_all_wrong_minus_random_answers_n8_100.json",
+        "results/layer_sweep/qwen/layer_sweep_qwen_mmlu_mode_8_base_delta_assistant_start_all_wrong_minus_random_answers_n8_100.json",
     ),
     (
-        "layer_sweep_results/layer_sweep_delta_all_wrong_minus_no_participants_n8_100.json",
-        "layer_sweep_results/qwen/layer_sweep_qwen_mmlu_mode_8_base_delta_assistant_start_all_wrong_minus_no_participants_n8_100.json",
+        "results/layer_sweep/layer_sweep_delta_all_wrong_minus_no_participants_n8_100.json",
+        "results/layer_sweep/qwen/layer_sweep_qwen_mmlu_mode_8_base_delta_assistant_start_all_wrong_minus_no_participants_n8_100.json",
     ),
 ]
 
@@ -100,7 +100,7 @@ def main() -> None:
     OUT_FILE.parent.mkdir(parents=True, exist_ok=True)
     _, first = load_local(SOURCE_FILES[0])
     summary = {
-        "source": "local layer_sweep_results activation-oracle outputs",
+        "source": "local results/layer_sweep activation-oracle outputs",
         "model_name": first["model_name"],
         "oracle_lora_path": "adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3-8B",
         "oracle_prompts": [
