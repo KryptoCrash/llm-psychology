@@ -230,9 +230,6 @@ python run_ablation.py --dataset bbh --mode 10 --alphas -0.1 --layer 23 --baseli
 
 ## Build the Paper
 
-The build needs the official NeurIPS 2026 style file `neurips_2026.sty`, which
-is not redistributed here; download it from the NeurIPS website into `paper/`.
-
 ```bash
 cd paper
 latexmk -pdf main.tex

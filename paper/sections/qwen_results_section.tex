@@ -1,25 +1,19 @@
-\section{Results}
+\section{Conformity Results}
 \label{sec:results}
 
 We evaluate Qwen/Qwen3-8B \citep{qwen2025technical} on two controlled 100-item
 sets from MMLU \citep{hendrycks2021mmlu} and BBH \citep{suzgun2023bbh}. Each
 item was selected because Qwen answered it correctly without social context. For
 $n\geq2$, the model is told that it is participant $n$ and sees the previous
-$n-1$ participants give the same incorrect answer. Accuracy is correct answers
-among parseable responses; conformity is the fraction matching the repeated
+$n-1$ participants give the same incorrect answer. We measure accuracy as correct answers
+over parseable responses; conformity is the fraction of parseable responses matching the repeated
 incorrect peer answer. Generation uses the model's default sampling
-configuration, with up to ten retries for unparseable outputs. Explanation
-prompts ask for reasoning before the final answer; question distillation (QD)
-summarizes prior agreement, and devil's advocate (DA) prompting inserts a
-dissenter \citep{zhu2025conformity}. Confidence intervals are 95\%
-item-bootstrap intervals over the 100 selected items, and paired contrasts use
-paired permutation tests over item-level correctness.
+configuration, with up to ten retries for unparseable outputs. We control for model reasoning effort, question distillation (QD) (summarizing prior agreement rather than repeating participant answers), and devil's advocate (DA) prompting (inserting one dissenting participant) \citep{zhu2025conformity}. We derive 95\% confidence intervals by sampling over the 100 selected items.
 
 \paragraph{Repeated incorrect answers induce conformity.}
 Figures~\ref{fig:qwen-conformity-participants}
 and~\ref{fig:qwen-accuracy-participants} summarize the standard multi-actor
-condition. In base prompting, Qwen's accuracy falls as incorrect peer
-answers are repeated. On MMLU, accuracy drops from 0.990
+setup. In baseline prompting, Qwen's accuracy falls as the number of repeated incorrect answers increases. On MMLU, accuracy drops from 0.990
 at $n=1$ to 0.637 at $n=10$, with conformity rising to 0.363. On BBH,
 accuracy drops from 0.970 at $n=1$ to 0.610 at $n=10$, with conformity rising to
 0.390. The corresponding accuracy drops from $n=1$ to $n=10$ are large under
@@ -34,7 +28,7 @@ pulls Qwen away from answers it can produce in the matched no-peer setting.
   \centering
   \includegraphics[width=0.92\linewidth]{figures/qwen_conformity_by_participants.pdf}
   \caption{Conformity rate increases with the number of prior participants in
-  the standard multi-actor condition. Shaded bands are item-bootstrap 95\%
+  the standard multi-actor condition. Shaded bands are 95\%
   confidence intervals.}
   \label{fig:qwen-conformity-participants}
 \end{figure}
@@ -44,7 +38,7 @@ pulls Qwen away from answers it can produce in the matched no-peer setting.
   \includegraphics[width=0.92\linewidth]{figures/qwen_accuracy_by_participants.pdf}
   \caption{Accuracy decreases as repeated incorrect peer answers accumulate.
   Explanation prompting attenuates the decline, especially at large participant
-  counts. Shaded bands are item-bootstrap 95\% confidence intervals.}
+  counts. Shaded bands are 95\% confidence intervals.}
   \label{fig:qwen-accuracy-participants}
 \end{figure}
 
@@ -63,7 +57,7 @@ family, increasing $n$ both adds repeated participant lines and strengthens the
 apparent consensus.
 
 \paragraph{Explanation prompting reduces conformity.}
-Adding an explanation requirement before the final answer improves robustness at
+Adding a requirement for models to explain their reasoning before the final answer improves robustness at
 high social pressure. At $n=10$, explanation prompting reduces MMLU conformity
 from 0.363 to 0.082 and increases accuracy from 0.637 to 0.867. On BBH, it
 reduces conformity from 0.390 to 0.152 and increases accuracy from 0.610 to
