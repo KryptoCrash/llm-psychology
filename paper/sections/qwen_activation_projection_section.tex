@@ -1,0 +1,204 @@
+\section{Activation-space analysis}
+\label{sec:qwen-activation-projection}
+
+We next ask whether the conformity effect is reflected in Qwen's residual
+stream, using assistant-start states from the same social prompts.
+
+\paragraph{DiffMean directions.}
+For each selected layer $\ell$, we construct a direction that contrasts two
+matched social contexts for the same item. The first context repeats the same
+incorrect answer across the previous participants; the second keeps the
+multi-participant format but replaces the repeated consensus with random
+alternative answers. All activations are taken at the assistant-start position,
+the token position immediately before the model begins generating its answer.
+Let
+$h^\ell_{i,\mathrm{wrong}}$ and $h^\ell_{i,\mathrm{random}}$ denote the
+residual-stream activation at the assistant-start position for item $i$ under
+these two contexts. The DiffMean direction is
+\[
+  d^\ell =
+  \frac{1}{N}\sum_{i=1}^{N}
+  \left(h^\ell_{i,\mathrm{wrong}} - h^\ell_{i,\mathrm{random}}\right),
+\]
+with $N=100$ items for each tensor. The random-answer contrast preserves much of
+the prompt length and participant-list structure. The main direction is the MMLU
+$n=8$ \texttt{all\_wrong\_minus\_random\_answers} residual direction; we use the
+analogous MMLU $n=10$ direction as a check below.
+
+\paragraph{Activation oracle responses.}
+For the MMLU $n=8$ direction, we asked a Qwen3-8B LatentQA activation oracle
+for a short description of each layer's DiffMean vector, including a binary
+prompt: ``Does this activation represent pressure toward an incorrect
+consensus?''
+
+We query both residual-stream directions and layer-update (delta) directions,
+where the delta is the residual-stream update contributed by the layer rather
+than the residual state after the layer. The binary oracle prompt marks
+residual-stream layers 10, 12, and 22--33 as pressure toward an incorrect
+consensus. The delta results point to layers 22--23 as the layers contributing
+the conformity direction.
+
+Figure~\ref{fig:qwen-oracle-examples} gives two representative free-form
+responses from the residual band. We use layer 23 for projection because it is
+positive in both the residual and delta summaries: the delta positives point to
+where the direction is added, and the later residual positives show that it
+remains available afterward.
+
+\begin{figure}[t]
+  \centering
+  \begin{tabular}{lp{0.72\linewidth}}
+    \toprule
+    Layer & Free-form oracle response \\
+    \midrule
+    23 & ``The assistant's responses are influenced by the collective behavior
+    of the group it interacts with.'' \\
+    31 & ``Conformity is essential for the group's success.'' \\
+    \bottomrule
+  \end{tabular}
+  \caption{Representative activation-oracle descriptions for Qwen MMLU $n=8$
+  residual DiffMean directions in the oracle-positive band.}
+  \label{fig:qwen-oracle-examples}
+\end{figure}
+
+\paragraph{Projection across condition means.}
+A condition $c$ is a fixed tuple of dataset, social condition
+($n=1,\ldots,10$, QD, or DA), and prompt form (base or explanation). For each
+condition, we average the layer-23 assistant-start residual activations over
+its 100 prompts:
+\[
+  \bar{h}_c =
+  \frac{1}{M_c}\sum_{j=1}^{M_c} h^\ell_{c,j},
+  \qquad \ell=23,\; M_c=100,
+\]
+where $h^\ell_{c,j}$ is the residual-stream activation for prompt $j$ in
+condition $c$.
+
+Given a reference DiffMean $d^\ell$ from the MMLU $n=8$ or $n=10$
+all-wrong-minus-random-answers contrast, we report the scalar projection of the
+condition mean onto the unit reference direction,
+\[
+  \mathrm{proj}(c;d^\ell) = \bar{h}_c \cdot \frac{d^\ell}{\|d^\ell\|},
+\]
+which preserves activation-norm scale. The largest projections are MMLU base
+conditions: the $n=8$ reference peaks on MMLU $n=8$ base (12.713), while the
+$n=10$ reference peaks on MMLU $n=8$ base (9.413). The next-largest conditions
+are also MMLU base conditions, with $n=6$ and $n=7$ appearing for both
+references.
+
+Table~\ref{tab:qwen-projection-correlations} reports Pearson correlations
+between participant count $n$ and projection for the numeric participant-count
+conditions $n=1,\ldots,10$. Participant count is strongly correlated with
+projection within MMLU ($r=0.731$--$0.792$) and only weakly correlated within
+BBH ($r=0.022$--$0.230$).
+
+\begin{table}[t]
+  \centering
+  \caption{Correlation between participant count and projection for numeric
+  participant-count conditions.}
+  \label{tab:qwen-projection-correlations}
+  \begin{tabular}{lllrr}
+    \toprule
+    Reference & Dataset & Prompt & $r(n,\mathrm{proj})$ & Mean proj. \\
+    \midrule
+    MMLU $n=8$ & MMLU & base & 0.745 & -3.024 \\
+    MMLU $n=8$ & MMLU & explain & 0.731 & -13.732 \\
+    MMLU $n=8$ & BBH & base & 0.022 & -12.159 \\
+    MMLU $n=8$ & BBH & explain & 0.150 & -14.362 \\
+    MMLU $n=10$ & MMLU & base & 0.792 & -3.053 \\
+    MMLU $n=10$ & MMLU & explain & 0.792 & -12.235 \\
+    MMLU $n=10$ & BBH & base & 0.110 & -12.480 \\
+    MMLU $n=10$ & BBH & explain & 0.230 & -14.707 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Explanation prompting shifts MMLU condition means downward by 10.708 projection
+units for the $n=8$ reference and 9.181 units for the $n=10$ reference,
+averaged over participant-count conditions. In the activation data, the prompt
+form that lowers conformity also moves the mean state away from the
+repeated-wrong direction.
+
+These projections check the DiffMean beyond the pairwise contrast used to define
+it. The MMLU direction orders MMLU condition means by participant count, so it
+tracks repeated wrong-answer evidence in the residual stream. Its weak BBH
+correlations bound the result to the MMLU dataset and prompt family.
+
+\paragraph{Layer-wise cosine structure.}
+We use the layer-wise cosine matrix of the MMLU $n=8$ residual DiffMeans to
+test whether the oracle-positive band is geometrically clustered. Because
+$d^\ell$ is a paired all-wrong-minus-random contrast, this compares the
+layerwise effect of replacing random peer answers with a repeated wrong answer.
+For each layer $\ell$, we compute the cosine similarity between
+$d^\ell$ and every other layer's DiffMean, exclude the self-comparison, and
+average the five largest remaining cosines:
+\[
+  s_\ell =
+  \frac{1}{5}\sum_{k=1}^{5}
+  \operatorname{top}_k
+  \left\{
+    \frac{d^\ell \cdot d^m}{\|d^\ell\|\,\|d^m\|}
+    : m \neq \ell
+  \right\}.
+\]
+Here $\operatorname{top}_k$ denotes the $k$th-largest cosine in the set.
+Figure~\ref{fig:qwen-layer-top5-cosines} plots these per-layer scores. The
+layer 23--33 band has a much larger average top-neighbor cosine than earlier
+layers. Its mean $s_\ell$ is 0.859, compared with 0.477 for layers 0--9 and
+0.538 for layers 10--21. Within this band, layers 28--32 all have
+$s_\ell \geq 0.882$; layer 31 has the largest value, $s_{31}=0.904$.
+For layers 23--33, the mean pairwise cosine within the band is 0.752; the mean
+cosine from those layers to layers outside the band is 0.126. The large
+within-band and small outside-band cosines place the stable orientation of the
+MMLU repeated-wrong contrast in this late residual-stream band.
+
+This gives a geometry check on the oracle sweep: the oracle-positive band also
+contains mutually aligned DiffMean vectors. Together with the delta result at
+layers 22--23, this supports the interpretation that the direction is added near
+the start of the band and then maintained across later residual-stream states.
+
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.9\linewidth,
+      height=5.0cm,
+      xmin=0,
+      xmax=35,
+      ymin=0.35,
+      ymax=0.95,
+      xlabel={Layer},
+      ylabel={Mean top-5 cosine $s_\ell$},
+      xtick={0,5,10,15,20,25,30,35},
+      ytick={0.4,0.5,0.6,0.7,0.8,0.9},
+      grid=both,
+      major grid style={draw=gray!25},
+      minor grid style={draw=gray!10},
+      tick align=outside,
+      legend style={draw=none, fill=none, at={(0.03,0.97)}, anchor=north west},
+    ]
+      \addplot[draw=none, fill=blue!10, forget plot] coordinates {
+        (22.5,0.35) (33.5,0.35) (33.5,0.95) (22.5,0.95)
+      } \closedcycle;
+      \addplot[
+        color=black,
+        mark=*,
+        mark size=1.3pt,
+        line width=0.8pt,
+      ] coordinates {
+        (0,0.396) (1,0.512) (2,0.524) (3,0.537) (4,0.513) (5,0.488)
+        (6,0.494) (7,0.443) (8,0.415) (9,0.451) (10,0.475)
+        (11,0.497) (12,0.494) (13,0.436) (14,0.453) (15,0.487)
+        (16,0.537) (17,0.563) (18,0.577) (19,0.621) (20,0.655)
+        (21,0.660) (22,0.692) (23,0.748) (24,0.796) (25,0.840)
+        (26,0.861) (27,0.865) (28,0.882) (29,0.895) (30,0.902)
+        (31,0.904) (32,0.890) (33,0.868) (34,0.795) (35,0.540)
+      };
+      \addlegendentry{$s_\ell$}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Layer-wise neighborhood cosine scores for the MMLU $n=8$ residual
+  DiffMean. For each layer, $s_\ell$ is the mean cosine similarity to the five
+  most similar other layers, excluding self-comparisons. The shaded region marks
+  layers 23--33.}
+  \label{fig:qwen-layer-top5-cosines}
+\end{figure}
