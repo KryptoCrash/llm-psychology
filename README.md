@@ -1,10 +1,26 @@
 # LLM Psychology Reproducibility
 
-This branch contains the code needed to reproduce the NeurIPS paper results and
-only the minimal checked-in data that the code reads directly:
-`combined_mmlu_correct.json` and `combined_bbh_correct.json`. Experiment
-outputs, caches, activation tensors, generated figures, and paper summary files
-are intentionally not tracked; the commands below recreate them.
+This repository contains the code needed to reproduce the NeurIPS paper results,
+the input item sets `combined_mmlu_correct.json` and `combined_bbh_correct.json`,
+and the generated outputs that back the numbers and figures reported in the
+paper. The commands below recreate all of them.
+
+Checked-in paper outputs:
+
+- `qwen_{mmlu,bbh}_*.json`: behavioral runs (n=1..10, QD, DA; base and explain).
+- `layer_sweep_results/`: MMLU n=8/n=10 and BBH n=4 diffmean tensors, plus the
+  n=8 residual/delta activation-oracle sweeps.
+- `projection_results/`: layer-23 condition-mean projections onto the MMLU
+  n=8 and n=10 diffmeans (activation caches are not tracked).
+- `paper/figures/`, `paper/generated/`: paper figures, bootstrap tables, oracle
+  and projection summaries.
+- `runs/activation_patching/figures/`: steering figures, including the layer x
+  alpha heatmap.
+- `runs/activation_patching/qwen_{mmlu,bbh}_ablation/`: the all-layer layer-23
+  steering runs and baselines behind the multi-layer steering table.
+
+The raw per-layer, per-alpha steering sweep JSONs (~480 MB) are not tracked;
+regenerate them with `run_steering.py` as shown below.
 
 ## Setup
 

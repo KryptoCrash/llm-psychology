@@ -1,0 +1,929 @@
+{
+  "reference": "layer_sweep_results/qwen/layer_sweep_qwen_mmlu_mode_8_base_residual_assistant_start_all_wrong_minus_random_answers_n8_100_diffmeans.pt",
+  "reference_metadata": {
+    "model": "qwen",
+    "model_name": "Qwen/Qwen3-8B",
+    "dataset": "mmlu",
+    "mode": "8",
+    "n": 8,
+    "position": "assistant_start",
+    "activation_kind": "residual",
+    "direction": "all_wrong_minus_random_answers",
+    "layer": 23,
+    "reference_norm": 35.019439697265625
+  },
+  "rows": [
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_8_base.json",
+      "experiment": "qwen_mmlu_8_base.json",
+      "dataset": "mmlu",
+      "mode": "8",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": 445.1931457519531,
+      "projection_onto_unit_reference": 12.71274471282959,
+      "mean_activation_norm": 144.4266815185547,
+      "cosine_with_reference": 0.08802213399327026,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_8_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_6_base.json",
+      "experiment": "qwen_mmlu_6_base.json",
+      "dataset": "mmlu",
+      "mode": "6",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": 127.7623291015625,
+      "projection_onto_unit_reference": 3.6483278274536133,
+      "mean_activation_norm": 145.0809783935547,
+      "cosine_with_reference": 0.025146837771916297,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_6_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_7_base.json",
+      "experiment": "qwen_mmlu_7_base.json",
+      "dataset": "mmlu",
+      "mode": "7",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": 120.00302124023438,
+      "projection_onto_unit_reference": 3.4267568588256836,
+      "mean_activation_norm": 144.22219848632812,
+      "cosine_with_reference": 0.02376025948010029,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_7_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_5_base.json",
+      "experiment": "qwen_mmlu_5_base.json",
+      "dataset": "mmlu",
+      "mode": "5",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": 3.00494384765625,
+      "projection_onto_unit_reference": 0.08580422401428223,
+      "mean_activation_norm": 145.5217742919922,
+      "cosine_with_reference": 0.0005896315134401429,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_5_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_10_base.json",
+      "experiment": "qwen_mmlu_10_base.json",
+      "dataset": "mmlu",
+      "mode": "10",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -16.633529663085938,
+      "projection_onto_unit_reference": -0.4749789237976074,
+      "mean_activation_norm": 143.93280029296875,
+      "cosine_with_reference": -0.00330000474409453,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_10_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_9_base.json",
+      "experiment": "qwen_mmlu_9_base.json",
+      "dataset": "mmlu",
+      "mode": "9",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -29.34807586669922,
+      "projection_onto_unit_reference": -0.8380558490753174,
+      "mean_activation_norm": 144.13006591796875,
+      "cosine_with_reference": -0.005814580349614872,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_9_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_4_base.json",
+      "experiment": "qwen_mmlu_4_base.json",
+      "dataset": "mmlu",
+      "mode": "4",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -110.07467651367188,
+      "projection_onto_unit_reference": -3.143245220184326,
+      "mean_activation_norm": 147.83367919921875,
+      "cosine_with_reference": -0.021262037427537264,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_4_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_8_explain.json",
+      "experiment": "qwen_mmlu_8_explain.json",
+      "dataset": "mmlu",
+      "mode": "8",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -246.307373046875,
+      "projection_onto_unit_reference": -7.033450126647949,
+      "mean_activation_norm": 144.8343505859375,
+      "cosine_with_reference": -0.048562030334610776,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_8_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_10_explain.json",
+      "experiment": "qwen_mmlu_10_explain.json",
+      "dataset": "mmlu",
+      "mode": "10",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -249.57131958007812,
+      "projection_onto_unit_reference": -7.126651763916016,
+      "mean_activation_norm": 144.3026885986328,
+      "cosine_with_reference": -0.04938682593598978,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_10_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_3_base.json",
+      "experiment": "qwen_mmlu_3_base.json",
+      "dataset": "mmlu",
+      "mode": "3",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -280.5126647949219,
+      "projection_onto_unit_reference": -8.0101957321167,
+      "mean_activation_norm": 148.9493865966797,
+      "cosine_with_reference": -0.053777970592161266,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_3_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_qd_base.json",
+      "experiment": "qwen_bbh_qd_base.json",
+      "dataset": "bbh",
+      "mode": "qd",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -294.0989685058594,
+      "projection_onto_unit_reference": -8.398161888122559,
+      "mean_activation_norm": 146.94683837890625,
+      "cosine_with_reference": -0.05715102128613124,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_qd_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_6_explain.json",
+      "experiment": "qwen_mmlu_6_explain.json",
+      "dataset": "mmlu",
+      "mode": "6",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -309.7635192871094,
+      "projection_onto_unit_reference": -8.845470428466797,
+      "mean_activation_norm": 145.4025115966797,
+      "cosine_with_reference": -0.06083437164416069,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_6_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_da_base.json",
+      "experiment": "qwen_mmlu_da_base.json",
+      "dataset": "mmlu",
+      "mode": "da",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -323.1321105957031,
+      "projection_onto_unit_reference": -9.227221488952637,
+      "mean_activation_norm": 144.92576599121094,
+      "cosine_with_reference": -0.06366860596418876,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_da_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_1_explain.json",
+      "experiment": "qwen_bbh_1_explain.json",
+      "dataset": "bbh",
+      "mode": "1",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -328.7550354003906,
+      "projection_onto_unit_reference": -9.387792587280273,
+      "mean_activation_norm": 146.86154174804688,
+      "cosine_with_reference": -0.063922742983223,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_1_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_5_base.json",
+      "experiment": "qwen_bbh_5_base.json",
+      "dataset": "bbh",
+      "mode": "5",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -341.04827880859375,
+      "projection_onto_unit_reference": -9.738828659057617,
+      "mean_activation_norm": 142.13592529296875,
+      "cosine_with_reference": -0.06851771386427512,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_5_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_qd_base.json",
+      "experiment": "qwen_mmlu_qd_base.json",
+      "dataset": "mmlu",
+      "mode": "qd",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -349.73712158203125,
+      "projection_onto_unit_reference": -9.986942291259766,
+      "mean_activation_norm": 146.55665588378906,
+      "cosine_with_reference": -0.06814390128537616,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_qd_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_6_base.json",
+      "experiment": "qwen_bbh_6_base.json",
+      "dataset": "bbh",
+      "mode": "6",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -355.27484130859375,
+      "projection_onto_unit_reference": -10.145071029663086,
+      "mean_activation_norm": 142.81625366210938,
+      "cosine_with_reference": -0.07103582939281845,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_6_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_4_base.json",
+      "experiment": "qwen_bbh_4_base.json",
+      "dataset": "bbh",
+      "mode": "4",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -358.8373107910156,
+      "projection_onto_unit_reference": -10.246803283691406,
+      "mean_activation_norm": 144.0308837890625,
+      "cosine_with_reference": -0.07114309802263072,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_4_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_1_base.json",
+      "experiment": "qwen_bbh_1_base.json",
+      "dataset": "bbh",
+      "mode": "1",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -361.73382568359375,
+      "projection_onto_unit_reference": -10.329516410827637,
+      "mean_activation_norm": 147.474365234375,
+      "cosine_with_reference": -0.0700427928230873,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_1_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_9_explain.json",
+      "experiment": "qwen_mmlu_9_explain.json",
+      "dataset": "mmlu",
+      "mode": "9",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -390.23077392578125,
+      "projection_onto_unit_reference": -11.143260955810547,
+      "mean_activation_norm": 144.12680053710938,
+      "cosine_with_reference": -0.07731567560150904,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_9_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_qd_explain.json",
+      "experiment": "qwen_mmlu_qd_explain.json",
+      "dataset": "mmlu",
+      "mode": "qd",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -401.9992980957031,
+      "projection_onto_unit_reference": -11.479312896728516,
+      "mean_activation_norm": 145.3495635986328,
+      "cosine_with_reference": -0.07897727803591763,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_qd_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_7_base.json",
+      "experiment": "qwen_bbh_7_base.json",
+      "dataset": "bbh",
+      "mode": "7",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -407.86767578125,
+      "projection_onto_unit_reference": -11.646894454956055,
+      "mean_activation_norm": 140.39735412597656,
+      "cosine_with_reference": -0.08295665204990588,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_7_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_9_base.json",
+      "experiment": "qwen_bbh_9_base.json",
+      "dataset": "bbh",
+      "mode": "9",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -409.6470947265625,
+      "projection_onto_unit_reference": -11.697704315185547,
+      "mean_activation_norm": 143.5785675048828,
+      "cosine_with_reference": -0.08147249633750338,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_9_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_5_explain.json",
+      "experiment": "qwen_mmlu_5_explain.json",
+      "dataset": "mmlu",
+      "mode": "5",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -448.7756652832031,
+      "projection_onto_unit_reference": -12.815044403076172,
+      "mean_activation_norm": 145.6355438232422,
+      "cosine_with_reference": -0.08799393380663849,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_5_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_8_base.json",
+      "experiment": "qwen_bbh_8_base.json",
+      "dataset": "bbh",
+      "mode": "8",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -451.33935546875,
+      "projection_onto_unit_reference": -12.888246536254883,
+      "mean_activation_norm": 143.2053985595703,
+      "cosine_with_reference": -0.08999832873544676,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_8_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_3_base.json",
+      "experiment": "qwen_bbh_3_base.json",
+      "dataset": "bbh",
+      "mode": "3",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -458.5624694824219,
+      "projection_onto_unit_reference": -13.094507217407227,
+      "mean_activation_norm": 145.96731567382812,
+      "cosine_with_reference": -0.08970848821161864,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_3_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_7_explain.json",
+      "experiment": "qwen_bbh_7_explain.json",
+      "dataset": "bbh",
+      "mode": "7",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -466.0520324707031,
+      "projection_onto_unit_reference": -13.308381080627441,
+      "mean_activation_norm": 141.35028076171875,
+      "cosine_with_reference": -0.09415178384443429,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_7_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_9_explain.json",
+      "experiment": "qwen_bbh_9_explain.json",
+      "dataset": "bbh",
+      "mode": "9",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -475.19537353515625,
+      "projection_onto_unit_reference": -13.569474220275879,
+      "mean_activation_norm": 143.18597412109375,
+      "cosine_with_reference": -0.0947681803582245,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_9_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_6_explain.json",
+      "experiment": "qwen_bbh_6_explain.json",
+      "dataset": "bbh",
+      "mode": "6",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -476.9788818359375,
+      "projection_onto_unit_reference": -13.620403289794922,
+      "mean_activation_norm": 143.40603637695312,
+      "cosine_with_reference": -0.09497789377563375,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_6_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_8_explain.json",
+      "experiment": "qwen_bbh_8_explain.json",
+      "dataset": "bbh",
+      "mode": "8",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -483.59088134765625,
+      "projection_onto_unit_reference": -13.809211730957031,
+      "mean_activation_norm": 143.1905975341797,
+      "cosine_with_reference": -0.0964393749922076,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_8_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_10_explain.json",
+      "experiment": "qwen_bbh_10_explain.json",
+      "dataset": "bbh",
+      "mode": "10",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -489.8420715332031,
+      "projection_onto_unit_reference": -13.987717628479004,
+      "mean_activation_norm": 143.96572875976562,
+      "cosine_with_reference": -0.09716005155518775,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_10_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_1_explain.json",
+      "experiment": "qwen_mmlu_1_explain.json",
+      "dataset": "mmlu",
+      "mode": "1",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -490.788818359375,
+      "projection_onto_unit_reference": -14.014749526977539,
+      "mean_activation_norm": 147.63458251953125,
+      "cosine_with_reference": -0.09492863587786733,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_1_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_10_base.json",
+      "experiment": "qwen_bbh_10_base.json",
+      "dataset": "bbh",
+      "mode": "10",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -497.255615234375,
+      "projection_onto_unit_reference": -14.19941520690918,
+      "mean_activation_norm": 143.7704620361328,
+      "cosine_with_reference": -0.09876448197920197,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_10_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_5_explain.json",
+      "experiment": "qwen_bbh_5_explain.json",
+      "dataset": "bbh",
+      "mode": "5",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -503.59423828125,
+      "projection_onto_unit_reference": -14.38041877746582,
+      "mean_activation_norm": 143.3260498046875,
+      "cosine_with_reference": -0.10033360158228198,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_5_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_qd_explain.json",
+      "experiment": "qwen_bbh_qd_explain.json",
+      "dataset": "bbh",
+      "mode": "qd",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -506.60540771484375,
+      "projection_onto_unit_reference": -14.466407775878906,
+      "mean_activation_norm": 148.4392852783203,
+      "cosine_with_reference": -0.09745673289085648,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_qd_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_1_base.json",
+      "experiment": "qwen_mmlu_1_base.json",
+      "dataset": "mmlu",
+      "mode": "1",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -508.7582702636719,
+      "projection_onto_unit_reference": -14.52787971496582,
+      "mean_activation_norm": 147.20968627929688,
+      "cosine_with_reference": -0.09868834097915592,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_1_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_4_explain.json",
+      "experiment": "qwen_bbh_4_explain.json",
+      "dataset": "bbh",
+      "mode": "4",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -524.8862915039062,
+      "projection_onto_unit_reference": -14.988424301147461,
+      "mean_activation_norm": 144.95957946777344,
+      "cosine_with_reference": -0.10339726671516455,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_4_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_7_explain.json",
+      "experiment": "qwen_mmlu_7_explain.json",
+      "dataset": "mmlu",
+      "mode": "7",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -555.0565185546875,
+      "projection_onto_unit_reference": -15.849954605102539,
+      "mean_activation_norm": 144.5574188232422,
+      "cosine_with_reference": -0.10964469851584094,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_7_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_da_explain.json",
+      "experiment": "qwen_mmlu_da_explain.json",
+      "dataset": "mmlu",
+      "mode": "da",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -558.0802001953125,
+      "projection_onto_unit_reference": -15.93629264831543,
+      "mean_activation_norm": 145.1991729736328,
+      "cosine_with_reference": -0.10975470673796023,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_da_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_da_explain.json",
+      "experiment": "qwen_bbh_da_explain.json",
+      "dataset": "bbh",
+      "mode": "da",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -567.2808227539062,
+      "projection_onto_unit_reference": -16.199024200439453,
+      "mean_activation_norm": 145.11721801757812,
+      "cosine_with_reference": -0.1116271688620523,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_da_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_da_base.json",
+      "experiment": "qwen_bbh_da_base.json",
+      "dataset": "bbh",
+      "mode": "da",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -593.1840209960938,
+      "projection_onto_unit_reference": -16.938705444335938,
+      "mean_activation_norm": 145.1682586669922,
+      "cosine_with_reference": -0.11668325844696101,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_da_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_4_explain.json",
+      "experiment": "qwen_mmlu_4_explain.json",
+      "dataset": "mmlu",
+      "mode": "4",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -599.0548095703125,
+      "projection_onto_unit_reference": -17.10634994506836,
+      "mean_activation_norm": 147.86183166503906,
+      "cosine_with_reference": -0.11569145162370555,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_4_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_2_base.json",
+      "experiment": "qwen_bbh_2_base.json",
+      "dataset": "bbh",
+      "mode": "2",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -616.3671875,
+      "projection_onto_unit_reference": -17.60071563720703,
+      "mean_activation_norm": 148.76170349121094,
+      "cosine_with_reference": -0.11831482985301327,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_2_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_3_explain.json",
+      "experiment": "qwen_bbh_3_explain.json",
+      "dataset": "bbh",
+      "mode": "3",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -618.9247436523438,
+      "projection_onto_unit_reference": -17.673748016357422,
+      "mean_activation_norm": 147.0796661376953,
+      "cosine_with_reference": -0.12016445563461736,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_3_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_3_explain.json",
+      "experiment": "qwen_mmlu_3_explain.json",
+      "dataset": "mmlu",
+      "mode": "3",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -648.4715576171875,
+      "projection_onto_unit_reference": -18.517475128173828,
+      "mean_activation_norm": 149.5620880126953,
+      "cosine_with_reference": -0.12381129050967786,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_3_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/bbh/qwen_bbh_2_explain.json",
+      "experiment": "qwen_bbh_2_explain.json",
+      "dataset": "bbh",
+      "mode": "2",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -661.6288452148438,
+      "projection_onto_unit_reference": -18.8931884765625,
+      "mean_activation_norm": 149.08042907714844,
+      "cosine_with_reference": -0.12673151394530371,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_bbh_2_explain_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_2_base.json",
+      "experiment": "qwen_mmlu_2_base.json",
+      "dataset": "mmlu",
+      "mode": "2",
+      "prompt_style": "base",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -809.631591796875,
+      "projection_onto_unit_reference": -23.119491577148438,
+      "mean_activation_norm": 151.36798095703125,
+      "cosine_with_reference": -0.1527370017818455,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_2_base_layer23_residual_assistant_start.pt"
+    },
+    {
+      "experiment_file": "runs/qwen/mmlu/qwen_mmlu_2_explain.json",
+      "experiment": "qwen_mmlu_2_explain.json",
+      "dataset": "mmlu",
+      "mode": "2",
+      "prompt_style": "explain",
+      "sample_count": 100,
+      "layer": 23,
+      "position": "assistant_start",
+      "activation_kind": "residual",
+      "dot_with_reference": -870.7520751953125,
+      "projection_onto_unit_reference": -24.864816665649414,
+      "mean_activation_norm": 149.29920959472656,
+      "cosine_with_reference": -0.166543525134159,
+      "position_counts": {
+        "<|im_start|>": 100
+      },
+      "cache_file": "projection_results/cache/qwen_mmlu_2_explain_layer23_residual_assistant_start.pt"
+    }
+  ]
+}
